@@ -1,4 +1,4 @@
-from adminFunction import *
+from homeDisplay import *
 import pytest
 
 def test_displayMainMenu(capfd):

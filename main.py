@@ -9,9 +9,11 @@
 #     else:
 #         print(f'You have selected an option {option}')
 
-from adminFunction import *
+from src.home import *
 
 while True:
     displayMainMenu()
-    if(validateMain(promptMainMenu()) == '---- Game Ended----'):
+    option = promptMainMenu()
+    validateMain(option)
+    if str(option) == '0': 
         break
