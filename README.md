@@ -8,6 +8,8 @@ During development, please create a new branch `feature-{featureName}-{version}`
 
 ### Commit messages style
 
+`<type>: <description>`
+
 * `feat` - adding to a particular application
 * `fix` - bug fix
 * `refactor` - refactoring a specific section of the codebase
