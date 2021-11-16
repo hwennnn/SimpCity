@@ -1,0 +1,16 @@
+name: Run Docker CI (python ver 3.10)
+
+on:
+   [push, pull_request]
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag simpcity:latest && docker run simpcity:latest
+      
+
