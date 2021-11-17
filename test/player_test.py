@@ -1,8 +1,10 @@
-from homeDisplay import *
+from models.player import Player
 import pytest
 
+player_test = Player()
+
 def test_displayMainMenu(capfd):
-    displayMainMenu()
+    player_test.displayMainMenu()
     out, err = capfd.readouterr()
     assert """
     Welcome, mayor of Simp City!
@@ -15,12 +17,12 @@ def test_displayMainMenu(capfd):
 
 def test_nonExit(capfd):
     option = "1"
-    validateMain(option)
+    player_test.validateMain(option)
     out, err = capfd.readouterr()
     assert f"You selected option {option}" in out
 
 def test_Exit(capfd):
     option = "0"
-    validateMain(option)
+    player_test.validateMain(option)
     out, err = capfd.readouterr()
     assert "---- Game Ended----" in out
