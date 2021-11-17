@@ -1,19 +1,9 @@
-
-# Driver code (Please delete this once you have worked on the main menu)
-# while True:
-#     option = input('Please enter an option: ')
-
-#     if option == '0':
-#         print('Exit game ...')
-#         break
-#     else:
-#         print(f'You have selected an option {option}')
-
+from models.player import Player
 from src.home import *
 
 while True:
     displayMainMenu()
     option = promptMainMenu()
     validateMain(option)
-    if str(option) == '0': 
+    if option == '0': 
         break

@@ -13,11 +13,8 @@ def promptMainMenu():
     return input('Please enter an input: ')
 
 def validateMain(option):
-    if option == '0' or option == 0:
+    if option == '0':
         print('---- Game Ended----')
 
     else:
         print(f"You selected option {option}")
-
-# if __name__ == '__main__':
-#     promptMainMenu()
