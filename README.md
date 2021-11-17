@@ -1,7 +1,5 @@
 # SimpCity
 
-
-
 ## Development guide
 
 During development, please create a new branch `feature-{featureName}-{version}` from the latest development branch. When the feature is finished developed, please submit a pull request before merging the feature branch to the development branch for code reviewing.
@@ -10,12 +8,12 @@ During development, please create a new branch `feature-{featureName}-{version}`
 
 `<type>: <description>`
 
-* `feat` - adding to a particular application
-* `fix` - bug fix
-* `refactor` - refactoring a specific section of the codebase
-* `test` - related to testing 
-* `docs` - related to documentation
-* `CI` - related to continuous integration 
+- `feat` - adding feature or enhancment to the application
+- `fix` - bug fix
+- `refactor` - refactoring a specific section of the codebase
+- `test` - related to testing
+- `docs` - related to documentation
+- `CI` - related to continuous integration
 
 ## Build Docker
 
