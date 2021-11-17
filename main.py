@@ -1,4 +1,3 @@
-
 # Driver code (Please delete this once you have worked on the main menu)
 while True:
     option = input('Please enter an option: ')

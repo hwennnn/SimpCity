@@ -10,7 +10,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag simpcity:latest && docker run simpcity:latest
+    - name: Build Docker image
+      run: docker build . --file Dockerfile --tag simpcity:latest 
+    - name: Run Docker image
+      run: docker run simpcity:latest
       
 
