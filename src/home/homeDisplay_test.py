@@ -14,13 +14,13 @@ def test_displayMainMenu(capfd):
     """ in out
 
 def test_nonExit(capfd):
-    option = 1
-    validateMain(option)    
+    option = "1"
+    validateMain(option)
     out, err = capfd.readouterr()
     assert f"You selected option {option}" in out
 
 def test_Exit(capfd):
-    option = 0
+    option = "0"
     validateMain(option)
     out, err = capfd.readouterr()
     assert "---- Game Ended----" in out
