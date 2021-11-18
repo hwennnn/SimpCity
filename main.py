@@ -11,4 +11,4 @@ while True:
     if option == '0':
         break
     elif option == '5':
-	player.saveGame()
+        player.saveGame()
