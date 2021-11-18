@@ -8,7 +8,7 @@ During development, please create a new branch `feature-{featureName}-{version}`
 
 `<type>: <description>`
 
-- `feat` - adding feature or enhancment to the application
+- `feat` - adding feature or enhancements to the application
 - `fix` - bug fix
 - `refactor` - refactoring a specific section of the codebase
 - `test` - related to testing
