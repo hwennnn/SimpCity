@@ -1,3 +1,5 @@
+from models.enums import Buildings
+
 class Grid:  # Grid Class
     def __init__(self):
         self.rowCount = self.colCount = 4
@@ -26,4 +28,7 @@ class Grid:  # Grid Class
         pass
 
     def retrieveBuildingsScore(self):
+        pass
+
+    def displayGrid(self):
         pass

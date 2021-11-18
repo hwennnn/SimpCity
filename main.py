@@ -10,3 +10,6 @@ while True:
 
     if option == '0': 
         break
+    
+    elif option == '1':
+        Player.displayGrid()
