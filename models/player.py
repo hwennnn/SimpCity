@@ -39,7 +39,7 @@ class Player:  # Player Class
             gridValue = self.grid.parseGridAsString()
             print(gridValue) 
             for row in gridValue:
-                f.write(row)
+                f.writelines(row + "\n")
 
     def exitToMainMenu(self):
         pass
