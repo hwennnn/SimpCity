@@ -1,4 +1,6 @@
 from models.grid import Grid
+from models.configurations import *
+
 
 class Player:  # Player Class
     def __init__(self):
@@ -23,7 +25,6 @@ class Player:  # Player Class
     def validateMain(self, option):
         if option == '0':
             print('---- Game Ended----')
-
         else:
             print(f"You selected option {option}")
 
@@ -31,13 +32,11 @@ class Player:  # Player Class
         pass
 
     def loadGame(self):
-        self.grid.readGridFromFile("test-save.txt")
+        self.grid.readGridFromFile()
 
     def saveGame(self):
-        filename = "test-save.txt"
-        with open(filename, 'w+') as f:
+        with open(savedGameFilename, 'w+') as f:
             gridValue = self.grid.parseGridAsString()
-            print(gridValue)
             for row in gridValue:
                 f.writelines(row + "\n")
 

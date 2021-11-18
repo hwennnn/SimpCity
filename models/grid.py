@@ -1,4 +1,6 @@
 import os
+from models.configurations import *
+
 
 class Grid:  # Grid Class
     def __init__(self):
@@ -35,21 +37,20 @@ class Grid:  # Grid Class
         returnStrArr = []
         for row in self.grid:
             rowStr = []
-            for v in row: 
+            for v in row:
                 rowStr.append("None" if v is None else v)
             returnStrArr.append(",".join(rowStr))
         return returnStrArr
 
+    def isSavedGameExist(self):
+        pass
 
     # serialising from file to grid object
-    def readGridFromFile(self, savedFile):
-        if os.path.exists(savedFile):
-            with open(savedFile, "r+") as file: 
-                lines = file.readlines()
-                for line in lines: 
-                    line.split(",").strip("\n") #striping from reading file
-                print(lines)
+    def readGridFromFile(self):
+        pass
 
+    def isSavedGameFileValid(self, lines):
+        pass
 
-
-
+    def readFiles(self):
+        pass
