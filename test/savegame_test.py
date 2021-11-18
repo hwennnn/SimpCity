@@ -1,15 +1,15 @@
-from pathlib import Path
-import sys
-path = str(Path(Path(file).parent.absolute()).parent.absolute())
-sys.path.insert(0, path)
-
+import os
 from models.player import Player
-import pytest
+from models.configurations import *
+from pathlib import Path
 
-player_test = Player()
 
-def test_checkFileSaved(capfd):
+dir_path = os.path.dirname(os.path.realpath(__file__))
+currentDirectory = Path(dir_path)
+
+
+def test_checkFileSaved():
+    player_test = Player()
     player_test.saveGame()
-    assert "test-save.txt" in path
-
-
+    rootDirWithFile = currentDirectory.joinpath(savedGameFilename)
+    assert rootDirWithFile.exists()
