@@ -12,3 +12,5 @@ while True:
         break
     elif option == '5':
         player.saveGame()
+    elif option == '6':
+        player.loadGame()
