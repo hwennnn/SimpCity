@@ -7,6 +7,9 @@ class Building(ABC):  # use absract class as the buildings have some common trai
         self.x = x
         self.y = y
 
+    def getName(self):
+        return self.name
+
     @abstractmethod
     def retrieveBuildingScore(self):
         pass

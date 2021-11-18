@@ -31,6 +31,9 @@ class Player:  # Player Class
     def startNewGame(self):
         pass
 
+    def displayGrid(self):
+        self.grid.displayGrid()
+
     def loadGame(self):
         pass
 
