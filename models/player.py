@@ -32,10 +32,14 @@ class Player:  # Player Class
         pass
 
     def loadGame(self):
-        pass
+	pass
 
     def saveGame(self):
-        pass
+	filename = "test-save"
+	with open(filename,"w") as f: 
+		gridValue = self.grid
+		print(gridValue)
+		f.write(gridValue)
 
     def exitToMainMenu(self):
         pass
