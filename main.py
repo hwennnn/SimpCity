@@ -1,9 +1,12 @@
 from models.player import Player
-from src.home import *
+
+player = Player()
 
 while True:
-    displayMainMenu()
-    option = promptMainMenu()
-    validateMain(option)
+
+    player.displayMainMenu()
+    option = player.promptMainMenu()
+    player.validateMain(option)
+
     if option == '0': 
         break
