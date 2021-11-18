@@ -38,4 +38,4 @@ coverage.xml
 *.mo
 
 #Saved game state files 
-test-save.txt 
+saved_game.txt 
