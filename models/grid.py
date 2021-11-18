@@ -27,3 +27,14 @@ class Grid:  # Grid Class
 
     def retrieveBuildingsScore(self):
         pass
+
+    # parses the grid as an array of string, allowing it to be written into txt file
+    def parseGridAsString(self):
+        returnStrArr = []
+        for row in self.grid:
+            rowStr = []
+            for v in row: 
+                rowStr.append("None" if v is None else v)
+            returnStrArr.append(",".join(rowStr))
+        return returnStrArr
+
