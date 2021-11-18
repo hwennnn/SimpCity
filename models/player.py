@@ -31,13 +31,13 @@ class Player:  # Player Class
         pass
 
     def loadGame(self):
-        pass
+        self.grid.readGridFromFile("test-save.txt")
 
     def saveGame(self):
         filename = "test-save.txt"
         with open(filename, 'w+') as f:
             gridValue = self.grid.parseGridAsString()
-            print(gridValue) 
+            print(gridValue)
             for row in gridValue:
                 f.writelines(row + "\n")
 

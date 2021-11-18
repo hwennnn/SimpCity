@@ -1,3 +1,5 @@
+import os
+
 class Grid:  # Grid Class
     def __init__(self):
         self.rowCount = self.colCount = 4
@@ -37,4 +39,17 @@ class Grid:  # Grid Class
                 rowStr.append("None" if v is None else v)
             returnStrArr.append(",".join(rowStr))
         return returnStrArr
+
+
+    # serialising from file to grid object
+    def readGridFromFile(self, savedFile):
+        if os.path.exists(savedFile):
+            with open(savedFile, "r+") as file: 
+                lines = file.readlines()
+                for line in lines: 
+                    line.split(",").strip("\n") #striping from reading file
+                print(lines)
+
+
+
 
