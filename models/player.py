@@ -1,4 +1,5 @@
 from models.grid import Grid
+from gameplay import process
 
 
 class Player:  # Player Class
@@ -28,7 +29,24 @@ Welcome, mayor of Simp City!
         else:
             print(f"You selected option {option}")
 
+    def displayGameMenu(self):
+        print(
+"""1.
+2.
+3. See remaining buildings
+4. See current score
+
+5. Save game
+0. Exit to main menu
+""")
+
     def startNewGame(self):
+        self.turns += 1
+
+    def promptGameMenu(self):
+        return input('Please enter an input: ')
+
+    def validateGame(self, option):
         pass
 
     def displayGrid(self):
