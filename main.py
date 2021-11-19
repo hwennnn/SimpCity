@@ -12,4 +12,4 @@ while True:
         break
     
     elif option == '1':
-        Player.displayGrid()
+        player.displayGrid()

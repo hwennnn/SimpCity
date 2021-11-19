@@ -1,6 +1,6 @@
 from pathlib import Path
 import sys
-path = str(Path(Path(file).parent.absolute()).parent.absolute())
+path = str(Path(Path('player_test.py').parent.absolute()).parent.absolute())
 sys.path.insert(0, path)
 
 from models.player import Player
