@@ -1,4 +1,5 @@
 from models.enums import Buildings
+from models.buildings.beach import Beach
 
 class Grid:  # Grid Class
     def __init__(self):
@@ -31,4 +32,26 @@ class Grid:  # Grid Class
         pass
 
     def displayGrid(self):
-        pass
+        print("""
+            A     B     C     D
+         +-----+-----+-----+-----+ """)
+        for i in range(self.rowCount):
+            rowline = "{0}| ".format(i + 1)
+            for build in self.grid[i]:
+                if build is None:
+                    rowline += "    | "
+                else:
+                    match build.getName():
+                        case "beach":
+                            rowline += Buildings.BEACH.value + " | "
+                        case "factory":
+                            rowline += Buildings.FACTORY.value + " | "
+                        case "highway":
+                            rowline += Buildings.HIGHWAY.value + " | "
+                        case "house":
+                            rowline += Buildings.HOUSE.value + " | "
+                        case "shop":
+                            rowline += Buildings.SHOP.value + " | "
+            print(
+"""        {0}
+         +-----+-----+-----+-----+ """.format(rowline))
