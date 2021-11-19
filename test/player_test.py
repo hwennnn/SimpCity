@@ -12,13 +12,13 @@ def test_displayMainMenu(capfd):
     player_test.displayMainMenu()
     out, err = capfd.readouterr()
     assert """
-        Welcome, mayor of Simp City!
-        ----------------------------
-        1. Start new game
-        2. Load saved game
+Welcome, mayor of Simp City!
+----------------------------
+1. Start new game
+2. Load saved game
 
-        0. Exit
-        """ in out
+0. Exit
+""" in out
 
 def test_nonExit(capfd):
     option = "1"

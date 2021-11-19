@@ -10,13 +10,13 @@ class Player:  # Player Class
     def displayMainMenu(self):
 
         print("""
-        Welcome, mayor of Simp City!
-        ----------------------------
-        1. Start new game
-        2. Load saved game
+Welcome, mayor of Simp City!
+----------------------------
+1. Start new game
+2. Load saved game
 
-        0. Exit
-        """)
+0. Exit
+""")
 
     def promptMainMenu(self):
         return input('Please enter an input: ')

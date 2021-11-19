@@ -33,8 +33,8 @@ class Grid:  # Grid Class
 
     def displayGrid(self):
         print("""
-            A     B     C     D
-         +-----+-----+-----+-----+ """)
+    A     B     C     D
+ +-----+-----+-----+-----+ """)
         for i in range(self.rowCount):
             rowline = "{0}| ".format(i + 1)
             for build in self.grid[i]:
@@ -53,5 +53,5 @@ class Grid:  # Grid Class
                         case "shop":
                             rowline += Buildings.SHOP.value + " | "
             print(
-"""        {0}
-         +-----+-----+-----+-----+ """.format(rowline))
+"""{0}
+ +-----+-----+-----+-----+ """.format(rowline))
