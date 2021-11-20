@@ -26,7 +26,7 @@ def test_nonExit(capfd):
     out, err = capfd.readouterr()
     assert f"You selected option {option}" in out
 
-def test_Exit(capfd):
+def test_ExitGame(capfd):
     option = "0"
     player_test.validateMain(option)
     out, err = capfd.readouterr()
