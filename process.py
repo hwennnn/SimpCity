@@ -1,13 +1,11 @@
-from models.player import Player
-
-def process(player):
+def run(player):
     while True:
         print("""
 Turn: {0}""".format(player.turns))
         player.displayGrid()
         player.displayGameMenu()
         option = player.promptGameMenu()
-        player.validateMain(option)
+        player.validateGame(option)
         
         if option == '0':
             break
