@@ -1,5 +1,5 @@
 from models.grid import Grid
-from process import process
+from process import run
 
 
 class Player:  # Player Class
@@ -41,7 +41,7 @@ Welcome, mayor of Simp City!
 
     def startNewGame(self):
         self.turns += 1
-        process(self)
+        run(self)
 
     def promptGameMenu(self):
         return input('Please enter an input: ')
