@@ -35,7 +35,7 @@ Demonstrate the code is solid. Example: The exact commands you ran and their out
 
 ### **Closing issues**
 
-Put `Closes #XXXX` in your comment to auto-close the issue that your PR fixes (if such, only put this when).
+Put `Closes #XXXX` in your comment to auto-close the issue that your PR fixes (if such, only put this when the issue is to be completed).
 
 ## **Build with Docker**
 
