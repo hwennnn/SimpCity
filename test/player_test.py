@@ -1,7 +1,14 @@
+import os
+from models.player import Player
+from models.configurations import *
 from pathlib import Path
 import sys
-path = str(Path(Path(file).parent.absolute()).parent.absolute())
+
+path = str(Path(Path("player_test.py").parent.absolute()).parent.absolute())
 sys.path.insert(0, path)
+
+dir_path = os.path.dirname(os.path.realpath(__file__))
+currentDirectory = Path(dir_path)
 
 from models.player import Player
 import pytest
@@ -31,3 +38,8 @@ def test_Exit(capfd):
     player_test.validateMain(option)
     out, err = capfd.readouterr()
     assert "---- Game Ended----" in out
+
+def test_checkFileSaved():
+    player_test.saveGame()
+    rootDirWithFile = currentDirectory.joinpath(savedGameFilename)
+    assert rootDirWithFile.exists()
