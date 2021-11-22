@@ -36,3 +36,6 @@ coverage.xml
 
 # Translations
 *.mo
+
+#Saved game state files 
+saved_game.txt 

@@ -8,5 +8,9 @@ while True:
     option = player.promptMainMenu()
     player.validateMain(option)
 
-    if option == '0': 
+    if option == '0':
         break
+    elif option == '2':
+        player.loadGame()
+    elif option == '5':
+        player.saveGame()
