@@ -1,5 +1,6 @@
 from models.grid import Grid
 from process import run
+from models.configurations import *
 
 
 class Player:  # Player Class
@@ -25,7 +26,6 @@ Welcome, mayor of Simp City!
     def validateMain(self, option):
         if option == '0':
             print('---- Game Ended----')
-
         else:
             print(f"You selected option {option}")
 
@@ -57,10 +57,13 @@ Welcome, mayor of Simp City!
         self.grid.displayGrid()
 
     def loadGame(self):
-        pass
+        self.grid.readGridFromFile()
 
     def saveGame(self):
-        pass
+        with open(savedGameFilename, 'w+') as f:
+            gridValue = self.grid.parseGridAsString()
+            for row in gridValue:
+                f.writelines(row + "\n")
 
     def exitToMainMenu(self):
         pass
