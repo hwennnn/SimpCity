@@ -12,7 +12,7 @@ while True:
         break
     
     elif option == '1':
-        player = player.startNewGame()
+        player.startNewGame()
 
     elif option == '2':
         player.loadGame()
