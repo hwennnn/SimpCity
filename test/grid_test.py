@@ -24,12 +24,5 @@ def test_displayMainMenu(capfd):
  +-----+-----+-----+-----+ 
 """ in out
 
-def test_ExitGame(capfd):
-    player_test.displayGrid()
-    option = "0"
-    player_test.validateMain(option)
-    out, err = capfd.readouterr()
-    assert "---- Game Ended----" in out
-
 
 

@@ -48,7 +48,7 @@ Welcome, mayor of Simp City!
 
     def validateGame(self, option):
         if option == '0':
-            print('Returning to main menu')
+            print('Returning to main menu...')
 
         else:
             print(f"You selected option {option}")
