@@ -41,8 +41,8 @@ Welcome, mayor of Simp City!
 0. Exit to main menu""")
 
     def startNewGame(self):
-        self.turns = 1
-
+        self.turns += 1
+        
     def promptGameMenu(self):
         return input('Please enter an input: ')
 
