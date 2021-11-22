@@ -1,5 +1,7 @@
 from models.enums import Buildings
-from models.buildings.beach import Beach
+import os
+from models.configurations import *
+
 
 class Grid:  # Grid Class
     def __init__(self):
@@ -31,6 +33,7 @@ class Grid:  # Grid Class
     def retrieveBuildingsScore(self):
         pass
 
+    #displays the grid and adapts to each building type
     def displayGrid(self):
         print("""
     A     B     C     D
@@ -55,3 +58,26 @@ class Grid:  # Grid Class
             print(
 """{0}
  +-----+-----+-----+-----+ """.format(rowline))
+
+    # parses the grid as an array of string, allowing it to be written into txt file
+    def parseGridAsString(self):
+        returnStrArr = []
+        for row in self.grid:
+            rowStr = []
+            for v in row:
+                rowStr.append("None" if v is None else v)
+            returnStrArr.append(",".join(rowStr))
+        return returnStrArr
+
+    def isSavedGameExist(self):
+        pass
+
+    # serialising from file to grid object
+    def readGridFromFile(self):
+        pass
+
+    def isSavedGameFileValid(self, lines):
+        pass
+
+    def readFiles(self):
+        pass
