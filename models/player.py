@@ -31,7 +31,8 @@ Welcome, mayor of Simp City!
 
     def displayGameMenu(self):
         print(
-"""1.
+"""
+1.
 2.
 3. See remaining buildings
 4. See current score
@@ -40,8 +41,7 @@ Welcome, mayor of Simp City!
 0. Exit to main menu""")
 
     def startNewGame(self):
-        self.turns += 1
-        run(self)
+        self.turns = 1
 
     def promptGameMenu(self):
         return input('Please enter an input: ')
