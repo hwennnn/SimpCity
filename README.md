@@ -45,6 +45,9 @@ Put `Closes #XXXX` in your comment to auto-close the issue that your PR fixes (i
 docker build -t simpcity .
 docker run -ti simpcity
 ```
+
+### Run pytest using docker in interative mode
+
 ```bash
 docker build -f Dockerfile.pytest -t simpcity-test .
 docker run -ti simpcity-test
