@@ -14,9 +14,6 @@ player_test = Player()
 def test_startNewGame(capfd):
     player_test.validateMain('1')
     player_test.startNewGame() # Init turns == 1
-    player_test.validateGame('0')
-    player_test.validateMain('0')
-    out, err = capfd.readouterr()
     assert player_test.turns == 1
 
 # Test the display of a empty grid
