@@ -46,7 +46,7 @@ def test_ExitGame(capfd):
     option = "0"
     player_test.validateGame(option)
     out, err = capfd.readouterr()
-    assert "Returning to main menu..." in out
+    assert f"You selected option {option}" in out 
 
 
 def test_checkFileSaved():
