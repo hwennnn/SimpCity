@@ -25,7 +25,7 @@ Welcome, mayor of Simp City!
     def validateMain(self, option):
         if option == '0':
             print('---- Game Ended----')
-        elif ord("1") <= ord(option) <= ord("2"):
+        elif len(option) == 1 and ord("1") <= ord(option) <= ord("2"):
             print(f"You selected option {option}")
         else:
             print('Invalid option!')
@@ -48,7 +48,7 @@ Welcome, mayor of Simp City!
         return input('Please enter an input: ')
 
     def validateGame(self, option):
-        if ord("0") <= ord(option) <= ord("5"):
+        if len(option) == 1 and ord("0") <= ord(option) <= ord("5"):
             print(f"You selected option {option}")
         else:
             print("Invalid option!")
