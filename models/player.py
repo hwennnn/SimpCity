@@ -5,7 +5,7 @@ from models.configurations import *
 class Player:  # Player Class
     def __init__(self):
         self.score = 0
-        self.turns = 0
+        self.turns = 1
         self.grid = Grid()
 
     def displayMainMenu(self):
@@ -46,11 +46,17 @@ Welcome, mayor of Simp City!
         return input('Please enter an input: ')
 
     def validateGame(self, option):
-        if option == '0':
+            print(f"You selected option {option}")
+
+    def promptSaveGame(self):
+        return input('Have you saved your game progress? [Y/N]: ').upper()
+
+    def validateSaveGame(self, option):
+        if option.upper() == "Y":
             print('Returning to main menu...')
 
         else:
-            print(f"You selected option {option}")
+            print("Select Option '5' in the game menu to save your game")
 
     def displayGrid(self):
         self.grid.displayGrid()
