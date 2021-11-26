@@ -54,7 +54,7 @@ Welcome, mayor of Simp City!
             print("Invalid option!")
 
     def promptSaveGame(self):
-        return input('Have you saved your game progress? [Y/N]: ').upper()
+        return input('Are you sure to exit to main menu without saving game? [Y/N]: ').upper()
 
     def validateSaveGame(self, option):
         if option.upper() == "Y":
