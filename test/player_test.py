@@ -28,6 +28,34 @@ Welcome, mayor of Simp City!
 0. Exit
 """ in out
 
+# Test the display of a empty grid
+def test_displayGrid(capfd):
+    player_test.displayGrid()
+    out, err = capfd.readouterr()
+    assert """
+    A     B     C     D
+ +-----+-----+-----+-----+ 
+1|     |     |     |     | 
+ +-----+-----+-----+-----+ 
+2|     |     |     |     | 
+ +-----+-----+-----+-----+ 
+3|     |     |     |     | 
+ +-----+-----+-----+-----+ 
+4|     |     |     |     | 
+ +-----+-----+-----+-----+ 
+""" in out
+
+def test_invalidOptionMain(capfd):
+    option = "a"
+    player_test.validateMain(option)
+    out, err = capfd.readouterr()
+    assert f"You selected option {option}" not in out
+
+def test_invalidOptionGame(capfd):
+    option = "a"
+    player_test.validateGame(option)
+    out, err = capfd.readouterr()
+    assert f"You selected option {option}" not in out
 
 def test_nonExit(capfd):
     option = "1"
