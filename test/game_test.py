@@ -7,6 +7,7 @@ sys.path.insert(0, path)
 import pytest
 from models.game import Game
 from models.player import Player
+import test.player_test as unit_Player
 
 game_test = Game()
 player_test = Player()
@@ -14,24 +15,8 @@ player_test = Player()
 def test_startNewGame(capfd):
     player_test.validateMain('1')
     player_test.startNewGame() # Init turns == 1
+    unit_Player.test_displayGrid(capfd) # Reuse unit test from player_test.py
     assert player_test.turns == 1
-
-# Test the display of a empty grid
-def test_displayGrid(capfd):
-    player_test.displayGrid()
-    out, err = capfd.readouterr()
-    assert """
-    A     B     C     D
- +-----+-----+-----+-----+ 
-1|     |     |     |     | 
- +-----+-----+-----+-----+ 
-2|     |     |     |     | 
- +-----+-----+-----+-----+ 
-3|     |     |     |     | 
- +-----+-----+-----+-----+ 
-4|     |     |     |     | 
- +-----+-----+-----+-----+ 
-""" in out
 
 # Test exit when player started the game
 def test_ExitFromGrid(capfd):
