@@ -25,12 +25,14 @@ Welcome, mayor of Simp City!
     def validateMain(self, option):
         if option == '0':
             print('---- Game Ended----')
-        else:
+        elif ord("1") <= ord(option) <= ord("2"):
             print(f"You selected option {option}")
+        else:
+            print('Invalid option!')
 
     def displayGameMenu(self):
         print(
-"""
+            """
 1.
 2.
 3. See remaining buildings
@@ -41,12 +43,15 @@ Welcome, mayor of Simp City!
 
     def startNewGame(self):
         self.turns = 1
-        
+
     def promptGameMenu(self):
         return input('Please enter an input: ')
 
     def validateGame(self, option):
+        if ord("0") <= ord(option) <= ord("5"):
             print(f"You selected option {option}")
+        else:
+            print("Invalid option!")
 
     def promptSaveGame(self):
         return input('Have you saved your game progress? [Y/N]: ').upper()

@@ -28,6 +28,8 @@ Welcome, mayor of Simp City!
 """ in out
 
 # Test the display of a empty grid
+
+
 def test_displayGrid(capfd):
     player_test.displayGrid()
     out, err = capfd.readouterr()
@@ -44,17 +46,34 @@ def test_displayGrid(capfd):
  +-----+-----+-----+-----+ 
 """ in out
 
+
+def test_validOptionMain(capfd):
+    option = "1"
+    player_test.validateMain(option)
+    out, err = capfd.readouterr()
+    assert f"You selected option {option}" in out
+
+
 def test_invalidOptionMain(capfd):
     option = "a"
     player_test.validateMain(option)
     out, err = capfd.readouterr()
     assert f"You selected option {option}" not in out
 
+
+def test_invalidOptionGame(capfd):
+    option = "2"
+    player_test.validateGame(option)
+    out, err = capfd.readouterr()
+    assert f"You selected option {option}" in out
+
+
 def test_invalidOptionGame(capfd):
     option = "a"
     player_test.validateGame(option)
     out, err = capfd.readouterr()
     assert f"You selected option {option}" not in out
+
 
 def test_nonExit(capfd):
     option = "1"
@@ -69,11 +88,12 @@ def test_Exit(capfd):
     out, err = capfd.readouterr()
     assert "---- Game Ended----" in out
 
+
 def test_ExitGame(capfd):
     option = "0"
     player_test.validateGame(option)
     out, err = capfd.readouterr()
-    assert f"You selected option {option}" in out 
+    assert f"You selected option {option}" in out
 
 
 def test_checkFileSaved():
