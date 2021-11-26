@@ -1,7 +1,7 @@
-from building import Building
+from models.buildings.building import Building
 
 
-class Factory:
+class Factory(Building):
     def __init__(self, name, x, y):
         Building.__init__(self, name, x, y)
 

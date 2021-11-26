@@ -1,3 +1,4 @@
+# Unit Test Only
 import os
 import sys
 import pytest
@@ -18,13 +19,60 @@ def test_displayMainMenu(capfd):
     player_test.displayMainMenu()
     out, err = capfd.readouterr()
     assert """
-        Welcome, mayor of Simp City!
-        ----------------------------
-        1. Start new game
-        2. Load saved game
+Welcome, mayor of Simp City!
+----------------------------
+1. Start new game
+2. Load saved game
 
-        0. Exit
-        """ in out
+0. Exit
+""" in out
+
+# Test the display of a empty grid
+
+
+def test_displayGrid(capfd):
+    player_test.displayGrid()
+    out, err = capfd.readouterr()
+    assert """
+    A     B     C     D
+ +-----+-----+-----+-----+ 
+1|     |     |     |     | 
+ +-----+-----+-----+-----+ 
+2|     |     |     |     | 
+ +-----+-----+-----+-----+ 
+3|     |     |     |     | 
+ +-----+-----+-----+-----+ 
+4|     |     |     |     | 
+ +-----+-----+-----+-----+ 
+""" in out
+
+
+def test_validOptionMain(capfd):
+    option = "1"
+    player_test.validateMain(option)
+    out, err = capfd.readouterr()
+    assert f"You selected option {option}" in out
+
+
+def test_invalidOptionMain(capfd):
+    option = "a"
+    player_test.validateMain(option)
+    out, err = capfd.readouterr()
+    assert f"You selected option {option}" not in out
+
+
+def test_invalidOptionGame(capfd):
+    option = "2"
+    player_test.validateGame(option)
+    out, err = capfd.readouterr()
+    assert f"You selected option {option}" in out
+
+
+def test_invalidOptionGame(capfd):
+    option = "a"
+    player_test.validateGame(option)
+    out, err = capfd.readouterr()
+    assert f"You selected option {option}" not in out
 
 
 def test_nonExit(capfd):
@@ -39,6 +87,13 @@ def test_Exit(capfd):
     player_test.validateMain(option)
     out, err = capfd.readouterr()
     assert "---- Game Ended----" in out
+
+
+def test_ExitGame(capfd):
+    option = "0"
+    player_test.validateGame(option)
+    out, err = capfd.readouterr()
+    assert f"You selected option {option}" in out
 
 
 def test_checkFileSaved():
