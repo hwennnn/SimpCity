@@ -1,5 +1,13 @@
 # SimpCity
 
+## **Links to wiki**
+
+1. [Roadmap](https://github.com/hwennnn/SimpCity/wiki/RoadMap)
+2. [Daily Scrum](https://github.com/hwennnn/SimpCity/wiki/Daily-Scrum)
+3. [Sprint Goal](https://github.com/hwennnn/SimpCity/wiki/Sprint-Goal)
+4. [Sprint Retrospective](https://github.com/hwennnn/SimpCity/wiki/Sprint-Retrospective)
+5. [Weekly Progress Update Report](https://github.com/hwennnn/SimpCity/wiki/Weekly-Progress-Update-Report)
+
 ## **Development guide**
 
 During development, please create a new branch `feature-{featureName}-{version}` from the latest development branch. When the feature is finished developed, please submit a pull request before merging the feature branch to the development branch for code reviewing.
