@@ -61,7 +61,7 @@ def test_invalidOptionMain(capfd):
     assert f"You selected option {option}" not in out
 
 
-def test_invalidOptionGame(capfd):
+def test_validOptionGame(capfd):
     option = "2"
     player_test.validateGame(option)
     out, err = capfd.readouterr()
@@ -73,13 +73,6 @@ def test_invalidOptionGame(capfd):
     player_test.validateGame(option)
     out, err = capfd.readouterr()
     assert f"You selected option {option}" not in out
-
-
-def test_nonExit(capfd):
-    option = "1"
-    player_test.validateMain(option)
-    out, err = capfd.readouterr()
-    assert f"You selected option {option}" in out
 
 
 def test_Exit(capfd):
@@ -100,3 +93,4 @@ def test_checkFileSaved():
     player_test.saveGame()
     rootDirWithFile = currentDirectory.joinpath(savedGameFilename)
     assert rootDirWithFile.exists()
+
