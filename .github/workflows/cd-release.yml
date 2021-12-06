@@ -1,4 +1,4 @@
-name: SimpCity CD for delivery
+name: SimpCity CD for Delivery
 
 on:
   push:
@@ -33,7 +33,7 @@ jobs:
       name: Create Issues
       uses: nashmaniac/create-issue-action@v1.1
       with:
-          title: Build Failed for CI on Push Events
+          title: Build Failed for CD
           token: ${{secrets.GITHUB_TOKEN}}
           assignees: ${{github.actor}}
           labels: worflow-failed
@@ -58,11 +58,6 @@ jobs:
 
     - name: Set environment variables for version number
       run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
-
-    - name: Echo Version Tag
-      run: |
-        echo $RELEASE_VERSION
-        echo ${{ env.RELEASE_VERSION }}
 
     - name: Create Download Directory
       run: mkdir downloads
