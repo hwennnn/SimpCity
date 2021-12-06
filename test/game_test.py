@@ -13,19 +13,19 @@ game_test = Game()
 player_test = Player()
 
 
-# def test_startNewGame(capfd):
-#     player_test.validateMain('1')
-#     unit_Player.test_displayGrid(capfd)  # Reuse unit test from player_test.py
-#     assert player_test.turns == 1
+def test_startNewGame(capfd):
+    player_test.validateMain('1')
+    # Reuse unit test from player_test.py
+    unit_Player.test_displayGrid(capfd)
+    assert player_test.turns == 1
 
-# # Test exit when player started the game
+# Test exit when player started the game
 
 
-# def test_ExitFromGrid(capfd):
-#     player_test.validateMain('1')
-#     player_test.startNewGame()  # Init turns == 1
-#     player_test.validateGame('0')
-#     player_test.validateMain('0')
-#     out, err = capfd.readouterr()
-#     assert player_test.turns == 1
-#     assert "---- Game Ended----"
+def test_ExitFromGrid(capfd):
+    player_test.validateMain('1')
+    player_test.startNewGame()  # Init turns == 1
+    player_test.validateGame('0')
+    assert player_test.turns == 1
+    # Reuse unit test from player_test.py
+    unit_Player.test_ExitGame(capfd, "0", "---- Game Ended----")
