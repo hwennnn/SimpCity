@@ -47,18 +47,45 @@ def test_displayGrid(capfd):
 """ in out
 
 
-def test_validOptionMain(capfd):
-    option = "1"
-    player_test.validateMain(option)
-    out, err = capfd.readouterr()
-    assert f"You selected option {option}" in out
+validOptionMainTestData = \
+    [("1", "You selected option 1"),
+     ("2", "You selected option 2")]
 
 
-def test_invalidOptionMain(capfd):
-    option = "a"
+@pytest.mark.parametrize("option, expectedResult", validOptionMainTestData)
+def test_validOptionMain(capfd, option, expectedResult):
     player_test.validateMain(option)
     out, err = capfd.readouterr()
-    assert f"You selected option {option}" not in out
+    assert expectedResult in out
+
+
+invalidOptionMainTestData = \
+    [("3", "Invalid option!"),
+     ("4", "Invalid option!"),
+     ("10", "Invalid option!"),
+     ("a", "Invalid option!")]
+
+
+@pytest.mark.parametrize("option, expectedResult", invalidOptionMainTestData)
+def test_invalidOptionMain(capfd, option, expectedResult):
+    player_test.validateMain(option)
+    out, err = capfd.readouterr()
+    assert expectedResult in out
+
+
+exitGameTestData = \
+    [("0", "---- Game Ended----")]
+
+
+@pytest.mark.parametrize("option, expectedResult", exitGameTestData)
+def test_ExitGame(capfd, option, expectedResult):
+    with pytest.raises(SystemExit) as e:
+        player_test.validateMain(option)
+
+    out, err = capfd.readouterr()
+    assert expectedResult in out
+    assert e.type == SystemExit
+    assert e.value.code == 0
 
 
 def test_validOptionGame(capfd):
@@ -75,14 +102,7 @@ def test_invalidOptionGame(capfd):
     assert f"You selected option {option}" not in out
 
 
-def test_Exit(capfd):
-    option = "0"
-    player_test.validateMain(option)
-    out, err = capfd.readouterr()
-    assert "---- Game Ended----" in out
-
-
-def test_ExitGame(capfd):
+def test_ExitGame11(capfd):
     option = "0"
     player_test.validateGame(option)
     out, err = capfd.readouterr()
@@ -93,4 +113,3 @@ def test_checkFileSaved():
     player_test.saveGame()
     rootDirWithFile = currentDirectory.joinpath(savedGameFilename)
     assert rootDirWithFile.exists()
-
