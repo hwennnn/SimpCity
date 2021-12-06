@@ -5,18 +5,47 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up Python 3.10
-        uses: actions/setup-python@v2
-        with:
-          python-version: "3.10"
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install pytest
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-      - name: Test with pytest
-        run: |
-          cd test; pytest -v
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v2
+      with:
+        python-version: "3.10"
+    - name: Install Libraries
+      run: |
+        if [ -f test_requirements.txt ]; then pip install -r test_requirements.txt; fi
+        
+    - name: Linter Check with Flake8
+      run: |
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics    
+    - name: Label the PR Size
+      uses: coverwallet/pr-labeler@v1.2.1
+      with:
+          xs_max_size: '10'
+          s_max_size: '100'
+          m_max_size: '500'
+          l_max_size: '1000'
+          exclude_files: '.txt'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+        
+    - name: Begin Pytest
+      run: |
+        cd test; pytest --cov -v --junitxml=report.xml
+    - if: ${{failure()}}       
+      name: Create Issues
+      uses: nashmaniac/create-issue-action@v1.1
+      with:
+          title: Build Failed
+          token: ${{secrets.GITHUB_TOKEN}}
+          assignees: ${{github.actor}}
+          labels: worflow-failed
+          body: Workflow failed for commit ${{github.sha}} @ ${{github.ref}}       
+
+    - name: Publish Unit Test Results
+      uses: EnricoMi/publish-unit-test-result-action@v1.24
+      if: always()
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        files: report.xml
