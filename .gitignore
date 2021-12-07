@@ -39,3 +39,4 @@ coverage.xml
 
 #Saved game state files 
 saved_game.txt 
+.DS_Store

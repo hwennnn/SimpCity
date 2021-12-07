@@ -1,3 +1,4 @@
+import sys
 from models.grid import Grid
 from models.configurations import *
 
@@ -25,6 +26,7 @@ Welcome, mayor of Simp City!
     def validateMain(self, option):
         if option == '0':
             print('---- Game Ended----')
+            self.exitGame()
         elif len(option) == 1 and ord("1") <= ord(option) <= ord("2"):
             print(f"You selected option {option}")
         else:
@@ -79,4 +81,4 @@ Welcome, mayor of Simp City!
         pass
 
     def exitGame(self):
-        pass
+        exit(0)
