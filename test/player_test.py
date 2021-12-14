@@ -1,33 +1,127 @@
-from pathlib import Path
+# Unit Test Only
+import os
 import sys
-path = str(Path(Path(file).parent.absolute()).parent.absolute())
+import pytest
+from models.player import Player
+from models.configurations import *
+from pathlib import Path
+
+path = str(Path(Path("player_test.py").parent.absolute()).parent.absolute())
 sys.path.insert(0, path)
 
-from models.player import Player
-import pytest
+dir_path = os.path.dirname(os.path.realpath(__file__))
+currentDirectory = Path(dir_path)
 
 player_test = Player()
 
+
 def test_displayMainMenu(capfd):
     player_test.displayMainMenu()
-    out, err = capfd.readouterr()
+    out, _ = capfd.readouterr()
     assert """
-        Welcome, mayor of Simp City!
-        ----------------------------
-        1. Start new game
-        2. Load saved game
+Welcome, mayor of Simp City!
+----------------------------
+1. Start new game
+2. Load saved game
 
-        0. Exit
-        """ in out
+0. Exit
+""" in out
 
-def test_nonExit(capfd):
-    option = "1"
+# Test the display of a empty grid
+
+
+def test_displayGrid(capfd):
+    player_test.displayGrid()
+    out, _ = capfd.readouterr()
+    assert """
+    A     B     C     D
+ +-----+-----+-----+-----+ 
+1|     |     |     |     | 
+ +-----+-----+-----+-----+ 
+2|     |     |     |     | 
+ +-----+-----+-----+-----+ 
+3|     |     |     |     | 
+ +-----+-----+-----+-----+ 
+4|     |     |     |     | 
+ +-----+-----+-----+-----+ 
+""" in out
+
+
+validMainOptionTestData = \
+    [("1", "You selected option 1"),
+     ("2", "You selected option 2")]
+
+
+@pytest.mark.parametrize("option, expectedResult", validMainOptionTestData)
+def test_validMainOption(capfd, option, expectedResult):
     player_test.validateMain(option)
-    out, err = capfd.readouterr()
-    assert f"You selected option {option}" in out
+    out, _ = capfd.readouterr()
+    assert expectedResult in out
 
-def test_Exit(capfd):
-    option = "0"
+
+invalidMainOptionTestData = \
+    [("3", "Invalid option!"),
+     ("4", "Invalid option!"),
+     ("10", "Invalid option!"),
+     ("a", "Invalid option!"),
+     ("abc", "Invalid option!")]
+
+
+@pytest.mark.parametrize("option, expectedResult", invalidMainOptionTestData)
+def test_invalidMainOption(capfd, option, expectedResult):
     player_test.validateMain(option)
-    out, err = capfd.readouterr()
-    assert "---- Game Ended----" in out
+    out, _ = capfd.readouterr()
+    assert expectedResult in out
+
+
+exitGameTestData = \
+    [("0", "---- Game Ended----")]
+
+
+@pytest.mark.parametrize("option, expectedResult", exitGameTestData)
+def test_ExitGame(capfd, option, expectedResult):
+    with pytest.raises(SystemExit) as e:
+        player_test.validateMain(option)
+
+    out, _ = capfd.readouterr()
+    assert expectedResult in out
+    assert e.type == SystemExit
+    assert e.value.code == 0
+
+
+validGameOptionTestData = \
+    [("0", "You selected option 0"),
+     ("1", "You selected option 1"),
+     ("2", "You selected option 2"),
+     ("3", "You selected option 3"),
+     ("4", "You selected option 4"),
+     ("5", "You selected option 5")]
+
+
+@pytest.mark.parametrize("option, expectedResult", validGameOptionTestData)
+def test_validGameOption(capfd, option, expectedResult):
+    player_test.validateGame(option)
+    out, _ = capfd.readouterr()
+    assert expectedResult in out
+
+
+invalidGameOptionTestData = \
+    [("6", "Invalid option!"),
+     ("7", "Invalid option!"),
+     ("8", "Invalid option!"),
+     ("9", "Invalid option!"),
+     ("10", "Invalid option!"),
+     ("abc", "Invalid option!")]
+
+
+@pytest.mark.parametrize("option, expectedResult", invalidGameOptionTestData)
+def test_invalidGameOption(capfd, option, expectedResult):
+    player_test.validateGame(option)
+    out, _ = capfd.readouterr()
+    assert expectedResult in out
+
+
+def test_checkFileSaved():
+    player_test.saveGame()
+    rootDirWithFile = currentDirectory.joinpath(savedGameFilename)
+    assert rootDirWithFile.exists()

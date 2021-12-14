@@ -1,12 +1,19 @@
-from models.player import Player
+import sys
+from models.game import Game
 
-player = Player()
+game = Game()
 
 while True:
 
-    player.displayMainMenu()
-    option = player.promptMainMenu()
-    player.validateMain(option)
+    game.player.displayMainMenu()
+    option = game.player.promptMainMenu()
+    game.player.validateMain(option)
 
-    if option == '0': 
-        break
+    if option == '0':
+        game.player.exitGame()
+
+    elif option == '1':
+        game.launchGame()
+
+    elif option == '2':
+        game.player.loadGame()
