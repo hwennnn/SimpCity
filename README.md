@@ -6,7 +6,8 @@
 2. [Daily Scrum](https://github.com/hwennnn/SimpCity/wiki/Daily-Scrum)
 3. [Sprint Goal](https://github.com/hwennnn/SimpCity/wiki/Sprint-Goal)
 4. [Sprint Retrospective](https://github.com/hwennnn/SimpCity/wiki/Sprint-Retrospective)
-5. [Weekly Progress Update Report](https://github.com/hwennnn/SimpCity/wiki/Progress-Report)
+5. [Progress Update Report](https://github.com/hwennnn/SimpCity/wiki/Progress-Report)
+
 
 ## **Development guide**
 
