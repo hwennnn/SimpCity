@@ -10,7 +10,7 @@
 
 ## **Development guide**
 
-During development, please create a new branch `feature-{featureName}-{version}` from the latest development branch. When the feature is finished developed, please submit a pull request before merging the feature branch to the development branch for code reviewing.
+During development, please create a new branch `feature-{featureName}` from the latest development branch. When the feature is finished developed, please submit a pull request before merging the feature branch to the development branch for code reviewing.
 
 ## **Commit messages style**
 
@@ -21,7 +21,11 @@ During development, please create a new branch `feature-{featureName}-{version}`
 - `refactor` - refactoring a specific section of the codebase
 - `test` - related to testing
 - `docs` - related to documentation
-- `CI` - related to continuous integration
+- `ci` - related to continuous integration
+- `style` - Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
+- `chore` - Changes to the build process or auxiliary tools and libraries such as documentation generation
+
+**Notes: Please only specifc one type in one commit!**
 
 ## **Pull request template**
 
@@ -43,7 +47,7 @@ Demonstrate the code is solid. Example: The exact commands you ran and their out
 
 ### **Closing issues**
 
-Put `Closes #XXXX` in your comment to auto-close the issue that your PR fixes (if such, only put this when the issue is to be completed).
+Put `Closes #XXXX` in your comment to auto-close the issue that your PR fixes (if such, only put this when the issue is to be completed or else just link the issue).
 
 ## **Build with Docker**
 
