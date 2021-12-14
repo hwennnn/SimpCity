@@ -2,7 +2,7 @@ name: SimpCity CI on Push Events
 
 on: 
   push:
-    branches: ["feature-*", "development", "QA", "stable", "release-*"]
+    branches: ["feature/*", "development", "QA", "stable", "release-*"]
 
 jobs:
   build:
