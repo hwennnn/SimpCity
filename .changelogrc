@@ -1,0 +1,64 @@
+{
+    "app_name": "SimpCity",
+    "intro": "This is the assignment for DevOps module in Ngee Ann Polytechnic",
+    "branch": "development",
+    "repo_url": "https://github.com/hwennnn/SimpCity",
+    "file": "CHANGELOG.md",
+    "sections": [{
+            "title": "Bug Fixes",
+            "grep": "^fix"
+        },
+        {
+            "title": "Features",
+            "grep": "^feat"
+        },
+        {
+            "title": "Documentation",
+            "grep": "^docs"
+        },
+        {
+            "title": "Breaking changes",
+            "grep": "BREAKING"
+        },
+        {
+            "title": "Refactor",
+            "grep": "^refactor"
+        },
+        {
+            "title": "Style",
+            "grep": "^style"
+        },
+        {
+            "title": "Test",
+            "grep": "^test"
+        },
+        {
+            "title": "Chore",
+            "grep": "^chore"
+        },
+        {
+            "title": "Making changes to CI",
+            "grep": "^ci"
+        },
+        {
+            "title": "Making changes to CI",
+            "grep": "^CI"
+        },
+        {
+            "title": "Making changes to CD",
+            "grep": "^cd"
+        },
+        {
+            "title": "Making changes to CD",
+            "grep": "^CD"
+        },
+        {
+            "title": "Branches merged",
+            "grep": "^Merge branch"
+        },
+        {
+            "title": "Pull requests merged",
+            "grep": "^Merge pull request"
+        }
+    ]
+}
