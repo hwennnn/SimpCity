@@ -6,7 +6,8 @@
 2. [Daily Scrum](https://github.com/hwennnn/SimpCity/wiki/Daily-Scrum)
 3. [Sprint Goal](https://github.com/hwennnn/SimpCity/wiki/Sprint-Goal)
 4. [Sprint Retrospective](https://github.com/hwennnn/SimpCity/wiki/Sprint-Retrospective)
-5. [Weekly Progress Update Report](https://github.com/hwennnn/SimpCity/wiki/Progress-Report)
+5. [Progress Update Report](https://github.com/hwennnn/SimpCity/wiki/Progress-Report)
+
 
 ## **Development guide**
 
@@ -22,6 +23,7 @@ During development, please create a new branch `feature-{featureName}` from the 
 - `test` - related to testing
 - `docs` - related to documentation
 - `ci` - related to continuous integration
+- `cd` - related to continuous delivery
 - `style` - Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
 - `chore` - Changes to the build process or auxiliary tools and libraries such as documentation generation
 
