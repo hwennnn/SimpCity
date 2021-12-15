@@ -1,0 +1,11 @@
+FROM robd003/python3.10:latest
+
+WORKDIR /usr/src/app
+
+COPY . .
+
+RUN pip3 install -r test_requirements.txt
+
+RUN cd test; pytest -v --cov
+
+CMD tail -f /dev/null
