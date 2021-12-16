@@ -136,7 +136,25 @@ def test_shuffleCurrentAvailableBuildings():
 
 
 def test_retriveTwoRandomBuildings():
-    available_buildings = player_test.grid.availableBuildings
-    two_random_buildings = available_buildings.retriveTwoRandomBuildings()
+    two_random_buildings = player_test.retrieveTwoRandomBuildings()
 
     assert len(two_random_buildings) == 2
+
+
+def generateRandomBuildingsMenuContent():
+    gameMenuContentTestData = []
+
+    for _ in range(10):
+        firstBuilding, secondBuilding = player_test.retrieveTwoRandomBuildings()
+        gameMenuContentTestData.append(
+            ((firstBuilding, secondBuilding), player_test.gameMenuContent(firstBuilding, secondBuilding)))
+
+    return gameMenuContentTestData
+
+
+@pytest.mark.parametrize("option, expectedResult", generateRandomBuildingsMenuContent())
+def test_displayGameMenuWithTwoRandomBuildings(capfd, option, expectedResult):
+    firstBuilding, secondBuilding = option
+    player_test.displayGameMenu(firstBuilding, secondBuilding)
+    out, _ = capfd.readouterr()
+    assert expectedResult in out

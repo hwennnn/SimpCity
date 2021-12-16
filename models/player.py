@@ -43,8 +43,9 @@ Welcome, mayor of Simp City!
 5. Save game
 0. Exit to main menu""")
 
-    def displayGameMenu(self):
-        firstBuilding, secondBuilding = self.retrieveTwoRandomBuildings()
+    def displayGameMenu(self, firstBuilding=None, secondBuilding=None):
+        if firstBuilding is None and secondBuilding is None:
+            firstBuilding, secondBuilding = self.retrieveTwoRandomBuildings()
         print(self.gameMenuContent(firstBuilding, secondBuilding))
 
     def startNewGame(self):
