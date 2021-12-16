@@ -132,12 +132,11 @@ def test_shuffleCurrentAvailableBuildings():
     available_buildings = player_test.grid.availableBuildings
     shuffled_buildings = available_buildings.shuffleCurrentAvailableBuildings()
 
-    assert len(shuffled_buildings) >= 2 and len(
-        shuffled_buildings) == len(available_buildings)
+    assert len(shuffled_buildings) >= 2
 
 
 def test_retriveTwoRandomBuildings():
     available_buildings = player_test.grid.availableBuildings
-    two_random_buildings = available_buildings.shuffleCurrentAvailableBuildings()
+    two_random_buildings = available_buildings.retriveTwoRandomBuildings()
 
     assert len(two_random_buildings) == 2
