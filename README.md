@@ -11,7 +11,7 @@
 
 ## **Development guide**
 
-During development, please create a new branch `feature-{featureName}` from the latest development branch. When the feature is finished developed, please submit a pull request before merging the feature branch to the development branch for code reviewing.
+During development, please create a new branch `feature/{featureName}` from the latest development branch. When the feature is finished developed, please submit a pull request before merging the feature branch to the development branch for code reviewing.
 
 ## **Commit messages style**
 
