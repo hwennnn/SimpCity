@@ -32,16 +32,19 @@ Welcome, mayor of Simp City!
         else:
             print('Invalid option!')
 
-    def displayGameMenu(self):
-        print(
+    def gameMenuContent(self, firstBuilding, secondBuilding):
+        return (
             """
-1.
-2.
+1. Build a %s
+2. Build a %s
 3. See remaining buildings
 4. See current score
 
 5. Save game
-0. Exit to main menu""")
+0. Exit to main menu""".format(firstBuilding, secondBuilding))
+
+    def displayGameMenu(self):
+        print(self.gameMenuContent("", ""))
 
     def startNewGame(self):
         self.turns = 1
@@ -76,6 +79,9 @@ Welcome, mayor of Simp City!
             gridValue = self.grid.parseGridAsString()
             for row in gridValue:
                 f.writelines(row + "\n")
+
+    def retrieveTwoRandomBuildings(self):
+        return self.grid.retrieveTwoRandomBuildings()
 
     def exitToMainMenu(self):
         pass
