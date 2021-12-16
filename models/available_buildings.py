@@ -18,9 +18,19 @@ class AvailableBuildings:
     # Then use random module to shuffle the array
     # Return the shuffled buildings
     def shuffleCurrentAvailableBuildings(self):
-        pass
+        available_buildings = [[self.buildings[i].value] * self.availability[i]
+                               for i in range(len(self.availability)) if self.availability[i] > 0]
+
+        # flatten 2d array into 1d array
+        flatten_buildings = sum(available_buildings, [])
+
+        random.shuffle(flatten_buildings)
+
+        return flatten_buildings
 
     # Return the first two element of the shuffled buildings
     # Logically the length of the shuffled buildings should be always greater than two
     def retriveTwoRandomBuildings(self):
-        pass
+        shuffled_buildings = self.shuffleCurrentAvailableBuildings()
+
+        return shuffled_buildings[:2]

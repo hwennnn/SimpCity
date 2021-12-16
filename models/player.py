@@ -34,17 +34,18 @@ Welcome, mayor of Simp City!
 
     def gameMenuContent(self, firstBuilding, secondBuilding):
         return (
-            """
-1. Build a %s
-2. Build a %s
+            f"""
+1. Build a {firstBuilding}
+2. Build a {secondBuilding}
 3. See remaining buildings
 4. See current score
 
 5. Save game
-0. Exit to main menu""".format(firstBuilding, secondBuilding))
+0. Exit to main menu""")
 
     def displayGameMenu(self):
-        print(self.gameMenuContent("", ""))
+        firstBuilding, secondBuilding = self.retrieveTwoRandomBuildings()
+        print(self.gameMenuContent(firstBuilding, secondBuilding))
 
     def startNewGame(self):
         self.turns = 1

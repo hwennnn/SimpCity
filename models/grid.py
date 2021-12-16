@@ -36,7 +36,7 @@ class Grid:  # Grid Class
         pass
 
     def retrieveTwoRandomBuildings(self):
-        pass
+        return self.availableBuildings.retriveTwoRandomBuildings()
 
     # displays the grid and adapts to each building type
     def displayGrid(self):
