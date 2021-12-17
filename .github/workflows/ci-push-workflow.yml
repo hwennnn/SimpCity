@@ -1,8 +1,8 @@
-name: SimpCity CI on Push Events
+name: SimpCity CI on Push Events (For Protected Branch)
 
 on: 
   push:
-    branches: ["feature/*", "development", "QA", "stable", "release-*"]
+    branches: ["development", "QA", "stable", "release-*"]
 
 jobs:
   build:
