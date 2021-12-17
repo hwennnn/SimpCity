@@ -60,6 +60,12 @@ docker build -t simpcity .
 docker run -ti simpcity
 ```
 
+### Run pytest unit testing in docker
+
+```bash
+docker build -t simpcity-test -f Dockerfile.test .
+```
+
 ## **Credits**
 
 <table>
