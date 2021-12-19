@@ -65,7 +65,7 @@ class Grid:  # Grid Class
         for row in self.grid:
             rowStr = []
             for v in row:
-                rowStr.append("None" if v is None else v)
+                rowStr.append("None" if v is None else v.name)
             returnStrArr.append(",".join(rowStr))
         return returnStrArr
 
