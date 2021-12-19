@@ -35,20 +35,23 @@ Welcome, mayor of Simp City!
         else:
             print('Invalid option!')
 
-    #Display In game Main Menu upon lauching python code
-    def displayGameMenu(self):  
-        print(
-            """
-1.
-2.
+    def gameMenuContent(self, firstBuilding, secondBuilding):
+        return (
+            f"""
+1. Build a {firstBuilding}
+2. Build a {secondBuilding}
 3. See remaining buildings
 4. See current score
 
 5. Save game
 0. Exit to main menu""")
 
-    #Turns player's turns into 1 for starting a new game 
-    def startNewGame(self):    
+    def displayGameMenu(self, firstBuilding=None, secondBuilding=None):
+        if firstBuilding is None and secondBuilding is None:
+            firstBuilding, secondBuilding = self.retrieveTwoRandomBuildings()
+        print(self.gameMenuContent(firstBuilding, secondBuilding))
+
+    def startNewGame(self):
         self.turns = 1
 
     #Prompt player for input in InGame main menu
@@ -90,6 +93,9 @@ Welcome, mayor of Simp City!
             gridValue = self.grid.parseGridAsString()
             for row in gridValue:
                 f.writelines(row + "\n")
+
+    def retrieveTwoRandomBuildings(self):
+        return self.grid.retrieveTwoRandomBuildings()
 
     def exitToMainMenu(self):
         pass

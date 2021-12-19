@@ -11,7 +11,7 @@
 
 ## **Development guide**
 
-During development, please create a new branch `feature-{featureName}` from the latest development branch. When the feature is finished developed, please submit a pull request before merging the feature branch to the development branch for code reviewing.
+During development, please create a new branch `feature/{featureName}` from the latest development branch. When the feature is finished developed, please submit a pull request before merging the feature branch to the development branch for code reviewing.
 
 ## **Commit messages style**
 
@@ -58,6 +58,12 @@ Put `Closes #XXXX` in your comment to auto-close the issue that your PR fixes (i
 ```bash
 docker build -t simpcity .
 docker run -ti simpcity
+```
+
+### Run pytest unit testing in docker
+
+```bash
+docker build -t simpcity-test -f Dockerfile.test .
 ```
 
 ## **Credits**
