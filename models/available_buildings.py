@@ -38,4 +38,6 @@ class AvailableBuildings:
     # Displays remaining buildings for the current turn
     # Goes through list of buildings and display their availability based on indexes
     def displayAvailableBuilding(self):
-        pass
+        print(f"\nBuilding\tRemaining\n--------\t--------")
+        for i in range(len(self.buildings)):
+            print(self.buildings[i].value + "\t\t" + str(self.availability[i]))

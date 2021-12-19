@@ -97,6 +97,9 @@ Welcome, mayor of Simp City!
     def retrieveTwoRandomBuildings(self):
         return self.grid.retrieveTwoRandomBuildings()
 
+    def displayAvailableBuildings(self):
+        self.grid.displayAvailableBuildings()
+
     def exitToMainMenu(self):
         pass
 
