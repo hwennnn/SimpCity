@@ -34,3 +34,9 @@ class AvailableBuildings:
         shuffled_buildings = self.shuffleCurrentAvailableBuildings()
 
         return shuffled_buildings[:2]
+
+    # Displays remaining buildings for the current turn
+    # Goes through list of buildings and display their availability based on indexes
+    def displayAvailableBuilding(self):
+        for building in self.buildings:
+            
