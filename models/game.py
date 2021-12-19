@@ -22,6 +22,9 @@ Turn: {0}""".format(self.player.turns))
                 elif subOption == "N":
                     continue
 
+            elif option == '3':
+                self.player.displayAvailableBuildings()
+
         
             elif option == '5':
                 self.player.saveGame()

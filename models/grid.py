@@ -38,6 +38,9 @@ class Grid:  # Grid Class
     def retrieveTwoRandomBuildings(self):
         return self.availableBuildings.retriveTwoRandomBuildings()
 
+    def displayAvailableBuildings(self):
+        self.availableBuildings.displayAvailableBuilding()
+
     # displays the grid and adapts to each building type
     def displayGrid(self):
         print("""
@@ -70,7 +73,7 @@ class Grid:  # Grid Class
         for row in self.grid:
             rowStr = []
             for v in row:
-                rowStr.append("None" if v is None else v)
+                rowStr.append("None" if v is None else v.name)
             returnStrArr.append(",".join(rowStr))
         return returnStrArr
 
