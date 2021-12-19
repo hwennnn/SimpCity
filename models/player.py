@@ -9,6 +9,7 @@ class Player:  # Player Class
         self.turns = 1
         self.grid = Grid()
 
+    #Display first main menu upon launching python code
     def displayMainMenu(self):
 
         print("""
@@ -20,10 +21,12 @@ Welcome, mayor of Simp City!
 0. Exit
 """)
 
-    def promptMainMenu(self):
+    #Prompt player for input in first main menu
+    def promptMainMenu(self):   
         return input('Please enter an input: ')
 
-    def validateMain(self, option):
+    #Validate options made in main menu
+    def validateMain(self, option):    
         if option == '0':
             print('---- Game Ended----')
             self.exitGame()
@@ -32,7 +35,8 @@ Welcome, mayor of Simp City!
         else:
             print('Invalid option!')
 
-    def displayGameMenu(self):
+    #Display In game Main Menu upon lauching python code
+    def displayGameMenu(self):  
         print(
             """
 1.
@@ -43,35 +47,45 @@ Welcome, mayor of Simp City!
 5. Save game
 0. Exit to main menu""")
 
-    def startNewGame(self):
+    #Turns player's turns into 1 for starting a new game 
+    def startNewGame(self):    
         self.turns = 1
 
-    def promptGameMenu(self):
+    #Prompt player for input in InGame main menu
+    def promptGameMenu(self):   
         return input('Please enter an input: ')
 
-    def validateGame(self, option):
+    #Validate options made in game menu
+    def validateGame(self, option):   
         if len(option) == 1 and ord("0") <= ord(option) <= ord("5"):
             print(f"You selected option {option}")
         else:
             print("Invalid option!")
 
-    def promptSaveGame(self):
+    #Prompt player to check if they saved their game beforehand
+    def promptSaveGame(self):     
         return input('Are you sure to exit to main menu without saving game? [Y/N]: ').upper()
 
-    def validateSaveGame(self, option):
+    #Validate options for prompting save game.
+    def validateSaveGame(self, option):    
         if option.upper() == "Y":
             print('Returning to main menu...')
 
-        else:
+        elif option.upper() == "N":
             print("Select Option '5' in the game menu to save your game")
 
-    def displayGrid(self):
+        else:
+            print("Invalid Option. Returning to Game Menu...")
+
+    #Access grid attribute to display grid
+    def displayGrid(self):       
         self.grid.displayGrid()
 
-    def loadGame(self):
+    #Access grid attribute to
+    def loadGame(self):           
         self.grid.readGridFromFile()
 
-    def saveGame(self):
+    def saveGame(self):     
         with open(savedGameFilename, 'w+') as f:
             gridValue = self.grid.parseGridAsString()
             for row in gridValue:
