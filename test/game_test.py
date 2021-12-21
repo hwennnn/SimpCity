@@ -16,9 +16,10 @@ game_test = Game()
 player_test = Player()
 grid_test = Grid()
 
-# Test Add Building and Saving
 # x = Row
 # y = Column
+
+# Test Add Building and Saving
 def test_SavePlacedBuildings():
     grid_test.createBuilding(Buildings.BEACH, '1', 'A')     # Building Name, x, y
 
@@ -57,4 +58,6 @@ def test_SavePlacedBuildings():
             temp += i
 
     assert grid[0][0] == 'BCH'
-    
+
+def test_ContinueLoadedGame():
+    pass
