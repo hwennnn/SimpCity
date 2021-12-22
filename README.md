@@ -8,7 +8,6 @@
 4. [Sprint Retrospective](https://github.com/hwennnn/SimpCity/wiki/Sprint-Retrospective)
 5. [Progress Update Report](https://github.com/hwennnn/SimpCity/wiki/Progress-Report)
 
-
 ## **Development guide**
 
 During development, please create a new branch `feature-{featureName}` from the latest development branch. When the feature is finished developed, please submit a pull request before merging the feature branch to the development branch for code reviewing.
@@ -58,6 +57,25 @@ Put `Closes #XXXX` in your comment to auto-close the issue that your PR fixes (i
 ```bash
 docker build -t simpcity .
 docker run -ti simpcity
+```
+
+## **Comments Style**
+
+Used to help with generating documentation using pydoc
+
+```python
+
+  """
+  Summary or Description of the Function
+
+    Parameters:
+    argument1 (int): Description of arg1
+
+    Returns:
+    int:Returning value
+
+   """
+
 ```
 
 ## **Credits**
