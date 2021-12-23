@@ -75,6 +75,9 @@ class Grid:  # Grid Class
             case _:
                 raise Exception()
 
+    def decreaseBuildingCount(self, buildingName):
+        self.availableBuildings.decreaseAvailableBuilding(buildingName)
+
     def retrieveBuildingsScore(self):
         pass
 

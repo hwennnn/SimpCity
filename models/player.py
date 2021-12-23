@@ -82,6 +82,7 @@ Welcome, mayor of Simp City!
             x, y = self.grid.retrieveParsedPosition(positions)
             if self.turns == 1 or (self.turns > 1 and self.grid.hasAdjacentBuildingsForPosition(x, y)):
                 self.grid.updateGrid(x, y, building)
+                self.grid.decreaseBuildingCount(building)
                 self.turns += 1
             else:
                 print("You must build next to an existing building.")
