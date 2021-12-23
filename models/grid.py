@@ -1,7 +1,6 @@
 from models.available_buildings import AvailableBuildings
 from models.buildings import Beach, Factory, House, Highway, Shop
 from models.enums import Buildings
-import os
 from models.configurations import *
 
 
