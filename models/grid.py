@@ -31,7 +31,7 @@ class Grid:  # Grid Class
         x, y = userInput
 
         return self.isPositionXValid(x) and self.isPositionYValid(y) \
-            and self.grid[self.parseXPositionInput(x)][self.parseYPositionInput(y)] is None
+            and self.grid[self.parseYPositionInput(y)][self.parseXPositionInput(x)] is None
 
     def retrieveParsedPosition(self, userInput):
         x, y = userInput
