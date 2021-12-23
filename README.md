@@ -63,10 +63,12 @@ docker run -ti simpcity
 
 Used to help with generating documentation using pydoc
 
+### Functions
+
 ```python
 
   """
-  Summary or Description of the Function
+  Summary or Description of the Function should fit in one line
 
     Parameters:
     argument1 (int): Description of arg1
@@ -75,6 +77,25 @@ Used to help with generating documentation using pydoc
     int:Returning value
 
    """
+
+```
+
+### Classes
+
+```python
+
+    """
+    The summary line for a class should fit in one line.
+
+    Attributes:
+        attr1 (str): Description of `attr1`.
+        attr2 (:obj:`int`, optional): Description of `attr2`.
+
+    Properties:
+        func1 (int) :  Description of func1
+
+    """
+
 
 ```
 
