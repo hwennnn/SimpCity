@@ -175,7 +175,7 @@ def test_displayAvailableBuildings(capfd):
     out, _ = capfd.readouterr()
     assert f"\nBuilding\tRemaining\n--------\t--------" in out
     for i in range(len(player_test.grid.availableBuildings.buildings)):
-        assert player_test.grid.availableBuildings.buildings[i].value + "\t\t" + str(
+        assert player_test.grid.availableBuildings.buildings[i] + "\t\t" + str(
             player_test.grid.availableBuildings.availability[i]) in out
 
 
