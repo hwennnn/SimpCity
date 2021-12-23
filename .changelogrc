@@ -1,7 +1,6 @@
 {
     "app_name": "SimpCity",
     "intro": "This is the assignment for DevOps module in Ngee Ann Polytechnic",
-    "branch": "development",
     "repo_url": "https://github.com/hwennnn/SimpCity",
     "file": "CHANGELOG.md",
     "sections": [{
