@@ -92,8 +92,8 @@ def test_ExitGame(capfd, option, expectedResult):
 
 validGameOptionTestData = \
     [("0", "You selected option 0"),
-     ("1", "You selected option 1"),
-     ("2", "You selected option 2"),
+     #  ("1", "Build Where? "),
+     #  ("2", "Build Where? "),
      ("3", "You selected option 3"),
      ("4", "You selected option 4"),
      ("5", "You selected option 5")]
@@ -159,19 +159,89 @@ def test_displayGameMenuWithTwoRandomBuildings(capfd, option, expectedResult):
     out, _ = capfd.readouterr()
     assert expectedResult in out
 
+
 def test_availableBuildings():
     # Each Buildings be less than 0, more than 8
     # Total Buildings cannot be less than 24, more than 40
 
     for i in player_test.grid.availableBuildings.availability:
-        assert i in range(0,9)
+        assert i in range(0, 9)
 
-    assert sum(player_test.grid.availableBuildings.availability) in range(24,41)
+    assert sum(player_test.grid.availableBuildings.availability) in range(24, 41)
+
 
 def test_displayAvailableBuildings(capfd):
     player_test.displayAvailableBuildings()
     out, _ = capfd.readouterr()
     assert f"\nBuilding\tRemaining\n--------\t--------" in out
     for i in range(len(player_test.grid.availableBuildings.buildings)):
-            assert player_test.grid.availableBuildings.buildings[i].value + "\t\t" + str(player_test.grid.availableBuildings.availability[i]) in out
+        assert player_test.grid.availableBuildings.buildings[i].value + "\t\t" + str(
+            player_test.grid.availableBuildings.availability[i]) in out
 
+
+passingBuildingPositionsFromUserInput = [
+    ("a1", True),
+    ("a2", True),
+    ("a3", True),
+    ("a4", True),
+    ("b1", True),
+    ("b2", True),
+    ("b3", True),
+    ("b4", True),
+    ("c1", True),
+    ("c2", True),
+    ("c3", True),
+    ("c4", True),
+    ("d1", True),
+    ("d2", True),
+    ("d3", True),
+    ("d4", True),
+    ("A1", True),
+    ("A2", True),
+    ("A3", True),
+    ("A4", True),
+    ("B1", True),
+    ("B2", True),
+    ("B3", True),
+    ("B4", True),
+    ("C1", True),
+    ("C2", True),
+    ("C3", True),
+    ("C4", True),
+    ("D1", True),
+    ("D2", True),
+    ("D3", True),
+    ("D4", True),
+]
+
+failingBuildingPositionsFromUserInput = [
+    ("a10", False),
+    ("a11", False),
+    ("a13", False),
+    ("a", False),
+    ("b", False),
+    ("c", False),
+    ("d", False),
+    ("1", False),
+    ("2", False),
+    ("3", False),
+    ("4", False),
+    ("10", False),
+    ("11", False),
+    ("12", False),
+    ("13", False),
+    ("14", False),
+    ("", False),
+    (" ", False),
+    ("   ", False),
+    ("simpcity", False),
+    ("devops", False),
+    ("].", False),
+]
+
+
+@pytest.mark.parametrize("userInput, expectedResult", passingBuildingPositionsFromUserInput + failingBuildingPositionsFromUserInput)
+def test_validBuildingPositionFromUserInputs(capfd, userInput, expectedResult):
+    result = player_test.grid.isPositionValid(userInput)
+
+    assert result == expectedResult
