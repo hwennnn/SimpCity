@@ -49,7 +49,7 @@ def saveGridToTextUnderTest():
     return f
 
 # Test Add Building and Saving
-def test_SavePlacedBuildings():
+def test_savePlacedBuildings():
     grid_test.createBuilding(Buildings.BEACH.value, '1', 'A')     # Building Name, x, y
     f = saveGridToTextUnderTest()
 
@@ -61,7 +61,7 @@ def test_SavePlacedBuildings():
     assert parse_fileToList(f)[0][0] == 'BCH'
 
 # Test loading a saved game file and continue where it left off
-def test_ContinueLoadedGame(capfd):
+def test_continueLoadedGame(capfd):
     f = open("testing.txt", "r")
     f = f.read()
 
@@ -88,8 +88,9 @@ def test_ContinueLoadedGame(capfd):
  +-----+-----+-----+-----+ 
 """ in out
 
-    # Check Score
-    
+    # Check Score. Score == 3. BCH = 3 Points if Col A / D, else 1 Point.
+    assert grid_test.retrieveBuildingsScore == 3
 
-def test_BuildingScore():
+
+def test_buildingScore():
     pass
