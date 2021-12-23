@@ -2,6 +2,8 @@
 import pytest
 from models.player import Player
 
+player_test = Player()
+
 validXPositions = [
     ("a", True),
     ("b", True),
@@ -24,8 +26,6 @@ invalidXPositions = [
     ("3", False),
     ("10", False)
 ]
-
-player_test = Player()
 
 
 @pytest.mark.parametrize("userInput, expectedResult", validXPositions + invalidXPositions)
