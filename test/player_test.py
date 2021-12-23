@@ -241,7 +241,7 @@ failingBuildingPositionsFromUserInput = [
 
 
 @pytest.mark.parametrize("userInput, expectedResult", passingBuildingPositionsFromUserInput + failingBuildingPositionsFromUserInput)
-def test_validBuildingPositionFromUserInputs(capfd, userInput, expectedResult):
+def test_validBuildingPositionFromUserInputs(userInput, expectedResult):
     result = player_test.grid.isPositionValid(userInput)
 
     assert result == expectedResult
