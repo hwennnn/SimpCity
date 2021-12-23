@@ -49,8 +49,11 @@ Welcome, mayor of Simp City!
 0. Exit to main menu""")
 
     def displayGameMenu(self, firstBuilding=None, secondBuilding=None):
-        if firstBuilding is None and secondBuilding is None:
+        if firstBuilding is not None and secondBuilding is not None:
+            self.firstBuilding, self.secondBuilding = firstBuilding, secondBuilding
+        else:
             self.firstBuilding, self.secondBuilding = self.retrieveTwoRandomBuildings()
+
         print(self.gameMenuContent(self.firstBuilding, self.secondBuilding))
 
     def startNewGame(self):
