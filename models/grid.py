@@ -1,4 +1,5 @@
 from models.available_buildings import AvailableBuildings
+from models.buildings import Beach, Factory, House, Highway, Shop
 from models.enums import Buildings
 import os
 from models.configurations import *
@@ -12,19 +13,29 @@ class Grid:  # Grid Class
         self.availableBuildings = AvailableBuildings()
 
     def isPositionXValid(self, x):
-        pass
+        return ord('A') <= ord(x.upper()) <= ord('D')
 
     def isPositionYValid(self, y):
-        pass
+        return y.isnumeric() and 1 <= int(y) <= self.rowCount
 
     def parseXPositionInput(self, x):
-        pass
+        return ord(x.upper()) - ord('A')
 
     def parseYPositionInput(self, y):
-        pass
+        return int(y) - 1
 
-    def isPositionValid(self, userInput):
-        pass
+    def isPositionValid(self, userInput, turns=1):
+        if len(userInput) != 2:
+            return False
+
+        x, y = userInput
+
+        return self.isPositionXValid(x) and self.isPositionYValid(y) and self.grid[self.parseXPositionInput(x)][self.parseYPositionInput(y)] is None
+
+    def retrieveParsedPosition(self, userInput):
+        x, y = userInput
+
+        return (self.parseXPositionInput(x), self.parseYPositionInput(y))
 
     def updateGrid(self, x, y, buildingName):
         pass

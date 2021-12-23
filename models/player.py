@@ -9,7 +9,7 @@ class Player:  # Player Class
         self.turns = 1
         self.grid = Grid()
 
-    #Display first main menu upon launching python code
+    # Display first main menu upon launching python code
     def displayMainMenu(self):
 
         print("""
@@ -21,12 +21,12 @@ Welcome, mayor of Simp City!
 0. Exit
 """)
 
-    #Prompt player for input in first main menu
-    def promptMainMenu(self):   
+    # Prompt player for input in first main menu
+    def promptMainMenu(self):
         return input('Please enter an input: ')
 
-    #Validate options made in main menu
-    def validateMain(self, option):    
+    # Validate options made in main menu
+    def validateMain(self, option):
         if option == '0':
             print('---- Game Ended----')
             self.exitGame()
@@ -54,23 +54,35 @@ Welcome, mayor of Simp City!
     def startNewGame(self):
         self.turns = 1
 
-    #Prompt player for input in InGame main menu
-    def promptGameMenu(self):   
+    # Prompt player for input in InGame main menu
+    def promptGameMenu(self):
         return input('Please enter an input: ')
 
-    #Validate options made in game menu
-    def validateGame(self, option):   
+    # Validate options made in game menu
+    def validateGame(self, option):
         if len(option) == 1 and ord("0") <= ord(option) <= ord("5"):
-            print(f"You selected option {option}")
+            if ord("1") <= ord(option) <= ord("2"):
+                self.promptEnterBuildingPosition()
+            else:
+                print(f"You selected option {option}")
         else:
             print("Invalid option!")
 
-    #Prompt player to check if they saved their game beforehand
-    def promptSaveGame(self):     
+    def promptEnterBuildingPosition(self):
+        positions = input("Build where? ")
+
+        if self.grid.isPositionValid(positions):
+            x, y = self.grid.retrieveParsedPosition(positions)
+            print(self.grid.grid[x][y])
+        else:
+            print("Please enter a valid building position!")
+
+    # Prompt player to check if they saved their game beforehand
+    def promptSaveGame(self):
         return input('Are you sure to exit to main menu without saving game? [Y/N]: ').upper()
 
-    #Validate options for prompting save game.
-    def validateSaveGame(self, option):    
+    # Validate options for prompting save game.
+    def validateSaveGame(self, option):
         if option.upper() == "Y":
             print('Returning to main menu...')
 
@@ -80,15 +92,15 @@ Welcome, mayor of Simp City!
         else:
             print("Invalid Option. Returning to Game Menu...")
 
-    #Access grid attribute to display grid
-    def displayGrid(self):       
+    # Access grid attribute to display grid
+    def displayGrid(self):
         self.grid.displayGrid()
 
-    #Access grid attribute to
-    def loadGame(self):           
+    # Access grid attribute to
+    def loadGame(self):
         self.grid.readGridFromFile()
 
-    def saveGame(self):     
+    def saveGame(self):
         with open(savedGameFilename, 'w+') as f:
             gridValue = self.grid.parseGridAsString()
             for row in gridValue:
