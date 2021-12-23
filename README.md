@@ -59,6 +59,12 @@ docker build -t simpcity .
 docker run -ti simpcity
 ```
 
+### Run pytest unit testing in docker
+
+```bash
+docker build -t simpcity-test -f Dockerfile.test .
+```
+
 ## **Comments Style**
 
 Used to help with generating documentation using pydoc
@@ -95,11 +101,6 @@ Used to help with generating documentation using pydoc
         func1 (int) :  Description of func1
 
     """
-
-### Run pytest unit testing in docker
-
-```bash
-docker build -t simpcity-test -f Dockerfile.test .
 ```
 
 ## **Credits**
