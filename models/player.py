@@ -9,6 +9,7 @@ class Player:  # Player Class
         self.score = 0
         self.turns = 1
         self.grid = Grid()
+        self.firstBuilding = self.secondBuilding = None
 
     # Display first main menu upon launching python code
     def displayMainMenu(self):
@@ -49,8 +50,8 @@ Welcome, mayor of Simp City!
 
     def displayGameMenu(self, firstBuilding=None, secondBuilding=None):
         if firstBuilding is None and secondBuilding is None:
-            firstBuilding, secondBuilding = self.retrieveTwoRandomBuildings()
-        print(self.gameMenuContent(firstBuilding, secondBuilding))
+            self.firstBuilding, self.secondBuilding = self.retrieveTwoRandomBuildings()
+        print(self.gameMenuContent(self.firstBuilding, self.secondBuilding))
 
     def startNewGame(self):
         self.turns = 1
@@ -63,19 +64,21 @@ Welcome, mayor of Simp City!
     def validateGame(self, option):
         if len(option) == 1 and ord("0") <= ord(option) <= ord("5"):
             if ord("1") <= ord(option) <= ord("2"):
-                self.promptEnterBuildingPosition()
+                buildingValue = self.firstBuilding if \
+                    ord(option) == ord("1") else self.secondBuilding
+                self.promptEnterBuildingPosition(buildingValue)
             else:
                 print(f"You selected option {option}")
         else:
             print("Invalid option!")
 
-    def promptEnterBuildingPosition(self):
+    def promptEnterBuildingPosition(self, building):
         positions = input("Build where? ")
 
         if self.grid.isPositionValid(positions):
             x, y = self.grid.retrieveParsedPosition(positions)
             if self.turns == 1 or (self.turns > 1 and self.grid.hasAdjacentBuildingsForPosition(x, y)):
-                self.grid.grid[x][y] = Beach("beach", x, y)
+                self.grid.updateGrid(x, y, building)
                 self.turns += 1
             else:
                 print("You must build next to an existing building.")

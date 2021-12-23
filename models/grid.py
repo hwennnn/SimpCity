@@ -51,10 +51,29 @@ class Grid:  # Grid Class
         return self.grid[x][y] is not None
 
     def updateGrid(self, x, y, buildingName):
-        pass
+        # convert the user input to 0-indexed for array processing
+        self.grid[x][y] = self.createBuilding(buildingName, x, y)
 
     def createBuilding(self, buildingName, x, y):
-        pass
+        match buildingName:
+            case Buildings.BEACH.value:
+                return Beach(buildingName, x, y)
+
+            case Buildings.FACTORY.value:
+                return Factory(buildingName, x, y)
+
+            case Buildings.HOUSE.value:
+                return House(buildingName, x, y)
+
+            case Buildings.SHOP.value:
+                return Shop(buildingName, x, y)
+
+            case Buildings.HIGHWAY.value:
+                return Highway(buildingName, x, y)
+
+            # raise exception if the building input cannot be found in the cases
+            case _:
+                raise Exception()
 
     def retrieveBuildingsScore(self):
         pass
@@ -77,16 +96,20 @@ class Grid:  # Grid Class
                     rowline += "    | "
                 else:
                     match build.getName():
-                        case "beach":
+                        case Buildings.BEACH.value:
                             rowline += Buildings.BEACH.value + " | "
-                        case "factory":
+                        case Buildings.FACTORY.value:
                             rowline += Buildings.FACTORY.value + " | "
-                        case "highway":
+                        case Buildings.HIGHWAY.value:
                             rowline += Buildings.HIGHWAY.value + " | "
-                        case "house":
+                        case Buildings.HOUSE.value:
                             rowline += Buildings.HOUSE.value + " | "
-                        case "shop":
+                        case Buildings.SHOP.value:
                             rowline += Buildings.SHOP.value + " | "
+
+                        # raise exception if the building input cannot be found in the cases
+                        case _:
+                            raise Exception()
             print(
                 """{0}
  +-----+-----+-----+-----+ """.format(rowline))
