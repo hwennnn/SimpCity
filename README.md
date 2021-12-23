@@ -59,6 +59,13 @@ docker build -t simpcity .
 docker run -ti simpcity
 ```
 
+### Run pytest unit testing in docker
+
+```bash
+docker build -t simpcity-test -f Dockerfile.test .
+docker run -ti simpcity-test
+```
+
 ## **Comments Style**
 
 Used to help with generating documentation using pydoc
@@ -68,13 +75,13 @@ Used to help with generating documentation using pydoc
 ```python
 
   """
-  Summary or Description of the Function should fit in one line
+    Summary or Description of the Function should fit in one line
 
     Parameters:
-    argument1 (int): Description of arg1
+      argument1 (int): Description of arg1
 
     Returns:
-    int:Returning value
+      int:Returning value
 
    """
 
@@ -85,21 +92,16 @@ Used to help with generating documentation using pydoc
 ```python
 
     """
-    The summary line for a class should fit in one line.
+      Summary line for a class should fit in one line.
 
-    Attributes:
+      Attributes:
         attr1 (str): Description of `attr1`.
         attr2 (:obj:`int`, optional): Description of `attr2`.
 
-    Properties:
+      Properties:
         func1 (int) :  Description of func1
 
     """
-
-### Run pytest unit testing in docker
-
-```bash
-docker build -t simpcity-test -f Dockerfile.test .
 ```
 
 ## **Credits**
