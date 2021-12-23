@@ -1,4 +1,5 @@
 import sys
+from models.buildings.beach import Beach
 from models.grid import Grid
 from models.configurations import *
 
@@ -73,7 +74,12 @@ Welcome, mayor of Simp City!
 
         if self.grid.isPositionValid(positions):
             x, y = self.grid.retrieveParsedPosition(positions)
-            print(self.grid.grid[x][y])
+            if self.turns == 1 or (self.turns > 1 and self.grid.hasAdjacentBuildingsForPosition(x, y)):
+                self.grid.grid[x][y] = Beach("beach", x, y)
+                self.turns += 1
+            else:
+                print("You must build next to an existing building.")
+
         else:
             print("Please enter a valid building position!")
 
