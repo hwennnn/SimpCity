@@ -130,3 +130,30 @@ def test_validBuildingPositionFromUserInputs(userInput, expectedResult):
     result = player_test.grid.isPositionValid(userInput)
 
     assert result == expectedResult
+
+
+positionFromUserInput = [
+    ("a1", (0, 0)),
+    ("a2", (1, 0)),
+    ("a3", (2, 0)),
+    ("a4", (3, 0)),
+    ("b1", (0, 1)),
+    ("b2", (1, 1)),
+    ("b3", (2, 1)),
+    ("b4", (3, 1)),
+    ("c1", (0, 2)),
+    ("c2", (1, 2)),
+    ("c3", (2, 2)),
+    ("c4", (3, 2)),
+    ("d1", (0, 3)),
+    ("d2", (1, 3)),
+    ("d3", (2, 3)),
+    ("d4", (3, 3))
+]
+
+
+@pytest.mark.parametrize("userInput, expectedResult", positionFromUserInput)
+def test_retrieveParsedPosition(userInput, expectedResult):
+    result = player_test.grid.retrieveParsedPosition(userInput)
+
+    assert result == expectedResult
