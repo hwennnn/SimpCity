@@ -36,7 +36,7 @@ class Grid:  # Grid Class
     def retrieveParsedPosition(self, userInput):
         x, y = userInput
 
-        return (self.parseXPositionInput(x), self.parseYPositionInput(y))
+        return (self.parseYPositionInput(y), self.parseXPositionInput(x))
 
     def hasAdjacentBuildingsForPosition(self, x, y):
         adjacentPositions = [(x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)]
