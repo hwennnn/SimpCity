@@ -179,6 +179,66 @@ def test_displayAvailableBuildings(capfd):
             player_test.grid.availableBuildings.availability[i]) in out
 
 
+validXPositions = [
+    ("a", True),
+    ("b", True),
+    ("c", True),
+    ("d", True),
+    ("A", True),
+    ("B", True),
+    ("C", True),
+    ("D", True),
+]
+
+invalidXPositions = [
+    ("e", False),
+    ("f", False),
+    ("g", False),
+    ("h", False),
+    ("z", False),
+    ("1", False),
+    ("2", False),
+    ("3", False),
+    ("10", False)
+]
+
+
+@pytest.mark.parametrize("userInput, expectedResult", validXPositions + invalidXPositions)
+def test_isPositionXValid(userInput, expectedResult):
+    result = player_test.grid.isPositionXValid(userInput)
+
+    assert result == expectedResult
+
+
+validYPositions = [
+    ("1", True),
+    ("2", True),
+    ("3", True),
+    ("4", True),
+]
+
+invalidYPositions = [
+    ("5", False),
+    ("6", False),
+    ("7", False),
+    ("8", False),
+    ("9", False),
+    ("10", False),
+    ("99", False),
+    ("100", False),
+    ("100000", False),
+    ("abc", False),
+    ("efg", False)
+]
+
+
+@pytest.mark.parametrize("userInput, expectedResult", validYPositions + invalidYPositions)
+def test_isPositionYValid(userInput, expectedResult):
+    result = player_test.grid.isPositionYValid(userInput)
+
+    assert result == expectedResult
+
+
 passingBuildingPositionsFromUserInput = [
     ("a1", True),
     ("a2", True),

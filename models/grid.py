@@ -13,10 +13,10 @@ class Grid:  # Grid Class
         self.availableBuildings = AvailableBuildings()
 
     def isPositionXValid(self, x):
-        return ord('A') <= ord(x.upper()) <= ord('D')
+        return len(x) == 1 and ord('A') <= ord(x.upper()) <= ord('D')
 
     def isPositionYValid(self, y):
-        return y.isnumeric() and 1 <= int(y) <= self.rowCount
+        return len(y) == 1 and y.isnumeric() and 1 <= int(y) <= self.rowCount
 
     def parseXPositionInput(self, x):
         return ord(x.upper()) - ord('A')
