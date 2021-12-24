@@ -7,18 +7,19 @@ class AvailableBuildings:
         self.availability = [8] * 5
         # The sequence follows as:
         # Beaches, Factories, Houses, Shops, Highways
-        self.buildings = [Buildings.BEACH, Buildings.FACTORY,
-                          Buildings.HOUSE, Buildings.SHOP, Buildings.HIGHWAY]
+        self.buildings = [Buildings.BEACH.value, Buildings.FACTORY.value,
+                          Buildings.HOUSE.value, Buildings.SHOP.value, Buildings.HIGHWAY.value]
 
     # decrease the available building
     def decreaseAvailableBuilding(self, buildingName):
-        pass
+        building_index = self.buildings.index(buildingName)
+        self.availability[building_index] -= 1
 
     # First flatten the current available buildings into 1D array
     # Then use random module to shuffle the array
     # Return the shuffled buildings
     def shuffleCurrentAvailableBuildings(self):
-        available_buildings = [[self.buildings[i].value] * self.availability[i]
+        available_buildings = [[self.buildings[i]] * self.availability[i]
                                for i in range(len(self.availability)) if self.availability[i] > 0]
 
         # flatten 2d array into 1d array
@@ -40,4 +41,4 @@ class AvailableBuildings:
     def displayAvailableBuilding(self):
         print(f"\nBuilding\tRemaining\n--------\t--------")
         for i in range(len(self.buildings)):
-            print(self.buildings[i].value + "\t\t" + str(self.availability[i]))
+            print(self.buildings[i] + "\t\t" + str(self.availability[i]))

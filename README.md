@@ -8,7 +8,6 @@
 4. [Sprint Retrospective](https://github.com/hwennnn/SimpCity/wiki/Sprint-Retrospective)
 5. [Progress Update Report](https://github.com/hwennnn/SimpCity/wiki/Progress-Report)
 
-
 ## **Development guide**
 
 During development, please create a new branch `feature/{featureName}` from the latest development branch. When the feature is finished developed, please submit a pull request before merging the feature branch to the development branch for code reviewing.
@@ -64,6 +63,45 @@ docker run -ti simpcity
 
 ```bash
 docker build -t simpcity-test -f Dockerfile.test .
+docker run -ti simpcity-test
+```
+
+## **Comments Style**
+
+Used to help with generating documentation using pydoc
+
+### Functions
+
+```python
+
+  """
+    Summary or Description of the Function should fit in one line
+
+    Parameters:
+      argument1 (int): Description of arg1
+
+    Returns:
+      int:Returning value
+
+   """
+
+```
+
+### Classes
+
+```python
+
+    """
+      Summary line for a class should fit in one line.
+
+      Attributes:
+        attr1 (str): Description of `attr1`.
+        attr2 (:obj:`int`, optional): Description of `attr2`.
+
+      Properties:
+        func1 (int) :  Description of func1
+
+    """
 ```
 
 ## **Credits**
