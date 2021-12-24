@@ -78,20 +78,6 @@ jobs:
     - name: Run changelog
       run: |
         git-changelog -t ${{ steps.previoustag.outputs.TAG_NAME  }} -a "simpcity"
-
-    - name: Create Download Directory
-      run: mkdir downloads
-
-    - name: upload documents
-      uses: actions/upload-artifact@v2
-      with:
-        name: assetDocuments
-        path: downloads
-
-    - name: Download Content
-      uses: actions/download-artifact@v2
-      with:
-        name: assetDocuments
                
     - name: Create GitHub release
       id: create-new-release
