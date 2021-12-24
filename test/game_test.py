@@ -10,11 +10,6 @@ import sys
 path = str(Path(Path('game_test.py').parent.absolute()).parent.absolute())
 sys.path.insert(0, path)
 
-
-game_test = Game()
-player_test = Player()
-grid_test = Grid()
-
 def parse_fileToList(f):
     temp = ''
     row = []
@@ -47,17 +42,30 @@ def saveGridToTextUnderTest():
     f = f.read()
     return f
 
-# Test Add Building and Saving
-def test_savePlacedBuildings():
-    grid_test.createBuilding(Buildings.BEACH.value, '1', 'A')     # Building Name, x, y
-    f = saveGridToTextUnderTest()
 
-    # parse_fileToString = Grid will be tested in nested list format
-    # [[None, None, None, None]
-    #  [None, None, None, None]
-    #  [None, None, None, None]
-    #  [None, None, None, None]]
-    assert parse_fileToList(f)[0][0] == 'BCH'
+# Test Add Building and Saving
+def test_savePlacedBuildings(monkeypatch, capfd):
+    player_test = Player()
+    player_test.displayMainMenu()
+
+    monkeypatch.setattr('builtins.input', lambda _: "1")
+    player_test.validateMain(player_test.promptMainMenu())
+    out, _ = capfd.readouterr()
+
+    assert "You selected option 1" in out
+
+    monkeypatch.setattr('builtins.input', lambda _: "1")
+    # responses = iter(['1', 'A1'])
+    # monkeypatch.setattr('builtins.input', lambda _: next(responses))
+    player_test.validateGame(player_test.promptGameMenu())
+    monkeypatch.setattr('builtins.input', lambda _: "A1")
+
+    out, _ = capfd.readouterr()
+    assert "1" in out
+    
+
+    # f = saveGridToTextUnderTest()
+    # assert parse_fileToList(f)[0][0] == 'BCH'
 
 # Test loading a saved game file and continue where it left off
 def test_continueLoadedGame(capfd):
