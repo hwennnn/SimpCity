@@ -87,8 +87,7 @@ Welcome, mayor of Simp City!
             else:
                 print("You must build next to an existing building.")
         else:
-            # print("Please enter a valid building position!")
-            print(f"{building}?")
+            print("Please enter a valid building position!")
 
     # Prompt player to check if they saved their game beforehand
     def promptSaveGame(self):
