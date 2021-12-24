@@ -41,7 +41,7 @@ class Grid:  # Grid Class
         adjacentPositions = [(x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)]
 
         for dx, dy in adjacentPositions:
-            if 0 <= dx < 3 and 0 <= dy < 3 and self.hasBuildingOnPosition(dx, dy):
+            if 0 <= dx < 4 and 0 <= dy < 4 and self.hasBuildingOnPosition(dx, dy):
                 return True
 
         return False
