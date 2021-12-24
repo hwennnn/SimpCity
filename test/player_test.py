@@ -2,6 +2,7 @@
 import os
 import sys
 import pytest
+from models.available_buildings import AvailableBuildings
 from models.player import Player
 from models.configurations import *
 from pathlib import Path
@@ -125,3 +126,52 @@ def test_checkFileSaved():
     player_test.saveGame()
     rootDirWithFile = currentDirectory.joinpath(savedGameFilename)
     assert rootDirWithFile.exists()
+
+
+def test_shuffleCurrentAvailableBuildings():
+    available_buildings = player_test.grid.availableBuildings
+    shuffled_buildings = available_buildings.shuffleCurrentAvailableBuildings()
+
+    assert len(shuffled_buildings) >= 2
+
+
+def test_retriveTwoRandomBuildings():
+    two_random_buildings = player_test.retrieveTwoRandomBuildings()
+
+    assert len(two_random_buildings) == 2
+
+
+def generateRandomBuildingsMenuContent():
+    gameMenuContentTestData = []
+
+    for _ in range(10):
+        firstBuilding, secondBuilding = player_test.retrieveTwoRandomBuildings()
+        gameMenuContentTestData.append(
+            ((firstBuilding, secondBuilding), player_test.gameMenuContent(firstBuilding, secondBuilding)))
+
+    return gameMenuContentTestData
+
+
+@pytest.mark.parametrize("option, expectedResult", generateRandomBuildingsMenuContent())
+def test_displayGameMenuWithTwoRandomBuildings(capfd, option, expectedResult):
+    firstBuilding, secondBuilding = option
+    player_test.displayGameMenu(firstBuilding, secondBuilding)
+    out, _ = capfd.readouterr()
+    assert expectedResult in out
+
+def test_availableBuildings():
+    # Each Buildings be less than 0, more than 8
+    # Total Buildings cannot be less than 24, more than 40
+
+    for i in player_test.grid.availableBuildings.availability:
+        assert i in range(0,9)
+
+    assert sum(player_test.grid.availableBuildings.availability) in range(24,41)
+
+def test_displayAvailableBuildings(capfd):
+    player_test.displayAvailableBuildings()
+    out, _ = capfd.readouterr()
+    assert f"\nBuilding\tRemaining\n--------\t--------" in out
+    for i in range(len(player_test.grid.availableBuildings.buildings)):
+            assert player_test.grid.availableBuildings.buildings[i].value + "\t\t" + str(player_test.grid.availableBuildings.availability[i]) in out
+

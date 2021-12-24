@@ -54,13 +54,13 @@ jobs:
       with: 
         fetch-depth: 0
 
+    - name: Remove Test Folder
+      run: rm -r "test"
+
     - name: Set up Python 3.10
       uses: actions/setup-python@v2
       with:
         python-version: "3.10"
-    
-     - name: Remove Test Folder
-      run: rm -r "test"
 
     - name: Set environment variables for version number
       run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
