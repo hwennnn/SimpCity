@@ -51,6 +51,10 @@ jobs:
     needs: build
     steps:
     - uses: actions/checkout@v2
+
+    - name: Remove Test Folder
+      run: rm -r "test"
+
     - name: Set up Python 3.10
       uses: actions/setup-python@v2
       with:
