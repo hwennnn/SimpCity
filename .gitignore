@@ -41,3 +41,5 @@ coverage.xml
 saved_game.txt
 testing.txt
 .DS_Store
+
+CHANGELOG.md
