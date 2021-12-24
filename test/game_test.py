@@ -1,5 +1,4 @@
 # Functional / Integration Test
-from typing_extensions import Self
 from models.player import Player
 from models.game import Game
 from models.grid import Grid
