@@ -6,11 +6,11 @@
 2. [Daily Scrum](https://github.com/hwennnn/SimpCity/wiki/Daily-Scrum)
 3. [Sprint Goal](https://github.com/hwennnn/SimpCity/wiki/Sprint-Goal)
 4. [Sprint Retrospective](https://github.com/hwennnn/SimpCity/wiki/Sprint-Retrospective)
-5. [Weekly Progress Update Report](https://github.com/hwennnn/SimpCity/wiki/Weekly-Progress-Update-Report)
+5. [Progress Update Report](https://github.com/hwennnn/SimpCity/wiki/Progress-Report)
 
 ## **Development guide**
 
-During development, please create a new branch `feature-{featureName}-{version}` from the latest development branch. When the feature is finished developed, please submit a pull request before merging the feature branch to the development branch for code reviewing.
+During development, please create a new branch `feature/{featureName}` from the latest development branch. When the feature is finished developed, please submit a pull request before merging the feature branch to the development branch for code reviewing.
 
 ## **Commit messages style**
 
@@ -21,7 +21,12 @@ During development, please create a new branch `feature-{featureName}-{version}`
 - `refactor` - refactoring a specific section of the codebase
 - `test` - related to testing
 - `docs` - related to documentation
-- `CI` - related to continuous integration
+- `ci` - related to continuous integration
+- `cd` - related to continuous delivery
+- `style` - Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
+- `chore` - Changes to the build process or auxiliary tools and libraries such as documentation generation
+
+**Notes: Please only specifc one type in one commit!**
 
 ## **Pull request template**
 
@@ -43,7 +48,7 @@ Demonstrate the code is solid. Example: The exact commands you ran and their out
 
 ### **Closing issues**
 
-Put `Closes #XXXX` in your comment to auto-close the issue that your PR fixes (if such, only put this when the issue is to be completed).
+Put `Closes #XXXX` in your comment to auto-close the issue that your PR fixes (if such, only put this when the issue is to be completed or else just link the issue).
 
 ## **Build with Docker**
 
@@ -52,6 +57,51 @@ Put `Closes #XXXX` in your comment to auto-close the issue that your PR fixes (i
 ```bash
 docker build -t simpcity .
 docker run -ti simpcity
+```
+
+### Run pytest unit testing in docker
+
+```bash
+docker build -t simpcity-test -f Dockerfile.test .
+docker run -ti simpcity-test
+```
+
+## **Comments Style**
+
+Used to help with generating documentation using pydoc
+
+### Functions
+
+```python
+
+  """
+    Summary or Description of the Function should fit in one line
+
+    Parameters:
+      argument1 (int): Description of arg1
+
+    Returns:
+      int:Returning value
+
+   """
+
+```
+
+### Classes
+
+```python
+
+    """
+      Summary line for a class should fit in one line.
+
+      Attributes:
+        attr1 (str): Description of `attr1`.
+        attr2 (:obj:`int`, optional): Description of `attr2`.
+
+      Properties:
+        func1 (int) :  Description of func1
+
+    """
 ```
 
 ## **Credits**
