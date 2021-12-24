@@ -1,3 +1,4 @@
+from models.available_buildings import AvailableBuildings
 from models.enums import Buildings
 import os
 from models.configurations import *
@@ -8,6 +9,7 @@ class Grid:  # Grid Class
         self.rowCount = self.colCount = 4
         # First initialise the object in each position as None
         self.grid = [[None] * self.colCount for _ in range(self.rowCount)]
+        self.availableBuildings = AvailableBuildings()
 
     def isPositionXValid(self, x):
         pass
@@ -33,7 +35,13 @@ class Grid:  # Grid Class
     def retrieveBuildingsScore(self):
         pass
 
-    #displays the grid and adapts to each building type
+    def retrieveTwoRandomBuildings(self):
+        return self.availableBuildings.retriveTwoRandomBuildings()
+
+    def displayAvailableBuildings(self):
+        self.availableBuildings.displayAvailableBuilding()
+
+    # displays the grid and adapts to each building type
     def displayGrid(self):
         print("""
     A     B     C     D
@@ -56,7 +64,7 @@ class Grid:  # Grid Class
                         case "shop":
                             rowline += Buildings.SHOP.value + " | "
             print(
-"""{0}
+                """{0}
  +-----+-----+-----+-----+ """.format(rowline))
 
     # parses the grid as an array of string, allowing it to be written into txt file
@@ -65,7 +73,7 @@ class Grid:  # Grid Class
         for row in self.grid:
             rowStr = []
             for v in row:
-                rowStr.append("None" if v is None else v)
+                rowStr.append("None" if v is None else v.name)
             returnStrArr.append(",".join(rowStr))
         return returnStrArr
 
