@@ -82,11 +82,6 @@ jobs:
     - name: Create Download Directory
       run: mkdir downloads
 
-    - name: Create docs
-      run: |
-        python -m pydoc -w ./
-        mv *.html ./downloads
-
     - name: upload documents
       uses: actions/upload-artifact@v2
       with:
