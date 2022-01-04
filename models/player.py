@@ -1,5 +1,3 @@
-import sys
-from models.buildings.beach import Beach
 from models.grid import Grid
 from models.configurations import *
 
@@ -98,8 +96,20 @@ Choose Building Pool
     def validateBuildingPoolOptionMenu(self, option):
         if option == '0':
             print('\n---- Back to Option Menu ----')
+        elif self.isBuildingPoolOptionsValid(option):
+            pass
         else:
             print('Invalid option!')
+
+    def isBuildingPoolOptionsValid(self, option):
+        # (e.g. 1,2,4,6,7)
+
+        if len(option) != 9:
+            return False
+
+        choices = option.split(',')
+
+        return len(set(choices)) == 5 and all(ord("1") <= ord(x) <= ord("7") for x in choices)
 
     def gameMenuContent(self, firstBuilding, secondBuilding):
         return (
