@@ -34,7 +34,7 @@ class AvailableBuildings:
     # Logically the length of the shuffled buildings should be always greater than two
     def retriveTwoRandomBuildings(self):
         shuffled_buildings = self.shuffleCurrentAvailableBuildings()
-        print(shuffled_buildings)
+
         return shuffled_buildings[:2]
 
     # Displays remaining buildings for the current turn
