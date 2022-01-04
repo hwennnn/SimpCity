@@ -162,12 +162,12 @@ def test_displayGameMenuWithTwoRandomBuildings(capfd, option, expectedResult):
 
 def test_availableBuildings():
     # Each Buildings be less than 0, more than 8
-    # Total Buildings cannot be less than 24, more than 40
+    # Total Buildings cannot be less than 24, more than 56
 
     for i in player_test.grid.availableBuildings.availability:
         assert i in range(0, 9)
 
-    assert sum(player_test.grid.availableBuildings.availability) in range(24, 41)
+    assert sum(player_test.grid.availableBuildings.availability) in range(24, 57)
 
 
 def test_displayAvailableBuildings(capfd):

@@ -1,5 +1,5 @@
 from models.available_buildings import AvailableBuildings
-from models.buildings import Beach, Factory, House, Highway, Shop
+from models.buildings import Beach, Factory, House, Highway, Shop, Monument, Park
 from models.enums import Buildings
 from models.configurations import *
 
@@ -70,6 +70,12 @@ class Grid:  # Grid Class
             case Buildings.HIGHWAY.value:
                 return Highway(buildingName, x, y)
 
+            case Buildings.MONUMENT.value:
+                return Monument(buildingName, x, y)
+
+            case Buildings.PARK.value:
+                return Park(buildingName, x, y)
+
             # raise exception if the building input cannot be found in the cases
             case _:
                 raise Exception()
@@ -108,7 +114,10 @@ class Grid:  # Grid Class
                             rowline += Buildings.HOUSE.value + " | "
                         case Buildings.SHOP.value:
                             rowline += Buildings.SHOP.value + " | "
-
+                        case Buildings.MONUMENT.value:
+                            rowline += Buildings.MONUMENT.value + " | "
+                        case Buildings.PARK.value:
+                            rowline += Buildings.PARK.value + " | "
                         # raise exception if the building input cannot be found in the cases
                         case _:
                             raise Exception()
