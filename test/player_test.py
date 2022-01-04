@@ -156,6 +156,29 @@ def test_validateBuildingPoolOptionMenu(capfd, option, expectedResult):
     out, _ = capfd.readouterr()
     assert expectedResult in out
 
+
+updateBuildingPoolFromOptionTestData = [
+    ("1,2,3,4,5", "Current Building Pool: BCH,FAC,HWY,HSE,SHP"),
+    ("1,2,4,5,7", "Current Building Pool: BCH,FAC,HSE,SHP,PRK"),
+    ("5,4,3,6,7", "Current Building Pool: SHP,HSE,HWY,MON,PRK"),
+    ("1,4,5,6,7", "Current Building Pool: BCH,HSE,SHP,MON,PRK"),
+    ("4,2,1,3,7", "Current Building Pool: HSE,FAC,BCH,HWY,PRK"),
+    ("6,2,4,3,1", "Current Building Pool: MON,FAC,HSE,HWY,BCH"),
+    ("7,4,3,1,5", "Current Building Pool: PRK,HSE,HWY,BCH,SHP"),
+    ("1,5,4,2,7", "Current Building Pool: BCH,SHP,HSE,FAC,PRK"),
+    ("4,2,7,1,3", "Current Building Pool: HSE,FAC,PRK,BCH,HWY"),
+    ("6,4,5,2,7", "Current Building Pool: MON,HSE,SHP,FAC,PRK"),
+]
+
+
+@pytest.mark.parametrize("option, expectedResult", updateBuildingPoolFromOptionTestData)
+def test_updateBuildingPoolFromOption(capfd, option, expectedResult):
+    player = Player()
+    player.updateBuildingPoolFromOption(option)
+    player.displayCurrentBuildingPool()
+    out, _ = capfd.readouterr()
+    assert expectedResult in out
+
 # Test the display of a empty grid
 
 
