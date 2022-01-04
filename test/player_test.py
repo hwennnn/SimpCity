@@ -128,7 +128,11 @@ def test_validateBuildingPoolOptions(option, expectedResult):
 
 
 validBuildingPoolOptionMenuTestData = [
-    ("0", "---- Back to Option Menu ----")
+    ("0", "---- Back to Option Menu ----"),
+    ("1,2,3,4,5", "Sucessfully updated building pool!"),
+    ("1,2,4,5,7", "Sucessfully updated building pool!"),
+    ("5,4,3,6,7", "Sucessfully updated building pool!"),
+    ("1,4,5,6,7", "Sucessfully updated building pool!"),
 ]
 
 invalidBuildingPoolOptionMenuTestData = [
