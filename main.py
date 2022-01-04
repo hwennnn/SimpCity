@@ -17,3 +17,6 @@ while True:
 
     elif option == '2':
         game.player.loadGame()
+
+    elif option == '3':
+        game.player.displayOptionMenu()

@@ -24,15 +24,14 @@ Welcome, mayor of Simp City!
 ----------------------------
 1. Start new game
 2. Load saved game
-
-
 3. Options
+
 0. Exit
 """ in out
 
 
 def test_displayOptionMenu(capfd):
-    player_test.displayOptionMenu()
+    player_test.displayOptionMenuHelper()
     out, _ = capfd.readouterr()
     assert """
 SimpCity Game Options
@@ -44,7 +43,7 @@ SimpCity Game Options
 
 
 def test_displayBuildingPoolOptionMenu(capfd):
-    player_test.displayBuildingPoolOptionMenu
+    player_test.displayBuildingPoolOptionMenuHelper()
     out, _ = capfd.readouterr()
     assert """
 Choose Building Pool
@@ -57,8 +56,7 @@ Choose Building Pool
 6. Monument
 7. Park 
 
-9. Return to Option Menu
-0. Return to Main Menu
+0. Return to Option Menu
 """ in out
 
 # Test the display of a empty grid
@@ -83,7 +81,8 @@ def test_displayGrid(capfd):
 
 validMainOptionTestData = \
     [("1", "You selected option 1"),
-     ("2", "You selected option 2")]
+     ("2", "You selected option 2"),
+     ("3", "You selected option 3")]
 
 
 @pytest.mark.parametrize("option, expectedResult", validMainOptionTestData)
@@ -94,8 +93,7 @@ def test_validMainOption(capfd, option, expectedResult):
 
 
 invalidMainOptionTestData = \
-    [("3", "Invalid option!"),
-     ("4", "Invalid option!"),
+    [("4", "Invalid option!"),
      ("10", "Invalid option!"),
      ("a", "Invalid option!"),
      ("abc", "Invalid option!")]
@@ -109,7 +107,7 @@ def test_invalidMainOption(capfd, option, expectedResult):
 
 
 exitGameTestData = \
-    [("0", "---- Game Ended----")]
+    [("0", "---- Game Ended ----")]
 
 
 @pytest.mark.parametrize("option, expectedResult", exitGameTestData)
