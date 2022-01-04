@@ -95,7 +95,7 @@ Choose Building Pool
         return input("Enter 5 building options with a comma separator (e.g. 1,2,4,6,7): ")
 
     # Validate options made in main menu
-    def validateOptionMenu(self, option):
+    def validateBuildingPoolOptionMenu(self, option):
         if option == '0':
             print('\n---- Back to Option Menu ----')
         else:

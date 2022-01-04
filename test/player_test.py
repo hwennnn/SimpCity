@@ -30,6 +30,25 @@ Welcome, mayor of Simp City!
 """ in out
 
 
+validMainOptionTestData = \
+    [("1", "You selected option 1"),
+     ("2", "You selected option 2"),
+     ("3", "You selected option 3")]
+
+invalidMainOptionTestData = \
+    [("4", "Invalid option!"),
+     ("10", "Invalid option!"),
+     ("a", "Invalid option!"),
+     ("abc", "Invalid option!")]
+
+
+@pytest.mark.parametrize("option, expectedResult", validMainOptionTestData + invalidMainOptionTestData)
+def test_validateMainOption(capfd, option, expectedResult):
+    player_test.validateMain(option)
+    out, _ = capfd.readouterr()
+    assert expectedResult in out
+
+
 def test_displayOptionMenu(capfd):
     player_test.displayOptionMenuHelper()
     out, _ = capfd.readouterr()
@@ -40,6 +59,25 @@ SimpCity Game Options
 
 0. Return to Main Menu
 """ in out
+
+
+validOptionMenuTestData = \
+    [("0", "---- Back to Main Menu ----"),
+     ("1", "You selected option 1")]
+
+invalidOptionMenuTestData = \
+    [("2", "Invalid option!"),
+     ("3", "Invalid option!"),
+     ("4", "Invalid option!"),
+     ("5", "Invalid option!"),
+     ("10", "Invalid option!")]
+
+
+@pytest.mark.parametrize("option, expectedResult", validOptionMenuTestData + invalidOptionMenuTestData)
+def test_validateOptionMenu(capfd, option, expectedResult):
+    player_test.validateOptionMenu(option)
+    out, _ = capfd.readouterr()
+    assert expectedResult in out
 
 
 def test_displayBuildingPoolOptionMenu(capfd):
@@ -77,33 +115,6 @@ def test_displayGrid(capfd):
 4|     |     |     |     | 
  +-----+-----+-----+-----+ 
 """ in out
-
-
-validMainOptionTestData = \
-    [("1", "You selected option 1"),
-     ("2", "You selected option 2"),
-     ("3", "You selected option 3")]
-
-
-@pytest.mark.parametrize("option, expectedResult", validMainOptionTestData)
-def test_validMainOption(capfd, option, expectedResult):
-    player_test.validateMain(option)
-    out, _ = capfd.readouterr()
-    assert expectedResult in out
-
-
-invalidMainOptionTestData = \
-    [("4", "Invalid option!"),
-     ("10", "Invalid option!"),
-     ("a", "Invalid option!"),
-     ("abc", "Invalid option!")]
-
-
-@pytest.mark.parametrize("option, expectedResult", invalidMainOptionTestData)
-def test_invalidMainOption(capfd, option, expectedResult):
-    player_test.validateMain(option)
-    out, _ = capfd.readouterr()
-    assert expectedResult in out
 
 
 exitGameTestData = \
