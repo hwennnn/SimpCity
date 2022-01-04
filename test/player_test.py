@@ -122,12 +122,39 @@ invalidBuildingPoolOptions = [
 
 
 @pytest.mark.parametrize("option, expectedResult", generateValidBuildingPoolOptions() + invalidBuildingPoolOptions)
-def test_validateOptionMenu(option, expectedResult):
+def test_validateBuildingPoolOptions(option, expectedResult):
     result = player_test.isBuildingPoolOptionsValid(option)
     assert result == expectedResult
 
 
+validBuildingPoolOptionMenuTestData = [
+    ("0", "---- Back to Option Menu ----")
+]
+
+invalidBuildingPoolOptionMenuTestData = [
+    ("1,2,1,3,4", "Invalid option!"),
+    ("1,2,3,5,8", "Invalid option!"),
+    ("1,2,3,8,2", "Invalid option!"),
+    ("1,2,1,3,4", "Invalid option!"),
+    ("1,2,10,5,6", "Invalid option!"),
+    ("1,2,2,3,4", "Invalid option!"),
+    ("1,5,5,6,6", "Invalid option!"),
+    ("2", "Invalid option!"),
+    ("3", "Invalid option!"),
+    ("5", "Invalid option!"),
+    ("10", "Invalid option!"),
+]
+
+
+@pytest.mark.parametrize("option, expectedResult", validBuildingPoolOptionMenuTestData + invalidBuildingPoolOptionMenuTestData)
+def test_validateBuildingPoolOptionMenu(capfd, option, expectedResult):
+    player_test.validateBuildingPoolOptionMenu(option)
+    out, _ = capfd.readouterr()
+    assert expectedResult in out
+
 # Test the display of a empty grid
+
+
 def test_displayGrid(capfd):
     player_test.displayGrid()
     out, _ = capfd.readouterr()
