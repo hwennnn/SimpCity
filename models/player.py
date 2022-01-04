@@ -23,6 +23,12 @@ Welcome, mayor of Simp City!
 0. Exit
 """)
 
+    def displayOptionMenu(self):
+        pass
+
+    def displayBuildingPoolOptionMenu(self):
+        pass
+
     # Prompt player for input in first main menu
     def promptMainMenu(self):
         return input('Please enter an input: ')

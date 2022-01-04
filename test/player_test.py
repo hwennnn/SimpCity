@@ -25,7 +25,40 @@ Welcome, mayor of Simp City!
 1. Start new game
 2. Load saved game
 
+
+3. Options
 0. Exit
+""" in out
+
+
+def test_displayOptionMenu(capfd):
+    player_test.displayOptionMenu()
+    out, _ = capfd.readouterr()
+    assert """
+SimpCity Game Options
+---------------------
+1. Choose Building Pool
+
+0. Return to Main Menu
+""" in out
+
+
+def test_displayBuildingPoolOptionMenu(capfd):
+    player_test.displayBuildingPoolOptionMenu
+    out, _ = capfd.readouterr()
+    assert """
+Choose Building Pool
+--------------------
+1. Beach
+2. Factory
+3. Highway
+4. House
+5. Shop
+6. Monument
+7. Park 
+
+9. Return to Option Menu
+0. Return to Main Menu
 """ in out
 
 # Test the display of a empty grid
