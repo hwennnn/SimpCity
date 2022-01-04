@@ -4,11 +4,12 @@ import random
 
 class AvailableBuildings:
     def __init__(self):
-        self.availability = [8] * 5
+        self.availability = [8] * 7
         # The sequence follows as:
-        # Beaches, Factories, Houses, Shops, Highways
+        # Beaches, Factories, Houses, Shops, Highways, Monuments, Parks
         self.buildings = [Buildings.BEACH.value, Buildings.FACTORY.value,
-                          Buildings.HOUSE.value, Buildings.SHOP.value, Buildings.HIGHWAY.value]
+                          Buildings.HOUSE.value, Buildings.SHOP.value, Buildings.HIGHWAY.value,
+                          Buildings.MONUMENT.value, Buildings.PARK.value]
 
     # decrease the available building
     def decreaseAvailableBuilding(self, buildingName):
@@ -33,7 +34,7 @@ class AvailableBuildings:
     # Logically the length of the shuffled buildings should be always greater than two
     def retriveTwoRandomBuildings(self):
         shuffled_buildings = self.shuffleCurrentAvailableBuildings()
-
+        print(shuffled_buildings)
         return shuffled_buildings[:2]
 
     # Displays remaining buildings for the current turn
