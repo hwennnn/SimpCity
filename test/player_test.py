@@ -6,6 +6,7 @@ from models.available_buildings import AvailableBuildings
 from models.player import Player
 from models.configurations import *
 from pathlib import Path
+from itertools import permutations
 
 path = str(Path(Path("player_test.py").parent.absolute()).parent.absolute())
 sys.path.insert(0, path)
@@ -97,9 +98,36 @@ Choose Building Pool
 0. Return to Option Menu
 """ in out
 
+
+def generateValidBuildingPoolOptions():
+    A = map(str, list(range(1, 8)))
+
+    validBuildingPoolOptions = []
+
+    for perm in permutations(A, 5):
+        validBuildingPoolOptions.append((",".join(perm), True))
+
+    return validBuildingPoolOptions
+
+
+invalidBuildingPoolOptions = [
+    ("1,2,1,3,4", False),
+    ("1,2,3,5,8", False),
+    ("1,2,3,8,2", False),
+    ("1,2,1,3,4", False),
+    ("1,2,10,5,6", False),
+    ("1,2,2,3,4", False),
+    ("1,5,5,6,6", False),
+]
+
+
+@pytest.mark.parametrize("option, expectedResult", generateValidBuildingPoolOptions() + invalidBuildingPoolOptions)
+def test_validateOptionMenu(option, expectedResult):
+    result = player_test.isBuildingPoolOptionsValid(option)
+    assert result == expectedResult
+
+
 # Test the display of a empty grid
-
-
 def test_displayGrid(capfd):
     player_test.displayGrid()
     out, _ = capfd.readouterr()
