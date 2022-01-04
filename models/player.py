@@ -71,8 +71,9 @@ SimpCity Game Options
         option = None
         while option != "9" and option != "0":
             self.displayBuildingPoolOptionMenuHelper()
+            self.displayCurrentBuildingPool()
             option = self.promptBuildingPoolOptionMenu()
-            self.validateOptionMenu(option)
+            self.validateBuildingPoolOptionMenu(option)
 
     def displayBuildingPoolOptionMenuHelper(self):
         print("""
@@ -90,14 +91,15 @@ Choose Building Pool
 """)
 
     def promptBuildingPoolOptionMenu(self):
-        return input("Enter 5 building options with a comma separator (e.g. 1,2,4,6,7): ")
+        return input("Enter 5 building options with a comma separator (e.g. 1,2,4,6,7) or '0' to exit: ")
 
     # Validate options made in main menu
     def validateBuildingPoolOptionMenu(self, option):
         if option == '0':
             print('\n---- Back to Option Menu ----')
         elif self.isBuildingPoolOptionsValid(option):
-            pass
+            self.updateBuildingPoolFromOption(option)
+            print("Sucessfully updated building pool!")
         else:
             print('Invalid option!')
 
@@ -110,6 +112,12 @@ Choose Building Pool
         choices = option.split(',')
 
         return len(set(choices)) == 5 and all(ord("1") <= ord(x) <= ord("7") for x in choices)
+
+    def updateBuildingPoolFromOption(self, option):
+        self.grid.availableBuildings.updateBuildingPool(option)
+
+    def displayCurrentBuildingPool(self):
+        self.grid.availableBuildings.displayCurrentBuildingPool()
 
     def gameMenuContent(self, firstBuilding, secondBuilding):
         return (
