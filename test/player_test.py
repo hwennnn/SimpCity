@@ -182,21 +182,21 @@ def test_updateBuildingPoolFromOption(capfd, option, expectedResult):
 # Test the display of a empty grid
 
 
-def test_displayGrid(capfd):
-    player_test.displayGrid()
-    out, _ = capfd.readouterr()
-    assert """
-    A     B     C     D
- +-----+-----+-----+-----+ 
-1|     |     |     |     | 
- +-----+-----+-----+-----+ 
-2|     |     |     |     | 
- +-----+-----+-----+-----+ 
-3|     |     |     |     | 
- +-----+-----+-----+-----+ 
-4|     |     |     |     | 
- +-----+-----+-----+-----+ 
-""" in out
+# def test_displayGrid(capfd):
+#     player_test.displayGrid()
+#     out, _ = capfd.readouterr()
+#     assert """
+#     A     B     C     D
+#  +-----+-----+-----+-----+ 
+# 1|     |     |     |     | 
+#  +-----+-----+-----+-----+ 
+# 2|     |     |     |     | 
+#  +-----+-----+-----+-----+ 
+# 3|     |     |     |     | 
+#  +-----+-----+-----+-----+ 
+# 4|     |     |     |     | 
+#  +-----+-----+-----+-----+ 
+# """ in out
 
 
 exitGameTestData = \

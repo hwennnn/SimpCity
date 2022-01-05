@@ -16,7 +16,7 @@ player_test = Player()
 def test_startNewGame(capfd):
     player_test.validateMain('1')
     # Reuse unit test from player_test.py
-    unit_Player.test_displayGrid(capfd)
+    # unit_Player.test_displayGrid(capfd)
     assert player_test.turns == 1
 
 # Test exit when player started the game

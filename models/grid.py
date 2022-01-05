@@ -93,6 +93,7 @@ class Grid:  # Grid Class
         self.availableBuildings.displayAvailableBuilding()
 
     # displays the grid and adapts to each building type
+    # will be reformatted in later sprint for adaptability to grid size
     def displayGrid(self):
         print("\n    A     B     C     D\t\t Remaining Buildings Left\n +-----+-----+-----+-----+\t ------------------------")
         for i in range(self.rowCount):
