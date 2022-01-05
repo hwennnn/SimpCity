@@ -34,28 +34,3 @@ citySize = {
     24: 'Y',
     25: 'Z',
 }
-
-
-def test_fillGridWithBuildings(monkeypatch, capfd):
-    grid = Grid()
-    game = Game()
-
-    row = grid.rowCount
-    col = grid.colCount
-    total = row * col
-
-    colCounter = 0
-    rowCounter = 1
-    for i in range(0, total + 1):
-        if colCounter < col:
-            responses = iter(["1", citySize[colCounter] + str(rowCounter)])
-            monkeypatch.setattr('builtins.input', lambda _: next(responses))
-            game.launchGameHelper()
-        else:
-            colCounter = 0
-            rowCounter += 1
-            responses = iter(["1", citySize[colCounter] + str(rowCounter)])
-            monkeypatch.setattr('builtins.input', lambda _: next(responses))
-            game.launchGameHelper()
-
-        colCounter += 1
