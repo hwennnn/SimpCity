@@ -4,14 +4,31 @@ import random
 
 class AvailableBuildings:
     def __init__(self):
-        self.availability = [8] * 7
-        # The sequence follows as:
-        # Beaches, Factories, Houses, Shops, Highways, Monuments, Parks
-        self.buildings = [Buildings.BEACH.value, Buildings.FACTORY.value,
-                          Buildings.HOUSE.value, Buildings.SHOP.value, Buildings.HIGHWAY.value,
-                          Buildings.MONUMENT.value, Buildings.PARK.value]
+        self.availability = [8] * 5
+
+        self.buildings = [
+            Buildings.BEACH.value, Buildings.FACTORY.value,
+            Buildings.HOUSE.value, Buildings.SHOP.value, Buildings.HIGHWAY.value
+        ]
+
+        self.buildingsPool = [
+            Buildings.BEACH.value, Buildings.FACTORY.value,
+            Buildings.HIGHWAY.value, Buildings.HOUSE.value, Buildings.SHOP.value,
+            Buildings.MONUMENT.value, Buildings.PARK.value
+        ]
+
+    def updateBuildingPool(self, options):
+        self.buildings.clear()
+
+        for option in options.split(','):
+            buildingIndex = int(option) - 1
+            self.buildings.append(self.buildingsPool[buildingIndex])
+
+    def displayCurrentBuildingPool(self):
+        print(f"Current Building Pool: {','.join(self.buildings)}")
 
     # decrease the available building
+
     def decreaseAvailableBuilding(self, buildingName):
         building_index = self.buildings.index(buildingName)
         self.availability[building_index] -= 1

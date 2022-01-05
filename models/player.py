@@ -1,5 +1,3 @@
-import sys
-from models.buildings.beach import Beach
 from models.grid import Grid
 from models.configurations import *
 
@@ -19,6 +17,7 @@ Welcome, mayor of Simp City!
 ----------------------------
 1. Start new game
 2. Load saved game
+3. Options
 
 0. Exit
 """)
@@ -30,12 +29,95 @@ Welcome, mayor of Simp City!
     # Validate options made in main menu
     def validateMain(self, option):
         if option == '0':
-            print('---- Game Ended----')
+            print('---- Game Ended ----')
             self.exitGame()
-        elif len(option) == 1 and ord("1") <= ord(option) <= ord("2"):
+        elif len(option) == 1 and ord("1") <= ord(option) <= ord("3"):
             print(f"You selected option {option}")
         else:
             print('Invalid option!')
+
+    def displayOptionMenu(self):
+        option = None
+        while option != "0":
+            self.displayOptionMenuHelper()
+            option = self.promptOptionMenu()
+            self.validateOptionMenu(option)
+
+            if option == "1":
+                self.displayBuildingPoolOptionMenu()
+
+    def displayOptionMenuHelper(self):
+        print("""
+SimpCity Game Options
+---------------------
+1. Choose Building Pool
+
+0. Return to Main Menu
+""")
+
+    def promptOptionMenu(self):
+        return input("Please enter an option: ")
+
+    # Validate options made in main menu
+    def validateOptionMenu(self, option):
+        if option == '0':
+            print('\n---- Back to Main Menu ----')
+        elif len(option) == 1 and ord("1") <= ord(option) <= ord("1"):
+            print(f"You selected option {option}")
+        else:
+            print('Invalid option!')
+
+    def displayBuildingPoolOptionMenu(self):
+        option = None
+        while option != "9" and option != "0":
+            self.displayBuildingPoolOptionMenuHelper()
+            self.displayCurrentBuildingPool()
+            option = self.promptBuildingPoolOptionMenu()
+            self.validateBuildingPoolOptionMenu(option)
+
+    def displayBuildingPoolOptionMenuHelper(self):
+        print("""
+Choose Building Pool
+--------------------
+1. Beach
+2. Factory
+3. Highway
+4. House
+5. Shop
+6. Monument
+7. Park 
+
+0. Return to Option Menu
+""")
+
+    def promptBuildingPoolOptionMenu(self):
+        return input("Enter 5 building options with a comma separator (e.g. 1,2,4,6,7) or '0' to exit: ")
+
+    # Validate options made in main menu
+    def validateBuildingPoolOptionMenu(self, option):
+        if option == '0':
+            print('\n---- Back to Option Menu ----')
+        elif self.isBuildingPoolOptionsValid(option):
+            self.updateBuildingPoolFromOption(option)
+            print("Sucessfully updated building pool!")
+        else:
+            print('Invalid option!')
+
+    def isBuildingPoolOptionsValid(self, option):
+        # (e.g. 1,2,4,6,7)
+
+        if len(option) != 9:
+            return False
+
+        choices = option.split(',')
+
+        return len(set(choices)) == 5 and all(ord("1") <= ord(x) <= ord("7") for x in choices)
+
+    def updateBuildingPoolFromOption(self, option):
+        self.grid.availableBuildings.updateBuildingPool(option)
+
+    def displayCurrentBuildingPool(self):
+        self.grid.availableBuildings.displayCurrentBuildingPool()
 
     def gameMenuContent(self, firstBuilding, secondBuilding):
         return (
