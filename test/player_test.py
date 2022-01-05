@@ -219,8 +219,7 @@ validGameOptionTestData = \
      #  ("1", "Build Where? "),
      #  ("2", "Build Where? "),
      ("3", "You selected option 3"),
-     ("4", "You selected option 4"),
-     ("5", "You selected option 5")]
+     ("4", "You selected option 4")]
 
 
 @pytest.mark.parametrize("option, expectedResult", validGameOptionTestData)
@@ -231,7 +230,8 @@ def test_validGameOption(capfd, option, expectedResult):
 
 
 invalidGameOptionTestData = \
-    [("6", "Invalid option!"),
+    [("5", "Invalid option!"),
+     ("6", "Invalid option!"),
      ("7", "Invalid option!"),
      ("8", "Invalid option!"),
      ("9", "Invalid option!"),
@@ -293,11 +293,3 @@ def test_availableBuildings():
 
     assert sum(player_test.grid.availableBuildings.availability) in range(24, 41)
 
-
-def test_displayAvailableBuildings(capfd):
-    player_test.displayAvailableBuildings()
-    out, _ = capfd.readouterr()
-    assert f"\nBuilding\tRemaining\n--------\t--------" in out
-    for i in range(len(player_test.grid.availableBuildings.buildings)):
-        assert player_test.grid.availableBuildings.buildings[i] + "\t\t" + str(
-            player_test.grid.availableBuildings.availability[i]) in out

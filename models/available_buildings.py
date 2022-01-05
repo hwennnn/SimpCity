@@ -53,10 +53,3 @@ class AvailableBuildings:
         shuffled_buildings = self.shuffleCurrentAvailableBuildings()
 
         return shuffled_buildings[:2]
-
-    # Displays remaining buildings for the current turn
-    # Goes through list of buildings and display their availability based on indexes
-    def displayAvailableBuilding(self):
-        print(f"\nBuilding\tRemaining\n--------\t--------")
-        for i in range(len(self.buildings)):
-            print(self.buildings[i] + "\t\t" + str(self.availability[i]))

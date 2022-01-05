@@ -21,10 +21,6 @@ class Game: #Game Class
                 elif subOption == "N":
                     continue
 
-            elif option == '3':
-                self.player.displayAvailableBuildings()
-
-        
-            elif option == '5':
+            elif option == '4':
                 self.player.saveGame()
 
