@@ -6,8 +6,7 @@ class Game: #Game Class
 
     def launchGame(self):
         while True:
-            print("""
-Turn: {0}""".format(self.player.turns))
+            print("\nTurn: {0}".format(self.player.turns))
             self.player.displayGrid()
             self.player.displayGameMenu()
             option = self.player.promptGameMenu()
