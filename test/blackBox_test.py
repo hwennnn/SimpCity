@@ -126,9 +126,10 @@ def test_fillGridWithBuildings(monkeypatch, capfd):
 
         # Moves to the next Col each loop, A -> B -> C -> D
         colCounter += 1
-
-    tempList.append("0")
-    tempList.append("Y")
-    responses = iter(tempList)
-    monkeypatch.setattr('builtins.input', lambda _: next(responses))
-    import main
+    
+    try:
+        responses = iter(tempList)
+        monkeypatch.setattr('builtins.input', lambda _: next(responses))
+        import main
+    except Exception as e:
+        print(e)
