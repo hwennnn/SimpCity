@@ -124,10 +124,9 @@ Choose Building Pool
             f"""
 1. Build a {firstBuilding}
 2. Build a {secondBuilding}
-3. See remaining buildings
-4. See current score
+3. See current score
 
-5. Save game
+4. Save game
 0. Exit to main menu""")
 
     def displayGameMenu(self, firstBuilding=None, secondBuilding=None):
@@ -147,7 +146,7 @@ Choose Building Pool
 
     # Validate options made in game menu
     def validateGame(self, option):
-        if len(option) == 1 and ord("0") <= ord(option) <= ord("5"):
+        if len(option) == 1 and ord("0") <= ord(option) <= ord("4"):
             if ord("1") <= ord(option) <= ord("2"):
                 buildingValue = self.firstBuilding if \
                     ord(option) == ord("1") else self.secondBuilding
