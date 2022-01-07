@@ -5,12 +5,39 @@ import random
 class AvailableBuildings:
     def __init__(self):
         self.availability = [8] * 5
+<<<<<<< HEAD
         # The sequence follows as:
         # Beaches, Factories, Houses, Shops, Highways
         self.buildings = [Buildings.BEACH.value, Buildings.FACTORY.value,
                           Buildings.HOUSE.value, Buildings.SHOP.value, Buildings.HIGHWAY.value]
 
     # decrease the available building
+=======
+
+        self.buildings = [
+            Buildings.BEACH.value, Buildings.FACTORY.value,
+            Buildings.HOUSE.value, Buildings.SHOP.value, Buildings.HIGHWAY.value
+        ]
+
+        self.buildingsPool = [
+            Buildings.BEACH.value, Buildings.FACTORY.value,
+            Buildings.HIGHWAY.value, Buildings.HOUSE.value, Buildings.SHOP.value,
+            Buildings.MONUMENT.value, Buildings.PARK.value
+        ]
+
+    def updateBuildingPool(self, options):
+        self.buildings.clear()
+
+        for option in options.split(','):
+            buildingIndex = int(option) - 1
+            self.buildings.append(self.buildingsPool[buildingIndex])
+
+    def displayCurrentBuildingPool(self):
+        print(f"Current Building Pool: {','.join(self.buildings)}")
+
+    # decrease the available building
+
+>>>>>>> 04888cc4a69a3b38dd45c08fd671adbd18fd1da1
     def decreaseAvailableBuilding(self, buildingName):
         building_index = self.buildings.index(buildingName)
         self.availability[building_index] -= 1
@@ -34,6 +61,7 @@ class AvailableBuildings:
     def retriveTwoRandomBuildings(self):
         shuffled_buildings = self.shuffleCurrentAvailableBuildings()
 
+<<<<<<< HEAD
         return shuffled_buildings[:2]
 
     # Displays remaining buildings for the current turn
@@ -42,3 +70,6 @@ class AvailableBuildings:
         print(f"\nBuilding\tRemaining\n--------\t--------")
         for i in range(len(self.buildings)):
             print(self.buildings[i] + "\t\t" + str(self.availability[i]))
+=======
+        return shuffled_buildings[:2]
+>>>>>>> 04888cc4a69a3b38dd45c08fd671adbd18fd1da1

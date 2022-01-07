@@ -6,3 +6,5 @@ class Buildings(Enum):  # buildings enum
     HOUSE = 'HSE'
     SHOP = 'SHP'
     HIGHWAY = 'HWY'
+    MONUMENT = "MON"
+    PARK = "PRK"

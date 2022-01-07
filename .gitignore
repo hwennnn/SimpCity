@@ -37,9 +37,14 @@ coverage.xml
 # Translations
 *.mo
 
+<<<<<<< HEAD
 #Saved game state files
 saved_game.txt
 testing.txt
+=======
+#Saved game state files 
+saved_game.txt 
+>>>>>>> 04888cc4a69a3b38dd45c08fd671adbd18fd1da1
 .DS_Store
 
 CHANGELOG.md

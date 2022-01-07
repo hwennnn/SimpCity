@@ -157,3 +157,36 @@ def test_retrieveParsedPosition(userInput, expectedResult):
     result = player_test.grid.retrieveParsedPosition(userInput)
 
     assert result == expectedResult
+<<<<<<< HEAD
+=======
+
+
+parsedXPosition = [
+    ("A", 0),
+    ("B", 1),
+    ("C", 2),
+    ("D", 3)
+]
+
+
+@pytest.mark.parametrize("userInput, expectedResult", parsedXPosition)
+def test_parseXPositionInput(userInput, expectedResult):
+    result = player_test.grid.parseXPositionInput(userInput)
+
+    assert result == expectedResult
+
+
+parsedYPosition = [
+    (1, 0),
+    (2, 1),
+    (3, 2),
+    (4, 3)
+]
+
+
+@pytest.mark.parametrize("userInput, expectedResult", parsedYPosition)
+def test_parseYPositionInput(userInput, expectedResult):
+    result = player_test.grid.parseYPositionInput(userInput)
+
+    assert result == expectedResult
+>>>>>>> 04888cc4a69a3b38dd45c08fd671adbd18fd1da1

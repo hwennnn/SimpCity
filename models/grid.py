@@ -1,5 +1,5 @@
 from models.available_buildings import AvailableBuildings
-from models.buildings import Beach, Factory, House, Highway, Shop
+from models.buildings import Beach, Factory, House, Highway, Shop, Monument, Park
 from models.enums import Buildings
 from models.configurations import *
 
@@ -70,6 +70,12 @@ class Grid:  # Grid Class
             case Buildings.HIGHWAY.value:
                 return Highway(buildingName, x, y)
 
+            case Buildings.MONUMENT.value:
+                return Monument(buildingName, x, y)
+
+            case Buildings.PARK.value:
+                return Park(buildingName, x, y)
+
             # raise exception if the building input cannot be found in the cases
             case _:
                 raise Exception()
@@ -78,7 +84,14 @@ class Grid:  # Grid Class
         self.availableBuildings.decreaseAvailableBuilding(buildingName)
 
     def retrieveBuildingsScore(self):
-        pass
+        scores = 0
+
+        for x in range(self.rowCount):
+            for y in range(self.colCount):
+                if self.grid[x][y] is not None:
+                    scores += self.grid[x][y].retrieveBuildingScore(self)
+
+        return scores
 
     def retrieveTwoRandomBuildings(self):
         return self.availableBuildings.retriveTwoRandomBuildings()
@@ -87,10 +100,9 @@ class Grid:  # Grid Class
         self.availableBuildings.displayAvailableBuilding()
 
     # displays the grid and adapts to each building type
+    # will be reformatted in later sprint for adaptability to grid size
     def displayGrid(self):
-        print("""
-    A     B     C     D
- +-----+-----+-----+-----+ """)
+        print("\n    A     B     C     D\t\t Remaining Buildings Left\n +-----+-----+-----+-----+\t ------------------------")
         for i in range(self.rowCount):
             rowline = "{0}| ".format(i + 1)
             for build in self.grid[i]:
@@ -108,13 +120,17 @@ class Grid:  # Grid Class
                             rowline += Buildings.HOUSE.value + " | "
                         case Buildings.SHOP.value:
                             rowline += Buildings.SHOP.value + " | "
-
+                        case Buildings.MONUMENT.value:
+                            rowline += Buildings.MONUMENT.value + " | "
+                        case Buildings.PARK.value:
+                            rowline += Buildings.PARK.value + " | "
                         # raise exception if the building input cannot be found in the cases
                         case _:
                             raise Exception()
-            print(
-                """{0}
- +-----+-----+-----+-----+ """.format(rowline))
+            print("{0}\t {1}: {2}\n +-----+-----+-----+-----+".format(rowline,
+                                                                     self.availableBuildings.buildings[i],
+                                                                     self.availableBuildings.availability[i]))
+        print("\t\t\t\t {0}: {1}".format(self.availableBuildings.buildings[4], self.availableBuildings.availability[4]))
 
     # parses the grid as an array of string, allowing it to be written into txt file
     def parseGridAsString(self):
