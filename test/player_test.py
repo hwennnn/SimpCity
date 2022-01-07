@@ -6,10 +6,7 @@ from models.available_buildings import AvailableBuildings
 from models.player import Player
 from models.configurations import *
 from pathlib import Path
-<<<<<<< HEAD
-=======
 from itertools import permutations
->>>>>>> 04888cc4a69a3b38dd45c08fd671adbd18fd1da1
 
 path = str(Path(Path("player_test.py").parent.absolute()).parent.absolute())
 sys.path.insert(0, path)
@@ -28,44 +25,11 @@ Welcome, mayor of Simp City!
 ----------------------------
 1. Start new game
 2. Load saved game
-<<<<<<< HEAD
-=======
 3. Options
->>>>>>> 04888cc4a69a3b38dd45c08fd671adbd18fd1da1
 
 0. Exit
 """ in out
 
-<<<<<<< HEAD
-# Test the display of a empty grid
-
-
-def test_displayGrid(capfd):
-    player_test.displayGrid()
-    out, _ = capfd.readouterr()
-    assert """
-    A     B     C     D
- +-----+-----+-----+-----+ 
-1|     |     |     |     | 
- +-----+-----+-----+-----+ 
-2|     |     |     |     | 
- +-----+-----+-----+-----+ 
-3|     |     |     |     | 
- +-----+-----+-----+-----+ 
-4|     |     |     |     | 
- +-----+-----+-----+-----+ 
-""" in out
-
-
-validMainOptionTestData = \
-    [("1", "You selected option 1"),
-     ("2", "You selected option 2")]
-
-
-@pytest.mark.parametrize("option, expectedResult", validMainOptionTestData)
-def test_validMainOption(capfd, option, expectedResult):
-    player_test.validateMain(option)
-=======
 
 validMainOptionTestData = \
     [("1", "You selected option 1"),
@@ -113,30 +77,10 @@ invalidOptionMenuTestData = \
 @pytest.mark.parametrize("option, expectedResult", validOptionMenuTestData + invalidOptionMenuTestData)
 def test_validateOptionMenu(capfd, option, expectedResult):
     player_test.validateOptionMenu(option)
->>>>>>> 04888cc4a69a3b38dd45c08fd671adbd18fd1da1
     out, _ = capfd.readouterr()
     assert expectedResult in out
 
 
-<<<<<<< HEAD
-invalidMainOptionTestData = \
-    [("3", "Invalid option!"),
-     ("4", "Invalid option!"),
-     ("10", "Invalid option!"),
-     ("a", "Invalid option!"),
-     ("abc", "Invalid option!")]
-
-
-@pytest.mark.parametrize("option, expectedResult", invalidMainOptionTestData)
-def test_invalidMainOption(capfd, option, expectedResult):
-    player_test.validateMain(option)
-    out, _ = capfd.readouterr()
-    assert expectedResult in out
-
-
-exitGameTestData = \
-    [("0", "---- Game Ended----")]
-=======
 def test_displayBuildingPoolOptionMenu(capfd):
     player_test.displayBuildingPoolOptionMenuHelper()
     out, _ = capfd.readouterr()
@@ -257,7 +201,6 @@ def test_updateBuildingPoolFromOption(capfd, option, expectedResult):
 
 exitGameTestData = \
     [("0", "---- Game Ended ----")]
->>>>>>> 04888cc4a69a3b38dd45c08fd671adbd18fd1da1
 
 
 @pytest.mark.parametrize("option, expectedResult", exitGameTestData)
@@ -276,12 +219,7 @@ validGameOptionTestData = \
      #  ("1", "Build Where? "),
      #  ("2", "Build Where? "),
      ("3", "You selected option 3"),
-<<<<<<< HEAD
-     ("4", "You selected option 4"),
-     ("5", "You selected option 5")]
-=======
      ("4", "You selected option 4")]
->>>>>>> 04888cc4a69a3b38dd45c08fd671adbd18fd1da1
 
 
 @pytest.mark.parametrize("option, expectedResult", validGameOptionTestData)
@@ -292,12 +230,8 @@ def test_validGameOption(capfd, option, expectedResult):
 
 
 invalidGameOptionTestData = \
-<<<<<<< HEAD
-    [("6", "Invalid option!"),
-=======
     [("5", "Invalid option!"),
      ("6", "Invalid option!"),
->>>>>>> 04888cc4a69a3b38dd45c08fd671adbd18fd1da1
      ("7", "Invalid option!"),
      ("8", "Invalid option!"),
      ("9", "Invalid option!"),
@@ -359,14 +293,3 @@ def test_availableBuildings():
 
     assert sum(player_test.grid.availableBuildings.availability) in range(24, 41)
 
-<<<<<<< HEAD
-
-def test_displayAvailableBuildings(capfd):
-    player_test.displayAvailableBuildings()
-    out, _ = capfd.readouterr()
-    assert f"\nBuilding\tRemaining\n--------\t--------" in out
-    for i in range(len(player_test.grid.availableBuildings.buildings)):
-        assert player_test.grid.availableBuildings.buildings[i] + "\t\t" + str(
-            player_test.grid.availableBuildings.availability[i]) in out
-=======
->>>>>>> 04888cc4a69a3b38dd45c08fd671adbd18fd1da1

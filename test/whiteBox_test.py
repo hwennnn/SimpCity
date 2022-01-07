@@ -117,4 +117,7 @@ def test_placeAndSave(monkeypatch, capfd):
     saveGridToTextUnderTest(grid)
     rootDirWithFile = currentDirectory.joinpath("testing.txt")
     assert rootDirWithFile.exists() == True
-    
+
+def test_citySizeBuildingPoolStartGame(monkeypatch, capfd):
+    player = Player()
+    player.updateBuildingPoolFromOption("")
