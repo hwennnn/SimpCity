@@ -34,15 +34,14 @@ def parse_fileToList(f):
     return grid
 
 def saveGridToTextUnderTest(grid):
-    
     # Test saving the current grid (on test) on a separate text file
     gridValue = grid.parseGridAsString()  
-    with open('testing.txt', 'w+') as f:
+    with open('test/testing.txt', 'w+') as f:
         for row in gridValue:
             f.writelines(row + "\n")
 
     # Test if the program saved the correct coordinates
-    f = open("testing.txt", "r")
+    f = open("test/testing.txt", "r")
     f = f.read()
     return f
 
@@ -119,5 +118,4 @@ def test_placeAndSave(monkeypatch, capfd):
     assert rootDirWithFile.exists() == True
 
 def test_citySizeBuildingPoolStartGame(monkeypatch, capfd):
-    player = Player()
-    player.updateBuildingPoolFromOption("")
+    pass

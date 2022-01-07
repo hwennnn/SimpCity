@@ -157,8 +157,6 @@ def test_retrieveParsedPosition(userInput, expectedResult):
     result = player_test.grid.retrieveParsedPosition(userInput)
 
     assert result == expectedResult
-<<<<<<< HEAD
-=======
 
 
 parsedXPosition = [
@@ -189,4 +187,3 @@ def test_parseYPositionInput(userInput, expectedResult):
     result = player_test.grid.parseYPositionInput(userInput)
 
     assert result == expectedResult
->>>>>>> 04888cc4a69a3b38dd45c08fd671adbd18fd1da1
