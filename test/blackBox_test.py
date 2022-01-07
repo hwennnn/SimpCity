@@ -5,39 +5,7 @@ from models.grid import Grid
 from models.enums import Buildings
 from models.configurations import *
 import random
-
-def parse_fileToList(f):
-    temp = ''
-    row = []
-    grid = []
-    for i in f:
-        if i == ',':
-            row.append(temp)    # Add a coordinate to a row
-            temp = ''
-            continue    # Ignore ',' and not append (it will be 'None,' if not included)
-
-        if i == '\n':
-            row.append(temp)    # Add the last coordinate for the row as it has '\n' instead of ','
-            grid.append(row)    # Add the row into a list to form a grid
-            row = []
-            temp = ''
-
-        else:
-            temp += i
-    return grid
-
-def saveGridToTextUnderTest():
-    grid = Grid()
-    # Test saving the current grid (on test) on a separate text file
-    gridValue = grid.parseGridAsString()  
-    with open('testing.txt', 'w+') as f:
-        for row in gridValue:
-            f.writelines(row + "\n")
-
-    # Test if the program saved the correct coordinates
-    f = open("testing.txt", "r")
-    f = f.read()
-    return f
+import pytest
 
 citySize = { 
     0: 'A',
@@ -67,35 +35,6 @@ citySize = {
     24: 'Y',
     25: 'Z',
 }
-
-# def test_randomPlacementAndSave(monkeypatch, capfd):
-#     grid = Grid()
-#     game = Game()
-
-#     row = grid.rowCount
-#     col = grid.colCount
-#     total = row * col
-
-#     rowRand, colRand = randomRoll(row, col)
-#     assert rowRand != 0
-
-
-#     for i in range(0, round(total / 2)):    # 7.4 rounded down to 7, 7.5 rounded up to 8
-#         rowRand, colRand = randomRoll(row, col)
-#         try:
-#             assert grid.grid[rowRand][colRand] is None
-#         except:
-#             rowRand, colRand = randomRoll(row, col)
-            
-#         responses = iter(["1", citySize[colRand] + str(rowRand)])
-#         monkeypatch.setattr('builtins.input', lambda _: next(responses))
-#         game.launchGameHelper()
-
-#         f = saveGridToTextUnderTest
-#         gridList = parse_fileToList(f)
-        
-#     out, _ = capfd.readouterr()
-#     assert out == "[]"
 
 def test_fillGridWithBuildings(monkeypatch, capfd):
     grid = Grid()
@@ -133,3 +72,16 @@ def test_fillGridWithBuildings(monkeypatch, capfd):
         import main
     except Exception as e:
         print(e)
+
+def test_Exit(monkeypatch, capfd):
+    game = Game()
+
+    # Iterations: Start New Game -> Exit Game Menu -> Confirm Exit w/o Save -> Exit Main Menu (Exit Program)
+    responses = iter(["1", "0", "Y", "0"])
+    monkeypatch.setattr('builtins.input', lambda _: next(responses))
+    with pytest.raises(SystemExit) as e:
+        import main
+
+    out, _ = capfd.readouterr()
+    assert e.type == SystemExit
+    assert e.value.code == 0
