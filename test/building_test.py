@@ -102,15 +102,6 @@ def test_calculateParkBuildingScore(buildingPositions, expectedResult):
     assert gridObject.calculateParkBuildingsScore() == expectedResult
 
 
-@pytest.mark.parametrize("option, expectedResult", beachBuildingTestData)
-def test_calculateBeachBuildingScore(option, expectedResult):
-    gridObject = Grid()
-    x, y = option
-
-    beachBuilding = gridObject.createBuilding(Buildings.BEACH.value, x, y)
-    assert beachBuilding.retrieveBuildingScore() == expectedResult
-
-
 monumentBuildingTestData = [
     (
         [
