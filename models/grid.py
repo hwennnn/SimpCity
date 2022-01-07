@@ -1,5 +1,5 @@
 from models.available_buildings import AvailableBuildings
-from models.buildings import Beach, Factory, House, Highway, Shop, Monument, Park
+from models.buildings import *
 from models.enums import Buildings
 from models.configurations import *
 
@@ -128,9 +128,10 @@ class Grid:  # Grid Class
                         case _:
                             raise Exception()
             print("{0}\t {1}: {2}\n +-----+-----+-----+-----+".format(rowline,
-                                                                     self.availableBuildings.buildings[i],
-                                                                     self.availableBuildings.availability[i]))
-        print("\t\t\t\t {0}: {1}".format(self.availableBuildings.buildings[4], self.availableBuildings.availability[4]))
+                                                                      self.availableBuildings.buildings[i],
+                                                                      self.availableBuildings.availability[i]))
+        print("\t\t\t\t {0}: {1}".format(
+            self.availableBuildings.buildings[4], self.availableBuildings.availability[4]))
 
     # parses the grid as an array of string, allowing it to be written into txt file
     def parseGridAsString(self):
