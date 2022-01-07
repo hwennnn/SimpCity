@@ -84,7 +84,14 @@ class Grid:  # Grid Class
         self.availableBuildings.decreaseAvailableBuilding(buildingName)
 
     def retrieveBuildingsScore(self):
-        pass
+        scores = 0
+
+        for x in range(self.rowCount):
+            for y in range(self.colCount):
+                if self.grid[x][y] is not None:
+                    scores += self.grid[x][y].retrieveBuildingScore(self)
+
+        return scores
 
     def retrieveTwoRandomBuildings(self):
         return self.availableBuildings.retriveTwoRandomBuildings()

@@ -11,5 +11,5 @@ class Building(ABC):  # use absract class as the buildings have some common trai
         return self.name
 
     @abstractmethod
-    def retrieveBuildingScore(self):
+    def retrieveBuildingScore(self, grid):
         pass
