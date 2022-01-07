@@ -2,6 +2,7 @@ from models.available_buildings import AvailableBuildings
 from models.buildings import *
 from models.enums import Buildings
 from models.configurations import *
+from collections import defaultdict
 
 
 class Grid:  # Grid Class
@@ -85,13 +86,17 @@ class Grid:  # Grid Class
 
     def retrieveBuildingsScore(self):
         scores = 0
+        scores += self.calculateParkBuildingsScore()
 
         for x in range(self.rowCount):
             for y in range(self.colCount):
-                if self.grid[x][y] is not None:
-                    scores += self.grid[x][y].retrieveBuildingScore(self)
+                if self.grid[x][y] is not None and self.grid[x][y].getName() != Buildings.PARK.value:
+                    scores += self.grid[x][y].retrieveBuildingScore(self.grid)
 
         return scores
+
+    def calculateParkBuildingsScore(self):
+        pass
 
     def retrieveTwoRandomBuildings(self):
         return self.availableBuildings.retriveTwoRandomBuildings()

@@ -31,3 +31,72 @@ def test_calculateBeachBuildingScore(option, expectedResult):
 
     beachBuilding = gridObject.createBuilding(Buildings.BEACH.value, x, y)
     assert beachBuilding.retrieveBuildingScore() == expectedResult
+
+
+parkBuildingTestData = [
+    (
+        [
+            (0, 0, Buildings.PARK.value)
+        ],
+        1
+    ),
+    (
+        [
+            (0, 0, Buildings.PARK.value),
+            (1, 1, Buildings.PARK.value),
+        ],
+        2
+    ),
+    (
+        [
+            (0, 0, Buildings.PARK.value),
+            (0, 1, Buildings.PARK.value),
+            (1, 1, Buildings.PARK.value),
+        ],
+        3
+    ),
+    (
+        # 2-square Park Building
+        [
+            (0, 0, Buildings.PARK.value),
+            (0, 1, Buildings.PARK.value),
+            (1, 0, Buildings.PARK.value),
+            (1, 1, Buildings.PARK.value),
+        ],
+        3
+    ),
+    (
+        [
+            (0, 0, Buildings.PARK.value),
+            (0, 1, Buildings.PARK.value),
+            (1, 1, Buildings.PARK.value),
+            (1, 2, Buildings.PARK.value),
+        ],
+        4
+    ),
+    (
+        # 3-square Park Building
+        [
+            (0, 0, Buildings.PARK.value),
+            (0, 1, Buildings.PARK.value),
+            (0, 2, Buildings.PARK.value),
+            (1, 0, Buildings.PARK.value),
+            (1, 1, Buildings.PARK.value),
+            (1, 2, Buildings.PARK.value),
+            (2, 0, Buildings.PARK.value),
+            (2, 1, Buildings.PARK.value),
+            (2, 2, Buildings.PARK.value),
+        ],
+        8
+    ),
+]
+
+
+@pytest.mark.parametrize("buildingPositions, expectedResult", parkBuildingTestData)
+def test_calculateParkBuildingScore(buildingPositions, expectedResult):
+    gridObject = Grid()
+
+    for x, y, buildingName in buildingPositions:
+        gridObject.updateGrid(x, y, buildingName)
+
+    assert gridObject.calculateParkBuildingsScore() == expectedResult
