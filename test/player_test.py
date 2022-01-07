@@ -99,32 +99,32 @@ Choose Building Pool
 """ in out
 
 
-# def generateValidBuildingPoolOptions():
-#     A = map(str, list(range(1, 8)))
+def generateValidBuildingPoolOptions():
+    A = map(str, list(range(1, 8)))
 
-#     validBuildingPoolOptions = []
+    validBuildingPoolOptions = []
 
-#     for perm in permutations(A, 5):
-#         validBuildingPoolOptions.append((",".join(perm), True))
+    for perm in permutations(A, 5):
+        validBuildingPoolOptions.append((",".join(perm), True))
 
-#     return validBuildingPoolOptions
-
-
-# invalidBuildingPoolOptions = [
-#     ("1,2,1,3,4", False),
-#     ("1,2,3,5,8", False),
-#     ("1,2,3,8,2", False),
-#     ("1,2,1,3,4", False),
-#     ("1,2,10,5,6", False),
-#     ("1,2,2,3,4", False),
-#     ("1,5,5,6,6", False),
-# ]
+    return validBuildingPoolOptions
 
 
-# @pytest.mark.parametrize("option, expectedResult", generateValidBuildingPoolOptions() + invalidBuildingPoolOptions)
-# def test_validateBuildingPoolOptions(option, expectedResult):
-#     result = player_test.isBuildingPoolOptionsValid(option)
-#     assert result == expectedResult
+invalidBuildingPoolOptions = [
+    ("1,2,1,3,4", False),
+    ("1,2,3,5,8", False),
+    ("1,2,3,8,2", False),
+    ("1,2,1,3,4", False),
+    ("1,2,10,5,6", False),
+    ("1,2,2,3,4", False),
+    ("1,5,5,6,6", False),
+]
+
+
+@pytest.mark.parametrize("option, expectedResult", generateValidBuildingPoolOptions() + invalidBuildingPoolOptions)
+def test_validateBuildingPoolOptions(option, expectedResult):
+    result = player_test.isBuildingPoolOptionsValid(option)
+    assert result == expectedResult
 
 
 validBuildingPoolOptionMenuTestData = [
