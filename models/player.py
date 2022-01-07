@@ -171,6 +171,11 @@ Choose Building Pool
         else:
             print("Please enter a valid building position!")
 
+    # Calculate total score for current game iteration
+    def retrieveBuildingsScore(self):
+        scores = self.grid.retrieveBuildingsScore()
+        print("Total Score: " + str(scores))
+
     # Prompt player to check if they saved their game beforehand
     def promptSaveGame(self):
         return input('Are you sure to exit to main menu without saving game? [Y/N]: ').upper()
