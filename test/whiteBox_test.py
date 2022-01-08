@@ -47,8 +47,8 @@ def saveGridToTextUnderTest(grid):
 
 def test_fillGridWithBuildings(monkeypatch, capfd):
     grid = Grid()
-    availableBuildings = AvailableBuildings()
-
+    player = Player()
+    
     row = grid.rowCount
     col = grid.colCount
     total = row * col
@@ -60,7 +60,7 @@ def test_fillGridWithBuildings(monkeypatch, capfd):
         # Adds building to grid as long as it has Col has not reached the last alphabet in the grid
         # A1 -> B1 -> C1 -> D1
         if colCounter < col:
-            tempList.append([availableBuildings.retriveTwoRandomBuildings()[(random.randint(0,1))], rowCounter, colCounter])
+            tempList.append([player.grid.availableBuildings.retriveTwoRandomBuildings()[(random.randint(0,1))], rowCounter, colCounter])
     
         # Resets Col back to 0 (A, first alphabet) once last alphabet is reached. D -> A. 
         # Row is increased by 1. A1 -> A2 (from Row 1 to Row 2)
@@ -68,7 +68,7 @@ def test_fillGridWithBuildings(monkeypatch, capfd):
         else:
             colCounter = 0
             rowCounter += 1
-            tempList.append([availableBuildings.retriveTwoRandomBuildings()[(random.randint(0,1))], rowCounter, colCounter])
+            tempList.append([player.grid.availableBuildings.retriveTwoRandomBuildings()[(random.randint(0,1))], rowCounter, colCounter])
 
         # Moves to the next Col each loop, A -> B -> C -> D
         colCounter += 1
@@ -81,7 +81,6 @@ def test_fillGridWithBuildings(monkeypatch, capfd):
 def test_placeAndSave(monkeypatch, capfd):
     grid = Grid()
     player = Player()
-    availableBuildings = AvailableBuildings()
 
     row = grid.rowCount
     col = grid.colCount
@@ -96,7 +95,7 @@ def test_placeAndSave(monkeypatch, capfd):
         # Adds building to grid as long as it has Col has not reached the last alphabet in the grid
         # A1 -> B1 -> C1 -> D1
         if colCounter < col:
-            tempList.append([availableBuildings.retriveTwoRandomBuildings()[(random.randint(0,1))], rowCounter, colCounter])
+            tempList.append([player.grid.availableBuildings.retriveTwoRandomBuildings()[(random.randint(0,1))], rowCounter, colCounter])
     
         # Resets Col back to 0 (A, first alphabet) once last alphabet is reached. D -> A. 
         # Row is increased by 1. A1 -> A2 (from Row 1 to Row 2)
@@ -104,7 +103,7 @@ def test_placeAndSave(monkeypatch, capfd):
         else:
             colCounter = 0
             rowCounter += 1
-            tempList.append([availableBuildings.retriveTwoRandomBuildings()[(random.randint(0,1))], rowCounter, colCounter])
+            tempList.append([player.grid.availableBuildings.retriveTwoRandomBuildings()[(random.randint(0,1))], rowCounter, colCounter])
 
         # Moves to the next Col each loop, A -> B -> C -> D
         colCounter += 1
@@ -121,10 +120,9 @@ def test_placeAndSave(monkeypatch, capfd):
 
 def test_citySizeBuildingPoolAndStartGame(monkeypatch, capfd):
     player = Player()
-    availableBuildings = AvailableBuildings()
     # Add City Size Logic
-    availableBuildings.updateBuildingPool("1,2,3,6,7")
-    availableBuildings.displayCurrentBuildingPool()
+    player.grid.availableBuildings.updateBuildingPool("1,2,3,6,7")
+    player.grid.availableBuildings.displayCurrentBuildingPool()
     out, _ = capfd.readouterr()
     assert "Current Building Pool: BCH,FAC,HWY,MON,PRK" in out
     # When game starts, turn = 1
