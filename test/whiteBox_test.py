@@ -132,11 +132,10 @@ def test_citySizeBuildingPoolAndStartGame(monkeypatch, capfd):
 
 def test_buildingPoolAndRemainingBuildings(monkeypatch, capfd):
     player = Player()
-    availableBuildings = AvailableBuildings()
     grid = Grid()
-    availableBuildings.updateBuildingPool("1,2,3,6,7")
+    player.grid.availableBuildings.updateBuildingPool("1,2,3,6,7")
     # Check if current building pool is those of selected
-    print(availableBuildings.buildings)
+    print(player.grid.availableBuildings.buildings)
     out, _ = capfd.readouterr()
     assert "['BCH', 'FAC', 'HWY', 'MON', 'PRK']" in out
 
