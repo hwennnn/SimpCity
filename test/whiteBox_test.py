@@ -36,12 +36,12 @@ def parse_fileToList(f):
 def saveGridToTextUnderTest(grid):
     # Test saving the current grid (on test) on a separate text file
     gridValue = grid.parseGridAsString()  
-    with open('test/testing.txt', 'w+') as f:
+    with open('testing.txt', 'w+') as f:
         for row in gridValue:
             f.writelines(row + "\n")
 
     # Test if the program saved the correct coordinates
-    f = open("test/testing.txt", "r")
+    f = open("testing.txt", "r")
     f = f.read()
     return f
 
@@ -74,6 +74,7 @@ def test_fillGridWithBuildings(monkeypatch, capfd):
         colCounter += 1
     
     for i in tempList:
+        # Place building
         grid.updateGrid(i[1], i[2], i[0])
         assert grid.grid[i[1]][i[2]] is not None
 
@@ -109,6 +110,7 @@ def test_placeAndSave(monkeypatch, capfd):
         colCounter += 1
     
     for i in tempList:
+        # Place building
         grid.updateGrid(i[1], i[2], i[0])
         assert grid.grid[i[1]][i[2]] is not None
     
@@ -117,5 +119,38 @@ def test_placeAndSave(monkeypatch, capfd):
     rootDirWithFile = currentDirectory.joinpath("testing.txt")
     assert rootDirWithFile.exists() == True
 
-def test_citySizeBuildingPoolStartGame(monkeypatch, capfd):
-    pass
+def test_citySizeBuildingPoolAndStartGame(monkeypatch, capfd):
+    player = Player()
+    availableBuildings = AvailableBuildings()
+    # Add City Size Logic
+    availableBuildings.updateBuildingPool("1,2,3,6,7")
+    availableBuildings.displayCurrentBuildingPool()
+    out, _ = capfd.readouterr()
+    assert "Current Building Pool: BCH,FAC,HWY,MON,PRK" in out
+    # When game starts, turn = 1
+    assert player.turns == 1
+
+def test_buildingPoolAndRemainingBuildings(monkeypatch, capfd):
+    player = Player()
+    availableBuildings = AvailableBuildings()
+    grid = Grid()
+    availableBuildings.updateBuildingPool("1,2,3,6,7")
+    # Check if current building pool is those of selected
+    print(availableBuildings.buildings)
+    out, _ = capfd.readouterr()
+    assert "['BCH', 'FAC', 'HWY', 'MON', 'PRK']" in out
+
+def test_buildingPoolAndRemainingBuildingCount(monkeypatch, capfd):
+    player = Player()
+    grid = Grid()
+    player.grid.availableBuildings.updateBuildingPool("1,2,3,6,7")
+    # Check if current building pool is those of selected
+    print(player.grid.availableBuildings.buildings)
+    out, _ = capfd.readouterr()
+    assert "['BCH', 'FAC', 'HWY', 'MON', 'PRK']" in out
+    
+    monkeypatch.setattr('builtins.input', lambda _: "A1")
+    player.promptEnterBuildingPosition("PRK")
+    print(player.grid.availableBuildings.availability)
+    out, _ = capfd.readouterr()
+    assert "[8, 8, 8, 8, 7]" in out
