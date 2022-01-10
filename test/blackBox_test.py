@@ -36,12 +36,12 @@ citySize = {
     25: 'Z',
 }
 
+# Test if all the coordinates in the grid is fillable with buildings. Scaleable to grid size.
 def test_fillGridWithBuildings(monkeypatch, capfd):
-    grid = Grid()
-    game = Game()
+    player = Player()
 
-    row = grid.rowCount
-    col = grid.colCount
+    row = player.grid.rowCount
+    col = player.grid.colCount
     total = row * col
 
     colCounter = 0
@@ -73,9 +73,8 @@ def test_fillGridWithBuildings(monkeypatch, capfd):
     except Exception as e:
         print(e)
 
+# Test if program can exit at different stages of the program.
 def test_Exit(monkeypatch, capfd):
-    game = Game()
-
     # Iterations: Start New Game -> Exit Game Menu -> Confirm Exit w/o Save -> Exit Main Menu (Exit Program)
     responses = iter(["1", "0", "Y", "0"])
     monkeypatch.setattr('builtins.input', lambda _: next(responses))

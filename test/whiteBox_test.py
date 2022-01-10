@@ -1,4 +1,4 @@
-# Functional / Integration Test - Black Box Edition
+# White-box Integration Test
 from models.available_buildings import AvailableBuildings
 from models.player import Player
 from models.game import Game
@@ -45,12 +45,15 @@ def saveGridToTextUnderTest(grid):
     f = f.read()
     return f
 
+
+# Features Under Test
+# 1) Building Placement
+# Test if all the coordinates in the grid is fillable with buildings. Scaleable to grid size.
 def test_fillGridWithBuildings(monkeypatch, capfd):
-    grid = Grid()
     player = Player()
     
-    row = grid.rowCount
-    col = grid.colCount
+    row = player.grid.rowCount
+    col = player.grid.colCount
     total = row * col
 
     colCounter = 0
@@ -75,15 +78,18 @@ def test_fillGridWithBuildings(monkeypatch, capfd):
     
     for i in tempList:
         # Place building
-        grid.updateGrid(i[1], i[2], i[0])
-        assert grid.grid[i[1]][i[2]] is not None
+        player.grid.updateGrid(i[1], i[2], i[0])
+        assert player.grid.grid[i[1]][i[2]] is not None
 
+# Features Under Test
+# 1) Placing Building
+# 2) Saving Grid
+# Test if the above features can be integrated together
 def test_placeAndSave(monkeypatch, capfd):
-    grid = Grid()
     player = Player()
 
-    row = grid.rowCount
-    col = grid.colCount
+    row = player.grid.rowCount
+    col = player.grid.colCount
     total = row * col
 
     colCounter = 0
@@ -110,14 +116,20 @@ def test_placeAndSave(monkeypatch, capfd):
     
     for i in tempList:
         # Place building
-        grid.updateGrid(i[1], i[2], i[0])
-        assert grid.grid[i[1]][i[2]] is not None
+        player.grid.updateGrid(i[1], i[2], i[0])
+        # Check if the coordinate where the building is supposed to be place is empty or not
+        assert player.grid.grid[i[1]][i[2]] is not None
     
-    # Passing in the state of the current grid
-    saveGridToTextUnderTest(grid)
+    # Passing in the state of the current grid to save
+    saveGridToTextUnderTest(player.grid)
     rootDirWithFile = currentDirectory.joinpath("testing.txt")
     assert rootDirWithFile.exists() == True
 
+# Features Under Test
+# 1) City Size
+# 2) Building Pool
+# 3) Start Game
+# Test if the above features can be integrated together
 def test_citySizeBuildingPoolAndStartGame(monkeypatch, capfd):
     player = Player()
     # Add City Size Logic
@@ -128,26 +140,25 @@ def test_citySizeBuildingPoolAndStartGame(monkeypatch, capfd):
     # When game starts, turn = 1
     assert player.turns == 1
 
-def test_buildingPoolAndRemainingBuildings(monkeypatch, capfd):
-    player = Player()
-    grid = Grid()
-    player.grid.availableBuildings.updateBuildingPool("1,2,3,6,7")
-    # Check if current building pool is those of selected
-    print(player.grid.availableBuildings.buildings)
-    out, _ = capfd.readouterr()
-    assert "['BCH', 'FAC', 'HWY', 'MON', 'PRK']" in out
-
+# Features Under Test
+# 1) Building Pool
+# 2) Remaining Buildings
+# 3) Remaining Buildings Count
+# Test if the above features can be integrated together
 def test_buildingPoolAndRemainingBuildingCount(monkeypatch, capfd):
     player = Player()
-    grid = Grid()
+    # Selects Beach, Factory, Highway, Monument and Park as part of the building pool.
     player.grid.availableBuildings.updateBuildingPool("1,2,3,6,7")
-    # Check if current building pool is those of selected
     print(player.grid.availableBuildings.buildings)
     out, _ = capfd.readouterr()
+    # Check if current building pool is those of selected.
     assert "['BCH', 'FAC', 'HWY', 'MON', 'PRK']" in out
-    
+
     monkeypatch.setattr('builtins.input', lambda _: "A1")
+    # Place Park on A1.
     player.promptEnterBuildingPosition("PRK")
     print(player.grid.availableBuildings.availability)
     out, _ = capfd.readouterr()
+    # Checks if Park's building count is deducted by 1.
     assert "[8, 8, 8, 8, 7]" in out
+    
