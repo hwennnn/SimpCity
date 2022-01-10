@@ -89,7 +89,7 @@ class Grid:  # Grid Class
         for x in range(self.rowCount):
             for y in range(self.colCount):
                 if self.grid[x][y] is not None:
-                    scores += self.grid[x][y].retrieveBuildingScore(self)
+                    scores += self.grid[x][y].retrieveBuildingScore(self.grid)
 
         return scores
 
