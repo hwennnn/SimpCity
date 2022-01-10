@@ -73,6 +73,17 @@ def test_fillGridWithBuildings(monkeypatch, capfd):
     except Exception as e:
         print(e)
 
+
+def test_citySizeBuildingPoolAndStartGame(monkeypatch, capfd):
+    # Add City Size Logic
+    try:
+        # Select Options Menu -> Select Building Pool -> Enter 5 Buildings -> Exit to Options Menu -> Exit to Main Menu -> Start New Game
+        responses = iter(["3", "1", "1,2,3,6,7", "0", "0", "1"])
+        monkeypatch.setattr('builtins.input', lambda _: next(responses))
+        import main
+    except Exception as e:
+        print(e)
+
 # Test if program can exit at different stages of the program.
 def test_Exit(monkeypatch, capfd):
     # Iterations: Start New Game -> Exit Game Menu -> Confirm Exit w/o Save -> Exit Main Menu (Exit Program)
