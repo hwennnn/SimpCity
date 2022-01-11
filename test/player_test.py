@@ -187,15 +187,15 @@ def test_updateBuildingPoolFromOption(capfd, option, expectedResult):
 #     out, _ = capfd.readouterr()
 #     assert """
 #     A     B     C     D
-#  +-----+-----+-----+-----+ 
-# 1|     |     |     |     | 
-#  +-----+-----+-----+-----+ 
-# 2|     |     |     |     | 
-#  +-----+-----+-----+-----+ 
-# 3|     |     |     |     | 
-#  +-----+-----+-----+-----+ 
-# 4|     |     |     |     | 
-#  +-----+-----+-----+-----+ 
+#  +-----+-----+-----+-----+
+# 1|     |     |     |     |
+#  +-----+-----+-----+-----+
+# 2|     |     |     |     |
+#  +-----+-----+-----+-----+
+# 3|     |     |     |     |
+#  +-----+-----+-----+-----+
+# 4|     |     |     |     |
+#  +-----+-----+-----+-----+
 # """ in out
 
 
@@ -292,4 +292,3 @@ def test_availableBuildings():
         assert i in range(0, 9)
 
     assert sum(player_test.grid.availableBuildings.availability) in range(24, 41)
-
