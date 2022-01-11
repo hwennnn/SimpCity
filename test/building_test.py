@@ -39,6 +39,14 @@ parkBuildingTestData = [
             (0, 0, Buildings.PARK.value)
         ],
         1
+        # One 1-Square Park
+    ),
+    (
+        [
+            (1, 1, Buildings.PARK.value)
+        ],
+        1
+        # One 1-Square Park
     ),
     (
         [
@@ -46,6 +54,78 @@ parkBuildingTestData = [
             (1, 1, Buildings.PARK.value),
         ],
         2
+        # Two 1-Square Park (As they are not horizontally or vertically connected)
+    ),
+    (
+        [
+            (0, 0, Buildings.PARK.value),
+            (1, 1, Buildings.PARK.value),
+            (2, 2, Buildings.PARK.value),
+        ],
+        3
+        # Three 1-Square Park (As they are not horizontally or vertically connected)
+    ),
+    (
+        [
+            (0, 0, Buildings.PARK.value),
+            (1, 1, Buildings.PARK.value),
+            (2, 2, Buildings.PARK.value),
+            (3, 3, Buildings.PARK.value),
+        ],
+        4
+        # Four 1-Square Park (As they are not horizontally or vertically connected)
+    ),
+    (
+        [
+            (0, 0, Buildings.PARK.value),
+            (0, 1, Buildings.PARK.value),
+        ],
+        3
+        # One 2-Square Park
+    ),
+    (
+        [
+            (2, 1, Buildings.PARK.value),
+            (2, 2, Buildings.PARK.value),
+        ],
+        3
+        # One 2-Square Park
+    ),
+    (
+        [
+            (0, 0, Buildings.PARK.value),
+            (0, 1, Buildings.PARK.value),
+            (2, 0, Buildings.PARK.value),
+            (2, 1, Buildings.PARK.value),
+        ],
+        6
+        # Two 2-Square Park (As they are not horizontally or vertically connected)
+    ),
+    (
+        [
+            (0, 0, Buildings.PARK.value),
+            (1, 0, Buildings.PARK.value),
+            (0, 2, Buildings.PARK.value),
+            (1, 2, Buildings.PARK.value),
+            (2, 1, Buildings.PARK.value),
+            (3, 1, Buildings.PARK.value),
+        ],
+        9
+        # Three 2-Square Park (As they are not horizontally or vertically connected)
+    ),
+    (
+        [
+            (0, 0, Buildings.PARK.value),
+            (1, 0, Buildings.PARK.value),
+            (0, 2, Buildings.PARK.value),
+            (1, 2, Buildings.PARK.value),
+            (2, 1, Buildings.PARK.value),
+            (3, 1, Buildings.PARK.value),
+            (2, 3, Buildings.PARK.value),
+            (3, 3, Buildings.PARK.value),
+        ],
+        12
+        # Four 2-Square Park (As they are not horizontally or vertically connected)
     ),
     (
         [
@@ -53,17 +133,39 @@ parkBuildingTestData = [
             (0, 1, Buildings.PARK.value),
             (1, 1, Buildings.PARK.value),
         ],
-        3
+        8
+        # One 3-Square Park
     ),
     (
-        # 2-square Park Building
+        [
+            (1, 0, Buildings.PARK.value),
+            (1, 1, Buildings.PARK.value),
+            (2, 1, Buildings.PARK.value),
+        ],
+        8
+        # One 3-Square Park
+    ),
+    (
+        [
+            (0, 0, Buildings.PARK.value),
+            (1, 0, Buildings.PARK.value),
+            (2, 0, Buildings.PARK.value),
+            (0, 2, Buildings.PARK.value),
+            (1, 2, Buildings.PARK.value),
+            (2, 2, Buildings.PARK.value),
+        ],
+        16
+        # Two 3-Square Park (As they are not horizontally or vertically connected)
+    ),
+    (
         [
             (0, 0, Buildings.PARK.value),
             (0, 1, Buildings.PARK.value),
             (1, 0, Buildings.PARK.value),
             (1, 1, Buildings.PARK.value),
         ],
-        3
+        16
+        # One 4-Square Park
     ),
     (
         [
@@ -72,10 +174,60 @@ parkBuildingTestData = [
             (1, 1, Buildings.PARK.value),
             (1, 2, Buildings.PARK.value),
         ],
-        4
+        16
+        # One 4-Square Park
     ),
     (
-        # 3-square Park Building
+        [
+            (0, 0, Buildings.PARK.value),
+            (0, 1, Buildings.PARK.value),
+            (1, 0, Buildings.PARK.value),
+            (1, 1, Buildings.PARK.value),
+            (2, 2, Buildings.PARK.value),
+            (2, 3, Buildings.PARK.value),
+            (3, 2, Buildings.PARK.value),
+            (3, 3, Buildings.PARK.value),
+        ],
+        32
+        # Two 4-Square Park (As they are not horizontally or vertically connected)
+    ),
+    (
+        [
+            (0, 0, Buildings.PARK.value),
+            (0, 1, Buildings.PARK.value),
+            (0, 2, Buildings.PARK.value),
+            (1, 1, Buildings.PARK.value),
+            (1, 2, Buildings.PARK.value),
+        ],
+        22
+        # One 5-Square Park
+    ),
+    (
+        [
+            (0, 0, Buildings.PARK.value),
+            (0, 1, Buildings.PARK.value),
+            (0, 2, Buildings.PARK.value),
+            (1, 0, Buildings.PARK.value),
+            (1, 1, Buildings.PARK.value),
+            (1, 2, Buildings.PARK.value),
+        ],
+        23
+        # One 6-Square Park
+    ),
+    (
+        [
+            (0, 0, Buildings.PARK.value),
+            (0, 1, Buildings.PARK.value),
+            (0, 2, Buildings.PARK.value),
+            (1, 0, Buildings.PARK.value),
+            (1, 1, Buildings.PARK.value),
+            (1, 2, Buildings.PARK.value),
+            (2, 0, Buildings.PARK.value),
+        ],
+        24
+        # One 7-Square Park
+    ),
+    (
         [
             (0, 0, Buildings.PARK.value),
             (0, 1, Buildings.PARK.value),
@@ -85,9 +237,9 @@ parkBuildingTestData = [
             (1, 2, Buildings.PARK.value),
             (2, 0, Buildings.PARK.value),
             (2, 1, Buildings.PARK.value),
-            (2, 2, Buildings.PARK.value),
         ],
-        8
+        25
+        # One 8-Square Park
     ),
 ]
 
