@@ -156,7 +156,8 @@ def test_retrieveHouseBuildingScore(buildingPositions, targetHouse, expectedResu
 
     dx, dy = targetHouse
 
-    assert gridObject.grid[dx][dy].retrieveBuildingScore(gridObject.grid) == expectedResult
+    assert gridObject.grid[dx][dy].retrieveBuildingScore(
+        gridObject.grid) == expectedResult
 
 
 factoryBuildingTestData = [
@@ -246,7 +247,9 @@ def test_calculateFactoryBuildingScore(buildingPositions, expectedResult):
     for x, y, buildingName in buildingPositions:
         gridObject.updateGrid(x, y, buildingName)
 
-    assert gridObject.calculateFactoryBuildingsScore() == expectedResult
+    scores, _ = gridObject.calculateFactoryBuildingsScore()
+
+    assert scores == expectedResult
 
 
 shopBuildingTestData = [
@@ -398,7 +401,8 @@ def test_retrieveShopBuildingScore(buildingPositions, targetShop, expectedResult
 
     dx, dy = targetShop
 
-    assert gridObject.grid[dx][dy].retrieveBuildingScore(gridObject.grid) == expectedResult
+    assert gridObject.grid[dx][dy].retrieveBuildingScore(
+        gridObject.grid) == expectedResult
 
 
 highwayBuildingTestData = [
@@ -537,7 +541,8 @@ def test_retrieveHighwayBuildingScore(buildingPositions, targetHighway, expected
 
     dx, dy = targetHighway
 
-    assert gridObject.grid[dx][dy].retrieveBuildingScore(gridObject.grid) == expectedResult
+    assert gridObject.grid[dx][dy].retrieveBuildingScore(
+        gridObject.grid) == expectedResult
 
 
 beachBuildingTestData = [
@@ -787,7 +792,8 @@ def test_calculateParkBuildingScore(buildingPositions, expectedResult):
     for x, y, buildingName in buildingPositions:
         gridObject.updateGrid(x, y, buildingName)
 
-    assert gridObject.calculateParkBuildingsScore() == expectedResult
+    scores, _ = gridObject.calculateParkBuildingsScore()
+    assert scores == expectedResult
 
 
 monumentBuildingTestData = [
@@ -860,8 +866,5 @@ def test_calculateMonumentBuildingScore(buildingPositions, expectedResult):
     for x, y, buildingName in buildingPositions:
         gridObject.updateGrid(x, y, buildingName)
 
-    assert gridObject.retrieveBuildingsScore() == expectedResult
-
-
-
-
+    scores, _ = gridObject.retrieveBuildingsScore()
+    assert scores == expectedResult
