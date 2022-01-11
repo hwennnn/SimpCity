@@ -862,6 +862,7 @@ monumentBuildingTestData = [
 @pytest.mark.parametrize("buildingPositions, expectedResult", monumentBuildingTestData)
 def test_calculateMonumentBuildingScore(buildingPositions, expectedResult):
     gridObject = Grid()
+    gridObject.availableBuildings.buildings[-1] = Buildings.MONUMENT.value
 
     for x, y, buildingName in buildingPositions:
         gridObject.updateGrid(x, y, buildingName)
