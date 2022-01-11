@@ -1,7 +1,9 @@
+import collections
 from models.available_buildings import AvailableBuildings
-from models.buildings import Beach, Factory, House, Highway, Shop, Monument, Park
+from models.buildings import *
 from models.enums import Buildings
 from models.configurations import *
+from collections import deque
 
 
 class Grid:  # Grid Class
@@ -85,13 +87,49 @@ class Grid:  # Grid Class
 
     def retrieveBuildingsScore(self):
         scores = 0
+        scores += self.calculateParkBuildingsScore()
 
         for x in range(self.rowCount):
             for y in range(self.colCount):
-                if self.grid[x][y] is not None:
-                    scores += self.grid[x][y].retrieveBuildingScore(self)
+                if self.grid[x][y] is not None and self.grid[x][y].getName() != Buildings.PARK.value:
+                    scores += self.grid[x][y].retrieveBuildingScore(self.grid)
 
         return scores
+
+    def calculateParkBuildingsScore(self):
+        result = 0
+
+        # first init a 2D array to keep track of the visited buildings on (x, y) position
+        visited = [[False] * self.colCount for _ in range(self.rowCount)]
+        scoresMap = {1: 1, 2: 3, 3: 8, 4: 16, 5: 22, 6: 23, 7: 24, 8: 25}
+
+        # A depth-first-search helper function to help explore its neighbours which are the Park buildings
+        def dfs(x, y):
+            # Return 0 as the current position has already been visited
+            if visited[x][y]:
+                return 0
+
+            # mark the current position as visited
+            visited[x][y] = True
+            # initialise the park building count as 1
+            count = 1
+
+            # explore 4 directions from the current position and conduct a depth-first-search from that position
+            for dx, dy in [(x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)]:
+                if 0 <= dx < self.rowCount and 0 <= dy < self.colCount and self.grid[dx][dy] is not None and self.grid[dx][dy].getName() == Buildings.PARK.value:
+                    count += dfs(dx, dy)
+
+            return count
+
+        # search through all Park buildings and conduct a depth-first-search to retrieve the Park Building Size
+        for x in range(self.rowCount):
+            for y in range(self.colCount):
+                # update the dp value as 1 if a park building is found
+                if self.grid[x][y] is not None and self.grid[x][y].getName() == Buildings.PARK.value and not visited[x][y]:
+                    parkSize = dfs(x, y)
+                    result += scoresMap[parkSize]
+
+        return result
 
     def retrieveTwoRandomBuildings(self):
         return self.availableBuildings.retriveTwoRandomBuildings()
@@ -128,9 +166,10 @@ class Grid:  # Grid Class
                         case _:
                             raise Exception()
             print("{0}\t {1}: {2}\n +-----+-----+-----+-----+".format(rowline,
-                                                                     self.availableBuildings.buildings[i],
-                                                                     self.availableBuildings.availability[i]))
-        print("\t\t\t\t {0}: {1}".format(self.availableBuildings.buildings[4], self.availableBuildings.availability[4]))
+                                                                      self.availableBuildings.buildings[i],
+                                                                      self.availableBuildings.availability[i]))
+        print("\t\t\t\t {0}: {1}".format(
+            self.availableBuildings.buildings[4], self.availableBuildings.availability[4]))
 
     # parses the grid as an array of string, allowing it to be written into txt file
     def parseGridAsString(self):
