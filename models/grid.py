@@ -208,6 +208,11 @@ class Grid:  # Grid Class
             returnStrArr.append(",".join(rowStr))
         return returnStrArr
 
+    # re-initializes grid to be empty
+    def initializeGrid(self):
+        self.grid = [[None] * self.colCount for _ in range(self.rowCount)]
+        self.availableBuildings.availability = [8] * 5
+
     def isSavedGameExist(self):
         pass
 

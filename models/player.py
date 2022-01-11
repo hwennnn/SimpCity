@@ -139,6 +139,7 @@ Choose Building Pool
 
     def startNewGame(self):
         self.turns = 1
+        self.grid.initializeGrid()
 
     # Prompt player for input in InGame main menu
     def promptGameMenu(self):
@@ -174,7 +175,7 @@ Choose Building Pool
     # Calculate total score for current game iteration
     def retrieveBuildingsScore(self):
         scores = self.grid.retrieveBuildingsScore()
-        print("Total Score: " + str(scores))
+        print("\nTotal Score: " + str(scores))
 
     # Prompt player to check if they saved their game beforehand
     def promptSaveGame(self):
