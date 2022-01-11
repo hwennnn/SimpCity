@@ -247,3 +247,155 @@ def test_calculateFactoryBuildingScore(buildingPositions, expectedResult):
         gridObject.updateGrid(x, y, buildingName)
 
     assert gridObject.calculateFactoryBuildingsScore() == expectedResult
+
+
+shopBuildingTestData = [
+    (
+        [
+            (0, 0, Buildings.SHOP.value)
+        ],
+        (0, 0),
+        1
+    ),
+    (
+        [
+            (0, 0, Buildings.SHOP.value),
+            (0, 1, Buildings.SHOP.value),
+        ],
+        (0, 0),
+        1
+    ),
+    (
+        [
+            (0, 0, Buildings.SHOP.value),
+            (0, 1, Buildings.SHOP.value),
+            (1, 0, Buildings.SHOP.value),
+        ],
+        (0, 0),
+        1
+    ),
+    (
+        [
+            (0, 0, Buildings.SHOP.value),
+            (0, 1, Buildings.SHOP.value),
+            (1, 0, Buildings.FACTORY.value),
+        ],
+        (0, 0),
+        2
+    ),
+    (
+        [
+            (0, 0, Buildings.SHOP.value),
+            (0, 1, Buildings.HOUSE.value),
+            (1, 0, Buildings.FACTORY.value),
+        ],
+        (0, 0),
+        3
+    ),
+    (
+        [
+            (0, 0, Buildings.SHOP.value),
+            (0, 1, Buildings.HOUSE.value),
+            (1, 0, Buildings.HOUSE.value),
+        ],
+        (0, 0),
+        2
+    ),
+    (
+        [
+            (0, 1, Buildings.SHOP.value),
+            (0, 0, Buildings.HOUSE.value),
+            (1, 1, Buildings.FACTORY.value),
+            (0, 2, Buildings.SHOP.value),
+        ],
+        (0, 1),
+        3
+    ),
+    (
+        [
+            (0, 1, Buildings.SHOP.value),
+            (0, 0, Buildings.HOUSE.value),
+            (1, 1, Buildings.FACTORY.value),
+            (0, 2, Buildings.PARK.value),
+        ],
+        (0, 1),
+        4
+    ),
+    (
+        [
+            (0, 1, Buildings.SHOP.value),
+            (0, 0, Buildings.SHOP.value),
+            (1, 1, Buildings.SHOP.value),
+            (0, 2, Buildings.SHOP.value),
+        ],
+        (0, 1),
+        1
+    ),
+    (
+        [
+            (1, 1, Buildings.SHOP.value),
+            (1, 0, Buildings.SHOP.value),
+            (0, 1, Buildings.SHOP.value),
+            (1, 2, Buildings.SHOP.value),
+            (2, 1, Buildings.FACTORY.value),
+        ],
+        (1, 1),
+        2
+    ),
+    (
+        [
+            (1, 1, Buildings.SHOP.value),
+            (1, 0, Buildings.FACTORY.value),
+            (0, 1, Buildings.HOUSE.value),
+            (1, 2, Buildings.HOUSE.value),
+            (2, 1, Buildings.FACTORY.value),
+        ],
+        (1, 1),
+        3
+    ),
+    (
+        [
+            (1, 1, Buildings.SHOP.value),
+            (1, 0, Buildings.HIGHWAY.value),
+            (0, 1, Buildings.HOUSE.value),
+            (1, 2, Buildings.MONUMENT.value),
+            (2, 1, Buildings.FACTORY.value),
+        ],
+        (1, 1),
+        5
+    ),
+    (
+        [
+            (1, 1, Buildings.SHOP.value),
+            (1, 0, Buildings.SHOP.value),
+            (0, 1, Buildings.SHOP.value),
+            (1, 2, Buildings.SHOP.value),
+            (2, 1, Buildings.SHOP.value),
+        ],
+        (1, 1),
+        1
+    ),
+    (
+        [
+            (1, 1, Buildings.SHOP.value),
+            (1, 0, Buildings.SHOP.value),
+            (0, 1, Buildings.MONUMENT.value),
+            (1, 2, Buildings.BEACH.value),
+            (2, 1, Buildings.FACTORY.value),
+        ],
+        (1, 1),
+        4
+    )
+]
+
+
+@pytest.mark.parametrize("buildingPositions, targetShop, expectedResult", shopBuildingTestData)
+def test_retrieveShopBuildingScore(buildingPositions, targetShop, expectedResult):
+    gridObject = Grid()
+
+    for x, y, buildingName in buildingPositions:
+        gridObject.updateGrid(x, y, buildingName)
+
+    dx, dy = targetShop
+
+    assert gridObject.grid[dx][dy].retrieveBuildingScore(gridObject.grid) == expectedResult

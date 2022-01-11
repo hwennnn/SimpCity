@@ -1,4 +1,5 @@
 from models.buildings.building import Building
+from models.enums import Buildings
 
 
 class Shop(Building):
