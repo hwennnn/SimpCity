@@ -3,7 +3,7 @@ from models.available_buildings import AvailableBuildings
 from models.buildings import *
 from models.enums import Buildings
 from models.configurations import *
-from collections import defaultdict
+from collections import deque
 
 
 class Grid:  # Grid Class
@@ -99,57 +99,37 @@ class Grid:  # Grid Class
     def calculateParkBuildingsScore(self):
         result = 0
 
-        # first init a 2D dp array
-        dp = [[0] * self.colCount for _ in range(self.rowCount)]
+        # first init a 2D array to keep track of the visited buildings on (x, y) position
+        visited = [[False] * self.colCount for _ in range(self.rowCount)]
         scoresMap = {1: 1, 2: 3, 3: 8, 4: 16, 5: 22, 6: 23, 7: 24, 8: 25}
-        # a hashset to record down all the position of park buildings
-        positions = set()
 
+        # A depth-first-search helper function to help explore its neighbours which are the Park buildings
+        def dfs(x, y):
+            # Return 0 as the current position has already been visited
+            if visited[x][y]:
+                return 0
+
+            # mark the current position as visited
+            visited[x][y] = True
+            # initialise the park building count as 1
+            count = 1
+
+            # explore 4 directions from the current position and conduct a depth-first-search from that position
+            for dx, dy in [(x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)]:
+                if 0 <= dx < self.rowCount and 0 <= dy < self.colCount and self.grid[dx][dy] is not None and self.grid[dx][dy].getName() == Buildings.PARK.value:
+                    count += dfs(dx, dy)
+
+            return count
+
+        # search through all Park buildings and conduct a depth-first-search to retrieve the Park Building Size
         for x in range(self.rowCount):
             for y in range(self.colCount):
                 # update the dp value as 1 if a park building is found
-                if self.grid[x][y] is not None and self.grid[x][y].getName() == Buildings.PARK.value:
-                    dp[x][y] = 1
-                    positions.add((x, y))
+                if self.grid[x][y] is not None and self.grid[x][y].getName() == Buildings.PARK.value and not visited[x][y]:
+                    parkSize = dfs(x, y)
+                    result += scoresMap[parkSize]
 
-        for x in range(1, self.rowCount):
-            for y in range(1, self.colCount):
-                # check if the neighbours (left, top, upperLeft) are able to form a bigger square
-                if dp[x][y] == 1:
-                    squareSize = 1 + \
-                        min(dp[x - 1][y - 1], dp[x - 1]
-                            [y], dp[x][y - 1])
-                    dp[x][y] = squareSize
-
-        # stores the squares position if the square size is greater than 1
-        squaresMap = defaultdict(list)
-
-        for x in range(1, self.rowCount):
-            for y in range(1, self.colCount):
-                if dp[x][y] > 1:
-                    squaresMap[dp[x][y]].append((x, y))
-
-        # gredily iterate from the largest available square size,
-        # and removing it and its neighbours from the positions set (as they forms the square together)
-        squareSizes = sorted(squaresMap.keys(), key=lambda x: -x)
-
-        for squareSize in squareSizes:
-            score = scoresMap[min(8, squareSize)]
-
-            for x, y in squaresMap[squareSize]:
-                squareCount = 0
-                for dx in range(x, x - squareSize, -1):
-                    for dy in range(y, y - squareSize, -1):
-                        if (dx, dy) in positions:
-                            positions.remove((dx, dy))
-                            squareCount += 1
-
-                # add the score to the result if all positions are valid (not being used by other Park buildings size yet)
-                if squareCount == squareSize * squareSize:
-                    result += score
-
-        # also need to add those 1-square Park, which has 1 mark each
-        return result + len(positions)
+        return result
 
     def retrieveTwoRandomBuildings(self):
         return self.availableBuildings.retriveTwoRandomBuildings()
