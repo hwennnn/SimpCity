@@ -1,9 +1,7 @@
-import collections
 from models.available_buildings import AvailableBuildings
 from models.buildings import *
 from models.enums import Buildings
 from models.configurations import *
-from collections import deque
 
 
 class Grid:  # Grid Class
@@ -89,20 +87,40 @@ class Grid:  # Grid Class
         self.availableBuildings.decreaseAvailableBuilding(buildingName)
 
     def retrieveBuildingsScore(self):
+        scoresBreakdown = {}
+
+        for buildingName in self.availableBuildings.buildings:
+            scoresBreakdown[buildingName] = []
+
         scores = 0
         # Declare exceptions for Park and Factory calculation
         exceptionList = [Buildings.PARK.value, Buildings.FACTORY.value]
-        scores += self.calculateFactoryBuildingsScore()
-        scores += self.calculateParkBuildingsScore()
+
+        # calculate Factory Building Score
+        if Buildings.FACTORY.value in self.availableBuildings.buildings:
+            factoryScore, factoryScoreBreakdown = self.calculateFactoryBuildingsScore()
+            scoresBreakdown[Buildings.FACTORY.value] = factoryScoreBreakdown
+            scores += factoryScore
+
+        # calculate Park Building Score
+        if Buildings.PARK.value in self.availableBuildings.buildings:
+            parkScore, parkScoreBreakdown = self.calculateParkBuildingsScore()
+            scoresBreakdown[Buildings.PARK.value] = parkScoreBreakdown
+            scores += parkScore
 
         for x in range(self.rowCount):
             for y in range(self.colCount):
                 if self.grid[x][y] is not None and self.grid[x][y].getName() not in exceptionList:
-                    scores += self.grid[x][y].retrieveBuildingScore(self.grid)
+                    buildingScore = self.grid[x][y].retrieveBuildingScore(
+                        self.grid)
+                    scoresBreakdown[self.grid[x]
+                                    [y].getName()].append(buildingScore)
+                    scores += buildingScore
 
-        return scores
+        return (scores, scoresBreakdown)
 
     def calculateFactoryBuildingsScore(self):
+        scoreBreakdown = []
         result = 0
 
         # Determine length of facotryList for scoring
@@ -117,15 +135,19 @@ class Grid:  # Grid Class
 
                     # Declare separate calculations for factoryList < 5 and factoryList >= 5
                     if len(self.factoryList) < 5:
+                        scoreBreakdown.append(factoryScore)
                         result += factoryScore
 
                     if len(self.factoryList) >= 5:
-                        result += (factoryScore * 4) if self.factoryList.index(
+                        score = (factoryScore * 4) if self.factoryList.index(
                             self.grid[x][y]) < 4 else factoryScore
+                        scoreBreakdown.append(score)
+                        result += score
 
-        return result
+        return (result, scoreBreakdown)
 
     def calculateParkBuildingsScore(self):
+        scoreBreakdown = []
         result = 0
 
         # first init a 2D array to keep track of the visited buildings on (x, y) position
@@ -156,9 +178,11 @@ class Grid:  # Grid Class
                 # update the dp value as 1 if a park building is found
                 if self.grid[x][y] is not None and self.grid[x][y].getName() == Buildings.PARK.value and not visited[x][y]:
                     parkSize = dfs(x, y)
-                    result += scoresMap[parkSize]
+                    score = scoresMap[parkSize]
+                    scoreBreakdown.append(score)
+                    result += score
 
-        return result
+        return (result, scoreBreakdown)
 
     def retrieveTwoRandomBuildings(self):
         return self.availableBuildings.retriveTwoRandomBuildings()
