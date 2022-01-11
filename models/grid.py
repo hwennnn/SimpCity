@@ -106,12 +106,13 @@ class Grid:  # Grid Class
         result = 0
 
         # Determine length of facotryList for scoring
-        factoryScore = len(self.factoryList) if len(self.factoryList) < 5 else 1
+        factoryScore = len(self.factoryList) if len(
+            self.factoryList) < 5 else 1
 
         # Loop through grid object and determine scoring
         for x in range(self.rowCount):
             for y in range(self.colCount):
-                # Check building type 
+                # Check building type
                 if self.grid[x][y] is not None and self.grid[x][y].getName() == Buildings.FACTORY.value:
 
                     # Declare separate calculations for factoryList < 5 and factoryList >= 5
@@ -119,7 +120,8 @@ class Grid:  # Grid Class
                         result += factoryScore
 
                     if len(self.factoryList) >= 5:
-                        result += (factoryScore * 4) if self.factoryList.index(self.grid[x][y]) < 4 else factoryScore
+                        result += (factoryScore * 4) if self.factoryList.index(
+                            self.grid[x][y]) < 4 else factoryScore
 
         return result
 
@@ -212,6 +214,7 @@ class Grid:  # Grid Class
     def initializeGrid(self):
         self.grid = [[None] * self.colCount for _ in range(self.rowCount)]
         self.availableBuildings.availability = [8] * 5
+        self.factoryList.clear()
 
     def isSavedGameExist(self):
         pass
