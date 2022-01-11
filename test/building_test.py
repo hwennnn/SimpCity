@@ -399,3 +399,142 @@ def test_retrieveShopBuildingScore(buildingPositions, targetShop, expectedResult
     dx, dy = targetShop
 
     assert gridObject.grid[dx][dy].retrieveBuildingScore(gridObject.grid) == expectedResult
+
+
+highwayBuildingTestData = [
+    (
+        [
+            (0, 0, Buildings.HIGHWAY.value)
+        ],
+        (0, 0),
+        1
+    ),
+    (
+        [
+            (0, 0, Buildings.HIGHWAY.value),
+            (0, 1, Buildings.HIGHWAY.value),
+        ],
+        (0, 0),
+        2
+    ),
+    (
+        [
+            (0, 0, Buildings.HIGHWAY.value),
+            (0, 1, Buildings.HIGHWAY.value),
+            (0, 2, Buildings.HIGHWAY.value),
+        ],
+        (0, 0),
+        3
+    ),
+    (
+        [
+            (0, 0, Buildings.HIGHWAY.value),
+            (0, 1, Buildings.HIGHWAY.value),
+            (0, 2, Buildings.HIGHWAY.value),
+            (0, 3, Buildings.HIGHWAY.value),
+        ],
+        (0, 0),
+        4
+    ),
+    (
+        [
+            (0, 0, Buildings.HIGHWAY.value),
+            (0, 2, Buildings.HIGHWAY.value),
+        ],
+        (0, 0),
+        1
+    ),
+    (
+        [
+            (0, 0, Buildings.HIGHWAY.value),
+            (0, 1, Buildings.HIGHWAY.value),
+            (0, 3, Buildings.HIGHWAY.value),
+        ],
+        (0, 0),
+        2
+    ),
+    (
+        [
+            (3, 3, Buildings.HIGHWAY.value),
+            (3, 2, Buildings.HIGHWAY.value),
+        ],
+        (3, 3),
+        2
+    ),
+    (
+        [
+            (3, 3, Buildings.HIGHWAY.value),
+            (3, 2, Buildings.HIGHWAY.value),
+            (3, 1, Buildings.HIGHWAY.value),
+        ],
+        (3, 3),
+        3
+    ),
+    (
+        [
+            (3, 3, Buildings.HIGHWAY.value),
+            (3, 2, Buildings.HIGHWAY.value),
+            (3, 0, Buildings.HIGHWAY.value),
+        ],
+        (3, 2),
+        2
+    ),
+    (
+        [
+            (2, 3, Buildings.HIGHWAY.value),
+            (2, 2, Buildings.HIGHWAY.value),
+            (2, 1, Buildings.HIGHWAY.value),
+        ],
+        (2, 2),
+        3
+    ),
+    (
+        [
+            (2, 3, Buildings.HIGHWAY.value),
+            (2, 2, Buildings.HIGHWAY.value),
+            (2, 1, Buildings.HIGHWAY.value),
+            (2, 0, Buildings.HIGHWAY.value),
+        ],
+        (2, 2),
+        4
+    ),
+    (
+        [
+            (2, 3, Buildings.HIGHWAY.value),
+            (2, 2, Buildings.HIGHWAY.value),
+            (2, 1, Buildings.HIGHWAY.value),
+            (2, 0, Buildings.BEACH.value),
+        ],
+        (2, 2),
+        3
+    ),
+    (
+        [
+            (2, 3, Buildings.HIGHWAY.value),
+            (2, 2, Buildings.HIGHWAY.value),
+            (2, 1, Buildings.HOUSE.value),
+            (2, 0, Buildings.HIGHWAY.value),
+        ],
+        (2, 2),
+        2
+    ),
+    (
+        [
+            (2, 2, Buildings.HIGHWAY.value)
+        ],
+        (2, 2),
+        1
+    )
+]
+
+
+@pytest.mark.parametrize("buildingPositions, targetHighway, expectedResult", highwayBuildingTestData)
+def test_retrieveHighwayBuildingScore(buildingPositions, targetHighway, expectedResult):
+    gridObject = Grid()
+
+    for x, y, buildingName in buildingPositions:
+        gridObject.updateGrid(x, y, buildingName)
+
+    dx, dy = targetHighway
+
+    assert gridObject.grid[dx][dy].retrieveBuildingScore(gridObject.grid) == expectedResult
