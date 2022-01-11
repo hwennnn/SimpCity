@@ -161,4 +161,6 @@ def test_buildingPoolAndRemainingBuildingCount(monkeypatch, capfd):
     out, _ = capfd.readouterr()
     # Checks if Park's building count is deducted by 1.
     assert "[8, 8, 8, 8, 7]" in out
+
+    
     
