@@ -9,6 +9,7 @@ class Grid:  # Grid Class
         self.rowCount = self.colCount = 4
         # First initialise the object in each position as None
         self.grid = [[None] * self.colCount for _ in range(self.rowCount)]
+        self.factoryList = []
         self.availableBuildings = AvailableBuildings()
 
     def isPositionXValid(self, x):
@@ -59,7 +60,9 @@ class Grid:  # Grid Class
                 return Beach(buildingName, x, y)
 
             case Buildings.FACTORY.value:
-                return Factory(buildingName, x, y)
+                factoryObject = Factory(buildingName, x, y)
+                self.factoryList.append(factoryObject)
+                return factoryObject
 
             case Buildings.HOUSE.value:
                 return House(buildingName, x, y)
@@ -85,13 +88,18 @@ class Grid:  # Grid Class
 
     def retrieveBuildingsScore(self):
         scores = 0
+        scores += self.calculateFactoryBuildingsScore()
 
         for x in range(self.rowCount):
             for y in range(self.colCount):
-                if self.grid[x][y] is not None:
+                if self.grid[x][y] is not None and self.grid[x][y].getName() != Buildings.FACTORY.value:
                     scores += self.grid[x][y].retrieveBuildingScore(self.grid)
 
         return scores
+
+    def calculateFactoryBuildingsScore(self):
+        pass
+
 
     def retrieveTwoRandomBuildings(self):
         return self.availableBuildings.retriveTwoRandomBuildings()

@@ -157,3 +157,93 @@ def test_retrieveHouseBuildingScore(buildingPositions, targetHouse, expectedResu
     dx, dy = targetHouse
 
     assert gridObject.grid[dx][dy].retrieveBuildingScore(gridObject.grid) == expectedResult
+
+
+factoryBuildingTestData = [
+    (
+        [
+            (0, 0, Buildings.FACTORY.value)
+        ],
+        1
+    ),
+    (
+        [
+            (0, 0, Buildings.FACTORY.value),
+            (0, 1, Buildings.FACTORY.value),
+        ],
+        4
+    ),
+    (
+        [
+            (0, 0, Buildings.FACTORY.value),
+            (0, 1, Buildings.FACTORY.value),
+            (0, 2, Buildings.FACTORY.value),
+        ],
+        9
+    ),
+    (
+        [
+            (0, 0, Buildings.FACTORY.value),
+            (0, 1, Buildings.FACTORY.value),
+            (0, 2, Buildings.FACTORY.value),
+            (0, 3, Buildings.FACTORY.value),
+        ],
+        16
+    ),
+    (
+        [
+            (0, 0, Buildings.FACTORY.value),
+            (0, 1, Buildings.FACTORY.value),
+            (0, 2, Buildings.FACTORY.value),
+            (0, 3, Buildings.FACTORY.value),
+            (1, 0, Buildings.FACTORY.value),
+        ],
+        17
+    ),
+    (
+        [
+            (0, 0, Buildings.FACTORY.value),
+            (0, 1, Buildings.FACTORY.value),
+            (0, 2, Buildings.FACTORY.value),
+            (0, 3, Buildings.FACTORY.value),
+            (1, 0, Buildings.FACTORY.value),
+            (1, 1, Buildings.FACTORY.value),
+        ],
+        18
+    ),
+    (
+        [
+            (0, 0, Buildings.FACTORY.value),
+            (0, 1, Buildings.FACTORY.value),
+            (0, 2, Buildings.FACTORY.value),
+            (0, 3, Buildings.FACTORY.value),
+            (1, 0, Buildings.FACTORY.value),
+            (1, 1, Buildings.FACTORY.value),
+            (3, 3, Buildings.FACTORY.value),
+        ],
+        19
+    ),
+    (
+        [
+            (0, 0, Buildings.FACTORY.value),
+            (0, 1, Buildings.FACTORY.value),
+            (0, 2, Buildings.FACTORY.value),
+            (0, 3, Buildings.FACTORY.value),
+            (1, 0, Buildings.FACTORY.value),
+            (1, 1, Buildings.FACTORY.value),
+            (3, 3, Buildings.FACTORY.value),
+            (3, 0, Buildings.FACTORY.value),
+        ],
+        20
+    ),
+]
+
+
+@pytest.mark.parametrize("buildingPositions, expectedResult", factoryBuildingTestData)
+def test_calculateFactoryBuildingScore(buildingPositions, expectedResult):
+    gridObject = Grid()
+
+    for x, y, buildingName in buildingPositions:
+        gridObject.updateGrid(x, y, buildingName)
+
+    assert gridObject.calculateFactoryBuildingsScore() == expectedResult
