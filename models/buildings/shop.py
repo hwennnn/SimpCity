@@ -7,4 +7,19 @@ class Shop(Building):
         Building.__init__(self, name, x, y)
 
     def retrieveBuildingScore(self, grid):
-        pass
+        result = 1
+
+        # Prepare a list for storing adjacent coordinates and adjacent buildings
+        adjacentPositions = [(self.x + 1, self.y), (self.x - 1, self.y), (self.x, self.y + 1), (self.x, self.y - 1)]
+        adjacentBuildingsValue = []
+
+        # Save string value for respective buildings
+        for dx, dy in adjacentPositions:
+            if 0 <= dx < 4 and 0 <= dy < 4 and grid[dx][dy] is not None and grid[dx][dy].getName() != Buildings.SHOP.value:
+                adjacentBuildingsValue.append(grid[dx][dy].getName())
+        
+        # Count unqiue values in list using set() function
+        adjacentBuildingsSet = set(adjacentBuildingsValue)
+        result += len(adjacentBuildingsSet)
+        
+        return result
