@@ -37,6 +37,16 @@ jobs:
     - name: Begin Test with Pytest
       run: |
         cd test; pytest --cov -v --junitxml=report.xml
+
+    - name: Build coverage file
+      run: |
+        pytest --cache-clear --cov -v --cov=SimpCity test/ > pytest-coverage.txt
+
+    - name: Comment coverage
+      uses: coroo/pytest-coverage-commentator@v1.0.2
+      with:
+        pytest-coverage: pytest-coverage.txt
+        
     - if: ${{failure()}}       
       name: Create Issues
       uses: nashmaniac/create-issue-action@v1.1
