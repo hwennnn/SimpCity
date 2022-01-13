@@ -243,38 +243,3 @@ def test_TC_PB_BC_002(monkeypatch, capfd):
     responses = iter(tempList)
     monkeypatch.setattr('builtins.input', lambda _: next(responses))
     game.launchGame()
-
-# Type: Integration
-# Description: Verifying the interaction between placing buildings and remaining building count.
-# Test Scenario ID: TS_PB_BC_001
-# Test Data: Enter valid coordinates
-
-def test_TC_PB_BC_002(monkeypatch, capfd):
-    game = Game()
-    tempList = [str(random.randint(1,2)), "!1"]
-
-    tempList.append("0")
-    tempList.append("Y")
-    tempList.append("0")
-
-    responses = iter(tempList)
-    monkeypatch.setattr('builtins.input', lambda _: next(responses))
-    game.launchGame()
-
-# Type: Integration
-# Description: Verifying the interaction between placing buildings and remaining building count.
-# Test Scenario ID: TS_PB_BC_001
-# Test Data: Enter valid coordinates
-
-def test_TC_PB_BC_002(monkeypatch, capfd):
-    game = Game()
-    tempList = [str(random.randint(1,2)), "!1"]
-
-    tempList.append("0")
-    tempList.append("Y")
-    tempList.append("0")
-
-    responses = iter(tempList)
-    monkeypatch.setattr('builtins.input', lambda _: next(responses))
-    game.launchGame()
-
