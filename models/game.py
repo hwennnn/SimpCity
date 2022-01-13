@@ -1,10 +1,11 @@
 from models.player import Player
 
 class Game: #Game Class
-    def __init__(self):
-        self.player = Player()
+    def __init__(self, player = Player()):
+        self.player = player
 
     def launchGame(self):
+        self.player.startNewGame()
         while True:
             print("\nTurn: {0}".format(self.player.turns))
             self.player.displayGrid()
@@ -20,6 +21,9 @@ class Game: #Game Class
                 
                 elif subOption == "N":
                     continue
+
+            elif option == '3':
+                self.player.retrieveBuildingsScore()
 
             elif option == '4':
                 self.player.saveGame()
