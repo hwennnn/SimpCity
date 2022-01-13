@@ -1,0 +1,164 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.10.0, pytest-6.2.5, py-1.11.0, pluggy-1.0.0
+rootdir: /Users/yongtenggg/Desktop/Poly/Year 3/Year 3 Sem 2/DevOps/Assignment/SimpCity/test
+plugins: mock-3.6.1, web3-5.25.0, cov-3.0.0
+collected 3 items
+
+blackBox_test.py ...                                                     [100%]
+
+==================================== PASSES ====================================
+_______________________________ test_TC_Exit_001 _______________________________
+----------------------------- Captured stdout call -----------------------------
+
+Welcome, mayor of Simp City!
+----------------------------
+1. Start new game
+2. Load saved game
+3. Options
+
+0. Exit
+
+You selected option 1
+
+Turn: 1
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1|     |     |     |     | 	 BCH: 8
+ +-----+-----+-----+-----+
+2|     |     |     |     | 	 FAC: 8
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HSE: 8
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 8
+ +-----+-----+-----+-----+
+				 HWY: 8
+
+1. Build a FAC
+2. Build a SHP
+3. See current score
+
+4. Save game
+0. Exit to main menu
+You selected option 0
+Returning to main menu...
+
+Welcome, mayor of Simp City!
+----------------------------
+1. Start new game
+2. Load saved game
+3. Options
+
+0. Exit
+
+---- Game Ended ----
+_______________________________ test_TC_Exit_002 _______________________________
+----------------------------- Captured stdout call -----------------------------
+
+Welcome, mayor of Simp City!
+----------------------------
+1. Start new game
+2. Load saved game
+3. Options
+
+0. Exit
+
+You selected option 1
+
+Turn: 1
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1|     |     |     |     | 	 BCH: 8
+ +-----+-----+-----+-----+
+2|     |     |     |     | 	 FAC: 8
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HSE: 8
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 8
+ +-----+-----+-----+-----+
+				 HWY: 8
+
+1. Build a HWY
+2. Build a FAC
+3. See current score
+
+4. Save game
+0. Exit to main menu
+You selected option 0
+Returning to main menu...
+
+Welcome, mayor of Simp City!
+----------------------------
+1. Start new game
+2. Load saved game
+3. Options
+
+0. Exit
+
+Invalid option!
+
+Welcome, mayor of Simp City!
+----------------------------
+1. Start new game
+2. Load saved game
+3. Options
+
+0. Exit
+
+_______________________________ test_TC_Exit_003 _______________________________
+----------------------------- Captured stdout call -----------------------------
+
+Welcome, mayor of Simp City!
+----------------------------
+1. Start new game
+2. Load saved game
+3. Options
+
+0. Exit
+
+You selected option 1
+
+Turn: 1
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1|     |     |     |     | 	 BCH: 8
+ +-----+-----+-----+-----+
+2|     |     |     |     | 	 FAC: 8
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HSE: 8
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 8
+ +-----+-----+-----+-----+
+				 HWY: 8
+
+1. Build a BCH
+2. Build a HWY
+3. See current score
+
+4. Save game
+0. Exit to main menu
+Invalid option!
+
+Turn: 1
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1|     |     |     |     | 	 BCH: 8
+ +-----+-----+-----+-----+
+2|     |     |     |     | 	 FAC: 8
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HSE: 8
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 8
+ +-----+-----+-----+-----+
+				 HWY: 8
+
+1. Build a HWY
+2. Build a BCH
+3. See current score
+
+4. Save game
+0. Exit to main menu
+============================== 3 passed in 0.02s ===============================

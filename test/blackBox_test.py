@@ -75,52 +75,206 @@ def buildingPlacements():
 
     return tempList
 
-# Test if all the coordinates in the grid is fillable with buildings. Scaleable to grid size.
-# def test_fillGridWithBuildings(monkeypatch, capfd):
-#     game = Game()
-#     tempList = buildingPlacements()
+# Type: Intergration
+# Description: Verifying the possibility of filling the grid with buildings.
+# Test Scenario ID: TS_Grid_Fill_001
+# Test Data: Valid Coordinates / Invalid Coordinates
 
-#     tempList.append("0")
-#     tempList.append("Y")
-#     tempList.append("0")
+def test_TC_Grid_Fill_001(monkeypatch, capfd):
+    game = Game()
+    tempList = buildingPlacements()
 
-#     responses = iter(tempList)
-#     monkeypatch.setattr('builtins.input', lambda _: next(responses))
-#     game.launchGame()
+    tempList.append("0")
+    tempList.append("Y")
+    tempList.append("0")
+
+    responses = iter(tempList)
+    monkeypatch.setattr('builtins.input', lambda _: next(responses))
+    game.launchGame()
 
     # game.player.displayGrid()
 
+# Type: Intergration
+# Description: Verifying the interaction between selecting city size, selecting building pool and starting game
+# Test Scenario ID: TS_CS_BP_SG_001
+# Test Data: Valid City Size / Valid Building Pool
 
-# def test_citySizeBuildingPoolAndStartGame(monkeypatch, capfd):
-#     # Add City Size Logic
-#     # Select Options Menu -> Select Building Pool -> Enter 5 Buildings -> Exit to Options Menu -> Exit to Main Menu -> Start New Game
-#     tempList = ["3", "1", "1,2,3,6,7", "0", "0", "1"]
-#     tempList.append("0")
-#     tempList.append("Y")
-#     tempList.append("0")
+def test_TC_CS_BP_SG_001(monkeypatch, capfd):
+    # Add City Size Logic
+    # Select Options Menu -> Select Building Pool -> Enter 5 Buildings -> Exit to Options Menu -> Exit to Main Menu -> Start New Game
+    tempList = ["3", "1", "1,2,3,6,7", "0", "0", "1"]
+    tempList.append("0")
+    tempList.append("Y")
+    tempList.append("0")
     
-#     responses = iter(tempList)
-#     monkeypatch.setattr('builtins.input', lambda _: next(responses))
-#     with pytest.raises(SystemExit) as e:
-#         import main
+    responses = iter(tempList)
+    monkeypatch.setattr('builtins.input', lambda _: next(responses))
+    with pytest.raises(SystemExit) as e:
+        import main
 
-#     out, _ = capfd.readouterr()
-#     assert e.type == SystemExit
-#     assert e.value.code == 0
-    # Find the correct entry point
-    # Add assert
+# Type: Intergration
+# Description: Verifying the interaction between selecting city size, selecting building pool and starting game
+# Test Scenario ID: TS_CS_BP_SG_001
+# Test Data: Invalid City Size / Valid Building Pool
+
+def test_TC_CS_BP_SG_002(monkeypatch, capfd):
+    # Add City Size Logic
+    # Select Options Menu -> Select Building Pool -> Enter 5 Buildings -> Exit to Options Menu -> Exit to Main Menu -> Start New Game
+    tempList = ["3", "1", "1,2,3,6,7", "0", "0", "1"]
+    tempList.append("0")
+    tempList.append("Y")
+    tempList.append("0")
+    
+    responses = iter(tempList)
+    monkeypatch.setattr('builtins.input', lambda _: next(responses))
+    with pytest.raises(SystemExit) as e:
+        import main
+
+# Type: Intergration
+# Description: Verifying the interaction between selecting city size, selecting building pool and starting game
+# Test Scenario ID: TS_CS_BP_SG_001
+# Test Data: Valid City Size / Invalid Building Pool
+
+def test_TC_CS_BP_SG_003(monkeypatch, capfd):
+    # Add City Size Logic
+    # Select Options Menu -> Select Building Pool -> Enter 5 Buildings -> Exit to Options Menu -> Exit to Main Menu -> Start New Game
+    tempList = ["3", "1", "1,2,3,8,10", "0", "0", "1"]
+    tempList.append("0")
+    tempList.append("Y")
+    tempList.append("0")
+    
+    responses = iter(tempList)
+    monkeypatch.setattr('builtins.input', lambda _: next(responses))
+    with pytest.raises(SystemExit) as e:
+        import main
+
+# Type: Intergration
+# Description: Verifying the interaction between selecting city size, selecting building pool and starting game
+# Test Scenario ID: TS_CS_BP_SG_001
+# Test Data: Invalid City Size / Invalid Building Pool
+
+def test_TC_CS_BP_SG_004(monkeypatch, capfd):
+    # Add City Size Logic
+    # Select Options Menu -> Select Building Pool -> Enter 5 Buildings -> Exit to Options Menu -> Exit to Main Menu -> Start New Game
+    tempList = ["3", "1", "1,2,3,8,10", "0", "0", "1"]
+    tempList.append("0")
+    tempList.append("Y")
+    tempList.append("0")
+    
+    responses = iter(tempList)
+    monkeypatch.setattr('builtins.input', lambda _: next(responses))
+    with pytest.raises(SystemExit) as e:
+        import main
 
 
-# Automate the UAT flow...
+# Type: Functional
+# Description: Verifying the interaction between exiting from both Game and Main menu
+# Test Scenario ID: TS_Exit_001
+# Test Data: Valid Game Menu Option / Valid Main Menu Option
 
-# Test if program can exit at different stages of the program.
-# def test_Exit(monkeypatch, capfd):
-#     # Iterations: Start New Game -> Exit Game Menu -> Confirm Exit w/o Save -> Exit Main Menu (Exit Program)
-#     responses = iter(["1", "0", "Y", "0"])
-#     monkeypatch.setattr('builtins.input', lambda _: next(responses))
-#     with pytest.raises(SystemExit) as e:
-#         import main
+def test_TC_Exit_001(monkeypatch, capfd):
+    # Iterations: Start New Game -> Exit Game Menu -> Confirm Exit w/o Save -> Exit Main Menu (Exit Program)
+    responses = iter(["1", "0", "Y", "0"])
+    monkeypatch.setattr('builtins.input', lambda _: next(responses))
+    with pytest.raises(SystemExit) as e:
+        import main
 
-#     out, _ = capfd.readouterr()
-#     assert e.type == SystemExit
-#     assert e.value.code == 0
+    assert e.type == SystemExit
+    assert e.value.code == 0
+
+# Type: Functional
+# Description: Verifying the interaction between exiting from both Game and Main menu
+# Test Scenario ID: TS_Exit_001
+# Test Data: Valid Game Menu Option / Invalid Main Menu Option
+
+def test_TC_Exit_002(monkeypatch, capfd):
+    # Iterations: Start New Game -> Exit Game Menu -> Confirm Exit w/o Save -> Exit Main Menu (Exit Program)
+    try:
+        responses = iter(["1", "0", "Y", "8"])
+        monkeypatch.setattr('builtins.input', lambda _: next(responses))
+        import main
+    except StopIteration as e:
+        pass
+
+# Type: Functional
+# Description: Verifying the interaction between exiting from both Game and Main menu
+# Test Scenario ID: TS_Exit_001
+# Test Data: Invlid Game Menu Option
+
+def test_TC_Exit_003(monkeypatch, capfd):
+    # Iterations: Start New Game -> Exit Game Menu -> Confirm Exit w/o Save -> Exit Main Menu (Exit Program)
+    try:
+        responses = iter(["1", "8"])
+        monkeypatch.setattr('builtins.input', lambda _: next(responses))
+        import main
+    except StopIteration as e:
+        pass
+
+# Type: Integration
+# Description: Verifying the interaction between placing buildings and remaining building count.
+# Test Scenario ID: TS_PB_BC_001
+# Test Data: Enter valid coordinates
+
+def test_TS_PB_BC_001(monkeypatch, capfd):
+    game = Game()
+    tempList = [str(random.randint(1,2)), "A1"]
+
+    tempList.append("0")
+    tempList.append("Y")
+    tempList.append("0")
+
+    responses = iter(tempList)
+    monkeypatch.setattr('builtins.input', lambda _: next(responses))
+    game.launchGame()
+
+# Type: Integration
+# Description: Verifying the interaction between placing buildings and remaining building count.
+# Test Scenario ID: TS_PB_BC_001
+# Test Data: Enter valid coordinates
+
+def test_TC_PB_BC_002(monkeypatch, capfd):
+    game = Game()
+    tempList = [str(random.randint(1,2)), "!1"]
+
+    tempList.append("0")
+    tempList.append("Y")
+    tempList.append("0")
+
+    responses = iter(tempList)
+    monkeypatch.setattr('builtins.input', lambda _: next(responses))
+    game.launchGame()
+
+# Type: Integration
+# Description: Verifying the interaction between placing buildings and remaining building count.
+# Test Scenario ID: TS_PB_BC_001
+# Test Data: Enter valid coordinates
+
+def test_TC_PB_BC_002(monkeypatch, capfd):
+    game = Game()
+    tempList = [str(random.randint(1,2)), "!1"]
+
+    tempList.append("0")
+    tempList.append("Y")
+    tempList.append("0")
+
+    responses = iter(tempList)
+    monkeypatch.setattr('builtins.input', lambda _: next(responses))
+    game.launchGame()
+
+# Type: Integration
+# Description: Verifying the interaction between placing buildings and remaining building count.
+# Test Scenario ID: TS_PB_BC_001
+# Test Data: Enter valid coordinates
+
+def test_TC_PB_BC_002(monkeypatch, capfd):
+    game = Game()
+    tempList = [str(random.randint(1,2)), "!1"]
+
+    tempList.append("0")
+    tempList.append("Y")
+    tempList.append("0")
+
+    responses = iter(tempList)
+    monkeypatch.setattr('builtins.input', lambda _: next(responses))
+    game.launchGame()
+
