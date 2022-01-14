@@ -50,7 +50,7 @@ def buildingPlacements():
 
     colCounter = 0
     rowCounter = 1
-    tempList = [str(random.randint(1,2)), "11", str(random.randint(1,2)), "!a", str(random.randint(1,2)), "1a", str(random.randint(1,2)), "!/"]
+    tempList = []
     
     for i in range(0, total):
         # Adds building to grid as long as it has Col has not reached the last alphabet in the grid
@@ -75,24 +75,6 @@ def buildingPlacements():
 
     return tempList
 
-# Type: Intergration
-# Description: Verifying the possibility of filling the grid with buildings.
-# Test Scenario ID: TS_Grid_Fill_001
-# Test Data: Valid Coordinates / Invalid Coordinates
-
-def test_TC_Grid_Fill_001(monkeypatch, capfd):
-    game = Game()
-    tempList = buildingPlacements()
-
-    tempList.append("0")
-    tempList.append("Y")
-    tempList.append("0")
-
-    responses = iter(tempList)
-    monkeypatch.setattr('builtins.input', lambda _: next(responses))
-    game.launchGame()
-
-    # game.player.displayGrid()
 
 # Type: Intergration
 # Description: Verifying the interaction between selecting city size, selecting building pool and starting game
@@ -101,16 +83,19 @@ def test_TC_Grid_Fill_001(monkeypatch, capfd):
 
 def test_TC_CS_BP_SG_001(monkeypatch, capfd):
     # Add City Size Logic
-    # Select Options Menu -> Select Building Pool -> Enter 5 Buildings -> Exit to Options Menu -> Exit to Main Menu -> Start New Game
+    # Select Options -> Choose Building Pool, Building Pool Selection, Exit to Options Menu, Exit to Main Menu -> Start New Game
     tempList = ["3", "1", "1,2,3,6,7", "0", "0", "1"]
-    tempList.append("0")
-    tempList.append("Y")
-    tempList.append("0")
-    
-    responses = iter(tempList)
-    monkeypatch.setattr('builtins.input', lambda _: next(responses))
-    with pytest.raises(SystemExit) as e:
+
+    # Iterates through the list of options that mimics user input   
+    try:
+        responses = iter(tempList)
+        monkeypatch.setattr('builtins.input', lambda _: next(responses))
         import main
+
+    # When list runs out of options, StopIteration error will happen unless game is exited with user inputs
+    except StopIteration as e:
+        pass
+
 
 # Type: Intergration
 # Description: Verifying the interaction between selecting city size, selecting building pool and starting game
@@ -119,16 +104,19 @@ def test_TC_CS_BP_SG_001(monkeypatch, capfd):
 
 def test_TC_CS_BP_SG_002(monkeypatch, capfd):
     # Add City Size Logic
-    # Select Options Menu -> Select Building Pool -> Enter 5 Buildings -> Exit to Options Menu -> Exit to Main Menu -> Start New Game
+    # Select Options -> Choose Building Pool, Building Pool Selection, Exit to Options Menu, Exit to Main Menu -> Start New Game
     tempList = ["3", "1", "1,2,3,6,7", "0", "0", "1"]
-    tempList.append("0")
-    tempList.append("Y")
-    tempList.append("0")
     
-    responses = iter(tempList)
-    monkeypatch.setattr('builtins.input', lambda _: next(responses))
-    with pytest.raises(SystemExit) as e:
+    # Iterates through the list of options that mimics user input   
+    try:
+        responses = iter(tempList)
+        monkeypatch.setattr('builtins.input', lambda _: next(responses))
         import main
+
+    # When list runs out of options, StopIteration error will happen unless game is exited with user inputs
+    except StopIteration as e:
+        pass
+
 
 # Type: Intergration
 # Description: Verifying the interaction between selecting city size, selecting building pool and starting game
@@ -137,16 +125,19 @@ def test_TC_CS_BP_SG_002(monkeypatch, capfd):
 
 def test_TC_CS_BP_SG_003(monkeypatch, capfd):
     # Add City Size Logic
-    # Select Options Menu -> Select Building Pool -> Enter 5 Buildings -> Exit to Options Menu -> Exit to Main Menu -> Start New Game
+    # Select Options -> Choose Building Pool, Building Pool Selection, Exit to Options Menu, Exit to Main Menu -> Start New Game
     tempList = ["3", "1", "1,2,3,8,10", "0", "0", "1"]
-    tempList.append("0")
-    tempList.append("Y")
-    tempList.append("0")
-    
-    responses = iter(tempList)
-    monkeypatch.setattr('builtins.input', lambda _: next(responses))
-    with pytest.raises(SystemExit) as e:
+
+    # Iterates through the list of options that mimics user input
+    try:
+        responses = iter(tempList)
+        monkeypatch.setattr('builtins.input', lambda _: next(responses))
         import main
+
+    # When list runs out of options, StopIteration error will happen unless game is exited with user inputs
+    except StopIteration as e:
+        pass
+
 
 # Type: Intergration
 # Description: Verifying the interaction between selecting city size, selecting building pool and starting game
@@ -155,16 +146,155 @@ def test_TC_CS_BP_SG_003(monkeypatch, capfd):
 
 def test_TC_CS_BP_SG_004(monkeypatch, capfd):
     # Add City Size Logic
-    # Select Options Menu -> Select Building Pool -> Enter 5 Buildings -> Exit to Options Menu -> Exit to Main Menu -> Start New Game
+    # Select Options -> Choose Building Pool, Building Pool Selection, Exit to Options Menu, Exit to Main Menu -> Start New Game
     tempList = ["3", "1", "1,2,3,8,10", "0", "0", "1"]
-    tempList.append("0")
-    tempList.append("Y")
-    tempList.append("0")
     
-    responses = iter(tempList)
-    monkeypatch.setattr('builtins.input', lambda _: next(responses))
-    with pytest.raises(SystemExit) as e:
+    # Iterates through the list of options that mimics user input
+    try:
+        responses = iter(tempList)
+        monkeypatch.setattr('builtins.input', lambda _: next(responses))
         import main
+
+    # When list runs out of options, StopIteration error will happen unless game is exited with user inputs
+    except StopIteration as e:
+        pass
+
+
+# Type: Functional
+# Description: Verifying the possibility of filling the grid with buildings
+# Test Scenario ID: TS_Grid_Fill_001
+# Test Data: Valid Coordinates
+
+def test_TC_Grid_Fill_001(monkeypatch, capfd):
+    game = Game()
+    tempList = buildingPlacements()
+
+    # Iterates through the list of options that mimics user input
+    try:
+        responses = iter(tempList)
+        monkeypatch.setattr('builtins.input', lambda _: next(responses))
+        game.launchGame()
+    
+    # When list runs out of options, StopIteration error will happen unless game is exited with user inputs
+    except StopIteration as e:
+        pass
+
+
+# Type: Functional
+# Description: Verifying the possibility of filling the grid with buildings
+# Test Scenario ID: TS_Grid_Fill_001
+# Test Data: Inalid Coordinates
+
+def test_TC_Grid_Fill_002(monkeypatch, capfd):
+    game = Game()
+
+    # Randomly pick between the two building options together with an invalid coordinate
+    tempList = [str(random.randint(1,2)), "11", str(random.randint(1,2)), "!a", str(random.randint(1,2)), "1a", str(random.randint(1,2)), "!/"]
+
+    # Iterates through the list of options that mimics user input
+    try:
+        responses = iter(tempList)
+        monkeypatch.setattr('builtins.input', lambda _: next(responses))
+        game.launchGame()
+    
+    # When list runs out of options, StopIteration error will happen unless game is exited with user inputs
+    except StopIteration as e:
+        pass
+
+
+# Type: Integration
+# Description: Verifying the interaction between placing buildings and remaining building count
+# Test Scenario ID: TS_PB_BC_001
+# Test Data: Valid coordinates
+
+def test_TC_PB_BC_001(monkeypatch, capfd):
+    game = Game()
+
+    # Randomly pick between the two building options together with a valid coordinate
+    tempList = [str(random.randint(1,2)), "A1"]
+
+    # Iterates through the list of options that mimics user input
+    try:
+        responses = iter(tempList)
+        monkeypatch.setattr('builtins.input', lambda _: next(responses))
+        game.launchGame()
+
+    # When list runs out of options, StopIteration error will happen unless game is exited with user inputs
+    except StopIteration as e:
+        pass
+
+
+# Type: Integration
+# Description: Verifying the interaction between placing buildings and remaining building count
+# Test Scenario ID: TS_PB_BC_001
+# Test Data: Invalid coordinates
+
+def test_TC_PB_BC_002(monkeypatch, capfd):
+    game = Game()
+
+    # Randomly pick between the two building options together with an invalid coordinate
+    tempList = [str(random.randint(1,2)), "!1"]
+
+    # Iterates through the list of options that mimics user input
+    try:
+        responses = iter(tempList)
+        monkeypatch.setattr('builtins.input', lambda _: next(responses))
+        game.launchGame()
+
+    # When list runs out of options, StopIteration error will happen unless game is exited with user inputs
+    except StopIteration as e:
+        pass
+
+
+# Type: Integration
+# Description: Verifying the interaction between placing buildings and the viewing of game score
+# Test Scenario ID: TS_PB_DS_001
+# Test Data: Valid coordinates
+
+def test_TC_PB_DS_001(monkeypatch, capfd):
+    game = Game()
+
+    # Ignoring the invalid building options and coordinates.
+    # tempList in this test contains only half of the all coordinates possible
+    tempList = buildingPlacements()[8:int(len(buildingPlacements())/2) + 4]
+
+    # Display Score
+    tempList.append("3")
+
+    # Iterates through the list of options that mimics user input
+    try:
+        responses = iter(tempList)
+        monkeypatch.setattr('builtins.input', lambda _: next(responses))
+        game.launchGame()
+
+    # When list runs out of options, StopIteration error will happen unless game is exited with user inputs
+    except StopIteration as e:
+        pass
+
+
+# Type: Integration
+# Description: Verifying the interaction between placing buildings and the viewing of game score
+# Test Scenario ID: TS_PB_DS_001
+# Test Data: Invalid coordinates
+
+def test_TC_PB_DS_002(monkeypatch, capfd):
+    game = Game()
+
+    # tempList in this test contains only invalid coordinates
+    tempList = buildingPlacements()[:8]
+
+    # Display Score
+    tempList.append("3")
+
+    # Iterates through the list of options that mimics user input
+    try:
+        responses = iter(tempList)
+        monkeypatch.setattr('builtins.input', lambda _: next(responses))
+        game.launchGame()
+
+    # When list runs out of options, StopIteration error will happen unless game is exited with user inputs
+    except StopIteration as e:
+        pass
 
 
 # Type: Functional
@@ -173,7 +303,63 @@ def test_TC_CS_BP_SG_004(monkeypatch, capfd):
 # Test Data: Valid Game Menu Option / Valid Main Menu Option
 
 def test_TC_Exit_001(monkeypatch, capfd):
-    # Iterations: Start New Game -> Exit Game Menu -> Confirm Exit w/o Save -> Exit Main Menu (Exit Program)
+    # Iterates through the list of options that mimics user input
+    # Start New Game -> Exit to Main Menu -> Confirm -> Exit
+    responses = iter(["1", "0", "Y", "0"])
+    monkeypatch.setattr('builtins.input', lambda _: next(responses))
+
+    with pytest.raises(SystemExit) as e:
+        import main
+
+    # Make sure that program is exited from system
+    assert e.type == SystemExit
+    assert e.value.code == 0
+
+
+# Type: Functional
+# Description: Verifying the interaction between exiting from both Game and Main menu
+# Test Scenario ID: TS_Exit_001
+# Test Data: Valid Game Menu Option / Invalid Main Menu Option
+
+def test_TC_Exit_002(monkeypatch, capfd):
+    # Iterates through the list of options that mimics user input
+    try:
+        # Start New Game -> Exit to Main Menu -> Confirm -> [Invalid Option]
+        responses = iter(["1", "0", "Y", "8"])
+        monkeypatch.setattr('builtins.input', lambda _: next(responses))
+        import main
+
+    # When list runs out of options, StopIteration error will happen unless game is exited with user inputs 
+    except StopIteration as e:
+        pass
+
+
+# Type: Functional
+# Description: Verifying the interaction between exiting from both Game and Main menu
+# Test Scenario ID: TS_Exit_001
+# Test Data: Invalid Game Menu Option
+
+def test_TC_Exit_003(monkeypatch, capfd):
+    # Iterates through the list of options that mimics user input
+    try:
+        # Start New Game -> [Invalid Option]
+        responses = iter(["1", "8"])
+        monkeypatch.setattr('builtins.input', lambda _: next(responses))
+        import main
+    
+    # When list runs out of options, StopIteration error will happen unless game is exited with user inputs 
+    except StopIteration as e:
+        pass
+
+
+# Type: Functional
+# Description: Verifying the interaction between starting a new game and exit immediately
+# Test Scenario ID: TS_SG_Exit_001
+# Test Data: Valid option for Main Menu, Valid option for Game Menu and Valid option for Main Menu.
+
+def test_TC_SG_Exit_001(monkeypatch, capfd):
+    # Iterates through the list of options that mimics user input
+    # Start New Game -> Exit to Main Menu -> Confirm -> Exit
     responses = iter(["1", "0", "Y", "0"])
     monkeypatch.setattr('builtins.input', lambda _: next(responses))
     with pytest.raises(SystemExit) as e:
@@ -182,64 +368,41 @@ def test_TC_Exit_001(monkeypatch, capfd):
     assert e.type == SystemExit
     assert e.value.code == 0
 
-# Type: Functional
-# Description: Verifying the interaction between exiting from both Game and Main menu
-# Test Scenario ID: TS_Exit_001
-# Test Data: Valid Game Menu Option / Invalid Main Menu Option
 
-def test_TC_Exit_002(monkeypatch, capfd):
-    # Iterations: Start New Game -> Exit Game Menu -> Confirm Exit w/o Save -> Exit Main Menu (Exit Program)
+# Type: Functional
+# Description: Verifying the interaction between starting a new game and exit immediately
+# Test Scenario ID: TS_SG_Exit_001
+# Test Data: Valid option for Main Menu, Valid option for Game Menu and Invalid option for Main Menu.
+
+def test_TC_SG_Exit_002(monkeypatch, capfd):
+    # Start New Game -> Exit to Main Menu -> Confirm -> [Invalid Option]
+    responses = iter(["1", "0", "Y", "5"])
+    monkeypatch.setattr('builtins.input', lambda _: next(responses))
+    # Iterates through the list of options that mimics user input
     try:
-        responses = iter(["1", "0", "Y", "8"])
-        monkeypatch.setattr('builtins.input', lambda _: next(responses))
         import main
+
+    # When list runs out of options, StopIteration error will happen unless game is exited with user inputs 
     except StopIteration as e:
         pass
 
-# Type: Functional
-# Description: Verifying the interaction between exiting from both Game and Main menu
-# Test Scenario ID: TS_Exit_001
-# Test Data: Invlid Game Menu Option
 
-def test_TC_Exit_003(monkeypatch, capfd):
-    # Iterations: Start New Game -> Exit Game Menu -> Confirm Exit w/o Save -> Exit Main Menu (Exit Program)
+# Type: Functional
+# Description: Verifying the interaction between starting a new game and exit immediately
+# Test Scenario ID: TS_SG_Exit_001
+# Test Data: Valid option for Main Menu, Invalid option for Game Menu.
+
+def test_TC_SG_Exit_003(monkeypatch, capfd):
+    # Iterates through the list of options that mimics user input
+    # Start New Game -> [Invalid Option]
+    responses = iter(["1", "9"])
+    monkeypatch.setattr('builtins.input', lambda _: next(responses))
+
+    # Iterates through the list of options that mimics user input
     try:
-        responses = iter(["1", "8"])
-        monkeypatch.setattr('builtins.input', lambda _: next(responses))
         import main
+
+    # When list runs out of options, StopIteration error will happen unless game is exited with user inputs 
     except StopIteration as e:
         pass
 
-# Type: Integration
-# Description: Verifying the interaction between placing buildings and remaining building count.
-# Test Scenario ID: TS_PB_BC_001
-# Test Data: Enter valid coordinates
-
-def test_TS_PB_BC_001(monkeypatch, capfd):
-    game = Game()
-    tempList = [str(random.randint(1,2)), "A1"]
-
-    tempList.append("0")
-    tempList.append("Y")
-    tempList.append("0")
-
-    responses = iter(tempList)
-    monkeypatch.setattr('builtins.input', lambda _: next(responses))
-    game.launchGame()
-
-# Type: Integration
-# Description: Verifying the interaction between placing buildings and remaining building count.
-# Test Scenario ID: TS_PB_BC_001
-# Test Data: Enter valid coordinates
-
-def test_TC_PB_BC_002(monkeypatch, capfd):
-    game = Game()
-    tempList = [str(random.randint(1,2)), "!1"]
-
-    tempList.append("0")
-    tempList.append("Y")
-    tempList.append("0")
-
-    responses = iter(tempList)
-    monkeypatch.setattr('builtins.input', lambda _: next(responses))
-    game.launchGame()
