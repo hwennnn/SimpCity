@@ -6,7 +6,6 @@ from models.enums import Buildings
 from models.configurations import *
 import random
 import pytest
-from main import MainProgram
 
 citySize = { 
     0: 'A',
