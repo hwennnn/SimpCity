@@ -7,7 +7,7 @@ from models.configurations import *
 import random
 import pytest
 
-citySize = { 
+citySize = {
     0: 'A',
     1: 'B',
     2: 'C',
@@ -36,10 +36,12 @@ citySize = {
     25: 'Z',
 }
 
+
 def get_key(val):
     for key, value in citySize.items():
-         if val == value:
-             return key
+        if val == value:
+            return key
+
 
 def buildingPlacements():
     player = Player()
@@ -51,22 +53,22 @@ def buildingPlacements():
     colCounter = 0
     rowCounter = 1
     tempList = []
-    
+
     for i in range(0, total):
         # Adds building to grid as long as it has Col has not reached the last alphabet in the grid
         # A1 -> B1 -> C1 -> D1
         if colCounter < col:
-            tempList.append(str(random.randint(1,2)))
+            tempList.append(str(random.randint(1, 2)))
             tempList.append(citySize[colCounter] + str(rowCounter))
             # Add failing cases
 
-        # Resets Col back to 0 (A, first alphabet) once last alphabet is reached. D -> A. 
+        # Resets Col back to 0 (A, first alphabet) once last alphabet is reached. D -> A.
         # Row is increased by 1. A1 -> A2 (from Row 1 to Row 2)
         # Adds exclusively one A column only or else first column will be empty if its only increment
         else:
             colCounter = 0
             rowCounter += 1
-            tempList.append(str(random.randint(1,2)))
+            tempList.append(str(random.randint(1, 2)))
             tempList.append(citySize[colCounter] + str(rowCounter))
             # Add failing cases
 
@@ -83,19 +85,20 @@ def buildingPlacements():
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit?pli=1#gid=768609166&range=2:2
 
 def test_TC_CS_BP_SG_001(monkeypatch, capfd):
+    game = Game()
     # Add City Size Logic
     # Select Options -> Choose Building Pool, Building Pool Selection, Exit to Options Menu, Exit to Main Menu -> Start New Game
     tempList = ["3", "1", "1,2,3,6,7", "0", "0", "1", "0", "Y", "0"]
 
-    # Iterates through the list of options that mimics user input   
+    # Iterates through the list of options that mimics user input
     try:
         responses = iter(tempList)
         monkeypatch.setattr('builtins.input', lambda _: next(responses))
-        import main
+        game.launch()
     # When list runs out of options, StopIteration error will happen unless game is exited with user inputs
     except StopIteration and SystemExit as e:
         pass
-    
+
 
 # Type: Intergration
 # Description: Verifying the interaction between selecting city size, selecting building pool and starting game
@@ -104,20 +107,21 @@ def test_TC_CS_BP_SG_001(monkeypatch, capfd):
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit?pli=1#gid=768609166&range=3:3
 
 def test_TC_CS_BP_SG_002(monkeypatch, capfd):
+    game = Game()
     # Add City Size Logic
     # Select Options -> Choose Building Pool, Building Pool Selection, Exit to Options Menu, Exit to Main Menu -> Start New Game
     tempList = ["3", "1", "1,2,3,6,7", "0", "0", "1", "0", "Y", "0"]
 
-    # Iterates through the list of options that mimics user input   
+    # Iterates through the list of options that mimics user input
     try:
         responses = iter(tempList)
         monkeypatch.setattr('builtins.input', lambda _: next(responses))
-        import main
-        
+        game.launch()
+
     # When list runs out of options, StopIteration error will happen unless game is exited with user inputs
     except StopIteration and SystemExit as e:
         pass
-    
+
 
 # # Type: Intergration
 # # Description: Verifying the interaction between selecting city size, selecting building pool and starting game
@@ -151,7 +155,7 @@ def test_TC_CS_BP_SG_002(monkeypatch, capfd):
 #     # Add City Size Logic
 #     # Select Options -> Choose Building Pool, Building Pool Selection, Exit to Options Menu, Exit to Main Menu -> Start New Game
 #     tempList = ["3", "1", "1,2,3,8,10", "0", "0", "1"]
-    
+
 #     # Iterates through the list of options that mimics user input
 #     try:
 #         responses = iter(tempList)
@@ -178,7 +182,7 @@ def test_TC_CS_BP_SG_002(monkeypatch, capfd):
 #         responses = iter(tempList)
 #         monkeypatch.setattr('builtins.input', lambda _: next(responses))
 #         game.launchGame()
-    
+
 #     # When list runs out of options, StopIteration error will happen unless game is exited with user inputs
 #     except StopIteration as e:
 #         pass
@@ -201,7 +205,7 @@ def test_TC_CS_BP_SG_002(monkeypatch, capfd):
 #         responses = iter(tempList)
 #         monkeypatch.setattr('builtins.input', lambda _: next(responses))
 #         game.launchGame()
-    
+
 #     # When list runs out of options, StopIteration error will happen unless game is exited with user inputs
 #     except StopIteration as e:
 #         pass
@@ -340,7 +344,7 @@ def test_TC_CS_BP_SG_002(monkeypatch, capfd):
 #         monkeypatch.setattr('builtins.input', lambda _: next(responses))
 #         import main
 
-#     # When list runs out of options, StopIteration error will happen unless game is exited with user inputs 
+#     # When list runs out of options, StopIteration error will happen unless game is exited with user inputs
 #     except StopIteration as e:
 #         pass
 
@@ -358,8 +362,8 @@ def test_TC_CS_BP_SG_002(monkeypatch, capfd):
 #         responses = iter(["1", "8"])
 #         monkeypatch.setattr('builtins.input', lambda _: next(responses))
 #         import main
-    
-#     # When list runs out of options, StopIteration error will happen unless game is exited with user inputs 
+
+#     # When list runs out of options, StopIteration error will happen unless game is exited with user inputs
 #     except StopIteration as e:
 #         pass
 
@@ -396,7 +400,7 @@ def test_TC_CS_BP_SG_002(monkeypatch, capfd):
 #     try:
 #         import main
 
-#     # When list runs out of options, StopIteration error will happen unless game is exited with user inputs 
+#     # When list runs out of options, StopIteration error will happen unless game is exited with user inputs
 #     except StopIteration as e:
 #         pass
 
@@ -417,7 +421,6 @@ def test_TC_CS_BP_SG_002(monkeypatch, capfd):
 #     try:
 #         import main
 
-#     # When list runs out of options, StopIteration error will happen unless game is exited with user inputs 
+#     # When list runs out of options, StopIteration error will happen unless game is exited with user inputs
 #     except StopIteration as e:
 #         pass
-

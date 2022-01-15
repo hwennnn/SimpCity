@@ -1,14 +1,72 @@
 ============================= test session starts ==============================
-platform darwin -- Python 3.10.0, pytest-6.2.5, py-1.11.0, pluggy-1.0.0
-rootdir: /Users/yongtenggg/Desktop/Poly/Year 3/Year 3 Sem 2/DevOps/Assignment/SimpCity/test
-plugins: mock-3.6.1, web3-5.25.0, cov-3.0.0
-collected 3 items
+platform linux -- Python 3.10.0, pytest-6.2.5, py-1.11.0, pluggy-1.0.0
+rootdir: /home/hwen/coding/project/school/SimpCity/test
+plugins: cov-3.0.0
+collected 2 items
 
-blackBox_test.py ...                                                     [100%]
+blackBox_test.py ..                                                      [100%]
 
 ==================================== PASSES ====================================
-_______________________________ test_TC_Exit_001 _______________________________
+_____________________________ test_TC_CS_BP_SG_001 _____________________________
 ----------------------------- Captured stdout call -----------------------------
+
+Welcome, mayor of Simp City!
+----------------------------
+1. Start new game
+2. Load saved game
+3. Options
+
+0. Exit
+
+You selected option 3
+
+SimpCity Game Options
+---------------------
+1. Choose Building Pool
+
+0. Return to Main Menu
+
+You selected option 1
+
+Choose Building Pool
+--------------------
+1. Beach
+2. Factory
+3. Highway
+4. House
+5. Shop
+6. Monument
+7. Park 
+
+0. Return to Option Menu
+
+Current Building Pool: BCH,FAC,HSE,SHP,HWY
+Sucessfully updated building pool!
+
+Choose Building Pool
+--------------------
+1. Beach
+2. Factory
+3. Highway
+4. House
+5. Shop
+6. Monument
+7. Park 
+
+0. Return to Option Menu
+
+Current Building Pool: BCH,FAC,HWY,MON,PRK
+
+---- Back to Option Menu ----
+
+SimpCity Game Options
+---------------------
+1. Choose Building Pool
+
+0. Return to Main Menu
+
+
+---- Back to Main Menu ----
 
 Welcome, mayor of Simp City!
 ----------------------------
@@ -28,14 +86,14 @@ Turn: 1
  +-----+-----+-----+-----+
 2|     |     |     |     | 	 FAC: 8
  +-----+-----+-----+-----+
-3|     |     |     |     | 	 HSE: 8
+3|     |     |     |     | 	 HWY: 8
  +-----+-----+-----+-----+
-4|     |     |     |     | 	 SHP: 8
+4|     |     |     |     | 	 MON: 8
  +-----+-----+-----+-----+
-				 HWY: 8
+				 PRK: 8
 
-1. Build a FAC
-2. Build a SHP
+1. Build a HWY
+2. Build a HWY
 3. See current score
 
 4. Save game
@@ -52,8 +110,66 @@ Welcome, mayor of Simp City!
 0. Exit
 
 ---- Game Ended ----
-_______________________________ test_TC_Exit_002 _______________________________
+_____________________________ test_TC_CS_BP_SG_002 _____________________________
 ----------------------------- Captured stdout call -----------------------------
+
+Welcome, mayor of Simp City!
+----------------------------
+1. Start new game
+2. Load saved game
+3. Options
+
+0. Exit
+
+You selected option 3
+
+SimpCity Game Options
+---------------------
+1. Choose Building Pool
+
+0. Return to Main Menu
+
+You selected option 1
+
+Choose Building Pool
+--------------------
+1. Beach
+2. Factory
+3. Highway
+4. House
+5. Shop
+6. Monument
+7. Park 
+
+0. Return to Option Menu
+
+Current Building Pool: BCH,FAC,HSE,SHP,HWY
+Sucessfully updated building pool!
+
+Choose Building Pool
+--------------------
+1. Beach
+2. Factory
+3. Highway
+4. House
+5. Shop
+6. Monument
+7. Park 
+
+0. Return to Option Menu
+
+Current Building Pool: BCH,FAC,HWY,MON,PRK
+
+---- Back to Option Menu ----
+
+SimpCity Game Options
+---------------------
+1. Choose Building Pool
+
+0. Return to Main Menu
+
+
+---- Back to Main Menu ----
 
 Welcome, mayor of Simp City!
 ----------------------------
@@ -73,14 +189,14 @@ Turn: 1
  +-----+-----+-----+-----+
 2|     |     |     |     | 	 FAC: 8
  +-----+-----+-----+-----+
-3|     |     |     |     | 	 HSE: 8
+3|     |     |     |     | 	 HWY: 8
  +-----+-----+-----+-----+
-4|     |     |     |     | 	 SHP: 8
+4|     |     |     |     | 	 MON: 8
  +-----+-----+-----+-----+
-				 HWY: 8
+				 PRK: 8
 
-1. Build a HWY
-2. Build a FAC
+1. Build a MON
+2. Build a PRK
 3. See current score
 
 4. Save game
@@ -96,69 +212,5 @@ Welcome, mayor of Simp City!
 
 0. Exit
 
-Invalid option!
-
-Welcome, mayor of Simp City!
-----------------------------
-1. Start new game
-2. Load saved game
-3. Options
-
-0. Exit
-
-_______________________________ test_TC_Exit_003 _______________________________
------------------------------ Captured stdout call -----------------------------
-
-Welcome, mayor of Simp City!
-----------------------------
-1. Start new game
-2. Load saved game
-3. Options
-
-0. Exit
-
-You selected option 1
-
-Turn: 1
-
-    A     B     C     D		 Remaining Buildings Left
- +-----+-----+-----+-----+	 ------------------------
-1|     |     |     |     | 	 BCH: 8
- +-----+-----+-----+-----+
-2|     |     |     |     | 	 FAC: 8
- +-----+-----+-----+-----+
-3|     |     |     |     | 	 HSE: 8
- +-----+-----+-----+-----+
-4|     |     |     |     | 	 SHP: 8
- +-----+-----+-----+-----+
-				 HWY: 8
-
-1. Build a BCH
-2. Build a HWY
-3. See current score
-
-4. Save game
-0. Exit to main menu
-Invalid option!
-
-Turn: 1
-
-    A     B     C     D		 Remaining Buildings Left
- +-----+-----+-----+-----+	 ------------------------
-1|     |     |     |     | 	 BCH: 8
- +-----+-----+-----+-----+
-2|     |     |     |     | 	 FAC: 8
- +-----+-----+-----+-----+
-3|     |     |     |     | 	 HSE: 8
- +-----+-----+-----+-----+
-4|     |     |     |     | 	 SHP: 8
- +-----+-----+-----+-----+
-				 HWY: 8
-
-1. Build a HWY
-2. Build a BCH
-3. See current score
-
-4. Save game
-0. Exit to main menu
-============================== 3 passed in 0.02s ===============================
+---- Game Ended ----
+============================== 2 passed in 0.01s ===============================
