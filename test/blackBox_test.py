@@ -104,7 +104,6 @@ def test_TC_CS_BP_SG_001(monkeypatch, capfd):
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit?pli=1#gid=768609166&range=3:3
 
 def test_TC_CS_BP_SG_002(monkeypatch, capfd):
-    main = MainProgram()
     # Add City Size Logic
     # Select Options -> Choose Building Pool, Building Pool Selection, Exit to Options Menu, Exit to Main Menu -> Start New Game
     tempList = ["3", "1", "1,2,3,6,7", "0", "0", "1", "0", "Y", "0"]
