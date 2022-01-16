@@ -63,7 +63,6 @@ docker run -ti simpcity
 
 ```bash
 docker build -t simpcity-test -f Dockerfile.test .
-docker run -ti simpcity-test
 ```
 
 ## **Comments Style**
