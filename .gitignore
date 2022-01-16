@@ -41,7 +41,7 @@ coverage.xml
 saved_game.txt
 .DS_Store
 
-# test out files
+# test output files
 output.txt
 testing.txt
 
