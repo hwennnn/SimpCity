@@ -39,8 +39,12 @@ saved_game.txt
 # Translations
 *.mo
 
-#Saved game state files 
-saved_game.txt 
+#Saved game state files
+saved_game.txt
 .DS_Store
+
+# test output files
 output.txt
+testing.txt
+
 CHANGELOG.md
