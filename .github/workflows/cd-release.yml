@@ -109,3 +109,35 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           branch: release-${{ env.RELEASE_VERSION }}
+
+      - uses: actions/checkout@v2
+        with:
+          repository: ZacharyHRQ/SimpCity.wiki
+
+      - name: install pandoc
+        run: |
+          sudo apt-get install pandoc
+
+      - name: convert wiki pages to html
+        run: |
+          find -name "*.md" -exec pandoc -o {}.html {} \;
+          mkdir doc
+          for file in *.md.html; do mv "$file" "doc/${file/.md.html/}";done
+
+      - name: ls
+        run: |
+          ls
+
+      - name: Send email to client
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{secrets.MAIL_USERNAME}}
+          password: ${{secrets.MAIL_PASSWORD}}
+          subject: Release notificiation from T02 Team 4
+          to: ${{secrets.CLIENT_EMAIL}}
+          cc: s10185319@connect.np.edu.sg,s10198102@connect.np.edu.sg,glennchia43@gmail.com,s10197636@connect.np.edu.sg
+          from: T02Team4Bot
+          body: Release version - ${{ env.RELEASE_VERSION }} has been successful. Attached are the feature completed during the sprint.
+          attachments: FeatureProgression.md
