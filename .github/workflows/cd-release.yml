@@ -124,7 +124,7 @@ jobs:
         with:
           branch: release-${{ env.RELEASE_VERSION }}
 
-            - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
         with:
           repository: ZacharyHRQ/SimpCity.wiki
 
@@ -153,5 +153,5 @@ jobs:
           to: ${{secrets.CLIENT_EMAIL}}
           cc: s10185319@connect.np.edu.sg,s10198102@connect.np.edu.sg,glennchia43@gmail.com,s10197636@connect.np.edu.sg
           from: T02Team4Bot
-          body: Release version - ${{ env.RELEASE_VERSION }} has been successful
-          attachments: Home.md
+          body: Release version - ${{ env.RELEASE_VERSION }} has been successful. Attached are the feature completed during the sprint.
+          attachments: FeatureProgression.md
