@@ -1,0 +1,1625 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.10.0, pytest-6.2.5, py-1.11.0, pluggy-1.0.0
+rootdir: /Users/yongtenggg/Desktop/Poly/Year 3/Year 3 Sem 2/DevOps/Assignment/SimpCity/test
+plugins: mock-3.6.1, web3-5.25.0, cov-3.0.0
+collected 16 items
+
+blackBox_test.py ................                                        [100%]
+
+==================================== PASSES ====================================
+_____________________________ test_TC_CS_BP_SG_001 _____________________________
+----------------------------- Captured stdout call -----------------------------
+
+Welcome, mayor of Simp City!
+----------------------------
+1. Start new game
+2. Load saved game
+3. Options
+
+0. Exit
+
+You selected option 3
+
+SimpCity Game Options
+---------------------
+1. Choose Building Pool
+
+0. Return to Main Menu
+
+You selected option 1
+
+Choose Building Pool
+--------------------
+1. Beach
+2. Factory
+3. Highway
+4. House
+5. Shop
+6. Monument
+7. Park 
+
+0. Return to Option Menu
+
+Current Building Pool: BCH,FAC,HSE,SHP,HWY
+Sucessfully updated building pool!
+
+Choose Building Pool
+--------------------
+1. Beach
+2. Factory
+3. Highway
+4. House
+5. Shop
+6. Monument
+7. Park 
+
+0. Return to Option Menu
+
+Current Building Pool: BCH,FAC,HWY,MON,PRK
+
+---- Back to Option Menu ----
+
+SimpCity Game Options
+---------------------
+1. Choose Building Pool
+
+0. Return to Main Menu
+
+
+---- Back to Main Menu ----
+
+Welcome, mayor of Simp City!
+----------------------------
+1. Start new game
+2. Load saved game
+3. Options
+
+0. Exit
+
+You selected option 1
+
+Turn: 1
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1|     |     |     |     | 	 BCH: 8
+ +-----+-----+-----+-----+
+2|     |     |     |     | 	 FAC: 8
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HWY: 8
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 MON: 8
+ +-----+-----+-----+-----+
+				 PRK: 8
+
+1. Build a HWY
+2. Build a FAC
+3. See current score
+
+4. Save game
+0. Exit to main menu
+You selected option 0
+Returning to main menu...
+
+Welcome, mayor of Simp City!
+----------------------------
+1. Start new game
+2. Load saved game
+3. Options
+
+0. Exit
+
+---- Game Ended ----
+_____________________________ test_TC_CS_BP_SG_002 _____________________________
+----------------------------- Captured stdout call -----------------------------
+
+Welcome, mayor of Simp City!
+----------------------------
+1. Start new game
+2. Load saved game
+3. Options
+
+0. Exit
+
+You selected option 3
+
+SimpCity Game Options
+---------------------
+1. Choose Building Pool
+
+0. Return to Main Menu
+
+You selected option 1
+
+Choose Building Pool
+--------------------
+1. Beach
+2. Factory
+3. Highway
+4. House
+5. Shop
+6. Monument
+7. Park 
+
+0. Return to Option Menu
+
+Current Building Pool: BCH,FAC,HSE,SHP,HWY
+Sucessfully updated building pool!
+
+Choose Building Pool
+--------------------
+1. Beach
+2. Factory
+3. Highway
+4. House
+5. Shop
+6. Monument
+7. Park 
+
+0. Return to Option Menu
+
+Current Building Pool: BCH,FAC,HWY,MON,PRK
+
+---- Back to Option Menu ----
+
+SimpCity Game Options
+---------------------
+1. Choose Building Pool
+
+0. Return to Main Menu
+
+
+---- Back to Main Menu ----
+
+Welcome, mayor of Simp City!
+----------------------------
+1. Start new game
+2. Load saved game
+3. Options
+
+0. Exit
+
+You selected option 1
+
+Turn: 1
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1|     |     |     |     | 	 BCH: 8
+ +-----+-----+-----+-----+
+2|     |     |     |     | 	 FAC: 8
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HWY: 8
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 MON: 8
+ +-----+-----+-----+-----+
+				 PRK: 8
+
+1. Build a PRK
+2. Build a MON
+3. See current score
+
+4. Save game
+0. Exit to main menu
+You selected option 0
+Returning to main menu...
+
+Welcome, mayor of Simp City!
+----------------------------
+1. Start new game
+2. Load saved game
+3. Options
+
+0. Exit
+
+---- Game Ended ----
+_____________________________ test_TC_CS_BP_SG_003 _____________________________
+----------------------------- Captured stdout call -----------------------------
+
+Welcome, mayor of Simp City!
+----------------------------
+1. Start new game
+2. Load saved game
+3. Options
+
+0. Exit
+
+You selected option 3
+
+SimpCity Game Options
+---------------------
+1. Choose Building Pool
+
+0. Return to Main Menu
+
+You selected option 1
+
+Choose Building Pool
+--------------------
+1. Beach
+2. Factory
+3. Highway
+4. House
+5. Shop
+6. Monument
+7. Park 
+
+0. Return to Option Menu
+
+Current Building Pool: BCH,FAC,HSE,SHP,HWY
+Invalid option!
+
+Choose Building Pool
+--------------------
+1. Beach
+2. Factory
+3. Highway
+4. House
+5. Shop
+6. Monument
+7. Park 
+
+0. Return to Option Menu
+
+Current Building Pool: BCH,FAC,HSE,SHP,HWY
+
+---- Back to Option Menu ----
+
+SimpCity Game Options
+---------------------
+1. Choose Building Pool
+
+0. Return to Main Menu
+
+
+---- Back to Main Menu ----
+
+Welcome, mayor of Simp City!
+----------------------------
+1. Start new game
+2. Load saved game
+3. Options
+
+0. Exit
+
+You selected option 1
+
+Turn: 1
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1|     |     |     |     | 	 BCH: 8
+ +-----+-----+-----+-----+
+2|     |     |     |     | 	 FAC: 8
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HSE: 8
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 8
+ +-----+-----+-----+-----+
+				 HWY: 8
+
+1. Build a HSE
+2. Build a HWY
+3. See current score
+
+4. Save game
+0. Exit to main menu
+_____________________________ test_TC_CS_BP_SG_004 _____________________________
+----------------------------- Captured stdout call -----------------------------
+
+Welcome, mayor of Simp City!
+----------------------------
+1. Start new game
+2. Load saved game
+3. Options
+
+0. Exit
+
+You selected option 3
+
+SimpCity Game Options
+---------------------
+1. Choose Building Pool
+
+0. Return to Main Menu
+
+You selected option 1
+
+Choose Building Pool
+--------------------
+1. Beach
+2. Factory
+3. Highway
+4. House
+5. Shop
+6. Monument
+7. Park 
+
+0. Return to Option Menu
+
+Current Building Pool: BCH,FAC,HSE,SHP,HWY
+Invalid option!
+
+Choose Building Pool
+--------------------
+1. Beach
+2. Factory
+3. Highway
+4. House
+5. Shop
+6. Monument
+7. Park 
+
+0. Return to Option Menu
+
+Current Building Pool: BCH,FAC,HSE,SHP,HWY
+
+---- Back to Option Menu ----
+
+SimpCity Game Options
+---------------------
+1. Choose Building Pool
+
+0. Return to Main Menu
+
+
+---- Back to Main Menu ----
+
+Welcome, mayor of Simp City!
+----------------------------
+1. Start new game
+2. Load saved game
+3. Options
+
+0. Exit
+
+You selected option 1
+
+Turn: 1
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1|     |     |     |     | 	 BCH: 8
+ +-----+-----+-----+-----+
+2|     |     |     |     | 	 FAC: 8
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HSE: 8
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 8
+ +-----+-----+-----+-----+
+				 HWY: 8
+
+1. Build a FAC
+2. Build a BCH
+3. See current score
+
+4. Save game
+0. Exit to main menu
+____________________________ test_TC_Grid_Fill_001 _____________________________
+----------------------------- Captured stdout call -----------------------------
+
+Turn: 1
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1|     |     |     |     | 	 BCH: 8
+ +-----+-----+-----+-----+
+2|     |     |     |     | 	 FAC: 8
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HSE: 8
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 8
+ +-----+-----+-----+-----+
+				 HWY: 8
+
+1. Build a HWY
+2. Build a FAC
+3. See current score
+
+4. Save game
+0. Exit to main menu
+
+Turn: 2
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1| HWY |     |     |     | 	 BCH: 8
+ +-----+-----+-----+-----+
+2|     |     |     |     | 	 FAC: 8
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HSE: 8
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 8
+ +-----+-----+-----+-----+
+				 HWY: 7
+
+1. Build a BCH
+2. Build a FAC
+3. See current score
+
+4. Save game
+0. Exit to main menu
+
+Turn: 3
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1| HWY | BCH |     |     | 	 BCH: 7
+ +-----+-----+-----+-----+
+2|     |     |     |     | 	 FAC: 8
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HSE: 8
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 8
+ +-----+-----+-----+-----+
+				 HWY: 7
+
+1. Build a FAC
+2. Build a HWY
+3. See current score
+
+4. Save game
+0. Exit to main menu
+
+Turn: 4
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1| HWY | BCH | FAC |     | 	 BCH: 7
+ +-----+-----+-----+-----+
+2|     |     |     |     | 	 FAC: 7
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HSE: 8
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 8
+ +-----+-----+-----+-----+
+				 HWY: 7
+
+1. Build a BCH
+2. Build a SHP
+3. See current score
+
+4. Save game
+0. Exit to main menu
+
+Turn: 5
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1| HWY | BCH | FAC | BCH | 	 BCH: 6
+ +-----+-----+-----+-----+
+2|     |     |     |     | 	 FAC: 7
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HSE: 8
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 8
+ +-----+-----+-----+-----+
+				 HWY: 7
+
+1. Build a BCH
+2. Build a SHP
+3. See current score
+
+4. Save game
+0. Exit to main menu
+
+Turn: 6
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1| HWY | BCH | FAC | BCH | 	 BCH: 6
+ +-----+-----+-----+-----+
+2| SHP |     |     |     | 	 FAC: 7
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HSE: 8
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 7
+ +-----+-----+-----+-----+
+				 HWY: 7
+
+1. Build a HSE
+2. Build a HWY
+3. See current score
+
+4. Save game
+0. Exit to main menu
+
+Turn: 7
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1| HWY | BCH | FAC | BCH | 	 BCH: 6
+ +-----+-----+-----+-----+
+2| SHP | HWY |     |     | 	 FAC: 7
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HSE: 8
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 7
+ +-----+-----+-----+-----+
+				 HWY: 6
+
+1. Build a SHP
+2. Build a BCH
+3. See current score
+
+4. Save game
+0. Exit to main menu
+
+Turn: 8
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1| HWY | BCH | FAC | BCH | 	 BCH: 5
+ +-----+-----+-----+-----+
+2| SHP | HWY | BCH |     | 	 FAC: 7
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HSE: 8
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 7
+ +-----+-----+-----+-----+
+				 HWY: 6
+
+1. Build a BCH
+2. Build a FAC
+3. See current score
+
+4. Save game
+0. Exit to main menu
+
+Turn: 9
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1| HWY | BCH | FAC | BCH | 	 BCH: 4
+ +-----+-----+-----+-----+
+2| SHP | HWY | BCH | BCH | 	 FAC: 7
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HSE: 8
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 7
+ +-----+-----+-----+-----+
+				 HWY: 6
+
+1. Build a SHP
+2. Build a HSE
+3. See current score
+
+4. Save game
+0. Exit to main menu
+
+Turn: 10
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1| HWY | BCH | FAC | BCH | 	 BCH: 4
+ +-----+-----+-----+-----+
+2| SHP | HWY | BCH | BCH | 	 FAC: 7
+ +-----+-----+-----+-----+
+3| SHP |     |     |     | 	 HSE: 8
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 6
+ +-----+-----+-----+-----+
+				 HWY: 6
+
+1. Build a HSE
+2. Build a HWY
+3. See current score
+
+4. Save game
+0. Exit to main menu
+
+Turn: 11
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1| HWY | BCH | FAC | BCH | 	 BCH: 4
+ +-----+-----+-----+-----+
+2| SHP | HWY | BCH | BCH | 	 FAC: 7
+ +-----+-----+-----+-----+
+3| SHP | HSE |     |     | 	 HSE: 7
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 6
+ +-----+-----+-----+-----+
+				 HWY: 6
+
+1. Build a HSE
+2. Build a HSE
+3. See current score
+
+4. Save game
+0. Exit to main menu
+
+Turn: 12
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1| HWY | BCH | FAC | BCH | 	 BCH: 4
+ +-----+-----+-----+-----+
+2| SHP | HWY | BCH | BCH | 	 FAC: 7
+ +-----+-----+-----+-----+
+3| SHP | HSE | HSE |     | 	 HSE: 6
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 6
+ +-----+-----+-----+-----+
+				 HWY: 6
+
+1. Build a FAC
+2. Build a HWY
+3. See current score
+
+4. Save game
+0. Exit to main menu
+
+Turn: 13
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1| HWY | BCH | FAC | BCH | 	 BCH: 4
+ +-----+-----+-----+-----+
+2| SHP | HWY | BCH | BCH | 	 FAC: 6
+ +-----+-----+-----+-----+
+3| SHP | HSE | HSE | FAC | 	 HSE: 6
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 6
+ +-----+-----+-----+-----+
+				 HWY: 6
+
+1. Build a FAC
+2. Build a HSE
+3. See current score
+
+4. Save game
+0. Exit to main menu
+
+Turn: 14
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1| HWY | BCH | FAC | BCH | 	 BCH: 4
+ +-----+-----+-----+-----+
+2| SHP | HWY | BCH | BCH | 	 FAC: 6
+ +-----+-----+-----+-----+
+3| SHP | HSE | HSE | FAC | 	 HSE: 5
+ +-----+-----+-----+-----+
+4| HSE |     |     |     | 	 SHP: 6
+ +-----+-----+-----+-----+
+				 HWY: 6
+
+1. Build a SHP
+2. Build a HWY
+3. See current score
+
+4. Save game
+0. Exit to main menu
+
+Turn: 15
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1| HWY | BCH | FAC | BCH | 	 BCH: 4
+ +-----+-----+-----+-----+
+2| SHP | HWY | BCH | BCH | 	 FAC: 6
+ +-----+-----+-----+-----+
+3| SHP | HSE | HSE | FAC | 	 HSE: 5
+ +-----+-----+-----+-----+
+4| HSE | HWY |     |     | 	 SHP: 6
+ +-----+-----+-----+-----+
+				 HWY: 5
+
+1. Build a FAC
+2. Build a HSE
+3. See current score
+
+4. Save game
+0. Exit to main menu
+
+Turn: 16
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1| HWY | BCH | FAC | BCH | 	 BCH: 4
+ +-----+-----+-----+-----+
+2| SHP | HWY | BCH | BCH | 	 FAC: 5
+ +-----+-----+-----+-----+
+3| SHP | HSE | HSE | FAC | 	 HSE: 5
+ +-----+-----+-----+-----+
+4| HSE | HWY | FAC |     | 	 SHP: 6
+ +-----+-----+-----+-----+
+				 HWY: 5
+
+1. Build a SHP
+2. Build a HWY
+3. See current score
+
+4. Save game
+0. Exit to main menu
+
+Turn: 17
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1| HWY | BCH | FAC | BCH | 	 BCH: 4
+ +-----+-----+-----+-----+
+2| SHP | HWY | BCH | BCH | 	 FAC: 5
+ +-----+-----+-----+-----+
+3| SHP | HSE | HSE | FAC | 	 HSE: 5
+ +-----+-----+-----+-----+
+4| HSE | HWY | FAC | HWY | 	 SHP: 6
+ +-----+-----+-----+-----+
+				 HWY: 4
+
+1. Build a HSE
+2. Build a SHP
+3. See current score
+
+4. Save game
+0. Exit to main menu
+____________________________ test_TC_Grid_Fill_002 _____________________________
+----------------------------- Captured stdout call -----------------------------
+
+Turn: 1
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1|     |     |     |     | 	 BCH: 8
+ +-----+-----+-----+-----+
+2|     |     |     |     | 	 FAC: 8
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HSE: 8
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 8
+ +-----+-----+-----+-----+
+				 HWY: 8
+
+1. Build a BCH
+2. Build a HSE
+3. See current score
+
+4. Save game
+0. Exit to main menu
+Please enter a valid building position!
+
+Turn: 1
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1|     |     |     |     | 	 BCH: 8
+ +-----+-----+-----+-----+
+2|     |     |     |     | 	 FAC: 8
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HSE: 8
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 8
+ +-----+-----+-----+-----+
+				 HWY: 8
+
+1. Build a HSE
+2. Build a BCH
+3. See current score
+
+4. Save game
+0. Exit to main menu
+Please enter a valid building position!
+
+Turn: 1
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1|     |     |     |     | 	 BCH: 8
+ +-----+-----+-----+-----+
+2|     |     |     |     | 	 FAC: 8
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HSE: 8
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 8
+ +-----+-----+-----+-----+
+				 HWY: 8
+
+1. Build a FAC
+2. Build a BCH
+3. See current score
+
+4. Save game
+0. Exit to main menu
+Please enter a valid building position!
+
+Turn: 1
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1|     |     |     |     | 	 BCH: 8
+ +-----+-----+-----+-----+
+2|     |     |     |     | 	 FAC: 8
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HSE: 8
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 8
+ +-----+-----+-----+-----+
+				 HWY: 8
+
+1. Build a FAC
+2. Build a HSE
+3. See current score
+
+4. Save game
+0. Exit to main menu
+Please enter a valid building position!
+
+Turn: 1
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1|     |     |     |     | 	 BCH: 8
+ +-----+-----+-----+-----+
+2|     |     |     |     | 	 FAC: 8
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HSE: 8
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 8
+ +-----+-----+-----+-----+
+				 HWY: 8
+
+1. Build a SHP
+2. Build a HSE
+3. See current score
+
+4. Save game
+0. Exit to main menu
+______________________________ test_TC_PB_BC_001 _______________________________
+----------------------------- Captured stdout call -----------------------------
+
+Turn: 1
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1|     |     |     |     | 	 BCH: 8
+ +-----+-----+-----+-----+
+2|     |     |     |     | 	 FAC: 8
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HSE: 8
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 8
+ +-----+-----+-----+-----+
+				 HWY: 8
+
+1. Build a SHP
+2. Build a BCH
+3. See current score
+
+4. Save game
+0. Exit to main menu
+
+Turn: 2
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1| BCH |     |     |     | 	 BCH: 7
+ +-----+-----+-----+-----+
+2|     |     |     |     | 	 FAC: 8
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HSE: 8
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 8
+ +-----+-----+-----+-----+
+				 HWY: 8
+
+1. Build a HWY
+2. Build a HWY
+3. See current score
+
+4. Save game
+0. Exit to main menu
+______________________________ test_TC_PB_BC_002 _______________________________
+----------------------------- Captured stdout call -----------------------------
+
+Turn: 1
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1|     |     |     |     | 	 BCH: 8
+ +-----+-----+-----+-----+
+2|     |     |     |     | 	 FAC: 8
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HSE: 8
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 8
+ +-----+-----+-----+-----+
+				 HWY: 8
+
+1. Build a BCH
+2. Build a HWY
+3. See current score
+
+4. Save game
+0. Exit to main menu
+Please enter a valid building position!
+
+Turn: 1
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1|     |     |     |     | 	 BCH: 8
+ +-----+-----+-----+-----+
+2|     |     |     |     | 	 FAC: 8
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HSE: 8
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 8
+ +-----+-----+-----+-----+
+				 HWY: 8
+
+1. Build a FAC
+2. Build a FAC
+3. See current score
+
+4. Save game
+0. Exit to main menu
+______________________________ test_TC_PB_DS_001 _______________________________
+----------------------------- Captured stdout call -----------------------------
+
+Turn: 1
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1|     |     |     |     | 	 BCH: 8
+ +-----+-----+-----+-----+
+2|     |     |     |     | 	 FAC: 8
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HSE: 8
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 8
+ +-----+-----+-----+-----+
+				 HWY: 8
+
+1. Build a HWY
+2. Build a HSE
+3. See current score
+
+4. Save game
+0. Exit to main menu
+
+Turn: 2
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1| HWY |     |     |     | 	 BCH: 8
+ +-----+-----+-----+-----+
+2|     |     |     |     | 	 FAC: 8
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HSE: 8
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 8
+ +-----+-----+-----+-----+
+				 HWY: 7
+
+1. Build a HWY
+2. Build a BCH
+3. See current score
+
+4. Save game
+0. Exit to main menu
+
+Turn: 3
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1| HWY | HWY |     |     | 	 BCH: 8
+ +-----+-----+-----+-----+
+2|     |     |     |     | 	 FAC: 8
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HSE: 8
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 8
+ +-----+-----+-----+-----+
+				 HWY: 6
+
+1. Build a FAC
+2. Build a HWY
+3. See current score
+
+4. Save game
+0. Exit to main menu
+
+Turn: 4
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1| HWY | HWY | FAC |     | 	 BCH: 8
+ +-----+-----+-----+-----+
+2|     |     |     |     | 	 FAC: 7
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HSE: 8
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 8
+ +-----+-----+-----+-----+
+				 HWY: 6
+
+1. Build a HWY
+2. Build a FAC
+3. See current score
+
+4. Save game
+0. Exit to main menu
+
+Turn: 5
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1| HWY | HWY | FAC | HWY | 	 BCH: 8
+ +-----+-----+-----+-----+
+2|     |     |     |     | 	 FAC: 7
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HSE: 8
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 8
+ +-----+-----+-----+-----+
+				 HWY: 5
+
+1. Build a SHP
+2. Build a FAC
+3. See current score
+
+4. Save game
+0. Exit to main menu
+
+Turn: 6
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1| HWY | HWY | FAC | HWY | 	 BCH: 8
+ +-----+-----+-----+-----+
+2| FAC |     |     |     | 	 FAC: 6
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HSE: 8
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 8
+ +-----+-----+-----+-----+
+				 HWY: 5
+
+1. Build a BCH
+2. Build a HSE
+3. See current score
+
+4. Save game
+0. Exit to main menu
+
+Turn: 7
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1| HWY | HWY | FAC | HWY | 	 BCH: 8
+ +-----+-----+-----+-----+
+2| FAC | HSE |     |     | 	 FAC: 6
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HSE: 7
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 8
+ +-----+-----+-----+-----+
+				 HWY: 5
+
+1. Build a HWY
+2. Build a BCH
+3. See current score
+
+4. Save game
+0. Exit to main menu
+
+Turn: 8
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1| HWY | HWY | FAC | HWY | 	 BCH: 7
+ +-----+-----+-----+-----+
+2| FAC | HSE | BCH |     | 	 FAC: 6
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HSE: 7
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 8
+ +-----+-----+-----+-----+
+				 HWY: 5
+
+1. Build a HSE
+2. Build a SHP
+3. See current score
+
+4. Save game
+0. Exit to main menu
+
+Turn: 9
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1| HWY | HWY | FAC | HWY | 	 BCH: 7
+ +-----+-----+-----+-----+
+2| FAC | HSE | BCH | SHP | 	 FAC: 6
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HSE: 7
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 7
+ +-----+-----+-----+-----+
+				 HWY: 5
+
+1. Build a FAC
+2. Build a HSE
+3. See current score
+
+4. Save game
+0. Exit to main menu
+You selected option 3
+BCH: 1 = 1
+FAC: 2 + 2 = 4
+HSE: 1 = 1
+SHP: 3 = 3
+HWY: 2 + 2 + 1 = 5
+
+Total Score: 14
+
+Turn: 9
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1| HWY | HWY | FAC | HWY | 	 BCH: 7
+ +-----+-----+-----+-----+
+2| FAC | HSE | BCH | SHP | 	 FAC: 6
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HSE: 7
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 7
+ +-----+-----+-----+-----+
+				 HWY: 5
+
+1. Build a FAC
+2. Build a SHP
+3. See current score
+
+4. Save game
+0. Exit to main menu
+______________________________ test_TC_PB_DS_002 _______________________________
+----------------------------- Captured stdout call -----------------------------
+
+Turn: 1
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1|     |     |     |     | 	 BCH: 8
+ +-----+-----+-----+-----+
+2|     |     |     |     | 	 FAC: 8
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HSE: 8
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 8
+ +-----+-----+-----+-----+
+				 HWY: 8
+
+1. Build a HSE
+2. Build a SHP
+3. See current score
+
+4. Save game
+0. Exit to main menu
+Please enter a valid building position!
+
+Turn: 1
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1|     |     |     |     | 	 BCH: 8
+ +-----+-----+-----+-----+
+2|     |     |     |     | 	 FAC: 8
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HSE: 8
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 8
+ +-----+-----+-----+-----+
+				 HWY: 8
+
+1. Build a HWY
+2. Build a HSE
+3. See current score
+
+4. Save game
+0. Exit to main menu
+Please enter a valid building position!
+
+Turn: 1
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1|     |     |     |     | 	 BCH: 8
+ +-----+-----+-----+-----+
+2|     |     |     |     | 	 FAC: 8
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HSE: 8
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 8
+ +-----+-----+-----+-----+
+				 HWY: 8
+
+1. Build a HWY
+2. Build a BCH
+3. See current score
+
+4. Save game
+0. Exit to main menu
+Please enter a valid building position!
+
+Turn: 1
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1|     |     |     |     | 	 BCH: 8
+ +-----+-----+-----+-----+
+2|     |     |     |     | 	 FAC: 8
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HSE: 8
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 8
+ +-----+-----+-----+-----+
+				 HWY: 8
+
+1. Build a FAC
+2. Build a BCH
+3. See current score
+
+4. Save game
+0. Exit to main menu
+Please enter a valid building position!
+
+Turn: 1
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1|     |     |     |     | 	 BCH: 8
+ +-----+-----+-----+-----+
+2|     |     |     |     | 	 FAC: 8
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HSE: 8
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 8
+ +-----+-----+-----+-----+
+				 HWY: 8
+
+1. Build a HSE
+2. Build a HWY
+3. See current score
+
+4. Save game
+0. Exit to main menu
+You selected option 3
+BCH: 0 = 0
+FAC: 0 = 0
+HSE: 0 = 0
+SHP: 0 = 0
+HWY: 0 = 0
+
+Total Score: 0
+
+Turn: 1
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1|     |     |     |     | 	 BCH: 8
+ +-----+-----+-----+-----+
+2|     |     |     |     | 	 FAC: 8
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HSE: 8
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 8
+ +-----+-----+-----+-----+
+				 HWY: 8
+
+1. Build a FAC
+2. Build a BCH
+3. See current score
+
+4. Save game
+0. Exit to main menu
+_______________________________ test_TC_Exit_001 _______________________________
+----------------------------- Captured stdout call -----------------------------
+
+Welcome, mayor of Simp City!
+----------------------------
+1. Start new game
+2. Load saved game
+3. Options
+
+0. Exit
+
+You selected option 1
+
+Turn: 1
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1|     |     |     |     | 	 BCH: 8
+ +-----+-----+-----+-----+
+2|     |     |     |     | 	 FAC: 8
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HSE: 8
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 8
+ +-----+-----+-----+-----+
+				 HWY: 8
+
+1. Build a SHP
+2. Build a BCH
+3. See current score
+
+4. Save game
+0. Exit to main menu
+You selected option 0
+Returning to main menu...
+
+Welcome, mayor of Simp City!
+----------------------------
+1. Start new game
+2. Load saved game
+3. Options
+
+0. Exit
+
+---- Game Ended ----
+_______________________________ test_TC_Exit_002 _______________________________
+----------------------------- Captured stdout call -----------------------------
+
+Welcome, mayor of Simp City!
+----------------------------
+1. Start new game
+2. Load saved game
+3. Options
+
+0. Exit
+
+You selected option 1
+
+Turn: 1
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1|     |     |     |     | 	 BCH: 8
+ +-----+-----+-----+-----+
+2|     |     |     |     | 	 FAC: 8
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HSE: 8
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 8
+ +-----+-----+-----+-----+
+				 HWY: 8
+
+1. Build a HSE
+2. Build a HWY
+3. See current score
+
+4. Save game
+0. Exit to main menu
+You selected option 0
+Returning to main menu...
+
+Welcome, mayor of Simp City!
+----------------------------
+1. Start new game
+2. Load saved game
+3. Options
+
+0. Exit
+
+Invalid option!
+
+Welcome, mayor of Simp City!
+----------------------------
+1. Start new game
+2. Load saved game
+3. Options
+
+0. Exit
+
+_______________________________ test_TC_Exit_003 _______________________________
+----------------------------- Captured stdout call -----------------------------
+
+Welcome, mayor of Simp City!
+----------------------------
+1. Start new game
+2. Load saved game
+3. Options
+
+0. Exit
+
+You selected option 1
+
+Turn: 1
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1|     |     |     |     | 	 BCH: 8
+ +-----+-----+-----+-----+
+2|     |     |     |     | 	 FAC: 8
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HSE: 8
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 8
+ +-----+-----+-----+-----+
+				 HWY: 8
+
+1. Build a SHP
+2. Build a FAC
+3. See current score
+
+4. Save game
+0. Exit to main menu
+Invalid option!
+
+Turn: 1
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1|     |     |     |     | 	 BCH: 8
+ +-----+-----+-----+-----+
+2|     |     |     |     | 	 FAC: 8
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HSE: 8
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 8
+ +-----+-----+-----+-----+
+				 HWY: 8
+
+1. Build a HSE
+2. Build a HSE
+3. See current score
+
+4. Save game
+0. Exit to main menu
+_____________________________ test_TC_SG_Exit_001 ______________________________
+----------------------------- Captured stdout call -----------------------------
+
+Welcome, mayor of Simp City!
+----------------------------
+1. Start new game
+2. Load saved game
+3. Options
+
+0. Exit
+
+You selected option 1
+
+Turn: 1
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1|     |     |     |     | 	 BCH: 8
+ +-----+-----+-----+-----+
+2|     |     |     |     | 	 FAC: 8
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HSE: 8
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 8
+ +-----+-----+-----+-----+
+				 HWY: 8
+
+1. Build a FAC
+2. Build a HSE
+3. See current score
+
+4. Save game
+0. Exit to main menu
+You selected option 0
+Returning to main menu...
+
+Welcome, mayor of Simp City!
+----------------------------
+1. Start new game
+2. Load saved game
+3. Options
+
+0. Exit
+
+---- Game Ended ----
+_____________________________ test_TC_SG_Exit_002 ______________________________
+----------------------------- Captured stdout call -----------------------------
+
+Welcome, mayor of Simp City!
+----------------------------
+1. Start new game
+2. Load saved game
+3. Options
+
+0. Exit
+
+You selected option 1
+
+Turn: 1
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1|     |     |     |     | 	 BCH: 8
+ +-----+-----+-----+-----+
+2|     |     |     |     | 	 FAC: 8
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HSE: 8
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 8
+ +-----+-----+-----+-----+
+				 HWY: 8
+
+1. Build a FAC
+2. Build a FAC
+3. See current score
+
+4. Save game
+0. Exit to main menu
+You selected option 0
+Returning to main menu...
+
+Welcome, mayor of Simp City!
+----------------------------
+1. Start new game
+2. Load saved game
+3. Options
+
+0. Exit
+
+Invalid option!
+
+Welcome, mayor of Simp City!
+----------------------------
+1. Start new game
+2. Load saved game
+3. Options
+
+0. Exit
+
+_____________________________ test_TC_SG_Exit_003 ______________________________
+----------------------------- Captured stdout call -----------------------------
+
+Welcome, mayor of Simp City!
+----------------------------
+1. Start new game
+2. Load saved game
+3. Options
+
+0. Exit
+
+You selected option 1
+
+Turn: 1
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1|     |     |     |     | 	 BCH: 8
+ +-----+-----+-----+-----+
+2|     |     |     |     | 	 FAC: 8
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HSE: 8
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 8
+ +-----+-----+-----+-----+
+				 HWY: 8
+
+1. Build a SHP
+2. Build a HWY
+3. See current score
+
+4. Save game
+0. Exit to main menu
+Invalid option!
+
+Turn: 1
+
+    A     B     C     D		 Remaining Buildings Left
+ +-----+-----+-----+-----+	 ------------------------
+1|     |     |     |     | 	 BCH: 8
+ +-----+-----+-----+-----+
+2|     |     |     |     | 	 FAC: 8
+ +-----+-----+-----+-----+
+3|     |     |     |     | 	 HSE: 8
+ +-----+-----+-----+-----+
+4|     |     |     |     | 	 SHP: 8
+ +-----+-----+-----+-----+
+				 HWY: 8
+
+1. Build a SHP
+2. Build a HSE
+3. See current score
+
+4. Save game
+0. Exit to main menu
+============================== 16 passed in 0.07s ==============================
