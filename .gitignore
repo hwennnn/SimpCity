@@ -33,6 +33,8 @@ pip-delete-this-directory.txt
 .cache
 nosetests.xml
 coverage.xml
+testing.txt
+saved_game.txt
 
 # Translations
 *.mo
@@ -40,5 +42,5 @@ coverage.xml
 #Saved game state files 
 saved_game.txt 
 .DS_Store
-
+output.txt
 CHANGELOG.md
