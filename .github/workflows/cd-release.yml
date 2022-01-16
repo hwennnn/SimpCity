@@ -65,11 +65,11 @@ jobs:
       - name: Set environment variables for version number
         run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
 
-      - name: Set previous tag
-        run: |
-          git describe --abbrev=0 --tags `git rev-list --tags --skip=1 --max-count=1`
-          echo "::set-output name=TAG_NAME::$(git describe --abbrev=0 --tags `git rev-list --tags --skip=1 --max-count=1`)"
-        id: previoustag
+      # - name: Set previous tag
+      #   run: |
+      #     git describe --abbrev=0 --tags `git rev-list --tags --skip=1 --max-count=1`
+      #     echo "::set-output name=TAG_NAME::$(git describe --abbrev=0 --tags `git rev-list --tags --skip=1 --max-count=1`)"
+      #   id: previoustag
 
       - name: Create changelog
         id: changelog
