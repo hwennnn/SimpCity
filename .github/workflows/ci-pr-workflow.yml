@@ -57,6 +57,10 @@ jobs:
           labels: worflow-failed
           body: Workflow failed for commit ${{github.sha}} @ ${{github.ref}}       
 
+    - name: Begin Black-Box Tests with Pytest
+          run: |
+            cd test; pytest --cov -v | tee output.txt; python3 output.py
+            
     - name: Publish Unit Test Results
       uses: EnricoMi/publish-unit-test-result-action@v1.24
       if: always()
