@@ -1,4 +1,4 @@
-name: SimpCity CD for Delivery
+name: SimpCity CD
 
 on:
   push:
@@ -29,6 +29,7 @@ jobs:
       - name: Begin Test with Pytest
         run: |
           cd test; pytest --cov -v --junitxml=report.xml
+
       - if: ${{failure()}}
         name: Create Issues
         uses: nashmaniac/create-issue-action@v1.1
@@ -109,6 +110,23 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           branch: release-${{ env.RELEASE_VERSION }}
+      
+      - if: ${{failure()}}       
+        name: Create Issues
+        uses: nashmaniac/create-issue-action@v1.1
+        with:
+            title: Release Failed for CD
+            token: ${{secrets.GITHUB_TOKEN}}
+            assignees: ${{github.actor}}
+            labels: worflow-failed
+            body: Workflow failed for commit ${{github.sha}} @ ${{github.ref}} 
+    
+  release-notification:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Set environment variables for version number
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
 
       - uses: actions/checkout@v2
         with:
@@ -141,3 +159,13 @@ jobs:
           from: T02Team4Bot
           body: Release version - ${{ env.RELEASE_VERSION }} has been successful. Attached are the feature completed during the sprint.
           attachments: FeatureProgression.md
+      
+      - if: ${{failure()}}       
+        name: Create Issues
+        uses: nashmaniac/create-issue-action@v1.1
+        with:
+            title: Release Notification Failed for CD
+            token: ${{secrets.GITHUB_TOKEN}}
+            assignees: ${{github.actor}}
+            labels: worflow-failed
+            body: Workflow failed for commit ${{github.sha}} @ ${{github.ref}} 
