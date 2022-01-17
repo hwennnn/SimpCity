@@ -207,7 +207,7 @@ jobs:
           push: true
           tags: |
             devops02team4/simpcity:latest
-            ghcr.io/devops02team4/simpcity:latest
+            ghcr.io/hwennnn/simpcity:latest
               
       - if: ${{failure()}}       
         name: Create Issues
