@@ -10,6 +10,7 @@ class Building(ABC):  # use absract class as the buildings have some common trai
     def getName(self):
         return self.name
 
+    # pragma: no cover
     @abstractmethod
-    def retrieveBuildingScore(self, grid):
+    def retrieveBuildingScore(self, grid):  # pragma: no cover
         pass
