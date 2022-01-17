@@ -1,5 +1,5 @@
 import pygsheets
-gc = pygsheets.authorize(service_file='/test/modular-sign-296911-116ce6ea3ff9.json')
+gc = pygsheets.authorize(service_file='modular-sign-296911-116ce6ea3ff9.json')
 
 f = open("output.txt", "r")
 file = f.readlines()
