@@ -87,7 +87,7 @@ def test_TC_CS_BP_SG_001(monkeypatch, capfd):
     game = Game()
     # Add City Size Logic
     # Select Options -> Choose Building Pool, Building Pool Selection, Exit to Options Menu, Exit to Main Menu -> Start New Game
-    tempList = ["3", "1", "1,2,3,6,7", "0", "0", "1", "0", "Y", "0"]
+    tempList = ["4", "1", "1,2,3,6,7", "0", "0", "1", "0", "Y", "0"]
 
     # Iterates through the list of options that mimics user input
     try:
@@ -109,7 +109,7 @@ def test_TC_CS_BP_SG_002(monkeypatch, capfd):
     game = Game()
     # Add City Size Logic
     # Select Options -> Choose Building Pool, Building Pool Selection, Exit to Options Menu, Exit to Main Menu -> Start New Game
-    tempList = ["3", "1", "1,2,3,6,7", "0", "0", "1", "0", "Y", "0"]
+    tempList = ["4", "1", "1,2,3,6,7", "0", "0", "1", "0", "Y", "0"]
 
     # Iterates through the list of options that mimics user input
     try:
@@ -131,7 +131,7 @@ def test_TC_CS_BP_SG_002(monkeypatch, capfd):
 def test_TC_CS_BP_SG_003(monkeypatch, capfd):
     # Add City Size Logic
     # Select Options -> Choose Building Pool, Building Pool Selection, Exit to Options Menu, Exit to Main Menu -> Start New Game
-    tempList = ["3", "1", "1,2,3,8,10", "0", "0", "1"]
+    tempList = ["4", "1", "1,2,3,8,10", "0", "0", "1"]
 
     # Iterates through the list of options that mimics user input
     try:
@@ -153,7 +153,7 @@ def test_TC_CS_BP_SG_003(monkeypatch, capfd):
 def test_TC_CS_BP_SG_004(monkeypatch, capfd):
     # Add City Size Logic
     # Select Options -> Choose Building Pool, Building Pool Selection, Exit to Options Menu, Exit to Main Menu -> Start New Game
-    tempList = ["3", "1", "1,2,3,8,10", "0", "0", "1"]
+    tempList = ["4", "1", "1,2,3,8,10", "0", "0", "1"]
 
     # Iterates through the list of options that mimics user input
     try:
@@ -197,7 +197,8 @@ def test_TC_Grid_Fill_002(monkeypatch, capfd):
     game = Game()
 
     # Randomly pick between the two building options together with an invalid coordinate
-    tempList = [str(random.randint(1,2)), "11", str(random.randint(1,2)), "!a", str(random.randint(1,2)), "1a", str(random.randint(1,2)), "!/"]
+    tempList = [str(random.randint(1, 2)), "11", str(random.randint(1, 2)), "!a", str(
+        random.randint(1, 2)), "1a", str(random.randint(1, 2)), "!/"]
 
     # Iterates through the list of options that mimics user input
     try:
@@ -220,7 +221,7 @@ def test_TC_PB_BC_001(monkeypatch, capfd):
     game = Game()
 
     # Randomly pick between the two building options together with a valid coordinate
-    tempList = [str(random.randint(1,2)), "A1"]
+    tempList = [str(random.randint(1, 2)), "A1"]
 
     # Iterates through the list of options that mimics user input
     try:
@@ -243,7 +244,7 @@ def test_TC_PB_BC_002(monkeypatch, capfd):
     game = Game()
 
     # Randomly pick between the two building options together with an invalid coordinate
-    tempList = [str(random.randint(1,2)), "!1"]
+    tempList = [str(random.randint(1, 2)), "!1"]
 
     # Iterates through the list of options that mimics user input
     try:
@@ -292,7 +293,8 @@ def test_TC_PB_DS_002(monkeypatch, capfd):
     game = Game()
 
     # tempList in this test contains only invalid coordinates
-    tempList = [str(random.randint(1,2)), "11", str(random.randint(1,2)), "!a", str(random.randint(1,2)), "1a", str(random.randint(1,2)), "!/"]
+    tempList = [str(random.randint(1, 2)), "11", str(random.randint(1, 2)), "!a", str(
+        random.randint(1, 2)), "1a", str(random.randint(1, 2)), "!/"]
 
     # Display Score
     tempList.append("3")

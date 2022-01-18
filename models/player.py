@@ -17,7 +17,8 @@ Welcome, mayor of Simp City!
 ----------------------------
 1. Start new game
 2. Load saved game
-3. Options
+3. Show high scores
+4. Options
 
 0. Exit
 """)
