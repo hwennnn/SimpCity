@@ -1,4 +1,4 @@
-name: SimpCity CD for Delivery
+name: SimpCity CD
 
 on:
   push:
@@ -29,6 +29,7 @@ jobs:
       - name: Begin Test with Pytest
         run: |
           cd test; pytest --cov -v --junitxml=report.xml
+
       - if: ${{failure()}}
         name: Create Issues
         uses: nashmaniac/create-issue-action@v1.1
@@ -109,6 +110,23 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           branch: release-${{ env.RELEASE_VERSION }}
+      
+      - if: ${{failure()}}       
+        name: Create Issues
+        uses: nashmaniac/create-issue-action@v1.1
+        with:
+            title: Release Failed for CD
+            token: ${{secrets.GITHUB_TOKEN}}
+            assignees: ${{github.actor}}
+            labels: worflow-failed
+            body: Workflow failed for commit ${{github.sha}} @ ${{github.ref}} 
+    
+  release-notification:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Set environment variables for version number
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
 
       - uses: actions/checkout@v2
         with:
@@ -141,3 +159,62 @@ jobs:
           from: T02Team4Bot
           body: Release version - ${{ env.RELEASE_VERSION }} has been successful. Attached are the feature completed during the sprint.
           attachments: FeatureProgression.md
+      
+      - if: ${{failure()}}       
+        name: Create Issues
+        uses: nashmaniac/create-issue-action@v1.1
+        with:
+            title: Release Notification Failed for CD
+            token: ${{secrets.GITHUB_TOKEN}}
+            assignees: ${{github.actor}}
+            labels: worflow-failed
+            body: Workflow failed for commit ${{github.sha}} @ ${{github.ref}} 
+
+  push-docker-image:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      
+      - name: Install Build Essentials
+        run: sudo apt-get install build-essential python-dev gcc
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1 
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Python Application Image
+        uses: docker/build-push-action@v2
+        with:
+          context: ./
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            devops02team4/simpcity:latest
+            ghcr.io/hwennnn/simpcity:latest
+              
+      - if: ${{failure()}}       
+        name: Create Issues
+        uses: nashmaniac/create-issue-action@v1.1
+        with:
+            title: Actions Failed for CD when pushing docker image
+            token: ${{secrets.GITHUB_TOKEN}}
+            assignees: ${{github.actor}}
+            labels: worflow-failed
+            body: Workflow failed for commit ${{github.sha}} @ ${{github.ref}}  

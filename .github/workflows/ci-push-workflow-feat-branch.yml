@@ -1,4 +1,4 @@
-name: SimpCity CI on Push Events (For Non-Protected Branch)
+name: SimpCity CI on Push Events (For Feature Branch)
 
 on: 
   push:
