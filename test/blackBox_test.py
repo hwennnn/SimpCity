@@ -1,4 +1,4 @@
-# Functional / Integration Test - Black Box Edition
+from logging import exception
 from models.player import Player
 from models.game import Game
 from models.grid import Grid
@@ -76,6 +76,10 @@ def buildingPlacements():
 
     return tempList
 
+
+##########################################
+##### Functional / Integration Tests #####
+##########################################
 
 # Type: Intergration
 # Description: Verifying the interaction between selecting city size, selecting building pool and starting game
@@ -417,6 +421,134 @@ def test_TC_SG_Exit_003(monkeypatch, capfd):
 
     # Iterates through the list of options that mimics user input
     try:
+        import main
+
+    # When list runs out of options, StopIteration error will happen unless game is exited with user inputs
+    except StopIteration as e:
+        pass
+
+
+##########################################
+########### UAT Functional Test ##########
+##########################################
+
+def test_UAT_TC_MainMenu_001(monkeypatch, capfd):
+    # Iterates through the list of options that mimics user input
+    # Start New Game
+
+    try:
+        import main
+
+    # When list runs out of options, OS error will happen if a input is not given with prompted
+    except OSError as e:
+        pass
+
+
+def test_UAT_TC_BuildingPool_001(monkeypatch, capfd):
+    # Add City Size Logic
+    # Select Options -> Choose Building Pool, Building Pool Selection,
+    tempList = ["3", "1", "1,2,3,6,7"]
+
+    # Iterates through the list of options that mimics user input
+    try:
+        responses = iter(tempList)
+        monkeypatch.setattr('builtins.input', lambda _: next(responses))
+        import main
+
+    # When list runs out of options, StopIteration error will happen unless game is exited with user inputs
+    except StopIteration as e:
+        pass
+
+
+def test_UAT_TC_StartGame_001(monkeypatch, capfd):
+    # Add City Size Logic
+    # Start Game
+    tempList = ["1"]
+
+    # Iterates through the list of options that mimics user input
+    try:
+        responses = iter(tempList)
+        monkeypatch.setattr('builtins.input', lambda _: next(responses))
+        import main
+
+    # When list runs out of options, StopIteration error will happen unless game is exited with user inputs
+    except StopIteration as e:
+        pass
+
+
+def test_UAT_TC_StartGame_002(monkeypatch, capfd):
+    # Add City Size Logic
+    # Attempt to Start Game with invalid option
+    tempList = ["5"]
+
+    # Iterates through the list of options that mimics user input
+    try:
+        responses = iter(tempList)
+        monkeypatch.setattr('builtins.input', lambda _: next(responses))
+        import main
+
+    # When list runs out of options, StopIteration error will happen unless game is exited with user inputs
+    except StopIteration as e:
+        pass
+
+
+def test_UAT_TC_PlaceBuilding_001(monkeypatch, capfd):
+    # Add City Size Logic
+    # Start Game, Select a random building, Place a building
+    tempList = ["1", str(random.randint(1,2)), "A1"]
+
+    # Iterates through the list of options that mimics user input
+    try:
+        responses = iter(tempList)
+        monkeypatch.setattr('builtins.input', lambda _: next(responses))
+        import main
+
+    # When list runs out of options, StopIteration error will happen unless game is exited with user inputs
+    except StopIteration as e:
+        pass
+
+
+def test_UAT_TC_PlaceBuilding_002(monkeypatch, capfd):
+    # Add City Size Logic
+    # Start Game, Select a random building, Place a building
+    tempList = ["1", str(random.randint(1,2)), "A9"]
+
+    # Iterates through the list of options that mimics user input
+    try:
+        responses = iter(tempList)
+        monkeypatch.setattr('builtins.input', lambda _: next(responses))
+        import main
+
+    # When list runs out of options, StopIteration error will happen unless game is exited with user inputs
+    except StopIteration as e:
+        pass
+
+
+def test_UAT_TC_BuildingCount_001(monkeypatch, capfd):
+    # Add City Size Logic
+    # Start Game, Select a random building, Place a building, Check building count
+    tempList = ["1", str(random.randint(1,2)), "A1"]
+
+    # Iterates through the list of options that mimics user input
+    try:
+        responses = iter(tempList)
+        monkeypatch.setattr('builtins.input', lambda _: next(responses))
+        import main
+
+    # When list runs out of options, StopIteration error will happen unless game is exited with user inputs
+    except StopIteration as e:
+        pass
+
+
+def test_UAT_TC_BuildingCount_002(monkeypatch, capfd):
+    # Add City Size Logic
+    # Start Game, Select a random building, Place a building with invalid coordinate, Check building count
+    tempList = ["1", str(random.randint(1,2)), "A9"]
+
+    # Iterates through the list of options that mimics user input
+    try:
+        responses = iter(tempList)
+        monkeypatch.setattr('builtins.input', lambda _: next(responses))
         import main
 
     # When list runs out of options, StopIteration error will happen unless game is exited with user inputs
