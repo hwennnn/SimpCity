@@ -32,7 +32,7 @@ Welcome, mayor of Simp City!
         if option == '0':
             print('---- Game Ended ----')
             self.exitGame()
-        elif len(option) == 1 and ord("1") <= ord(option) <= ord("3"):
+        elif len(option) == 1 and ord("1") <= ord(option) <= ord("4"):
             print(f"You selected option {option}")
         else:
             print('Invalid option!')
