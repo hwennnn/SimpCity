@@ -21,6 +21,9 @@ class Game:  # Game Class
                 self.player.loadGame()
 
             elif option == '3':
+                self.displayLeaderboard()
+
+            elif option == '4':
                 self.player.displayOptionMenu()
 
     def launchGame(self):
@@ -46,3 +49,6 @@ class Game:  # Game Class
 
             elif option == '4':
                 self.player.saveGame()
+
+    def displayLeaderboard(self):
+        pass
