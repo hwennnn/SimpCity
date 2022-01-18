@@ -571,11 +571,16 @@ def test_UAT_TC_SaveGame_001(monkeypatch, capfd):
     except StopIteration as e:
         pass
 
+    f = open("saved_game.txt", "r")
+    file = f.readlines()
+    for i in file:
+        print(i)
+
 
 def test_UAT_TC_GameScore_001(monkeypatch, capfd):
     # Add City Size Logic
     # Start Game, Select a random building, Place a building, Check game score
-
+    tempList = ["1", str(random.randint(1,2)), "A1", "3"]
     # Iterates through the list of options that mimics user input
     try:
         responses = iter(tempList)
@@ -589,7 +594,7 @@ def test_UAT_TC_GameScore_001(monkeypatch, capfd):
 
 def test_UAT_TC_GameScore_002(monkeypatch, capfd):
     # Add City Size Logic
-    # Start Game, Select a random building, Place a building, Check game score
+    # Start Game, Select a random building, Place a building with invalid coordinate, Check game score
     tempList = ["1", str(random.randint(1,2)), "A9", "3"]
 
     # Iterates through the list of options that mimics user input
