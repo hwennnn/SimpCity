@@ -1,5 +1,9 @@
 import pygsheets
-gc = pygsheets.authorize(service_file='modular-sign-296911-116ce6ea3ff9.json')
+# For Github Actions
+gc = pygsheets.authorize(service_file='modular-sign-296911-2bec11f42e5a.json')
+
+# For QA Testing
+# gc = pygsheets.authorize(service_file='modular-sign-296911-116ce6ea3ff9.json')
 
 f = open("output.txt", "r")
 file = f.readlines()
