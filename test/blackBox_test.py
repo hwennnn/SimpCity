@@ -1,11 +1,13 @@
-from logging import exception
+import os
+import sys
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from models.player import Player
 from models.game import Game
-from models.grid import Grid
-from models.enums import Buildings
 from models.configurations import *
 import random
 import pytest
+import time
 
 citySize = {
     0: 'A',
@@ -88,6 +90,7 @@ def buildingPlacements():
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit?pli=1#gid=768609166&range=2:2
 
 def test_TC_CS_BP_SG_001(monkeypatch, capfd):
+    start_time = time.time()
     game = Game()
     # Add City Size Logic
     # Select Options -> Choose Building Pool, Building Pool Selection, Exit to Options Menu, Exit to Main Menu -> Start New Game
@@ -101,6 +104,8 @@ def test_TC_CS_BP_SG_001(monkeypatch, capfd):
     # When list runs out of options, StopIteration error will happen unless game is exited with user inputs
     except StopIteration and SystemExit as e:
         pass
+
+    print("\n %s seconds" % (time.time() - start_time))
 
 
 # Type: Intergration
@@ -110,6 +115,7 @@ def test_TC_CS_BP_SG_001(monkeypatch, capfd):
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit?pli=1#gid=768609166&range=3:3
 
 def test_TC_CS_BP_SG_002(monkeypatch, capfd):
+    start_time = time.time() 
     game = Game()
     # Add City Size Logic
     # Select Options -> Choose Building Pool, Building Pool Selection, Exit to Options Menu, Exit to Main Menu -> Start New Game
@@ -125,6 +131,8 @@ def test_TC_CS_BP_SG_002(monkeypatch, capfd):
     except StopIteration and SystemExit as e:
         pass
 
+    print("\n %s seconds" % (time.time() - start_time))
+
 
 # Type: Intergration
 # Description: Verifying the interaction between selecting city size, selecting building pool and starting game
@@ -133,6 +141,7 @@ def test_TC_CS_BP_SG_002(monkeypatch, capfd):
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit?pli=1#gid=768609166&range=4:4
 
 def test_TC_CS_BP_SG_003(monkeypatch, capfd):
+    start_time = time.time()
     # Add City Size Logic
     # Select Options -> Choose Building Pool, Building Pool Selection, Exit to Options Menu, Exit to Main Menu -> Start New Game
     tempList = ["3", "1", "1,2,3,8,10", "0", "0", "1"]
@@ -146,6 +155,8 @@ def test_TC_CS_BP_SG_003(monkeypatch, capfd):
     # When list runs out of options, StopIteration error will happen unless game is exited with user inputs
     except StopIteration as e:
         pass
+
+    print("\n %s seconds" % (time.time() - start_time))
 
 
 # Type: Intergration
@@ -155,6 +166,7 @@ def test_TC_CS_BP_SG_003(monkeypatch, capfd):
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit?pli=1#gid=768609166&range=5:5
 
 def test_TC_CS_BP_SG_004(monkeypatch, capfd):
+    start_time = time.time()
     # Add City Size Logic
     # Select Options -> Choose Building Pool, Building Pool Selection, Exit to Options Menu, Exit to Main Menu -> Start New Game
     tempList = ["3", "1", "1,2,3,8,10", "0", "0", "1"]
@@ -169,6 +181,8 @@ def test_TC_CS_BP_SG_004(monkeypatch, capfd):
     except StopIteration as e:
         pass
 
+    print("\n %s seconds" % (time.time() - start_time))
+
 
 # Type: Functional
 # Description: Verifying the possibility of filling the grid with buildings
@@ -177,6 +191,7 @@ def test_TC_CS_BP_SG_004(monkeypatch, capfd):
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit?pli=1#gid=768609166&range=6:6
 
 def test_TC_Grid_Fill_001(monkeypatch, capfd):
+    start_time = time.time()
     game = Game()
     tempList = buildingPlacements()
 
@@ -190,6 +205,8 @@ def test_TC_Grid_Fill_001(monkeypatch, capfd):
     except StopIteration as e:
         pass
 
+    print("\n %s seconds" % (time.time() - start_time))
+
 
 # Type: Functional
 # Description: Verifying the possibility of filling the grid with buildings
@@ -198,6 +215,7 @@ def test_TC_Grid_Fill_001(monkeypatch, capfd):
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit?pli=1#gid=768609166&range=7:7
 
 def test_TC_Grid_Fill_002(monkeypatch, capfd):
+    start_time = time.time()
     game = Game()
 
     # Randomly pick between the two building options together with an invalid coordinate
@@ -213,6 +231,8 @@ def test_TC_Grid_Fill_002(monkeypatch, capfd):
     except StopIteration as e:
         pass
 
+    print("\n %s seconds" % (time.time() - start_time))
+
 
 # Type: Integration
 # Description: Verifying the interaction between placing buildings and remaining building count
@@ -221,6 +241,7 @@ def test_TC_Grid_Fill_002(monkeypatch, capfd):
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit?pli=1#gid=768609166&range=8:8
 
 def test_TC_PB_BC_001(monkeypatch, capfd):
+    start_time = time.time()
     game = Game()
 
     # Randomly pick between the two building options together with a valid coordinate
@@ -236,6 +257,8 @@ def test_TC_PB_BC_001(monkeypatch, capfd):
     except StopIteration as e:
         pass
 
+    print("\n %s seconds" % (time.time() - start_time))
+
 
 # Type: Integration
 # Description: Verifying the interaction between placing buildings and remaining building count
@@ -244,6 +267,7 @@ def test_TC_PB_BC_001(monkeypatch, capfd):
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit?pli=1#gid=768609166&range=9:9
 
 def test_TC_PB_BC_002(monkeypatch, capfd):
+    start_time = time.time()
     game = Game()
 
     # Randomly pick between the two building options together with an invalid coordinate
@@ -258,6 +282,8 @@ def test_TC_PB_BC_002(monkeypatch, capfd):
     # When list runs out of options, StopIteration error will happen unless game is exited with user inputs
     except StopIteration as e:
         pass
+    
+    print("\n %s seconds" % (time.time() - start_time))
 
 
 # Type: Integration
@@ -267,6 +293,7 @@ def test_TC_PB_BC_002(monkeypatch, capfd):
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit?pli=1#gid=768609166&range=16:16
 
 def test_TC_PB_DS_001(monkeypatch, capfd):
+    start_time = time.time()
     game = Game()
 
     # Ignoring the invalid building options and coordinates.
@@ -285,6 +312,8 @@ def test_TC_PB_DS_001(monkeypatch, capfd):
     except StopIteration as e:
         pass
 
+    print("\n %s seconds" % (time.time() - start_time))
+
 
 # Type: Integration
 # Description: Verifying the interaction between placing buildings and the viewing of game score
@@ -293,6 +322,7 @@ def test_TC_PB_DS_001(monkeypatch, capfd):
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit?pli=1#gid=768609166&range=17:17
 
 def test_TC_PB_DS_002(monkeypatch, capfd):
+    start_time = time.time()
     game = Game()
 
     # tempList in this test contains only invalid coordinates
@@ -311,6 +341,8 @@ def test_TC_PB_DS_002(monkeypatch, capfd):
     except StopIteration as e:
         pass
 
+    print("\n %s seconds" % (time.time() - start_time))
+
 
 # Type: Functional
 # Description: Verifying the interaction between exiting from both Game and Main menu
@@ -319,6 +351,7 @@ def test_TC_PB_DS_002(monkeypatch, capfd):
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit?pli=1#gid=768609166&range=22:22
 
 def test_TC_Exit_001(monkeypatch, capfd):
+    start_time = time.time()
     # Iterates through the list of options that mimics user input
     # Start New Game -> Exit to Main Menu -> Confirm -> Exit
     responses = iter(["1", "0", "Y", "0"])
@@ -330,6 +363,8 @@ def test_TC_Exit_001(monkeypatch, capfd):
     # Make sure that program is exited from system
     assert e.type == SystemExit
     assert e.value.code == 0
+    
+    print("\n %s seconds" % (time.time() - start_time))
 
 
 # Type: Functional
@@ -339,6 +374,7 @@ def test_TC_Exit_001(monkeypatch, capfd):
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit?pli=1#gid=768609166&range=23:23
 
 def test_TC_Exit_002(monkeypatch, capfd):
+    start_time = time.time()
     # Iterates through the list of options that mimics user input
     try:
         # Start New Game -> Exit to Main Menu -> Confirm -> [Invalid Option]
@@ -350,6 +386,8 @@ def test_TC_Exit_002(monkeypatch, capfd):
     except StopIteration as e:
         pass
 
+    print("\n %s seconds" % (time.time() - start_time))
+
 
 # Type: Functional
 # Description: Verifying the interaction between exiting from both Game and Main menu
@@ -358,6 +396,7 @@ def test_TC_Exit_002(monkeypatch, capfd):
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit?pli=1#gid=768609166&range=24:24
 
 def test_TC_Exit_003(monkeypatch, capfd):
+    start_time = time.time()
     # Iterates through the list of options that mimics user input
     try:
         # Start New Game -> [Invalid Option]
@@ -369,6 +408,8 @@ def test_TC_Exit_003(monkeypatch, capfd):
     except StopIteration as e:
         pass
 
+    print("\n %s seconds" % (time.time() - start_time))
+
 
 # Type: Integration
 # Description: Verifying the interaction between starting a new game and exit immediately
@@ -377,6 +418,7 @@ def test_TC_Exit_003(monkeypatch, capfd):
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit?pli=1#gid=768609166&range=25:25
 
 def test_TC_SG_Exit_001(monkeypatch, capfd):
+    start_time = time.time()
     # Iterates through the list of options that mimics user input
     # Start New Game -> Exit to Main Menu -> Confirm -> Exit
     responses = iter(["1", "0", "Y", "0"])
@@ -387,6 +429,8 @@ def test_TC_SG_Exit_001(monkeypatch, capfd):
     assert e.type == SystemExit
     assert e.value.code == 0
 
+    print("\n %s seconds" % (time.time() - start_time))
+
 
 # Type: Integration
 # Description: Verifying the interaction between starting a new game and exit immediately
@@ -395,6 +439,7 @@ def test_TC_SG_Exit_001(monkeypatch, capfd):
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit?pli=1#gid=768609166&range=26:26
 
 def test_TC_SG_Exit_002(monkeypatch, capfd):
+    start_time = time.time()
     # Start New Game -> Exit to Main Menu -> Confirm -> [Invalid Option]
     responses = iter(["1", "0", "Y", "5"])
     monkeypatch.setattr('builtins.input', lambda _: next(responses))
@@ -406,6 +451,8 @@ def test_TC_SG_Exit_002(monkeypatch, capfd):
     except StopIteration as e:
         pass
 
+    print("\n %s seconds" % (time.time() - start_time))
+
 
 # Type: Functional
 # Description: Verifying the interaction between starting a new game and exit immediately
@@ -414,6 +461,7 @@ def test_TC_SG_Exit_002(monkeypatch, capfd):
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit?pli=1#gid=768609166&range=27:27
 
 def test_TC_SG_Exit_003(monkeypatch, capfd):
+    start_time = time.time()
     # Iterates through the list of options that mimics user input
     # Start New Game -> [Invalid Option]
     responses = iter(["1", "9"])
@@ -427,6 +475,8 @@ def test_TC_SG_Exit_003(monkeypatch, capfd):
     except StopIteration as e:
         pass
 
+    print("\n %s seconds" % (time.time() - start_time))
+
 
 ##########################################
 ########### UAT Functional Test ##########
@@ -439,15 +489,17 @@ def test_TC_SG_Exit_003(monkeypatch, capfd):
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit#gid=1826582149&range=2:2
 
 def test_UAT_TC_MainMenu_001(monkeypatch, capfd):
-    # Iterates through the list of options that mimics user input
-    # Start New Game
+    start_time = time.time()
 
+    # Start New Game
     try:
         import main
 
     # When list runs out of options, OS error will happen if a input is not given with prompted
     except OSError as e:
         pass
+
+    print("\n%s seconds" % (time.time() - start_time))
 
 
 # Type: Functional
@@ -457,7 +509,7 @@ def test_UAT_TC_MainMenu_001(monkeypatch, capfd):
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit#gid=1826582149&range=4:4
 
 def test_UAT_TC_BuildingPool_001(monkeypatch, capfd):
-    # Add City Size Logic
+    start_time = time.time()
     # Select Options -> Choose Building Pool, Building Pool Selection
     tempList = ["3", "1", "1,2,3,6,7"]
 
@@ -471,6 +523,8 @@ def test_UAT_TC_BuildingPool_001(monkeypatch, capfd):
     except StopIteration as e:
         pass
 
+    print("\n%s seconds" % (time.time() - start_time))
+
 
 # Type: Functional
 # Description: Verify that user can select building pool
@@ -479,7 +533,7 @@ def test_UAT_TC_BuildingPool_001(monkeypatch, capfd):
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit#gid=1826582149&range=5:5
 
 def test_UAT_TC_BuildingPool_002(monkeypatch, capfd):
-    # Add City Size Logic
+    start_time = time.time()
     # Select Options -> Choose Building Pool, Building Pool Selection
     tempList = ["3", "1", "1,2,3,8,10"]
 
@@ -493,6 +547,8 @@ def test_UAT_TC_BuildingPool_002(monkeypatch, capfd):
     except StopIteration as e:
         pass
 
+    print("\n%s seconds" % (time.time() - start_time))
+
 
 # Type: Functional
 # Description: Verify that user can a start a game
@@ -500,7 +556,8 @@ def test_UAT_TC_BuildingPool_002(monkeypatch, capfd):
 # Test Data: Valid Main Menu Option - 1
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit#gid=1826582149&range=6:6
 
-def test_UAT_TC_StartGame_001(monkeypatch, capfd):
+def test_UAT_TC_StartGame_001(monkeypatch):
+    start_time = time.time()
     # Start Game
     tempList = ["1"]
 
@@ -514,6 +571,8 @@ def test_UAT_TC_StartGame_001(monkeypatch, capfd):
     except StopIteration as e:
         pass
 
+    print("\n%s seconds" % (time.time() - start_time))
+
 
 # Type: Functional
 # Description: Verify that user can a start a game
@@ -522,6 +581,7 @@ def test_UAT_TC_StartGame_001(monkeypatch, capfd):
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit#gid=1826582149&range=7:7
 
 def test_UAT_TC_StartGame_002(monkeypatch, capfd):
+    start_time = time.time()
     # Attempt to Start Game with invalid option
     tempList = ["5"]
 
@@ -535,6 +595,8 @@ def test_UAT_TC_StartGame_002(monkeypatch, capfd):
     except StopIteration as e:
         pass
 
+    print("\n %s seconds" % (time.time() - start_time))
+
 
 # Type: Functional
 # Description: Verify that user can place building on desired coordinate
@@ -543,7 +605,7 @@ def test_UAT_TC_StartGame_002(monkeypatch, capfd):
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit#gid=1826582149&range=8:8
 
 def test_UAT_TC_PlaceBuilding_001(monkeypatch, capfd):
-    # Add City Size Logic
+    start_time = time.time()
     # Start Game, Select a random building, Place a building
     tempList = ["1", str(random.randint(1,2)), "A1"]
 
@@ -557,6 +619,8 @@ def test_UAT_TC_PlaceBuilding_001(monkeypatch, capfd):
     except StopIteration as e:
         pass
 
+    print("\n%s seconds" % (time.time() - start_time))
+
 
 # Type: Functional
 # Description: Verify that user can place building on desired coordinate
@@ -565,7 +629,7 @@ def test_UAT_TC_PlaceBuilding_001(monkeypatch, capfd):
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit#gid=1826582149&range=9:9
 
 def test_UAT_TC_PlaceBuilding_002(monkeypatch, capfd):
-    # Add City Size Logic
+    start_time = time.time()
     # Start Game, Select a random building, Place a building
     tempList = ["1", str(random.randint(1,2)), "A9"]
 
@@ -579,6 +643,8 @@ def test_UAT_TC_PlaceBuilding_002(monkeypatch, capfd):
     except StopIteration as e:
         pass
 
+    print("\n%s seconds" % (time.time() - start_time))
+
 
 # Type: Functional
 # Description: Verify that user can see remaining building its count
@@ -587,7 +653,7 @@ def test_UAT_TC_PlaceBuilding_002(monkeypatch, capfd):
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit#gid=1826582149&range=10:10
 
 def test_UAT_TC_BuildingCount_001(monkeypatch, capfd):
-    # Add City Size Logic
+    start_time = time.time()
     # Start Game, Select a random building, Place a building, Check building count
     tempList = ["1", str(random.randint(1,2)), "A1"]
 
@@ -601,6 +667,8 @@ def test_UAT_TC_BuildingCount_001(monkeypatch, capfd):
     except StopIteration as e:
         pass
 
+    print("\n%s seconds" % (time.time() - start_time))
+
 
 # Type: Functional
 # Description: Verify that user can see remaining building its count
@@ -609,7 +677,7 @@ def test_UAT_TC_BuildingCount_001(monkeypatch, capfd):
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit#gid=1826582149&range=11:11
 
 def test_UAT_TC_BuildingCount_002(monkeypatch, capfd):
-    # Add City Size Logic
+    start_time = time.time()
     # Start Game, Select a random building, Place a building with invalid coordinate, Check building count
     tempList = ["1", str(random.randint(1,2)), "A9"]
 
@@ -623,6 +691,8 @@ def test_UAT_TC_BuildingCount_002(monkeypatch, capfd):
     except StopIteration as e:
         pass
 
+    print("\n%s seconds" % (time.time() - start_time))
+
 
 # Type: Functional
 # Description: Verify that user can save game
@@ -631,7 +701,7 @@ def test_UAT_TC_BuildingCount_002(monkeypatch, capfd):
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit#gid=1826582149&range=12:12
 
 def test_UAT_TC_SaveGame_001(monkeypatch, capfd):
-    # Add City Size Logic
+    start_time = time.time()
     # Start Game, Select a random building, Place a building with invalid coordinate, Save game
     tempList = ["1", str(random.randint(1,2)), "A1", "4"]
 
@@ -651,6 +721,8 @@ def test_UAT_TC_SaveGame_001(monkeypatch, capfd):
     for i in file:
         print(i)
 
+    print("\n%s seconds" % (time.time() - start_time))
+
 
 # Type: Functional
 # Description: Verify that game score can be shown
@@ -659,7 +731,7 @@ def test_UAT_TC_SaveGame_001(monkeypatch, capfd):
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit#gid=1826582149&range=15:15
 
 def test_UAT_TC_GameScore_001(monkeypatch, capfd):
-    # Add City Size Logic
+    start_time = time.time()
     # Start Game, Select a random building, Place a building, Check game score
     tempList = ["1", str(random.randint(1,2)), "A1", "3"]
     # Iterates through the list of options that mimics user input
@@ -672,6 +744,8 @@ def test_UAT_TC_GameScore_001(monkeypatch, capfd):
     except StopIteration as e:
         pass
 
+    print("\n%s seconds" % (time.time() - start_time))
+
 
 # Type: Functional
 # Description: Verify that game score can be shown
@@ -680,7 +754,7 @@ def test_UAT_TC_GameScore_001(monkeypatch, capfd):
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit#gid=1826582149&range=16:16
 
 def test_UAT_TC_GameScore_002(monkeypatch, capfd):
-    # Add City Size Logic
+    start_time = time.time()
     # Start Game, Select a random building, Place a building with invalid coordinate, Check game score
     tempList = ["1", str(random.randint(1,2)), "A9", "3"]
 
@@ -693,3 +767,6 @@ def test_UAT_TC_GameScore_002(monkeypatch, capfd):
     # When list runs out of options, StopIteration error will happen unless game is exited with user inputs
     except StopIteration as e:
         pass
+
+    print("\n%s seconds" % (time.time() - start_time))
+
