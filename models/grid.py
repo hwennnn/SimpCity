@@ -13,7 +13,7 @@ class Grid:  # Grid Class
         self.availableBuildings = AvailableBuildings()
 
     def isPositionXValid(self, x):
-        return len(x) == 1 and ord('A') <= ord(x.upper()) <= ord('D')
+        return len(x) == 1 and ord('A') <= ord(x.upper()) <= ord('A') + (self.colCount - 1)
 
     def isPositionYValid(self, y):
         return len(y) == 1 and y.isnumeric() and 1 <= int(y) <= self.rowCount
@@ -42,7 +42,7 @@ class Grid:  # Grid Class
         adjacentPositions = [(x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)]
 
         for dx, dy in adjacentPositions:
-            if 0 <= dx < 4 and 0 <= dy < 4 and self.hasBuildingOnPosition(dx, dy):
+            if 0 <= dx < 6 and 0 <= dy < 6 and self.hasBuildingOnPosition(dx, dy):
                 return True
 
         return False

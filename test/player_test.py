@@ -307,7 +307,8 @@ validGridSizes = [
 
 @pytest.mark.parametrize("gridSize, expectedResult", validGridSizes)
 def test_validateGridSize(capfd, gridSize, expectedResult):
-    player_test.validateGridSize(gridSize)
+    player = Player()
+    player.validateGridSize(gridSize)
     out, _ = capfd.readouterr()
     assert expectedResult in out
     
@@ -348,9 +349,10 @@ validGridSizeDisplay = [
 
 @pytest.mark.parametrize("gridSize, gridOutput", validGridSizeDisplay)
 def test_displayGridSize(capfd, gridSize, gridOutput):
+    player = Player()
     x, y = gridSize
-    player_test.updateGridSize(str(x) + ',' + str(y))
-    player_test.displayGrid()
+    player.updateGridSize(str(x) + ',' + str(y))
+    player.displayGrid()
 
     out, _ = capfd.readouterr()
     assert gridOutput in out
@@ -374,6 +376,7 @@ failingGridSizes = [
 
 @pytest.mark.parametrize("gridSize, expectedResult", validGridSizes)
 def test_validateGridSize(capfd, gridSize, expectedResult):
-    player_test.validateGridSize(gridSize)
+    player = Player()
+    player.validateGridSize(gridSize)
     out, _ = capfd.readouterr()
     assert expectedResult in out

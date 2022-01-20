@@ -174,6 +174,7 @@ def test_TC_CS_BP_SG_004(monkeypatch, capfd):
 
 def test_TC_Grid_Fill_001(monkeypatch, capfd):
     game = Game()
+    game.player.grid.updateGridSize(6, 6)
     tempList = buildingPlacements()
 
     # Iterates through the list of options that mimics user input
@@ -195,6 +196,7 @@ def test_TC_Grid_Fill_001(monkeypatch, capfd):
 
 def test_TC_Grid_Fill_002(monkeypatch, capfd):
     game = Game()
+    game.player.grid.updateGridSize(6, 6)
 
     # Randomly pick between the two building options together with an invalid coordinate
     tempList = [str(random.randint(1,2)), "11", str(random.randint(1,2)), "!a", str(random.randint(1,2)), "1a", str(random.randint(1,2)), "!/"]
@@ -264,6 +266,7 @@ def test_TC_PB_BC_002(monkeypatch, capfd):
 
 def test_TC_PB_DS_001(monkeypatch, capfd):
     game = Game()
+    game.player.grid.updateGridSize(6, 6)
 
     # Ignoring the invalid building options and coordinates.
     # tempList in this test contains only half of the all coordinates possible
