@@ -54,8 +54,10 @@ class Grid:  # Grid Class
         # convert the user input to 0-indexed for array processing
         self.grid[x][y] = self.createBuilding(buildingName, x, y)
 
-    def updateGridSize(self, size):
-        pass
+    def updateGridSize(self, x, y):
+        self.rowCount = int(y)
+        self.colCount = int(x)
+        self.initializeGrid()
 
     def createBuilding(self, buildingName, x, y):
         match buildingName:
@@ -194,38 +196,64 @@ class Grid:  # Grid Class
         self.availableBuildings.displayAvailableBuilding()
 
     # displays the grid and adapts to each building type
-    # will be reformatted in later sprint for adaptability to grid size
     def displayGrid(self):
-        print("\n    A     B     C     D\t\t Remaining Buildings Left\n +-----+-----+-----+-----+\t ------------------------")
-        for i in range(self.rowCount):
-            rowline = "{0}| ".format(i + 1)
-            for build in self.grid[i]:
-                if build is None:
-                    rowline += "    | "
+        columnIndication = "\n   "
+        upperGridline = " +"
+        for y in range(self.colCount):
+            columnIndication += "  "+chr(65 + y)+"   "
+            upperGridline += "-----+"
+        columnIndication += "\t Remaining Buildings\n"
+        upperGridline += "\t -------------------"
+        print(columnIndication, upperGridline)
+        for x in range(self.rowCount):
+            lastRemainingBuilding = ""
+            row = str(x + 1) + " |"
+            lowerGridline = "  +"
+            for building in self.grid[x]:
+                if building is None:
+                    row += "     |"
                 else:
-                    match build.getName():
+                    match building.getName():
                         case Buildings.BEACH.value:
-                            rowline += Buildings.BEACH.value + " | "
+                            row += " " + Buildings.BEACH.value + " |"
                         case Buildings.FACTORY.value:
-                            rowline += Buildings.FACTORY.value + " | "
+                            row += " " + Buildings.FACTORY.value + " |"
                         case Buildings.HIGHWAY.value:
-                            rowline += Buildings.HIGHWAY.value + " | "
+                            row += " " + Buildings.HIGHWAY.value + " |"
                         case Buildings.HOUSE.value:
-                            rowline += Buildings.HOUSE.value + " | "
+                            row += " " + Buildings.HOUSE.value + " |"
                         case Buildings.SHOP.value:
-                            rowline += Buildings.SHOP.value + " | "
+                            row += " " + Buildings.SHOP.value + " |"
                         case Buildings.MONUMENT.value:
-                            rowline += Buildings.MONUMENT.value + " | "
+                            row += " " + Buildings.MONUMENT.value + " |"
                         case Buildings.PARK.value:
-                            rowline += Buildings.PARK.value + " | "
+                            row += " " + Buildings.PARK.value + " |"
                         # raise exception if the building input cannot be found in the cases
                         case _:
                             raise Exception()
-            print("{0}\t {1}: {2}\n +-----+-----+-----+-----+".format(rowline,
-                                                                      self.availableBuildings.buildings[i],
-                                                                      self.availableBuildings.availability[i]))
-        print("\t\t\t\t {0}: {1}".format(
-            self.availableBuildings.buildings[4], self.availableBuildings.availability[4]))
+                lowerGridline += "-----+"
+            if self.rowCount <= 2:
+                row += f"\t {self.availableBuildings.buildings[x * 2]}: {self.availableBuildings.availability[x * 2]}"
+                lowerGridline += f"\t {self.availableBuildings.buildings[x * 2 + 1]}: {self.availableBuildings.availability[x * 2 + 1]}"
+                for y in range(self.colCount):
+                    lastRemainingBuilding += "\t"
+                lastRemainingBuilding += f" {self.availableBuildings.buildings[4]}: {self.availableBuildings.availability[4]}\n" 
+
+                print(row)
+                print(lowerGridline)
+                if x == 1:
+                    print(lastRemainingBuilding)
+                
+            else:
+                row += f"\t {self.availableBuildings.buildings[x * 2]}: {self.availableBuildings.availability[x * 2]}" \
+                    if x < 2 else ""
+                row += f"\t {self.availableBuildings.buildings[4]}: {self.availableBuildings.availability[4]}" \
+                    if x == 2 else ""
+                lowerGridline += f"\t {self.availableBuildings.buildings[x * 2 + 1]}: {self.availableBuildings.availability[x * 2 + 1]}" \
+                    if x < 2 else "\n" if x == self.rowCount - 1 else ""
+
+                print(row)
+                print(lowerGridline)
 
     # parses the grid as an array of string, allowing it to be written into txt file
     def parseGridAsString(self):
