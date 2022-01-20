@@ -64,11 +64,11 @@ SimpCity Game Options
 
 validOptionMenuTestData = \
     [("0", "---- Back to Main Menu ----"),
-     ("1", "You selected option 1")]
+     ("1", "You selected option 1"),
+     ("2", "You selected option 2")]
 
 invalidOptionMenuTestData = \
-    [("2", "Invalid option!"),
-     ("3", "Invalid option!"),
+    [("3", "Invalid option!"),
      ("4", "Invalid option!"),
      ("5", "Invalid option!"),
      ("10", "Invalid option!")]

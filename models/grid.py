@@ -54,6 +54,9 @@ class Grid:  # Grid Class
         # convert the user input to 0-indexed for array processing
         self.grid[x][y] = self.createBuilding(buildingName, x, y)
 
+    def updateGridSize(self, size):
+        pass
+
     def createBuilding(self, buildingName, x, y):
         match buildingName:
             case Buildings.BEACH.value:

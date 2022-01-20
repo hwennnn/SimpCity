@@ -47,6 +47,10 @@ Welcome, mayor of Simp City!
             if option == "1":
                 self.displayBuildingPoolOptionMenu()
 
+            elif option == "2":
+                gridSize = self.promptGridSize()
+                self.updateGridSize(gridSize)
+
     def displayOptionMenuHelper(self):
         print("""
 SimpCity Game Options
@@ -62,8 +66,8 @@ SimpCity Game Options
     # Validate options made in main menu
     def validateOptionMenu(self, option):
         if option == '0':
-            print('\n---- Back to Main Menu ----')
-        elif len(option) == 1 and ord("1") <= ord(option) <= ord("1"):
+            print('---- Back to Main Menu ----')
+        elif len(option) == 1 and ord("1") <= ord(option) <= ord("2"):
             print(f"You selected option {option}")
         else:
             print('Invalid option!')
@@ -120,6 +124,18 @@ Choose Building Pool
     def displayCurrentBuildingPool(self):
         self.grid.availableBuildings.displayCurrentBuildingPool()
 
+    def promptGridSize(self):
+        pass
+
+    def validateGridSize(self, option):
+        pass
+
+    def isGridSizeValid(self, gridSize):
+        pass
+
+    def updateGridSize(self, gridSize):
+        pass
+
     def gameMenuContent(self, firstBuilding, secondBuilding):
         return (
             f"""
@@ -156,21 +172,24 @@ Choose Building Pool
                     ord(option) == ord("1") else self.secondBuilding
                 self.promptEnterBuildingPosition(buildingValue)
             else:
-                print(f"You selected option {option}")
+                print(f"You selected option {option}\n")
         else:
             print("Invalid option!")
 
     def promptEnterBuildingPosition(self, building):
-        positions = input("Build where? ")
+        positions = input(f"\nWhere would you like to place {building} at? ")
 
         if self.grid.isPositionValid(positions):
             x, y = self.grid.retrieveParsedPosition(positions)
             if self.turns == 1 or (self.turns > 1 and self.grid.hasAdjacentBuildingsForPosition(x, y)):
+                print(f"Placing {building} at {positions}...")
                 self.grid.updateGrid(x, y, building)
                 self.grid.decreaseBuildingCount(building)
                 self.turns += 1
                 self.savedGame = False
+                print(f"{building} has been successfully placed at {positions}.")
             else:
+                print(f"Placing {building} at {positions} was unsuccessful.")
                 print("You must build next to an existing building.")
 
         else:
@@ -192,7 +211,7 @@ Choose Building Pool
 
     # Prompt player to check if they saved their game beforehand
     def promptSaveGame(self):
-        return input('\nGame has not been saved yet. Would you like to save your progress? [Y/N]: ').upper()
+        return input('Game has not been saved yet. Would you like to save your progress? [Y/N]: ').upper()
 
     # Validate options for prompting save game.
     def validateSaveGame(self, option):
