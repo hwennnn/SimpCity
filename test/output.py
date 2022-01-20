@@ -18,6 +18,7 @@ uatFunctionalTime = "H"
 # Test Data: Valid City Size / Valid Building Pool
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit?pli=1#gid=768609166&range=2:2
 
+
 def TC_CS_BP_SG_001():
     # Add City Size Output
 
@@ -67,7 +68,7 @@ def TC_CS_BP_SG_002():
     # Current Building Pool
     for i in file[135:148]:
         output += i
-    
+
     # Output after user input
     output += "\n"
     output += file[148]
@@ -80,7 +81,7 @@ def TC_CS_BP_SG_002():
     # Display Grid to check if remaining building is using updated building pool
     for i in file[185:198]:
         output += i
-    
+
     sh = gc.open('SimpCity Test Cases')
     wks = sh[2]
     wks.update_value(funtionalIntegrationCol + '3', output)
@@ -730,7 +731,6 @@ def UAT_TC_BuildingCount_002():
     for i in file[2033:2046]:
         output += i
 
-
     sh = gc.open('SimpCity Test Cases')
     wks = sh[1]
     wks.update_value(uatFunctionalCol + '11', output)
@@ -857,5 +857,3 @@ UAT_TC_BuildingCount_002()
 UAT_TC_SaveGame_001()
 UAT_TC_GameScore_001()
 UAT_TC_GameScore_002()
-
-

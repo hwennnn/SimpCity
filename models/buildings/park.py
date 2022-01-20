@@ -6,5 +6,5 @@ class Park(Building):
         Building.__init__(self, name, x, y)
 
     # the score calculation for park building only needs to be done once, hence it is implemented in grid.py
-    def retrieveBuildingScore(self, grid):
+    def retrieveBuildingScore(self, grid):  # pragma: no cover
         pass
