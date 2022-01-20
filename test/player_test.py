@@ -57,6 +57,7 @@ def test_displayOptionMenu(capfd):
 SimpCity Game Options
 ---------------------
 1. Choose Building Pool
+2. Adjust Grid Size
 
 0. Return to Main Menu
 """ in out
@@ -179,25 +180,6 @@ def test_updateBuildingPoolFromOption(capfd, option, expectedResult):
     out, _ = capfd.readouterr()
     assert expectedResult in out
 
-# Test the display of a empty grid
-
-
-# def test_displayGrid(capfd):
-#     player_test.displayGrid()
-#     out, _ = capfd.readouterr()
-#     assert """
-#     A     B     C     D
-#  +-----+-----+-----+-----+
-# 1|     |     |     |     |
-#  +-----+-----+-----+-----+
-# 2|     |     |     |     |
-#  +-----+-----+-----+-----+
-# 3|     |     |     |     |
-#  +-----+-----+-----+-----+
-# 4|     |     |     |     |
-#  +-----+-----+-----+-----+
-# """ in out
-
 
 exitGameTestData = \
     [("0", "---- Game Ended ----")]
@@ -292,3 +274,106 @@ def test_availableBuildings():
         assert i in range(0, 9)
 
     assert sum(player_test.grid.availableBuildings.availability) in range(24, 41)
+
+
+validGridSizes = [
+    ("2,2", "Sucessfully updated grid size!"),
+    ("2,3", "Sucessfully updated grid size!"),
+    ("2,4", "Sucessfully updated grid size!"),
+    ("2,5", "Sucessfully updated grid size!"),
+    ("2,6", "Sucessfully updated grid size!"),
+    ("3,2", "Sucessfully updated grid size!"),
+    ("3,3", "Sucessfully updated grid size!"),
+    ("3,4", "Sucessfully updated grid size!"),
+    ("3,5", "Sucessfully updated grid size!"),
+    ("3,6", "Sucessfully updated grid size!"),
+    ("4,2", "Sucessfully updated grid size!"),
+    ("4,3", "Sucessfully updated grid size!"),
+    ("4,4", "Sucessfully updated grid size!"),
+    ("4,5", "Sucessfully updated grid size!"),
+    ("4,6", "Sucessfully updated grid size!"),
+    ("5,2", "Sucessfully updated grid size!"),
+    ("5,3", "Sucessfully updated grid size!"),
+    ("5,4", "Sucessfully updated grid size!"),
+    ("5,5", "Sucessfully updated grid size!"),
+    ("5,6", "Sucessfully updated grid size!"),
+    ("6,2", "Sucessfully updated grid size!"),
+    ("6,3", "Sucessfully updated grid size!"),
+    ("6,4", "Sucessfully updated grid size!"),
+    ("6,5", "Sucessfully updated grid size!"),
+    ("6,6", "Sucessfully updated grid size!")
+]
+
+
+@pytest.mark.parametrize("gridSize, expectedResult", validGridSizes)
+def test_validateGridSize(capfd, gridSize, expectedResult):
+    player_test.validateGridSize(gridSize)
+    out, _ = capfd.readouterr()
+    assert expectedResult in out
+    
+
+validGridSizeDisplay = [
+    (
+        [
+            (2, 4),
+            ("A     B")
+        ]
+    ),
+    (
+        [
+            (3, 5),
+            ("A     B     C")
+        ]
+    ),
+    (
+        [
+            (4, 2),
+            ("A     B     C     D")
+        ]
+    ),
+    (
+        [
+            (5, 6),
+            ("A     B     C     D     E")
+        ]
+    ),
+    (
+        [
+            (6, 3),
+            ("A     B     C     D     E     F")
+        ]
+    )
+]
+
+
+@pytest.mark.parametrize("gridSize, gridOutput", validGridSizeDisplay)
+def test_displayGridSize(capfd, gridSize, gridOutput):
+    x, y = gridSize
+    player_test.updateGridSize(str(x) + ',' + str(y))
+    player_test.displayGrid()
+
+    out, _ = capfd.readouterr()
+    assert gridOutput in out
+
+
+failingGridSizes = [
+    ("0,0", "Invalid Grid Size!"),
+    ("6,7", "Invalid Grid Size!"),
+    ("8,5", "Invalid Grid Size!"),
+    ("2,0", "Invalid Grid Size!"),
+    ("10,1", "Invalid Grid Size!"),
+    ("3,7", "Invalid Grid Size!"),
+    ("26,5", "Invalid Grid Size!"),
+    ("aaa,5", "Invalid Grid Size!"),
+    ("64,game", "Invalid Grid Size!"),
+    ("$,0", "Invalid Grid Size!"),
+    ("a,b", "Invalid Grid Size!"),
+    ("100,100", "Invalid Grid Size!")
+]
+
+
+@pytest.mark.parametrize("gridSize, expectedResult", validGridSizes)
+def test_validateGridSize(capfd, gridSize, expectedResult):
+    player_test.validateGridSize(gridSize)
+    out, _ = capfd.readouterr()
+    assert expectedResult in out

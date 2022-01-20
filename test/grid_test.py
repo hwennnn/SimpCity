@@ -187,3 +187,40 @@ def test_parseYPositionInput(userInput, expectedResult):
     result = player_test.grid.parseYPositionInput(userInput)
 
     assert result == expectedResult
+
+
+validGridSizes = [
+    (2, 2),
+    (2, 3),
+    (2, 4),
+    (2, 5),
+    (2, 6),
+    (3, 2),
+    (3, 3),
+    (3, 4),
+    (3, 5),
+    (3, 6),
+    (4, 2),
+    (4, 3),
+    (4, 4),
+    (4, 5),
+    (4, 6),
+    (5, 2),
+    (5, 3),
+    (5, 4),
+    (5, 5),
+    (5, 6),
+    (6, 2),
+    (6, 3),
+    (6, 4),
+    (6, 5),
+    (6, 6)
+]
+
+
+@pytest.mark.parametrize("gridSize", validGridSizes)
+def test_updateGridSize(gridSize):
+    x, y = gridSize
+    player_test.grid.updateGridSize(x, y)
+
+    assert player_test.grid.colCount == x and player_test.grid.rowCount == y
