@@ -147,7 +147,7 @@ Choose Building Pool
         
         size = gridSize.split(',')
 
-        return (0 < int(size[0]) <= 6 and 0 < int(size[1]) <= 6)
+        return size[0].isnumeric() and size[1].isnumeric() and 1 < int(size[0]) <= 6 and 1 < int(size[1]) <= 6
 
     def updateGridSize(self, gridSize):
         size = gridSize.split(',')
