@@ -380,3 +380,54 @@ def test_validateGridSize(capfd, gridSize, expectedResult):
     player.validateGridSize(gridSize)
     out, _ = capfd.readouterr()
     assert expectedResult in out
+
+
+isValidGridSizes = [
+    ("2,2", True),
+    ("2,3", True),
+    ("2,4", True),
+    ("2,5", True),
+    ("2,6", True),
+    ("3,2", True),
+    ("3,3", True),
+    ("3,4", True),
+    ("3,5", True),
+    ("3,6", True),
+    ("4,2", True),
+    ("4,3", True),
+    ("4,4", True),
+    ("4,5", True),
+    ("4,6", True),
+    ("5,2", True),
+    ("5,3", True),
+    ("5,4", True),
+    ("5,5", True),
+    ("5,6", True),
+    ("6,2", True),
+    ("6,3", True),
+    ("6,4", True),
+    ("6,5", True),
+    ("6,6", True)
+]
+
+isFailingGridSizes = [
+    ("0,0", False),
+    ("6,7", False),
+    ("8,5", False),
+    ("2,0", False),
+    ("10,1", False),
+    ("3,7", False),
+    ("26,5", False),
+    ("aaa,5", False),
+    ("64,game", False),
+    ("$,0", False),
+    ("a,b", False),
+    ("100,100", False)
+]
+
+
+@pytest.mark.parametrize("gridSizes, expectedResult", isValidGridSizes + isFailingGridSizes)
+def test_validBuildingPositionFromUserInputs(gridSizes, expectedResult):
+    result = player_test.isGridSizeValid(gridSizes)
+
+    assert result == expectedResult
