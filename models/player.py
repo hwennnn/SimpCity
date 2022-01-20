@@ -8,6 +8,7 @@ class Player:  # Player Class
         self.turns = 1
         self.grid = Grid()
         self.firstBuilding = self.secondBuilding = None
+        self.savedGame = False
 
     # Display first main menu upon launching python code
     def displayMainMenu(self):
@@ -139,6 +140,7 @@ Choose Building Pool
 
     def startNewGame(self):
         self.turns = 1
+        self.savedGame = False
         self.grid.initializeGrid()
 
     # Prompt player for input in InGame main menu
@@ -188,15 +190,15 @@ Choose Building Pool
 
     # Prompt player to check if they saved their game beforehand
     def promptSaveGame(self):
-        return input('Are you sure to exit to main menu without saving game? [Y/N]: ').upper()
+        return input('\nGame has not been saved yet. Would you like to save your progress? [Y/N]: ').upper()
 
     # Validate options for prompting save game.
     def validateSaveGame(self, option):
         if option.upper() == "Y":
-            print('Returning to main menu...')
+            print('\nGame has been saved successfully. Returning to Main Menu... \n')
 
         elif option.upper() == "N":
-            print("Select Option '5' in the game menu to save your game")
+            print("\nReturning to Main Menu...\n")
 
         else:
             print("Invalid Option. Returning to Game Menu...")
@@ -214,6 +216,7 @@ Choose Building Pool
             gridValue = self.grid.parseGridAsString()
             for row in gridValue:
                 f.writelines(row + "\n")
+        self.savedGame = True
 
     def retrieveTwoRandomBuildings(self):
         return self.grid.retrieveTwoRandomBuildings()
