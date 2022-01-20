@@ -127,14 +127,15 @@ Choose Building Pool
         self.grid.availableBuildings.displayCurrentBuildingPool()
 
     def promptGridSize(self):
-        return input("\nEnter a valid Grid Size (Min 2 by 2, Max 6 by 6) with a comma separator (e.g. 3,4) or '0' to exit: ")
+        return input("\nEnter a valid Grid Size (x,y) between 1-6 with a comma separator (e.g. 3,4) or '0' to exit: ")
 
     def validateGridSize(self, option):
         if option == '0':
             pass
         elif self.isGridSizeValid(option):
             self.updateGridSize(option)
-            print("Sucessfully updated grid size!")
+            gridSize = option.split(',')
+            print(f"Sucessfully updated grid size to [{gridSize[0]} x {gridSize[1]}]!")
         else:
             print('Invalid Grid Size!')
         print('\n---- Back to Option Menu ----')
