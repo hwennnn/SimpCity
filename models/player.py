@@ -3,11 +3,12 @@ from models.configurations import *
 
 
 class Player:  # Player Class
-    def __init__(self):
+    def __init__(self, gameLeaderboard=None):
         self.score = 0
         self.turns = 1
         self.grid = Grid()
         self.firstBuilding = self.secondBuilding = None
+        self.gameLeaderboard = gameLeaderboard
 
     # Display first main menu upon launching python code
     def displayMainMenu(self):
@@ -227,3 +228,6 @@ Choose Building Pool
 
     def exitGame(self):
         exit(0)
+
+    def saveScoreIntoLeaderboard(self):
+        pass

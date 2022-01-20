@@ -1,9 +1,13 @@
 from models.player import Player
+from models.leaderboard import Leaderboard
 
 
 class Game:  # Game Class
     def __init__(self):
-        self.player = Player()
+        self.leaderboard = Leaderboard()
+        # init the player object with the game leaderboard
+        # so that the player can set their high score in the leaderboard later
+        self.player = Player(self.leaderboard)
 
     def launch(self):
         while True:
