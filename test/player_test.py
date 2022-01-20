@@ -252,6 +252,23 @@ def test_checkFileSaved():
     assert rootDirWithFile.exists()
 
 
+saveGameSuccessfulTestData = \
+    [('Game has been saved successfully.\n\n---- Back to Game Menu----')]
+
+
+@pytest.mark.parametrize("expectedResult", saveGameSuccessfulTestData)
+def test_saveGameSuccessful(capfd, expectedResult):
+    player_test.savedGameSuccessful()
+    out, _ = capfd.readouterr()
+    assert expectedResult in out
+
+
+def test_playerSavedGame(capfd):
+    player_test.savedGameSuccessful()
+    out, _ = capfd.readouterr()
+
+    assert 'Game has been saved successfully.\n\n---- Back to Game Menu----' in out
+
 def test_shuffleCurrentAvailableBuildings():
     available_buildings = player_test.grid.availableBuildings
     shuffled_buildings = available_buildings.shuffleCurrentAvailableBuildings()
@@ -292,3 +309,103 @@ def test_availableBuildings():
         assert i in range(0, 9)
 
     assert sum(player_test.grid.availableBuildings.availability) in range(24, 41)
+
+
+# validGridSizesData = [
+#     (1, 1),
+#     (1, 2),
+#     (1, 3),
+#     (1, 4),
+#     (1, 5),
+#     (1, 6),
+#     (2, 1),
+#     (2, 2),
+#     (2, 3),
+#     (2, 4),
+#     (2, 5),
+#     (2, 6),
+#     (3, 1),
+#     (3, 2),
+#     (3, 3),
+#     (3, 4),
+#     (3, 5),
+#     (3, 6),
+#     (4, 1),
+#     (4, 2),
+#     (4, 3),
+#     (4, 4),
+#     (4, 5),
+#     (4, 6),
+#     (5, 1),
+#     (5, 2),
+#     (5, 3),
+#     (5, 4),
+#     (5, 5),
+#     (5, 6),
+#     (6, 1),
+#     (6, 2),
+#     (6, 3),
+#     (6, 4),
+#     (6, 5),
+#     (6, 6),
+# ]
+
+
+# @pytest.mark.parametrize("validGridSize", validGridSizesData)
+# def test_updateGridSize(validGridSize):
+#     player_test.updateGridSize(validGridSize)
+
+#     x, y = validGridSize
+
+#     assert player_test.grid.colCount == x
+#     assert player_test.grid.rowCount == y
+
+
+# failingGridSizesData = [
+#     (0, 0),
+#     (0, 1),
+#     (1, 3),
+#     (1, 4),
+#     (1, 5),
+#     (1, 6),
+#     (2, 1),
+#     (2, 2),
+#     (2, 3),
+#     (2, 4),
+#     (2, 5),
+#     (2, 6),
+#     (3, 1),
+#     (3, 2),
+#     (3, 3),
+#     (3, 4),
+#     (3, 5),
+#     (3, 6),
+#     (4, 1),
+#     (4, 2),
+#     (4, 3),
+#     (4, 4),
+#     (4, 5),
+#     (4, 6),
+#     (5, 1),
+#     (5, 2),
+#     (5, 3),
+#     (5, 4),
+#     (5, 5),
+#     (5, 6),
+#     (6, 1),
+#     (6, 2),
+#     (6, 3),
+#     (6, 4),
+#     (6, 5),
+#     (6, 6),
+# ]
+
+
+# @pytest.mark.parametrize("validGridSize", validGridSizesData)
+# def test_updateGridSize(validGridSize):
+#     player_test.updateGridSize(validGridSize)
+
+#     x, y = validGridSize
+
+#     assert player_test.grid.colCount == x
+#     assert player_test.grid.rowCount == y
