@@ -50,5 +50,5 @@ class Game:  # Game Class
                 self.player.retrieveBuildingsScore()
 
             elif option == '4':
-                print("\nGame has been saved successfully. Returning to Game Menu...\n")
                 self.player.saveGame()
+                self.player.savedGameSuccessful()

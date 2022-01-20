@@ -142,6 +142,7 @@ Choose Building Pool
         self.turns = 1
         self.savedGame = False
         self.grid.initializeGrid()
+        print('\n---- Entering Game Menu ----')
 
     # Prompt player for input in InGame main menu
     def promptGameMenu(self):
@@ -168,6 +169,7 @@ Choose Building Pool
                 self.grid.updateGrid(x, y, building)
                 self.grid.decreaseBuildingCount(building)
                 self.turns += 1
+                self.savedGame = False
             else:
                 print("You must build next to an existing building.")
 
@@ -195,13 +197,17 @@ Choose Building Pool
     # Validate options for prompting save game.
     def validateSaveGame(self, option):
         if option.upper() == "Y":
-            print('\nGame has been saved successfully. Returning to Main Menu... \n')
+            print('\nGame has been saved successfully.\n\n---- Back to Main Menu ---')
 
         elif option.upper() == "N":
-            print("\nReturning to Main Menu...\n")
+            print("\n---- Back to Main Menu ----")
 
         else:
             print("Invalid Option. Returning to Game Menu...")
+
+    # Validation message for successfully saving game in the game menu
+    def savedGameSuccessful(self):
+        print('\nGame has been saved successfully.\n\n---- Back to Game Menu----')
 
     # Access grid attribute to display grid
     def displayGrid(self):
