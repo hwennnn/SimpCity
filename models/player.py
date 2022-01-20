@@ -3,12 +3,11 @@ from models.configurations import *
 
 
 class Player:  # Player Class
-    def __init__(self, gameLeaderboard=None):
+    def __init__(self):
         self.score = 0
         self.turns = 1
         self.grid = Grid()
         self.firstBuilding = self.secondBuilding = None
-        self.gameLeaderboard = gameLeaderboard
 
     # Display first main menu upon launching python code
     def displayMainMenu(self):
@@ -174,8 +173,13 @@ Choose Building Pool
         else:
             print("Please enter a valid building position!")
 
+    def displayBuildingsScore(self):
+        scores = self.retrieveBuildingsScore()
+
+        print("\nTotal Score: " + str(scores))
+
     # Calculate total score for current game iteration
-    def retrieveBuildingsScore(self):
+    def retrieveBuildingsScore(self, printBreakdown=True):
         scores, scoresBreakdown = self.grid.retrieveBuildingsScore()
 
         for buildingName, scoreBreakdown in scoresBreakdown.items():
@@ -184,9 +188,11 @@ Choose Building Pool
                 breakdown = " + ".join(map(str, scoreBreakdown))
             else:
                 breakdown = totalBuildingScore
-            print(f"{buildingName}: {breakdown} = {totalBuildingScore}")
 
-        print("\nTotal Score: " + str(scores))
+            if printBreakdown:
+                print(f"{buildingName}: {breakdown} = {totalBuildingScore}")
+
+        return scores
 
     # Prompt player to check if they saved their game beforehand
     def promptSaveGame(self):
@@ -228,6 +234,3 @@ Choose Building Pool
 
     def exitGame(self):
         exit(0)
-
-    def saveScoreIntoLeaderboard(self):
-        pass

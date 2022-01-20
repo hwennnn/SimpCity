@@ -7,9 +7,9 @@ class Game:  # Game Class
         self.leaderboard = Leaderboard()
         # init the player object with the game leaderboard
         # so that the player can set their high score in the leaderboard later
-        self.player = Player(self.leaderboard)
+        self.player = Player()
 
-    def launch(self):
+    def launch(self):  # pragma: no cover
         while True:
             self.player.displayMainMenu()
             option = self.player.promptMainMenu()
@@ -30,7 +30,7 @@ class Game:  # Game Class
             elif option == '4':
                 self.player.displayOptionMenu()
 
-    def launchGame(self):
+    def launchGame(self):  # pragma: no cover
         self.player.startNewGame()
         while True:
             print("\nTurn: {0}".format(self.player.turns))
@@ -54,5 +54,13 @@ class Game:  # Game Class
             elif option == '4':
                 self.player.saveGame()
 
+            maxPlayerTurns = min(self.player.grid.rowCount *
+                                 self.player.grid.colCount, 40)
+
+            if self.player.turns > maxPlayerTurns:
+                playerScore = self.player.retrieveBuildingsScore(False)
+                self.leaderboard.saveScoreIntoLeaderboard(playerScore)
+                break
+
     def displayLeaderboard(self):
-        pass
+        self.leaderboard.displayLeaderboard()

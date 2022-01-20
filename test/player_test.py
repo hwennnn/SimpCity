@@ -2,7 +2,6 @@
 import os
 import sys
 import pytest
-from models.available_buildings import AvailableBuildings
 from models.player import Player
 from models.configurations import *
 from pathlib import Path
@@ -294,3 +293,11 @@ def test_availableBuildings():
         assert i in range(0, 9)
 
     assert sum(player_test.grid.availableBuildings.availability) in range(24, 41)
+
+
+def test_displayBuildingsScore(capfd):
+    player_test.displayBuildingsScore()
+
+    out, _ = capfd.readouterr()
+
+    assert "Total Score: " in out
