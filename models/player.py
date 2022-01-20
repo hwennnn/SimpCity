@@ -120,21 +120,6 @@ Choose Building Pool
     def displayCurrentBuildingPool(self):
         self.grid.availableBuildings.displayCurrentBuildingPool()
 
-    def promptGridSize(self):
-        pass
-
-    def validateGridSize(self, option):
-        pass
-
-    def isGridSizeValid(self, gridSize):
-        pass
-
-    def updateGridSize(self, gridSize):
-        pass
-
-    def updateGridSize(self, x, y):
-        pass
-
     def gameMenuContent(self, firstBuilding, secondBuilding):
         return (
             f"""
@@ -171,28 +156,24 @@ Choose Building Pool
                     ord(option) == ord("1") else self.secondBuilding
                 self.promptEnterBuildingPosition(buildingValue)
             else:
-                print(f"You selected option {option}\n")
+                print(f"You selected option {option}")
         else:
             print("Invalid option!")
 
     def promptEnterBuildingPosition(self, building):
-        positions = input(f"\nWhere would you like to place {building} at? ")
+        positions = input("Build where? ")
 
         if self.grid.isPositionValid(positions):
             x, y = self.grid.retrieveParsedPosition(positions)
             if self.turns == 1 or (self.turns > 1 and self.grid.hasAdjacentBuildingsForPosition(x, y)):
-                print(f"Placing {building} at {positions}...")
                 self.grid.updateGrid(x, y, building)
                 self.grid.decreaseBuildingCount(building)
                 self.turns += 1
                 self.savedGame = False
-                print(f"{building} has been successfully placed at {positions}.")
             else:
-                print(f"Placing {building} at {positions} unsuccessful.")
                 print("You must build next to an existing building.")
 
         else:
-            print(f"Placing {building} at {positions} unsuccessful.")
             print("Please enter a valid building position!")
 
     # Calculate total score for current game iteration
@@ -211,7 +192,7 @@ Choose Building Pool
 
     # Prompt player to check if they saved their game beforehand
     def promptSaveGame(self):
-        return input('Game has not been saved yet. Would you like to save your progress? [Y/N]: ').upper()
+        return input('\nGame has not been saved yet. Would you like to save your progress? [Y/N]: ').upper()
 
     # Validate options for prompting save game.
     def validateSaveGame(self, option):
@@ -226,7 +207,7 @@ Choose Building Pool
 
     # Validation message for successfully saving game in the game menu
     def savedGameSuccessful(self):
-        print('Game has been saved successfully.\n\n---- Back to Game Menu----')
+        print('\nGame has been saved successfully.\n\n---- Back to Game Menu----')
 
     # Access grid attribute to display grid
     def displayGrid(self):
