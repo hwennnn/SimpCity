@@ -20,7 +20,6 @@ class Leaderboard:
             lines)
         if isFileValid:
             self.leaderboard = loadedLeaderboard
-            print('Successfully loaded the leaderboard!')
 
     def readFiles(self):
         lines = None
@@ -31,9 +30,11 @@ class Leaderboard:
         return lines
 
     def saveScoreIntoLeaderboard(self, playerScore, defaultPlayerName=""):
-        ranking = self.getRankingInLeaderBoard(playerScore)
 
-        if ranking >= 10:
+        # 1-indexed ranking
+        ranking = 1 + self.getRankingInLeaderBoard(playerScore)
+
+        if ranking > 10:
             print("Sorry! You didn't make it to top 10 in the leaderboard!")
         else:
             print(
@@ -41,7 +42,7 @@ class Leaderboard:
 
             playerName = defaultPlayerName
 
-            while len(playerName) == 0 and len(playerName) > 20:
+            while len(playerName) == 0 or len(playerName) > 20:
                 playerName = input("Please enter your name (max 20 chars): ")
 
             self.appendScoreIntoLeaderboard(playerName, playerScore)
@@ -97,14 +98,14 @@ class Leaderboard:
         maxLineWidth = len(leaderboardContent[0])
 
         for ranking, player in enumerate(self.leaderboard, 1):
-            header = f" {ranking}. {player.name}"
+            header = " " * int(ranking != 10) + f"{ranking}. {player.name}"
             trailing = f"{player.score}"
             spacesCount = maxLineWidth - len(header) - len(trailing)
             middleSpaces = " " * spacesCount
 
             leaderboardContent.append(header + middleSpaces + trailing)
 
-        leaderboardContent.append("--- ------                -----")
+        leaderboardContent.append("-------------------------------")
 
         print("\n".join(leaderboardContent))
 

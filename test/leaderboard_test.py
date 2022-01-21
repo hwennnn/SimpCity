@@ -107,7 +107,7 @@ def test_loadLeaderboardFromFile(capfd):
 
     out, _ = capfd.readouterr()
 
-    assert "Successfully loaded the leaderboard!" in out
+    assert len(leaderboard.leaderboard) > 0
 
 
 def test_readFiles():

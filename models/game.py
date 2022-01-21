@@ -49,7 +49,7 @@ class Game:  # Game Class
                     continue
 
             elif option == '3':
-                self.player.retrieveBuildingsScore()
+                self.player.displayBuildingsScore()
 
             elif option == '4':
                 self.player.saveGame()
@@ -58,8 +58,11 @@ class Game:  # Game Class
                                  self.player.grid.colCount, 40)
 
             if self.player.turns > maxPlayerTurns:
+                self.player.displayGrid(True)  # print final layout of SimpCity
+                self.player.displayBuildingsScore()
                 playerScore = self.player.retrieveBuildingsScore(False)
                 self.leaderboard.saveScoreIntoLeaderboard(playerScore)
+                self.displayLeaderboard()
                 break
 
     def displayLeaderboard(self):

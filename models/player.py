@@ -174,6 +174,8 @@ Choose Building Pool
             print("Please enter a valid building position!")
 
     def displayBuildingsScore(self):
+        print()
+
         scores = self.retrieveBuildingsScore()
 
         print("\nTotal Score: " + str(scores))
@@ -210,7 +212,10 @@ Choose Building Pool
             print("Invalid Option. Returning to Game Menu...")
 
     # Access grid attribute to display grid
-    def displayGrid(self):
+    def displayGrid(self, isFinal=False):
+        if isFinal:
+            print("\nFinal layout of Simp City:")
+
         self.grid.displayGrid()
 
     # Access grid attribute to
