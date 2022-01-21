@@ -44,21 +44,36 @@ def test_validateMainOption(option, expectedResult):
 
 
 validSavedLeaderboardFileTestData = \
-    [([
-        "zachary, 69, 1642677335555",
-        "hwen, 40, 1642677336958",
-        "yong teng, 39, 1642677336951",
-        "glenn, 20, 12381237872",
-    ], True),
+    [
+        ([
+            "zachary, 70, 1642677335555",
+            "hwen, 40, 1642677336958",
+            "yong teng, 39, 1642677336951",
+            "glenn, 20, 12381237872",
+        ], True),
     ]
 
 invalidSavedLeaderboardFileTestData = \
-    [([
-        "this is a very long sentence, 69, 1642677335555",
-        "hwen, 40, 1642677336958",
-        "yong teng, 39, 1642677336951",
-        "glenn, 20, 12381237872",
-    ], True),
+    [
+        ([
+            "this is a very long sentence!!!!!, 70, 1642677335555",
+            "hwen, 40, 1642677336958",
+            "yong teng, 39, 1642677336951",
+            "glenn, 20, 12381237872",
+        ], False),
+        ([
+            "zachary, 69, 1642677335555",
+            "hwen, 40, 1642677336958",
+            "yong teng, 39, 1642677336951",
+            "glenn, 20, 12381237872",
+            "zachary, 69, 1642677335555",
+            "hwen, 40, 1642677336958",
+            "yong teng, 39, 1642677336951",
+            "glenn, 20, 12381237872",
+            "zachary, 69, 1642677335555",
+            "hwen, 40, 1642677336958",
+            "yong teng, 39, 1642677336951",
+        ], False),
     ]
 
 
@@ -80,8 +95,9 @@ def test_saveScoreIntoLeaderboard():
     assert leaderboard.isSavedLeaderboardExist() == True
 
     newRanking = leaderboard.getRankingInLeaderBoard(30)
-
     assert newRanking == 0
+
+    leaderboard.saveScoreIntoLeaderboard(30, "hwen")
 
 
 def test_loadLeaderboardFromFile(capfd):

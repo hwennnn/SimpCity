@@ -127,5 +127,7 @@ class Leaderboard:
             if self.isLeaderboardPlayerNameValid(playerName):
                 results.append(LeaderboardPlayer(
                     playerName, int(playerScore), int(recordedTime)))
+            else:
+                return (False, None)
 
         return (True, results)
