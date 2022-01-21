@@ -235,9 +235,12 @@ class Grid:  # Grid Class
             if self.rowCount <= 2:
                 row += f"\t {self.availableBuildings.buildings[x * 2]}: {self.availableBuildings.availability[x * 2]}"
                 lowerGridline += f"\t {self.availableBuildings.buildings[x * 2 + 1]}: {self.availableBuildings.availability[x * 2 + 1]}"
-                for y in range(self.colCount):
-                    lastRemainingBuilding += "\t"
-                lastRemainingBuilding += f" {self.availableBuildings.buildings[4]}: {self.availableBuildings.availability[4]}\n" 
+                if self.colCount == 6:
+                    lastRemainingBuilding = f"\t\t\t\t\t {self.availableBuildings.buildings[4]}: {self.availableBuildings.availability[4]}\n"
+                else:
+                    for y in range(self.colCount):
+                        lastRemainingBuilding += "\t"
+                    lastRemainingBuilding += f" {self.availableBuildings.buildings[4]}: {self.availableBuildings.availability[4]}\n" 
 
                 print(row)
                 print(lowerGridline)

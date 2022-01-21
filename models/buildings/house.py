@@ -8,13 +8,14 @@ class House(Building):
 
     def retrieveBuildingScore(self, grid):
         result = 0
+        rowCount, colCount = len(grid), len(grid[0])
 
         # Prepare a list for storing adjacent coordinates and adjacent buildings
         adjacentPositions = [(self.x + 1, self.y), (self.x - 1, self.y), (self.x, self.y + 1), (self.x, self.y - 1)]
         adjacentBuildings = []
 
         for dx, dy in adjacentPositions:
-            if 0 <= dx < 4 and 0 <= dy < 4 and grid[dx][dy] is not None:
+            if 0 <= dx < rowCount and 0 <= dy < colCount and grid[dx][dy] is not None:
                 adjacentBuildings.append(grid[dx][dy])
 
         #Create a matches case for looping through all adjacent buildings

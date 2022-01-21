@@ -8,6 +8,7 @@ class Highway(Building):
 
     def retrieveBuildingScore(self, grid):
         result = 1
+        rowCount, colCount = len(grid), len(grid[0])
 
         # Prepare a list of row coordinates for horizontal positions of highway location
         rowLeftPositions = [(self.x, self.y - 1), (self.x, self.y - 2), (self.x, self.y - 3)]
@@ -17,11 +18,11 @@ class Highway(Building):
 
         # Add buildings from grid into left and right list
         for dx, dy in rowLeftPositions:
-            if 0 <= dx < 4 and 0 <= dy < 4:
+            if 0 <= dx < rowCount and 0 <= dy < colCount:
                 rowBuildingLeft.append(grid[dx][dy].getName() if grid[dx][dy] is not None else "None")
 
         for dx, dy in rowRightPositions:
-            if 0 <= dx < 4 and 0 <= dy < 4:
+            if 0 <= dx < rowCount and 0 <= dy < colCount:
                 rowBuildingRight.append(grid[dx][dy].getName() if grid[dx][dy] is not None else "None")
 
         # Check if target Highway building is connected to other Highway buildings from left and right
