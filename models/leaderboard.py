@@ -31,10 +31,9 @@ class Leaderboard:
         return lines
 
     def saveScoreIntoLeaderboard(self, playerScore, defaultPlayerName=""):
-        # 1-indexed
         ranking = self.getRankingInLeaderBoard(playerScore)
 
-        if ranking > 10:
+        if ranking >= 10:
             print("Sorry! You didn't make it to top 10 in the leaderboard!")
         else:
             print(
@@ -54,7 +53,7 @@ class Leaderboard:
             self.leaderboard.append(LeaderboardPlayer(
                 playerName, playerScore, currentMs))
             self.leaderboard.sort(
-                key=lambda player: (-player.score, player.recordedTime, player.name), reverse=1)
+                key=lambda player: (-player.score, player.recordedTime, player.name))
 
         elif (playerScore > self.leaderboard[-1].score):
             # pop the player from the leaderboard as the new playerScore is higher than his
@@ -64,13 +63,14 @@ class Leaderboard:
             self.leaderboard.append(LeaderboardPlayer(
                 playerName, playerScore, currentMs))
             self.leaderboard.sort(
-                key=lambda player: (-player.score, player.recordedTime, player.name), reverse=1)
+                key=lambda player: (-player.score, player.recordedTime, player.name))
 
     def getRankingInLeaderBoard(self, playerScore):
-        scores = [player.score for player in self.leaderboard]
+        scores = [-player.score for player in self.leaderboard]
 
-        ranking = bisect_right(scores, playerScore)
-        return 10 - ranking
+        ranking = bisect_right(scores, -playerScore)
+
+        return ranking
 
     def parseLeaderboardAsStringArray(self):
         lines = []

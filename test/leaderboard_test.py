@@ -108,3 +108,13 @@ def test_displayLeaderboard(capfd):
     out, _ = capfd.readouterr()
 
     assert "--------- HIGH SCORES ---------" in out
+
+
+def test_failToSaveScoreIntoLeaderBoard(capfd):
+    leaderboard = Leaderboard()
+
+    leaderboard.saveScoreIntoLeaderboard(0)
+
+    out, _ = capfd.readouterr()
+
+    assert "Sorry! You didn't make it to top 10 in the leaderboard!" in out
