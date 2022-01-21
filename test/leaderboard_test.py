@@ -37,7 +37,7 @@ invalidLeaderboardPlayerNameTestData = \
 
 
 @pytest.mark.parametrize("option, expectedResult", validLeaderboardPlayerNameTestData + invalidLeaderboardPlayerNameTestData)
-def test_validateMainOption(option, expectedResult):
+def test_checkIsLeaderboardPlayerNameValid(option, expectedResult):
     leaderboard = Leaderboard()
 
     assert leaderboard.isLeaderboardPlayerNameValid(option) == expectedResult
@@ -78,7 +78,7 @@ invalidSavedLeaderboardFileTestData = \
 
 
 @pytest.mark.parametrize("option, expectedResult", validSavedLeaderboardFileTestData + invalidSavedLeaderboardFileTestData)
-def test_validateMainOption(option, expectedResult):
+def test_checkIsSavedLeaderboardFileValid(option, expectedResult):
     leaderboard = Leaderboard()
     isValid, _ = leaderboard.isSavedLeaderboardFileValid(option)
 
