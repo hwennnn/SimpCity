@@ -34,18 +34,14 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
         
-    - name: Begin Test with Pytest
+    - name: Begin Test with Pytest and Build coverage file
       run: |
-        cd test; pytest --cov -v --junitxml=report.xml
-
-    - name: Build coverage file
-      run: |
-        pytest --cache-clear --cov -v --cov=SimpCity test/ > pytest-coverage.txt
+        cd test; pytest --cache-clear --cov -v --cov=SimpCity --junitxml=report.xml > pytest-coverage.txt 
 
     - name: Comment coverage
       uses: coroo/pytest-coverage-commentator@v1.0.2
       with:
-        pytest-coverage: pytest-coverage.txt
+        pytest-coverage: ./test/pytest-coverage.txt
         
     - if: ${{failure()}}       
       name: Create Issues
@@ -55,7 +51,11 @@ jobs:
           token: ${{secrets.GITHUB_TOKEN}}
           assignees: ${{github.actor}}
           labels: worflow-failed
-          body: Workflow failed for commit ${{github.sha}} @ ${{github.ref}}       
+          body: Workflow failed for commit ${{github.sha}} @ ${{github.ref}}     
+
+    - name: Begin Black-Box Tests with Pytest
+      run: |
+        cd test; pytest blackBox_test.py -rP | tee output.txt; python3 output.py
 
     - name: Publish Unit Test Results
       uses: EnricoMi/publish-unit-test-result-action@v1.24

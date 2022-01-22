@@ -1,112 +1,220 @@
-name: SimpCity CD for Delivery
+name: SimpCity CD
 
 on:
   push:
     # Sequence of patterns matched against refs/tags
     tags:
-      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+      - "v*" # Push events to matching v*, i.e. v1.0, v20.15.10
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python 3.10
-      uses: actions/setup-python@v2
-      with:
-        python-version: "3.10"
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.10"
 
-    - name: Install Dependencies
-      run: |
-        python -m pip install --upgrade pip
-        if [ -f test_requirements.txt ]; then pip install -r test_requirements.txt; fi
-        
-    - name: Linter Check with Flake8
-      run: |
-        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics    
-        
-    - name: Begin Test with Pytest
-      run: |
-        cd test; pytest --cov -v --junitxml=report.xml
-    - if: ${{failure()}}       
-      name: Create Issues
-      uses: nashmaniac/create-issue-action@v1.1
-      with:
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f test_requirements.txt ]; then pip install -r test_requirements.txt; fi
+
+      - name: Linter Check with Flake8
+        run: |
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+
+      - name: Begin Test with Pytest
+        run: |
+          cd test; pytest --cov -v --junitxml=report.xml
+
+      - if: ${{failure()}}
+        name: Create Issues
+        uses: nashmaniac/create-issue-action@v1.1
+        with:
           title: Build Failed for CD
           token: ${{secrets.GITHUB_TOKEN}}
           assignees: ${{github.actor}}
           labels: worflow-failed
-          body: Workflow failed for commit ${{github.sha}} @ ${{github.ref}}       
+          body: Workflow failed for commit ${{github.sha}} @ ${{github.ref}}
 
-    - name: Publish Unit Test Results
-      uses: EnricoMi/publish-unit-test-result-action@v1.24
-      if: always()
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        files: test/report.xml
+      - name: Publish Unit Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v1.24
+        if: always()
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          files: test/report.xml
 
   release:
     runs-on: ubuntu-latest
     needs: build
     steps:
-    - uses: actions/checkout@v2
-      with: 
-        fetch-depth: 0
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
-    - name: Remove Test Folder
-      run: rm -r "test"
+      - name: Remove Test Folder
+        run: rm -r "test"
 
-    - name: Set up Python 3.10
-      uses: actions/setup-python@v2
-      with:
-        python-version: "3.10"
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.10"
 
-    - name: Set environment variables for version number
-      run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+      - name: Set environment variables for version number
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
 
-    - name: Download changelog
-      run: |
-        npm install -g git-changelog
+      # - name: Set previous tag
+      #   run: |
+      #     git describe --abbrev=0 --tags `git rev-list --tags --skip=1 --max-count=1`
+      #     echo "::set-output name=TAG_NAME::$(git describe --abbrev=0 --tags `git rev-list --tags --skip=1 --max-count=1`)"
+      #   id: previoustag
 
-    - name: Set previous tag
-      run: |
-        git describe --abbrev=0 --tags `git rev-list --tags --skip=1 --max-count=1`
-        echo "::set-output name=TAG_NAME::$(git describe --abbrev=0 --tags `git rev-list --tags --skip=1 --max-count=1`)"
-      id: previoustag
+      - name: Create changelog
+        id: changelog
+        uses: loopwerk/tag-changelog@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          config_file: .github/tag-changelog-config.js
+
+      - name: Create GitHub release
+        id: create-new-release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ env.RELEASE_VERSION }}
+          release_name: Release ${{ env.RELEASE_VERSION }}
+          body: ${{ steps.changelog.outputs.changes }}
+
+      - name: Archive site content
+        uses: thedoctor0/zip-release@master
+        with:
+          filename: content.zip
+
+      - name: Upload release asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create-new-release.outputs.upload_url }}
+          asset_path: ./content.zip
+          asset_name: ${{ env.RELEASE_VERSION }}.zip
+          asset_content_type: application/zip
+
+      - name: Create release branch
+        uses: peterjgrainger/action-create-branch@v2.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          branch: release-${{ env.RELEASE_VERSION }}
+      
+      - if: ${{failure()}}       
+        name: Create Issues
+        uses: nashmaniac/create-issue-action@v1.1
+        with:
+            title: Release Failed for CD
+            token: ${{secrets.GITHUB_TOKEN}}
+            assignees: ${{github.actor}}
+            labels: worflow-failed
+            body: Workflow failed for commit ${{github.sha}} @ ${{github.ref}} 
     
-    - name: Run changelog
-      run: |
-        git-changelog -t ${{ steps.previoustag.outputs.TAG_NAME  }} -a "simpcity"
-               
-    - name: Create GitHub release
-      id: create-new-release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: ${{ env.RELEASE_VERSION }}
-        release_name: Release ${{ env.RELEASE_VERSION }}  
-        body_path: ./CHANGELOG.md
+  release-notification:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Set environment variables for version number
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
 
-    - name: Archive site content
-      uses: thedoctor0/zip-release@master
-      with:
-        filename: content.zip
+      - uses: actions/checkout@v2
+        with:
+          repository: hwennnn/SimpCity.wiki
 
-    - name: Upload release asset
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create-new-release.outputs.upload_url }}
-        asset_path: ./content.zip
-        asset_name: ${{ env.RELEASE_VERSION }}.zip
-        asset_content_type: application/zip
-    
-    - name: Create release branch
-      uses: peterjgrainger/action-create-branch@v2.0.1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        branch: release-${{ env.RELEASE_VERSION }}
+      - name: install pandoc
+        run: |
+          sudo apt-get install pandoc
+
+      - name: convert wiki pages to html
+        run: |
+          find -name "*.md" -exec pandoc -o {}.html {} \;
+          mkdir doc
+          for file in *.md.html; do mv "$file" "doc/${file/.md.html/}";done
+
+      - name: ls
+        run: |
+          ls
+
+      - name: Send email to client
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{secrets.MAIL_USERNAME}}
+          password: ${{secrets.MAIL_PASSWORD}}
+          subject: Release notificiation from T02 Team 4
+          to: ${{secrets.CLIENT_EMAIL}}
+          cc: s10185319@connect.np.edu.sg,s10198102@connect.np.edu.sg,glennchia43@gmail.com,s10197636@connect.np.edu.sg
+          from: T02Team4Bot
+          body: Release version - ${{ env.RELEASE_VERSION }} has been successful. Attached are the feature completed during the sprint.
+          attachments: FeatureProgression.md
+      
+      - if: ${{failure()}}       
+        name: Create Issues
+        uses: nashmaniac/create-issue-action@v1.1
+        with:
+            title: Release Notification Failed for CD
+            token: ${{secrets.GITHUB_TOKEN}}
+            assignees: ${{github.actor}}
+            labels: worflow-failed
+            body: Workflow failed for commit ${{github.sha}} @ ${{github.ref}} 
+
+  push-docker-image:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      
+      - name: Install Build Essentials
+        run: sudo apt-get install build-essential python-dev gcc
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1 
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Python Application Image
+        uses: docker/build-push-action@v2
+        with:
+          context: ./
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            devops02team4/simpcity:latest
+            ghcr.io/hwennnn/simpcity:latest
+              
+      - if: ${{failure()}}       
+        name: Create Issues
+        uses: nashmaniac/create-issue-action@v1.1
+        with:
+            title: Actions Failed for CD when pushing docker image
+            token: ${{secrets.GITHUB_TOKEN}}
+            assignees: ${{github.actor}}
+            labels: worflow-failed
+            body: Workflow failed for commit ${{github.sha}} @ ${{github.ref}}  
