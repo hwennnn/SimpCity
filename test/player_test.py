@@ -2,7 +2,6 @@
 import os
 import sys
 import pytest
-from models.available_buildings import AvailableBuildings
 from models.player import Player
 from models.configurations import *
 from pathlib import Path
@@ -25,7 +24,8 @@ Welcome, mayor of Simp City!
 ----------------------------
 1. Start new game
 2. Load saved game
-3. Options
+3. Show high scores
+4. Options
 
 0. Exit
 """ in out
@@ -34,10 +34,11 @@ Welcome, mayor of Simp City!
 validMainOptionTestData = \
     [("1", "You selected option 1"),
      ("2", "You selected option 2"),
-     ("3", "You selected option 3")]
+     ("3", "You selected option 3"),
+     ("4", "You selected option 4")]
 
 invalidMainOptionTestData = \
-    [("4", "Invalid option!"),
+    [("5", "Invalid option!"),
      ("10", "Invalid option!"),
      ("a", "Invalid option!"),
      ("abc", "Invalid option!")]
@@ -292,3 +293,11 @@ def test_availableBuildings():
         assert i in range(0, 9)
 
     assert sum(player_test.grid.availableBuildings.availability) in range(24, 41)
+
+
+def test_displayBuildingsScore(capfd):
+    player_test.displayBuildingsScore()
+
+    out, _ = capfd.readouterr()
+
+    assert "Total Score: " in out
