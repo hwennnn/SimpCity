@@ -18,7 +18,8 @@ Welcome, mayor of Simp City!
 ----------------------------
 1. Start new game
 2. Load saved game
-3. Options
+3. Show high scores
+4. Options
 
 0. Exit
 """)
@@ -32,7 +33,7 @@ Welcome, mayor of Simp City!
         if option == '0':
             print('---- Game Ended ----')
             self.exitGame()
-        elif len(option) == 1 and ord("1") <= ord(option) <= ord("3"):
+        elif len(option) == 1 and ord("1") <= ord(option) <= ord("4"):
             print(f"You selected option {option}")
         else:
             print('Invalid option!')
@@ -212,8 +213,15 @@ f"""1. Build a {firstBuilding}
         else:
             print("Please enter a valid building position!")
 
+    def displayBuildingsScore(self):
+        print()
+
+        scores = self.retrieveBuildingsScore()
+
+        print("\nTotal Score: " + str(scores))
+
     # Calculate total score for current game iteration
-    def retrieveBuildingsScore(self):
+    def retrieveBuildingsScore(self, printBreakdown=True):
         scores, scoresBreakdown = self.grid.retrieveBuildingsScore()
 
         for buildingName, scoreBreakdown in scoresBreakdown.items():
@@ -222,9 +230,11 @@ f"""1. Build a {firstBuilding}
                 breakdown = " + ".join(map(str, scoreBreakdown))
             else:
                 breakdown = totalBuildingScore
-            print(f"{buildingName}: {breakdown} = {totalBuildingScore}")
 
-        print("\nTotal Score: " + str(scores))
+            if printBreakdown:
+                print(f"{buildingName}: {breakdown} = {totalBuildingScore}")
+
+        return scores
 
     # Prompt player to check if they saved their game beforehand
     def promptSaveGame(self):
@@ -246,7 +256,10 @@ f"""1. Build a {firstBuilding}
         print('\nGame has been saved successfully.\n\n---- Back to Game Menu----')
 
     # Access grid attribute to display grid
-    def displayGrid(self):
+    def displayGrid(self, isFinal=False):
+        if isFinal:
+            print("\nFinal layout of Simp City:")
+
         self.grid.displayGrid()
 
     # Access grid attribute to

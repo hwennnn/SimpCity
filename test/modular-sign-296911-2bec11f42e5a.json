@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "modular-sign-296911",
+  "private_key_id": "2bec11f42e5abd954cafd59e5061b53084e0cf03",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCLmBkVtLdsJaP9\n8j9r5sqzzcEY/5WKPEHZ10wAVk0YMY5/oohqbElZty4UHsROGKWKps+MZxAVkr/2\nhD5cCy9rVry3ywZq9sUBCse/sAqbnH+qPKfRC7zSuvKKL6dVeEYgU3Qf1X9xa1kc\nRs5sG5FSi11iu5MwlC0SvD4x75KBuIubNVPwzgRmNKP3/Gof/3hBw8PfC4DUc7v9\nljMqlMW7tiPH2p+VFuCGNtYdt5ArZBnjXXVmRZUItKCIYfd9dNRB/gD8kA51oxHd\n+McrfM2myJItbAFRPE+LOhLNsx7XuOTNXPDFwMTQIwFqCBLOcAGIiZIeFJSa7bKt\nr0u99ly9AgMBAAECggEAIWvfN5/umWUyq/JzpkcZqW5d6LkKic/u+TOvhdYju6Lj\nyeG1VPuLnT/694S9PbBvc/CHuQcU5gFeVexoDLv91K5t3PguF25xENSOqfGBPKv9\nsdm3WRi9EtwBBT4vC0rSSVuJrjR8wIAx09ANDHuWMcPdri2YKjWTzAxHPMft1QIq\nWzdA/Gx9NYSQ0SuT8dOh5sPPC0EoVRR4pj9tQlSTYRCpdCl9fwbUJwRWmHV35iam\nViMmU+rJw06Ynk7YekgJwg1gSOiekYsUcDiKjaZXccWWIdVf8Fjc5Ozd2mtP4mly\ncRbqojo32t6GSNUbpp8qvDfdP/7BmE/xPMIsazB9QQKBgQDAoNlY/ijOMDewxJ3o\nJKkVIhv2hMJjkdlYJ3gV7ArUsEijQP5je6N4eSmGz+ll2VPQZcqwEiuxcZgzYzFE\nj6r0hg+Ok8rL31zdFddrBIXLrnNkW4TRI4lzt71FyaKa/hgRuJh/fOoCN8QISFOG\nh7LqdBHGSxkFAJpvKd8jq2+AQQKBgQC5hLYtJbJMb7UROab8nh1IqnmpUbd9gjhG\nH2Fk/8KUud3dk3ofugy4BOLlbcYylRP+tFcPsVl+25fJsyBMH7FgNj7Rp1IxQvQU\nQJECcoPJhWxaOCjN16FbRuLBRbb6yQrXB2IHXwF21ml8ZBT4z3bVpBcewNX4C12R\n9K8iraV9fQKBgFv5cU3orRsmMrEYcD0zo/gPPULLyPU54okQ72moNtOvCD/K/KwL\nkNYpJAbWpx6WUkqjD9BaHLqw/ncq2Y9e+cWfbTYqox4NHI4Dq8PReQDz3u0ANb6W\nNT8ncBwuVpGi2WM8vLPCtQkyD0vVHOyTRn5jxUjk+qFE1HhXic/CP48BAoGAXBkl\nM56OOGIQer+rRafdE9EF2ufldtppw24atMA/wgPPwAtRymRbohNS7OElTsExjvXK\nbtD1hAPSA+D4PLJTJVdosj4lkK0TbOZs1tEw2Z9yHgvZPe85fI3hTl+kqjWaOwvA\nP7aLjIp/DbDFtIuSDBeNHshOsPg7eJUHSOj5yiUCgYB4eBoUK9fA9SAxJAXrxusB\nKxPrzztYAy6AYpEYfyNu39aQpH8O/8rf63l8caDj1XLjAvrdp1LLdFFdgjsAn61A\ndEwMlogONTWEn69Q0pT9QfB5WJfkvUQG9e0hSZn3Thc94OSi3P8t1C8dgZPIrChr\nMqnKYfC6F4iHtocyBOLZKg==\n-----END PRIVATE KEY-----\n",
+  "client_email": "simcity-githubactions@modular-sign-296911.iam.gserviceaccount.com",
+  "client_id": "112867953920165283850",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/simcity-githubactions%40modular-sign-296911.iam.gserviceaccount.com"
+}
