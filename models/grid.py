@@ -55,8 +55,8 @@ class Grid:  # Grid Class
         self.grid[x][y] = self.createBuilding(buildingName, x, y)
 
     def updateGridSize(self, x, y):
-        self.rowCount = int(y)
-        self.colCount = int(x)
+        self.rowCount = int(x)
+        self.colCount = int(y)
         self.initializeGrid()
 
     def createBuilding(self, buildingName, x, y):

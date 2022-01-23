@@ -291,4 +291,4 @@ def test_updateGridSize(gridSize):
     x, y = gridSize
     player.grid.updateGridSize(x, y)
 
-    assert player.grid.colCount == x and player.grid.rowCount == y
+    assert player.grid.colCount == y and player.grid.rowCount == x
