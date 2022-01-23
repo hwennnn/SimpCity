@@ -192,9 +192,6 @@ class Grid:  # Grid Class
     def retrieveTwoRandomBuildings(self):
         return self.availableBuildings.retriveTwoRandomBuildings()
 
-    def displayAvailableBuildings(self):
-        self.availableBuildings.displayAvailableBuilding()
-
     # displays the grid and adapts to each building type
     def displayGrid(self):
         columnIndication = "\n   "

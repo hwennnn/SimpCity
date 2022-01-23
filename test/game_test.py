@@ -1,5 +1,3 @@
-# Unit Test Only
-
 from models.game import Game
 from pathlib import Path
 import sys
@@ -13,5 +11,5 @@ def test_displayLeaderboard(capfd):
     gameObject.displayLeaderboard()
 
     out, _ = capfd.readouterr()
-    
+
     assert "--------- HIGH SCORES ---------" in out

@@ -349,7 +349,7 @@ validGridSizeDisplay = [
 
 
 @pytest.mark.parametrize("gridSize, gridOutput", validGridSizeDisplay)
-def test_displayGridSize(capfd, gridSize, gridOutput):
+def test_displayGrid(capfd, gridSize, gridOutput):
     player = Player()
     x, y = gridSize
     player.updateGridSize(str(x) + ',' + str(y))
@@ -371,7 +371,8 @@ failingGridSizes = [
     ("64,game", "Invalid Grid Size!"),
     ("$,0", "Invalid Grid Size!"),
     ("a,b", "Invalid Grid Size!"),
-    ("100,100", "Invalid Grid Size!")
+    ("100,100", "Invalid Grid Size!"),
+    ("0", "\n---- Back to Option Menu ----")
 ]
 
 
@@ -432,9 +433,42 @@ def test_validBuildingPositionFromUserInputs(gridSizes, expectedResult):
     result = player_test.isGridSizeValid(gridSizes)
 
     assert result == expectedResult
+
+
 def test_displayBuildingsScore(capfd):
     player_test.displayBuildingsScore()
 
     out, _ = capfd.readouterr()
 
     assert "Total Score: " in out
+
+
+def test_retrieveBuildingsScore(capfd):
+    player = Player()
+    player.retrieveBuildingsScore()
+
+    out, _ = capfd.readouterr()
+
+    assert "BCH: 0 = 0" in out
+
+
+validateSaveGameData = [
+    ("Y", "\nGame has been saved successfully.\n\n---- Back to Main Menu ---"),
+    ("N", "\n---- Back to Main Menu ----"),
+    ("1", "Invalid Option. Returning to Game Menu..."),
+    ("55", "Invalid Option. Returning to Game Menu..."),
+    ("maybe", "Invalid Option. Returning to Game Menu...")
+]
+
+
+@pytest.mark.parametrize("validateOption, expectedResult", validateSaveGameData)
+def test_validateSaveGame(capfd, validateOption, expectedResult):
+    player_test.validateSaveGame(validateOption)
+    out, _ = capfd.readouterr()
+    assert expectedResult in out
+
+
+def test_savedGameSuccessful(capfd):
+    player_test.savedGameSuccessful()
+    out, _ = capfd.readouterr()
+    assert "\nGame has been saved successfully.\n\n---- Back to Game Menu----" in out

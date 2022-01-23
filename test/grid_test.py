@@ -292,3 +292,26 @@ def test_updateGridSize(gridSize):
     player.grid.updateGridSize(x, y)
 
     assert player.grid.colCount == y and player.grid.rowCount == x
+
+
+
+def test_grid2RowDisplay2Col(capfd):
+    player = Player()
+    player.grid.updateGridSize(2, 2)
+    player.grid.displayGrid()
+    out, _ = capfd.readouterr()
+    assert "\t\t HWY: 8" in out
+
+
+def test_grid2RowDisplay6Col(capfd):
+    player = Player()
+    player.grid.updateGridSize(2, 6)
+    player.grid.displayGrid()
+    out, _ = capfd.readouterr()
+    assert "\t\t\t\t\t HWY: 8" in out
+
+def test_gridMoreThan2RowDisplay(capfd):
+    player = Player()
+    player.displayGrid()
+    out, _ = capfd.readouterr()
+    assert "3 |     |     |     |     |\t HWY: 8"
