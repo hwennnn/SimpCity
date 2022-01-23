@@ -45,11 +45,11 @@ def get_key(val):
             return key
 
 
-def buildingPlacements(x, y):
+def buildingPlacements():
     player = Player()
 
-    row = x if x is not None else player.grid.rowCount
-    col = y if x is not None else player.grid.colCount
+    row = player.grid.rowCount
+    col = player.grid.colCount
     total = row * col
 
     colCounter = 0
@@ -76,7 +76,7 @@ def buildingPlacements(x, y):
         # Moves to the next Col each loop, A -> B -> C -> D
         colCounter += 1
 
-    print(f"x = {x}, y = {y} ", tempList)
+    # print(f"x = {x}, y = {y} ", tempList)
     return tempList
 
 
@@ -212,16 +212,29 @@ def test_TC_CS_BP_SG_004(monkeypatch, capfd):
 def test_TC_Grid_Fill_001(monkeypatch, capfd):
     start_time = time.time()
     
+    # game = Game()
+    # randomCitySize = random.choice(gridSize())
+    # x, y = randomCitySize[0].split(',')
+    # tempList = buildingPlacements(int(x), int(y))
+
+    # # Iterates through the list of options that mimics user input
+    # try:
+    #     responses = iter(["3", "2", randomCitySize[0], "0", "1"] + tempList)
+    #     monkeypatch.setattr('builtins.input', lambda _: next(responses))
+    #     game.launch()
+
+    # # When list runs out of options, StopIteration error will happen unless game is exited with user inputs
+    # except StopIteration as e:
+    #     pass
+
     game = Game()
-    randomCitySize = random.choice(gridSize())
-    x, y = randomCitySize[0].split(',')
-    tempList = buildingPlacements(int(x), int(y))
+    tempList = buildingPlacements()
 
     # Iterates through the list of options that mimics user input
     try:
-        responses = iter(["3", "2", randomCitySize[0], "0", "1"] + tempList)
+        responses = iter(tempList)
         monkeypatch.setattr('builtins.input', lambda _: next(responses))
-        game.launch()
+        game.launchGame()
 
     # When list runs out of options, StopIteration error will happen unless game is exited with user inputs
     except StopIteration as e:
@@ -315,7 +328,29 @@ def test_TC_PB_BC_002(monkeypatch, capfd):
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit?pli=1#gid=768609166&range=10:10
 
 def test_TC_PB_SG_001(monkeypatch, capfd):
-    pass
+    game = Game()
+
+    # # Add random picking of city size and random coordinate
+
+    # randomCitySize = random.choice(gridSize())
+    # x, y = randomCitySize[0].split(',')
+    # tempList = buildingPlacements(int(x), int(y))
+
+    # Iterates through the list of options that mimics user input
+    try:
+        responses = iter(["1", str(random.randint(1,2)), "A4", "4"])
+        monkeypatch.setattr('builtins.input', lambda _: next(responses))
+        game.launch()
+
+    # When list runs out of options, StopIteration error will happen unless game is exited with user inputs
+    except StopIteration as e:
+        pass
+
+    # Prints out the saved game file for verification
+    f = open("saved_game.txt", "r")
+    file = f.readlines()
+    for i in file:
+        print(i)
 
 
 # Type: Integration
@@ -324,8 +359,24 @@ def test_TC_PB_SG_001(monkeypatch, capfd):
 # Test Data: Invalid coordinates
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit?pli=1#gid=768609166&range=11:11
 
-def test_TC_PB_SG_001(monkeypatch, capfd):
-    pass
+def test_TC_PB_SG_002(monkeypatch, capfd):
+    game = Game()
+
+    # Iterates through the list of options that mimics user input
+    try:
+        responses = iter(["1", str(random.randint(1,2)), "A20", "4"])
+        monkeypatch.setattr('builtins.input', lambda _: next(responses))
+        game.launch()
+
+    # When list runs out of options, StopIteration error will happen unless game is exited with user inputs
+    except StopIteration as e:
+        pass
+
+    # Prints out the saved game file for verification
+    f = open("saved_game.txt", "r")
+    file = f.readlines()
+    for i in file:
+        print(i)
 
 
 # Type: Integration
