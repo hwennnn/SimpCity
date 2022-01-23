@@ -302,7 +302,8 @@ validGridSizes = [
     ("6,3", "Sucessfully updated grid size to [6 x 3]!"),
     ("6,4", "Sucessfully updated grid size to [6 x 4]!"),
     ("6,5", "Sucessfully updated grid size to [6 x 5]!"),
-    ("6,6", "Sucessfully updated grid size to [6 x 6]!")
+    ("6,6", "Sucessfully updated grid size to [6 x 6]!"),
+    ("0", "\n---- Back to Option Menu ----")
 ]
 
 
@@ -371,8 +372,7 @@ failingGridSizes = [
     ("64,game", "Invalid Grid Size!"),
     ("$,0", "Invalid Grid Size!"),
     ("a,b", "Invalid Grid Size!"),
-    ("100,100", "Invalid Grid Size!"),
-    ("0", "\n---- Back to Option Menu ----")
+    ("100,100", "Invalid Grid Size!")
 ]
 
 
@@ -472,3 +472,5 @@ def test_savedGameSuccessful(capfd):
     player_test.savedGameSuccessful()
     out, _ = capfd.readouterr()
     assert "\nGame has been saved successfully.\n\n---- Back to Game Menu----" in out
+
+

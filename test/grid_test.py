@@ -310,8 +310,25 @@ def test_grid2RowDisplay6Col(capfd):
     out, _ = capfd.readouterr()
     assert "\t\t\t\t\t HWY: 8" in out
 
+
 def test_gridMoreThan2RowDisplay(capfd):
     player = Player()
     player.displayGrid()
     out, _ = capfd.readouterr()
-    assert "3 |     |     |     |     |\t HWY: 8"
+    assert "3 |     |     |     |     |\t HWY: 8" in out
+
+
+def test_gridHouseDisplay(capfd):
+    player = Player()
+    player.grid.updateGrid(0, 0, "MON")
+    player.displayGrid()
+    out, _ = capfd.readouterr()
+    assert "1 | MON |     |     |     |\t BCH: 8" in out
+
+
+def test_gridHouseDisplay(capfd):
+    player = Player()
+    player.grid.updateGrid(0, 2, "PRK")
+    player.displayGrid()
+    out, _ = capfd.readouterr()
+    assert "1 |     |     | PRK |     |\t BCH: 8" in out
