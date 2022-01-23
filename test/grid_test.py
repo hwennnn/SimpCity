@@ -294,7 +294,6 @@ def test_updateGridSize(gridSize):
     assert player.grid.colCount == y and player.grid.rowCount == x
 
 
-
 def test_grid2RowDisplay2Col(capfd):
     player = Player()
     player.grid.updateGridSize(2, 2)
@@ -318,7 +317,7 @@ def test_gridMoreThan2RowDisplay(capfd):
     assert "3 |     |     |     |     |\t HWY: 8" in out
 
 
-def test_gridHouseDisplay(capfd):
+def test_gridMonumentDisplay(capfd):
     player = Player()
     player.grid.updateGrid(0, 0, "MON")
     player.displayGrid()
