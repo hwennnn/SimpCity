@@ -262,7 +262,7 @@ f"""1. Build a {firstBuilding}
 
         self.grid.displayGrid()
 
-    # Access grid attribute to
+    # Access grid attribute to load saved game
     def loadGame(self):
         self.grid.readGridFromFile()
 

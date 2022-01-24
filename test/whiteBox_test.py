@@ -47,6 +47,33 @@ def saveGridToTextUnderTest(grid):
 
 
 # Features Under Test
+# 1) Save Game
+# 2) Load Game
+# Test if contents of save game file is the same as the grid that is loaded
+def test_checkLoadFileContents(monkeypatch, capfd):
+    Game = Game()
+
+    # add BCH into A1 of grid 
+    Game.grid[0][0] = Buildings.BCH
+
+    Game.player.saveGame()
+    # Check if the file exists
+    rootDirWithFile = currentDirectory.joinpath(savedGameFilename)
+    assert rootDirWithFile.exists()
+    
+    # Parse the file into formatted grid
+    lines = self.readFiles()
+    isFileValid, formattedGrid = self.isSavedGameFileValid(lines)
+
+    # Check if the file contents are the same as the grid
+    Game.player.loadGame()
+    assert Game.grid[0][0] == Buildings.BCH
+    assert Game.grid == formattedGrid
+
+
+
+
+# Features Under Test
 # 1) Building Placement
 # Test if all the coordinates in the grid is fillable with buildings. Scaleable to grid size.
 def test_fillGridWithBuildings(monkeypatch, capfd):

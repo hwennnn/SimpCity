@@ -271,15 +271,45 @@ class Grid:  # Grid Class
         self.availableBuildings.availability = [8] * 5
         self.factoryList.clear()
 
+    # checks if save game file exists
     def isSavedGameExist(self):
-        pass
+        return os.path.exists(savedGameFilename)
 
     # serialising from file to grid object
     def readGridFromFile(self):
-        pass
+        if not self.isSavedGameExist():
+            return
+        lines = self.readFiles()
+
+        isFileValid, formattedGrid = self.isSavedGameFileValid(lines)
+        if isFileValid:
+            self.grid = formattedGrid
+            print('Successfully loaded the game!')
+
 
     def isSavedGameFileValid(self, lines):
-        pass
+        if len(lines) != self.rowCount:
+            return (False, None)
+
+        validBuildings = set(['None', 'BCH', 'FAC', 'HSE', 'SHP', 'HWY', 'MON', 'PRK'])
+        results = []
+
+        for line in lines:
+            line = line.strip("\n").split(',')
+
+            if len(line) != self.colCount:
+                return (False, None)
+
+            for building in line:
+                if building not in validBuildings:
+                    return (False, None)
+            results.append(line)
+
+        return (True, results)
 
     def readFiles(self):
-        pass
+        lines = None
+        with open(savedGameFilename, "r+") as file:
+            lines = file.readlines()
+
+        return lines
