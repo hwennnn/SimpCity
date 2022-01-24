@@ -1,11 +1,15 @@
 from models.player import Player
+from models.leaderboard import Leaderboard
 
 
 class Game:  # Game Class
     def __init__(self):
+        self.leaderboard = Leaderboard()
+        # init the player object with the game leaderboard
+        # so that the player can set their high score in the leaderboard later
         self.player = Player()
 
-    def launch(self):
+    def launch(self):  # pragma: no cover
         while True:
             self.player.displayMainMenu()
             option = self.player.promptMainMenu()
@@ -21,9 +25,12 @@ class Game:  # Game Class
                 self.player.loadGame()
 
             elif option == '3':
+                self.displayLeaderboard()
+
+            elif option == '4':
                 self.player.displayOptionMenu()
 
-    def launchGame(self):
+    def launchGame(self):  # pragma: no cover
         self.player.startNewGame()
         while True:
             print("\nTurn: {0}".format(self.player.turns))
@@ -33,16 +40,36 @@ class Game:  # Game Class
             self.player.validateGame(option)
 
             if option == '0':
-                subOption = self.player.promptSaveGame()
-                self.player.validateSaveGame(subOption)
-                if subOption == "Y":
+                if self.player.savedGame == False:
+                    subOption = self.player.promptSaveGame()
+                    self.player.validateSaveGame(subOption)
+                    if subOption == "Y":
+                        self.player.saveGame()
+                        break
+
+                    elif subOption == "N":
+                        break
+                else:
+                    self.player.validateSaveGame("N")
                     break
 
-                elif subOption == "N":
-                    continue
-
             elif option == '3':
-                self.player.retrieveBuildingsScore()
+                self.player.displayBuildingsScore()
 
             elif option == '4':
                 self.player.saveGame()
+                self.player.savedGameSuccessful()
+
+            maxPlayerTurns = min(self.player.grid.rowCount *
+                                 self.player.grid.colCount, 40)
+
+            if self.player.turns > maxPlayerTurns:
+                self.player.displayGrid(True)  # print final layout of SimpCity
+                self.player.displayBuildingsScore()
+                playerScore = self.player.retrieveBuildingsScore(False)
+                self.leaderboard.saveScoreIntoLeaderboard(playerScore)
+                self.displayLeaderboard()
+                break
+
+    def displayLeaderboard(self):
+        self.leaderboard.displayLeaderboard()
