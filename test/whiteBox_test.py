@@ -55,7 +55,7 @@ def test_checkLoadFileContents(monkeypatch, capfd):
     newGame = Game()
 
     # add BCH into A1 of grid 
-    x, y = self.grid.retrieveParsedPosition("A1")
+    x, y = newGame.player.grid.retrieveParsedPosition("A1")
     newGame.player.grid.updateGrid(x, y, "BCH")
 
     newGame.player.saveGame()
