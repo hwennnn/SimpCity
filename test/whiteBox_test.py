@@ -64,7 +64,7 @@ def test_checkLoadFileContents(monkeypatch, capfd):
     assert rootDirWithFile.exists()
     
     # Parse the file into formatted grid
-    lines = self.readFiles()
+    lines = newGame.player.grid.readFiles()
     isFileValid, formattedGrid = self.isSavedGameFileValid(lines)
 
     # Check if the file contents are the same as the grid
