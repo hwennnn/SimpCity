@@ -51,12 +51,12 @@ def saveGridToTextUnderTest(grid):
 # 2) Load Game
 # Test if contents of save game file is the same as the grid that is loaded
 def test_checkLoadFileContents(monkeypatch, capfd):
-    Game = Game()
+    newGame = Game()
 
     # add BCH into A1 of grid 
-    Game.grid[0][0] = Buildings.BCH
+    newGame.grid[0][0] = Buildings.BCH
 
-    Game.player.saveGame()
+    newGame.player.saveGame()
     # Check if the file exists
     rootDirWithFile = currentDirectory.joinpath(savedGameFilename)
     assert rootDirWithFile.exists()
@@ -66,9 +66,9 @@ def test_checkLoadFileContents(monkeypatch, capfd):
     isFileValid, formattedGrid = self.isSavedGameFileValid(lines)
 
     # Check if the file contents are the same as the grid
-    Game.player.loadGame()
-    assert Game.grid[0][0] == Buildings.BCH
-    assert Game.grid == formattedGrid
+    newGame.player.loadGame()
+    assert newGame.grid[0][0] == Buildings.BCH
+    assert newGame.grid == formattedGrid
 
 
 
