@@ -40,19 +40,25 @@ class Game:  # Game Class
             self.player.validateGame(option)
 
             if option == '0':
-                subOption = self.player.promptSaveGame()
-                self.player.validateSaveGame(subOption)
-                if subOption == "Y":
-                    break
+                if self.player.savedGame == False:
+                    subOption = self.player.promptSaveGame()
+                    self.player.validateSaveGame(subOption)
+                    if subOption == "Y":
+                        self.player.saveGame()
+                        break
 
-                elif subOption == "N":
-                    continue
+                    elif subOption == "N":
+                        break
+                else:
+                    self.player.validateSaveGame("N")
+                    break
 
             elif option == '3':
                 self.player.displayBuildingsScore()
 
             elif option == '4':
                 self.player.saveGame()
+                self.player.savedGameSuccessful()
 
             maxPlayerTurns = min(self.player.grid.rowCount *
                                  self.player.grid.colCount, 40)

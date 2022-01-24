@@ -8,6 +8,7 @@ class Player:  # Player Class
         self.turns = 1
         self.grid = Grid()
         self.firstBuilding = self.secondBuilding = None
+        self.savedGame = False
 
     # Display first main menu upon launching python code
     def displayMainMenu(self):
@@ -47,11 +48,16 @@ Welcome, mayor of Simp City!
             if option == "1":
                 self.displayBuildingPoolOptionMenu()
 
+            elif option == "2":
+                gridSize = self.promptGridSize()
+                self.validateGridSize(gridSize)
+
     def displayOptionMenuHelper(self):
         print("""
 SimpCity Game Options
 ---------------------
 1. Choose Building Pool
+2. Adjust Grid Size
 
 0. Return to Main Menu
 """)
@@ -63,7 +69,7 @@ SimpCity Game Options
     def validateOptionMenu(self, option):
         if option == '0':
             print('\n---- Back to Main Menu ----')
-        elif len(option) == 1 and ord("1") <= ord(option) <= ord("1"):
+        elif len(option) == 1 and ord("1") <= ord(option) <= ord("2"):
             print(f"You selected option {option}")
         else:
             print('Invalid option!')
@@ -92,7 +98,7 @@ Choose Building Pool
 """)
 
     def promptBuildingPoolOptionMenu(self):
-        return input("Enter 5 building options with a comma separator (e.g. 1,2,4,6,7) or '0' to exit: ")
+        return input("\nEnter 5 building options with a comma separator (e.g. 1,2,4,6,7) or '0' to exit: ")
 
     # Validate options made in main menu
     def validateBuildingPoolOptionMenu(self, option):
@@ -101,6 +107,7 @@ Choose Building Pool
         elif self.isBuildingPoolOptionsValid(option):
             self.updateBuildingPoolFromOption(option)
             print("Sucessfully updated building pool!")
+            print("\n---- Back to Option Menu ----")
         else:
             print('Invalid option!')
 
@@ -120,10 +127,37 @@ Choose Building Pool
     def displayCurrentBuildingPool(self):
         self.grid.availableBuildings.displayCurrentBuildingPool()
 
+    def promptGridSize(self):
+        return input("\nEnter a valid Grid Size (x,y) between 1-6 with a comma separator (e.g. 3,4) or '0' to exit: ")
+
+    def validateGridSize(self, option):
+        if option == '0':
+            pass
+        elif self.isGridSizeValid(option):
+            self.updateGridSize(option)
+            gridSize = option.split(',')
+            print(f"Sucessfully updated grid size to [{gridSize[0]} x {gridSize[1]}]!")
+        else:
+            print('Invalid Grid Size!')
+        print('\n---- Back to Option Menu ----')
+
+    def isGridSizeValid(self, gridSize):
+        # (e.g. 4,4  6,6  3,3)
+
+        if len(gridSize) != 3:
+            return False
+        
+        size = gridSize.split(',')
+
+        return size[0].isnumeric() and size[1].isnumeric() and 1 < int(size[0]) <= 6 and 1 < int(size[1]) <= 6
+
+    def updateGridSize(self, gridSize):
+        size = gridSize.split(',')
+        self.grid.updateGridSize(size[0] ,size[1])
+
     def gameMenuContent(self, firstBuilding, secondBuilding):
         return (
-            f"""
-1. Build a {firstBuilding}
+f"""1. Build a {firstBuilding}
 2. Build a {secondBuilding}
 3. See current score
 
@@ -140,7 +174,9 @@ Choose Building Pool
 
     def startNewGame(self):
         self.turns = 1
+        self.savedGame = False
         self.grid.initializeGrid()
+        print('\n---- Entering Game Menu ----')
 
     # Prompt player for input in InGame main menu
     def promptGameMenu(self):
@@ -154,20 +190,24 @@ Choose Building Pool
                     ord(option) == ord("1") else self.secondBuilding
                 self.promptEnterBuildingPosition(buildingValue)
             else:
-                print(f"You selected option {option}")
+                print(f"You selected option {option}\n")
         else:
             print("Invalid option!")
 
     def promptEnterBuildingPosition(self, building):
-        positions = input("Build where? ")
+        positions = input(f"\nWhere would you like to place {building} at? ")
 
         if self.grid.isPositionValid(positions):
             x, y = self.grid.retrieveParsedPosition(positions)
             if self.turns == 1 or (self.turns > 1 and self.grid.hasAdjacentBuildingsForPosition(x, y)):
+                print(f"Placing {building} at {positions}...")
                 self.grid.updateGrid(x, y, building)
                 self.grid.decreaseBuildingCount(building)
                 self.turns += 1
+                self.savedGame = False
+                print(f"{building} has been successfully placed at {positions}.")
             else:
+                print(f"Placing {building} at {positions} was unsuccessful.")
                 print("You must build next to an existing building.")
 
         else:
@@ -198,18 +238,22 @@ Choose Building Pool
 
     # Prompt player to check if they saved their game beforehand
     def promptSaveGame(self):
-        return input('Are you sure to exit to main menu without saving game? [Y/N]: ').upper()
+        return input('Game has not been saved yet. Would you like to save your progress? [Y/N]: ').upper()
 
     # Validate options for prompting save game.
     def validateSaveGame(self, option):
         if option.upper() == "Y":
-            print('Returning to main menu...')
+            print('\nGame has been saved successfully.\n\n---- Back to Main Menu ---')
 
         elif option.upper() == "N":
-            print("Select Option '5' in the game menu to save your game")
+            print("\n---- Back to Main Menu ----")
 
         else:
             print("Invalid Option. Returning to Game Menu...")
+
+    # Validation message for successfully saving game in the game menu
+    def savedGameSuccessful(self):
+        print('\nGame has been saved successfully.\n\n---- Back to Game Menu----')
 
     # Access grid attribute to display grid
     def displayGrid(self, isFinal=False):
@@ -227,12 +271,10 @@ Choose Building Pool
             gridValue = self.grid.parseGridAsString()
             for row in gridValue:
                 f.writelines(row + "\n")
+        self.savedGame = True
 
     def retrieveTwoRandomBuildings(self):
         return self.grid.retrieveTwoRandomBuildings()
-
-    def displayAvailableBuildings(self):
-        self.grid.displayAvailableBuildings()
 
     def exitToMainMenu(self):
         pass

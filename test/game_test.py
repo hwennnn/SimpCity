@@ -1,5 +1,3 @@
-# Unit Test Only
-
 from models.game import Game
 from pathlib import Path
 import sys
