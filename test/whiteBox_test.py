@@ -69,8 +69,8 @@ def test_checkLoadFileContents(monkeypatch, capfd):
 
     # Check if the file contents are the same as the grid
     newGame.player.loadGame()
-    assert newGame.grid[0][0] == Buildings.BCH
-    assert newGame.grid == formattedGrid
+    assert newGame.player.grid[0][0] == Buildings.BCH
+    assert newGame.player.grid == formattedGrid
 
 
 

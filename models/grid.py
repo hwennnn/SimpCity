@@ -2,6 +2,7 @@ from models.available_buildings import AvailableBuildings
 from models.buildings import *
 from models.enums import Buildings
 from models.configurations import *
+import os 
 
 
 class Grid:  # Grid Class
