@@ -55,7 +55,8 @@ def test_checkLoadFileContents(monkeypatch, capfd):
     newGame = Game()
 
     # add BCH into A1 of grid 
-    newGame.player.grid.updateGrid("A", 1, "BCH")
+    x, y = self.grid.retrieveParsedPosition("A1")
+    newGame.player.grid.updateGrid(x, y, "BCH")
 
     newGame.player.saveGame()
     # Check if the file exists
