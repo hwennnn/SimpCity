@@ -105,6 +105,7 @@ def invalidGridSize():
     x = 0
     y = 0
 
+    # Generate [0-1],[0-6] invalid grid sizes
     for i in range(0, 2):
         for i in range(0,7):
             temp1 = []
@@ -114,6 +115,18 @@ def invalidGridSize():
             y += 1
         y = 0
         x += 1
+
+    # Generate [2-6],[0-1] invalid grid sizes
+    for i in range(0, 5):
+        for i in range(0,2):
+            temp1 = []
+            tempString = f"{x},{y}"
+            temp1.append(tempString)
+            gridSizeList.append(temp1)
+            y += 1
+        y = 0
+        x += 1
+
     return gridSizeList
 
 
