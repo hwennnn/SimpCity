@@ -55,7 +55,7 @@ jobs:
 
     - name: Begin Black-Box Tests with Pytest
       run: |
-        cd test; pytest blackBox_test.py -rP | tee output.txt; python3 output.py
+        cd test; pytest blackBox_test.py -rP | tee output.txt; python3 output.py; python regression_test.py
 
     - name: Publish Unit Test Results
       uses: EnricoMi/publish-unit-test-result-action@v1.24
