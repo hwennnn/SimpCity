@@ -1,7 +1,7 @@
-__docformat__ = "google"
 """
 This module deals with the Beach building object.
 """
+__docformat__ = "google"
 
 from models.buildings.building import Building
 

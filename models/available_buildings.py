@@ -1,7 +1,7 @@
-__docformat__ = "google"
 """
 This module deals with the AvailableBuildings object.
 """
+__docformat__ = "google"
 
 from models.enums import Buildings
 import random

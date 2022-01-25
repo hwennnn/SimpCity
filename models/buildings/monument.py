@@ -1,7 +1,7 @@
-__docformat__ = "google"
 """
 This module deals with the Monument building object.
 """
+__docformat__ = "google"
 from models.buildings.building import Building
 from models.enums import Buildings
 

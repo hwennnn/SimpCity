@@ -1,10 +1,9 @@
-__docformat__ = "google"
-
 """
 This module deals with the building abstract object. 
 This is the building absract class as the buildings have some common traits, 
 hence we don't have to re-initialised those fields in each class.
 """
+__docformat__ = "google"
 
 from abc import ABC, abstractmethod
 
