@@ -1,27 +1,79 @@
+"""
+This module deals with all game related functions (driver code of SimpCity).
+"""
+__docformat__ = "google"
+
 from models.available_buildings import AvailableBuildings
 from models.buildings import *
 from models.enums import Buildings
 from models.configurations import *
 
 
-class Grid:  # Grid Class
+class Grid:
+    rowCount: int
+    """The row count of the grid"""
+    colCount: int
+    """The column count of the grid"""
+    grid: list[list[str]]
+    """The 2D array (row * grid) represents the grid. Initially each position in the grid is initialised as None"""
+    factoryList: list[Factory]
+    """The array keeps track of placed Factory building in the grid"""
+    availableBuildings: AvailableBuildings
+    """The available buildings object associated with the grid"""
+
     def __init__(self):
+        """
+        Initialise the grid object with default values for rowCount, columnCount, grid, factoryList and availableBuildings object.
+        """
         self.rowCount = self.colCount = 4
-        # First initialise the object in each position as None
         self.grid = [[None] * self.colCount for _ in range(self.rowCount)]
         self.factoryList = []
         self.availableBuildings = AvailableBuildings()
 
     def isPositionXValid(self, x):
+        """
+        Args:
+            x (str): The building position on x-axis of the grid entered by the user.
+
+        The method will validate whether the input is valid as the length is 1 and its within the boundary.
+
+        """
         return len(x) == 1 and ord('A') <= ord(x.upper()) <= ord('A') + (self.colCount - 1)
 
     def isPositionYValid(self, y):
+        """
+        Args:
+            y (str): The building position on y-axis of the grid entered by the user.
+
+        The method will validate whether the input is valid as the length is 1 and its within the boundary.
+
+        """
         return len(y) == 1 and y.isnumeric() and 1 <= int(y) <= self.rowCount
 
     def parseXPositionInput(self, x):
+        """
+        Args:
+            x (str): The building position on x-axis of the grid entered by the user.
+
+        Returns:
+            int: The 0-indexed position integer represents the position on x-axis in the grid.
+
+        The method will return the 0-indexed x position integer.
+
+        """
         return ord(x.upper()) - ord('A')
 
     def parseYPositionInput(self, y):
+        """
+        Args:
+            y (str): The building position on y-axis of the grid entered by the user.
+
+        Returns:
+            int: The 0-indexed position integer represents the position on y-axis in the grid.
+
+        The method will return the 0-indexed y position integer.
+
+        """
         return int(y) - 1
 
     def isPositionValid(self, userInput):
@@ -237,13 +289,13 @@ class Grid:  # Grid Class
                 else:
                     for y in range(self.colCount):
                         lastRemainingBuilding += "\t"
-                    lastRemainingBuilding += f" {self.availableBuildings.buildings[4]}: {self.availableBuildings.availability[4]}\n" 
+                    lastRemainingBuilding += f" {self.availableBuildings.buildings[4]}: {self.availableBuildings.availability[4]}\n"
 
                 print(row)
                 print(lowerGridline)
                 if x == 1:
                     print(lastRemainingBuilding)
-                
+
             else:
                 row += f"\t {self.availableBuildings.buildings[x * 2]}: {self.availableBuildings.availability[x * 2]}" \
                     if x < 2 else ""
