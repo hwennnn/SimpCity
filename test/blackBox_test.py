@@ -245,11 +245,13 @@ def test_TC_Grid_Fill_001(monkeypatch, capfd):
     start_time = time.time()
     game = Game()
 
+    open("saved_leaderboard.txt", "w").close()
+
     tempList = buildingPlacements(5, 5)
 
     # Iterates through the list of options that mimics user input
     try:
-        # Select Options -> Choose City Size -> Valid City Size -> Exit to Main Menu -> Start Game -> Place Buidlings
+        # Select Options -> Choose City Size -> Valid City Size -> Exit to Main Menu -> Start Game -> Place Buildlings
         responses = iter(["4", "2", "5,5", "0", "1"] + tempList)
         monkeypatch.setattr('builtins.input', lambda _: next(responses))
         game.launch()
@@ -513,7 +515,6 @@ def test_TC_EOGA_001(monkeypatch, capfd):
         pass
 
     print("\n %s seconds" % (time.time() - start_time))
-    open("saved_leaderboard.txt", "w").close()
 
 
 # Type: Functional
@@ -536,7 +537,7 @@ def test_TC_EOGA_002(monkeypatch, capfd):
     try:
         responses = iter(tempList)
         monkeypatch.setattr('builtins.input', lambda _: next(responses))
-        game.launch()
+        game.launchGame()
 
     # When list runs out of options, StopIteration error will happen unless game is exited with user inputs
     except StopIteration as e:
@@ -554,12 +555,9 @@ def test_TC_EOGA_002(monkeypatch, capfd):
 def test_TC_HS_001(monkeypatch, capfd):
     start_time = time.time()
 
-    # High Score
-    tempList = ["3"]
-
     # Iterates through the list of options that mimics user input
     try:
-        responses = iter(tempList)
+        responses = iter(["3"])
         monkeypatch.setattr('builtins.input', lambda _: next(responses))
         import main
 
@@ -570,14 +568,13 @@ def test_TC_HS_001(monkeypatch, capfd):
     print("\n %s seconds" % (time.time() - start_time))
 
 
-
 # Type: Functional
 # Description: Verify High Score (leaderboard) can be shown from Main Menu
 # Test Scenario ID: TS_HS_001
 # Test Data: Invalid option for Main Menu - 5
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit?pli=1#gid=768609166&range=21:21
 
-def test_TC_HS_001(monkeypatch, capfd):
+def test_TC_HS_002(monkeypatch, capfd):
     start_time = time.time()
 
     # High Score
@@ -775,7 +772,7 @@ def test_UAT_TC_MainMenu_001(monkeypatch, capfd):
 # Type: Functional
 # Description: Verify that user can select city size
 # Test Scenario ID: TS_CitySize_001
-# Test Data: Valid City Size - Random
+# Test Data: Valid City Size
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit#gid=1826582149&range=3:3
 
 def test_UAT_TC_CitySize_001(monkeypatch, capfd):
@@ -800,14 +797,14 @@ def test_UAT_TC_CitySize_001(monkeypatch, capfd):
 # Type: Functional
 # Description: Verify that user can select city size
 # Test Scenario ID: TS_CitySize_001
-# Test Data: Invalid City Size - Random
+# Test Data: Invalid City Size
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit#gid=1826582149&range=4:4
 
 def test_UAT_TC_CitySize_002(monkeypatch, capfd):
     start_time = time.time()
 
     # Select Options -> Choose Building Pool, Valid Building Pool
-    tempList = ["4", "2", "5,5"]
+    tempList = ["4", "2", "5,0"]
 
     # Iterates through the list of options that mimics user input
     try:
@@ -1127,7 +1124,6 @@ def test_UAT_TC_GameScore_003(monkeypatch, capfd):
         pass
 
     print("\n %s seconds" % (time.time() - start_time))
-    open("saved_leaderboard.txt", "w").close()
 
 
 # Type: Functional
