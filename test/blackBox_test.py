@@ -144,10 +144,8 @@ def test_TC_CS_BP_SG_001(monkeypatch, capfd):
     start_time = time.time()
     game = Game()
 
-    randomCitySize = random.choice(validGridSize())
-
     # Select Options -> Choose City Size -> Valid City Size -> Choose Building Pool, Valid Building Pool, Exit to Options Menu, Exit to Main Menu -> Start New Game
-    tempList = ["4", "2", randomCitySize[0], "1", "1,2,3,6,7", "0", "0", "1", "0", "Y", "0"]
+    tempList = ["4", "2", "5,5", "1", "1,2,3,6,7", "0", "0", "1", "0", "Y", "0"]
 
     # Iterates through the list of options that mimics user input
     try:
@@ -164,18 +162,15 @@ def test_TC_CS_BP_SG_001(monkeypatch, capfd):
 # Type: Intergration
 # Description: Verifying the interaction between selecting city size, selecting building pool and starting game
 # Test Scenario ID: TS_CS_BP_SG_001
-# Test Data: Invalid City Size - Random, Valid Building Pool - 1,2,3,6,7
+# Test Data: Invalid City Size - 5,0, Valid Building Pool - 1,2,3,6,7
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit?pli=1#gid=768609166&range=3:3
 
 def test_TC_CS_BP_SG_002(monkeypatch, capfd):
     start_time = time.time()
     game = Game()
 
-    # Add Invalid City Size Logic
-    randomCitySize = random.choice(invalidGridSize())
-
     # Select Options -> Choose City Size -> Invalid City Size -> Choose Building Pool, Valid Building Pool, Exit to Options Menu, Exit to Main Menu -> Start New Game
-    tempList = ["4", "2", randomCitySize[0], "1", "4", "1", "1,2,3,6,7", "0", "0", "1", "0", "Y", "0"]
+    tempList = ["4", "2", "5,0", "1", "1,2,3,6,7", "0", "0", "1", "0", "Y", "0"]
 
     # Iterates through the list of options that mimics user input
     try:
@@ -199,10 +194,8 @@ def test_TC_CS_BP_SG_002(monkeypatch, capfd):
 def test_TC_CS_BP_SG_003(monkeypatch, capfd):
     start_time = time.time()
 
-    randomCitySize = random.choice(validGridSize())
-
     # Select Options -> Choose City Size -> Valid City Size -> Choose Building Pool, Invalid Building Pool, Exit to Options Menu, Exit to Main Menu -> Start New Game
-    tempList = ["4", "2", randomCitySize[0], "0", "1", "1,2,3,8,10", "0", "0", "1"]
+    tempList = ["4", "2", "5,5", "1", "1,2,3,8,10", "0", "0", "1"]
 
     # Iterates through the list of options that mimics user input
     try:
@@ -220,16 +213,14 @@ def test_TC_CS_BP_SG_003(monkeypatch, capfd):
 # Type: Intergration
 # Description: Verifying the interaction between selecting city size, selecting building pool and starting game
 # Test Scenario ID: TS_CS_BP_SG_001
-# Test Data: Invalid City Size - Random, Invalid Building Pool - 1,2,3,8,10
+# Test Data: Invalid City Size, Invalid Building Pool - 1,2,3,8,10
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit?pli=1#gid=768609166&range=5:5
 
 def test_TC_CS_BP_SG_004(monkeypatch, capfd):
     start_time = time.time()
-
-    randomCitySize = random.choice(invalidGridSize())
     
     # Select Options -> Choose City Size -> Invalid City Size -> Choose Building Pool, Invalid Building Pool, Exit to Options Menu, Exit to Main Menu -> Start New Game
-    tempList = ["4", "2", randomCitySize[0], "1", "1,2,3,8,10", "0", "0", "1"]
+    tempList = ["4", "2", "5,0", "1", "1,2,3,8,10", "0", "0", "1"]
 
     # Iterates through the list of options that mimics user input
     try:
@@ -254,15 +245,12 @@ def test_TC_Grid_Fill_001(monkeypatch, capfd):
     start_time = time.time()
     game = Game()
 
-    # Choose random valid city size
-    randomCitySize = random.choice(validGridSize())
-    x, y = randomCitySize[0].split(',')
-    tempList = buildingPlacements(int(x), int(y))
+    tempList = buildingPlacements(5, 5)
 
     # Iterates through the list of options that mimics user input
     try:
         # Select Options -> Choose City Size -> Valid City Size -> Exit to Main Menu -> Start Game -> Place Buidlings
-        responses = iter(["4", "2", randomCitySize[0], "0", "1"] + tempList)
+        responses = iter(["4", "2", "5,5", "0", "1"] + tempList)
         monkeypatch.setattr('builtins.input', lambda _: next(responses))
         game.launch()
 
@@ -276,20 +264,17 @@ def test_TC_Grid_Fill_001(monkeypatch, capfd):
 # Type: Functional
 # Description: Verifying the possibility of filling the grid with buildings
 # Test Scenario ID: TS_Grid_Fill_001
-# Test Data: Inalid Coordinates - 11, !a, 1a,!/
+# Test Data: Invalid Coordinates - 11, !a, 1a,!/
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit?pli=1#gid=768609166&range=7:7
 
 def test_TC_Grid_Fill_002(monkeypatch, capfd):
     start_time = time.time()
     game = Game()
 
-    # Choose random valid city size
-    randomCitySize = random.choice(validGridSize())
-    x, y = randomCitySize[0].split(',')
-    tempList = buildingPlacements(int(x), int(y))
+    tempList = buildingPlacements(5,5)
 
     # Choose City Size and randomly pick between the two building options together with an invalid coordinate
-    tempList = ["4", "2", randomCitySize[0], "0", "1", str(random.randint(1, 2)), "11", str(random.randint(1, 2)), "!a", str(
+    tempList = ["4", "2", "5,5", "0", "1", str(random.randint(1, 2)), "11", str(random.randint(1, 2)), "!a", str(
         random.randint(1, 2)), "1a", str(random.randint(1, 2)), "!/"]
 
     # Iterates through the list of options that mimics user input
@@ -315,11 +300,8 @@ def test_TC_PB_BC_001(monkeypatch, capfd):
     start_time = time.time()
     game = Game()
 
-    # Choose random valid city size
-    randomCitySize = random.choice(validGridSize())
-
     # Choose City Size and randomly pick between the two building options together with an valid coordinate
-    tempList = ["4", "2", randomCitySize[0], "0", "1", str(random.randint(1, 2)), "A1"]
+    tempList = ["1", str(random.randint(1, 2)), "A1"]
 
     # Iterates through the list of options that mimics user input
     try:
@@ -344,11 +326,8 @@ def test_TC_PB_BC_002(monkeypatch, capfd):
     start_time = time.time()
     game = Game()
 
-    # Choose random valid city size
-    randomCitySize = random.choice(validGridSize())
-
     # Choose City Size and randomly pick between the two building options together with an invalid coordinate
-    tempList = ["4", "2", randomCitySize[0], "0", "1", str(random.randint(1, 2)), "!1"]
+    tempList = ["1", str(random.randint(1, 2)), "!1"]
 
     # Iterates through the list of options that mimics user input
     try:
@@ -366,17 +345,15 @@ def test_TC_PB_BC_002(monkeypatch, capfd):
 # Type: Integration
 # Description: Verifying the interaction between placing buildings and saving the game.
 # Test Scenario ID: TS_PB_SG_001
-# Test Data: Valid coordinates.
+# Test Data: Valid coordinates - A4
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit?pli=1#gid=768609166&range=10:10
 
 def test_TC_PB_SG_001(monkeypatch, capfd):
+    start_time = time.time()
     game = Game()
-
-    # Choose random valid city size
-    randomCitySize = random.choice(validGridSize())
     
     # Select Options -> Choose City Size -> Valid City Size -> Exit to Main Menu -> Start Game -> Place Buidling -> Save Game
-    tempList =["4", "2", randomCitySize[0], "0", "1", str(random.randint(1,2)), "A4", "4"]
+    tempList =["1", str(random.randint(1,2)), "A4", "4"]
 
     # Iterates through the list of options that mimics user input
     try:
@@ -393,6 +370,8 @@ def test_TC_PB_SG_001(monkeypatch, capfd):
     file = f.readlines()
     for i in file:
         print(i)
+
+    print("\n %s seconds" % (time.time() - start_time))
 
 
 # Type: Integration
@@ -402,13 +381,11 @@ def test_TC_PB_SG_001(monkeypatch, capfd):
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit?pli=1#gid=768609166&range=11:11
 
 def test_TC_PB_SG_002(monkeypatch, capfd):
+    start_time = time.time()
     game = Game()
 
-    # Choose random valid city size
-    randomCitySize = random.choice(validGridSize())
-
     # Select Options -> Choose City Size -> Valid City Size -> Exit to Main Menu -> Start Game -> Place Buidling-> Save Game
-    tempList = ["4", "2", randomCitySize[0], "0", "1", str(random.randint(1,2)), "A20", "4"]
+    tempList = ["1", str(random.randint(1,2)), "A20", "4"]
 
     # Iterates through the list of options that mimics user input
     try:
@@ -425,6 +402,8 @@ def test_TC_PB_SG_002(monkeypatch, capfd):
     file = f.readlines()
     for i in file:
         print(i)
+    
+    print("\n %s seconds" % (time.time() - start_time))
 
 
 # Type: Integration
@@ -467,21 +446,14 @@ def test_TC_PB_DS_001(monkeypatch, capfd):
     start_time = time.time()
     game = Game()
 
-    # Choose random valid city size
-    randomCitySize = random.choice(validGridSize())
-    x, y = randomCitySize[0].split(',')
-
     # tempList in this test contains only half of the all valid coordinates possible
-    tempList = buildingPlacements(int(x), int(y))[0:int(len(buildingPlacements(int(x), int(y)))/2)]
-
-    # Display Score
-    tempList.append("3")
+    tempList = buildingPlacements(None, None)[0:int(len(buildingPlacements(None, None))/2)]
 
     # Iterates through the list of options that mimics user input
     try:
-        responses = iter(["4", "2", randomCitySize[0], "0", "1"] + tempList)
+        responses = iter(tempList + ["3"])
         monkeypatch.setattr('builtins.input', lambda _: next(responses))
-        game.launch()
+        game.launchGame()
 
     # When list runs out of options, StopIteration error will happen unless game is exited with user inputs
     except StopIteration as e:
@@ -500,22 +472,16 @@ def test_TC_PB_DS_002(monkeypatch, capfd):
     start_time = time.time()
     game = Game()
 
-    # Choose random valid city size
-    randomCitySize = random.choice(validGridSize())
-
     # tempList in this test contains only invalid coordinates
-    tempList = ["4", "2", randomCitySize[0], "0", "1", str(random.randint(1, 2)), "11", str(random.randint(1, 2)), "!a", str(
-        random.randint(1, 2)), "1a", str(random.randint(1, 2)), "!/"]
-
-    # Display Score
-    tempList.append("3")
+    tempList = [str(random.randint(1, 2)), "11", str(random.randint(1, 2)), "!a", str(
+        random.randint(1, 2)), "1a", str(random.randint(1, 2)), "!/", "3"]
 
     # Iterates through the list of options that mimics user input
     try:
         responses = iter(tempList)
         monkeypatch.setattr('builtins.input', lambda _: next(responses))
         game.launchGame()
-
+        
     # When list runs out of options, StopIteration error will happen unless game is exited with user inputs
     except StopIteration as e:
         pass
@@ -533,23 +499,21 @@ def test_TC_EOGA_001(monkeypatch, capfd):
     start_time = time.time()
     game = Game()
 
-    # Choose random valid city size
-    randomCitySize = random.choice(validGridSize())
-    x, y = randomCitySize[0].split(',')
-    tempList = buildingPlacements(int(x), int(y))
+    tempList = buildingPlacements(None, None)
 
     # Iterates through the list of options that mimics user input
     try:
         # Select Options -> Choose City Size -> Valid City Size -> Exit to Main Menu -> Start Game -> Place Buidlings -> Enter Name for High Score -> Show High Score
-        responses = iter(["4", "2", randomCitySize[0], "0", "1"] + tempList + ["Tester01", "3"])
+        responses = iter(tempList + ["Tester01", "3"])
         monkeypatch.setattr('builtins.input', lambda _: next(responses))
-        game.launch()
+        game.launchGame()
 
     # When list runs out of options, StopIteration error will happen unless game is exited with user inputs
     except StopIteration as e:
         pass
 
     print("\n %s seconds" % (time.time() - start_time))
+    open("saved_leaderboard.txt", "w").close()
 
 
 # Type: Functional
@@ -562,14 +526,11 @@ def test_TC_EOGA_002(monkeypatch, capfd):
     start_time = time.time()
     game = Game()
 
-    # Choose random valid city size
-    randomCitySize = random.choice(validGridSize())
-    x, y = randomCitySize[0].split(',')
-    tempList = buildingPlacements(int(x), int(y))
+    tempList = buildingPlacements(5,5)
 
     # Choose City Size -> Enter Invalid Coordinate -> Exit to Main Menu -> Confirm -> High Score
-    tempList = ["4", "2", randomCitySize[0], "0", "1", str(random.randint(1, 2)), "11", str(random.randint(1, 2)), "!a", str(
-        random.randint(1, 2)), "1a", str(random.randint(1, 2)), "!/", "0", "Y", "3"]
+    tempList = [str(random.randint(1, 2)), "11", str(random.randint(1, 2)), "!a", str(
+        random.randint(1, 2)), "1a", str(random.randint(1, 2)), "!/"]
 
     # Iterates through the list of options that mimics user input
     try:
@@ -820,11 +781,8 @@ def test_UAT_TC_MainMenu_001(monkeypatch, capfd):
 def test_UAT_TC_CitySize_001(monkeypatch, capfd):
     start_time = time.time()
 
-    # Choose random valid city size
-    randomCitySize = random.choice(validGridSize())
-
     # Select Options -> Choose Building Pool, Valid Building Pool
-    tempList = ["4", "2", randomCitySize[0]]
+    tempList = ["4", "2", "5,5"]
 
     # Iterates through the list of options that mimics user input
     try:
@@ -848,11 +806,8 @@ def test_UAT_TC_CitySize_001(monkeypatch, capfd):
 def test_UAT_TC_CitySize_002(monkeypatch, capfd):
     start_time = time.time()
 
-    # Choose random valid city size
-    randomCitySize = random.choice(invalidGridSize())
-
     # Select Options -> Choose Building Pool, Valid Building Pool
-    tempList = ["4", "2", randomCitySize[0]]
+    tempList = ["4", "2", "5,5"]
 
     # Iterates through the list of options that mimics user input
     try:
@@ -1158,15 +1113,12 @@ def test_UAT_TC_GameScore_003(monkeypatch, capfd):
     start_time = time.time()
     game = Game()
 
-    # Choose random valid city size
-    randomCitySize = random.choice(validGridSize())
-    x, y = randomCitySize[0].split(',')
-    tempList = buildingPlacements(int(x), int(y))
+    tempList = buildingPlacements(5,5)
 
     # Iterates through the list of options that mimics user input
     try:
         # Select Options -> Choose City Size -> Valid City Size -> Exit to Main Menu -> Start Game -> Place Buidlings -> Enter Name for High Score -> Show High Score
-        responses = iter(["4", "2", randomCitySize[0], "0", "1"] + tempList + ["Tester01", "3"])
+        responses = iter(["4", "2", "5,5", "0", "1"] + tempList + ["Tester01", "3"])
         monkeypatch.setattr('builtins.input', lambda _: next(responses))
         game.launch()
 
@@ -1175,6 +1127,8 @@ def test_UAT_TC_GameScore_003(monkeypatch, capfd):
         pass
 
     print("\n %s seconds" % (time.time() - start_time))
+    open("saved_leaderboard.txt", "w").close()
+
 
 # Type: Functional
 # Description: Verify that game score can be shown

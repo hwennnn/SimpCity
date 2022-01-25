@@ -18,30 +18,34 @@ uatFunctionalTime = "H"
 # Test Data: Valid City Size / Valid Building Pool
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit?pli=1#gid=768609166&range=2:2
 
-
 def TC_CS_BP_SG_001():
-    # Add City Size Output
-
     output = ""
     # Test ID
     output += file[9]
     output += "\n"
 
+    # City Size
+    for i in file[23:31]:
+        output += i
+    output += "\n"
+
     # Current Building Pool
-    for i in file[30:43]:
+    for i in file[44:52]:
         output += i
 
-    # Output after user input
+    # Update Building Pool
     output += "\n"
-    output += file[43]
+    output += file[56]
     output += "\n"
+    output += file[57]
 
     # Updated Building Pool
-    output += file[57]
+    output += "\n"
+    output += file[73]
     output += "\n"
 
     # Display Grid to check if remaining building is using updated building pool
-    for i in file[80:93]:
+    for i in file[100:114]:
         output += i
 
     sh = gc.open('SimpCity Test Cases')
@@ -49,7 +53,7 @@ def TC_CS_BP_SG_001():
     wks.update_value(funtionalIntegrationCol + '2', output)
 
     # Time Taken
-    wks.update_value(funtionalIntegrationTime + '2', file[113])
+    wks.update_value(funtionalIntegrationTime + '2', file[139])
 
 
 # Description: Verifying the interaction between selecting city size, selecting building pool and starting game
@@ -58,28 +62,27 @@ def TC_CS_BP_SG_001():
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit?pli=1#gid=768609166&range=3:3
 
 def TC_CS_BP_SG_002():
-    # Add City Size Output
-
     output = ""
     # Test ID
-    output += file[114]
+    output += file[140]
     output += "\n"
 
-    # Current Building Pool
-    for i in file[135:148]:
+    # Update Grid Size
+    for i in file[154:163]:
+        output += i
+    output += "\n"
+
+    # Display Building Pool
+    for i in file[175:188]:
         output += i
 
     # Output after user input
     output += "\n"
-    output += file[148]
-    output += "\n"
-
-    # Updated Building Pool
-    output += file[162]
+    output += file[204]
     output += "\n"
 
     # Display Grid to check if remaining building is using updated building pool
-    for i in file[185:198]:
+    for i in file[231:243]:
         output += i
 
     sh = gc.open('SimpCity Test Cases')
@@ -87,7 +90,7 @@ def TC_CS_BP_SG_002():
     wks.update_value(funtionalIntegrationCol + '3', output)
 
     # Time Taken
-    wks.update_value(funtionalIntegrationTime + '3', file[218])
+    wks.update_value(funtionalIntegrationTime + '3', file[268])
 
 
 # Description: Verifying the interaction between selecting city size, selecting building pool and starting game
@@ -96,19 +99,23 @@ def TC_CS_BP_SG_002():
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit?pli=1#gid=768609166&range=3:3
 
 def TC_CS_BP_SG_003():
-    # Add City Size Output
-
     output = ""
     # Test ID
-    output += file[219]
+    output += file[269]
+    output += "\n"
+
+    # Update City Size
+    for i in file[283:292]:
+        output += i
     output += "\n"
 
     # Current Building Pool
-    for i in file[240:253]:
+    for i in file[304:318]:
         output += i
+    output += "\n"
 
     # Output after user input
-    output += file[253]
+    output += file[331]
     output += "\n"
 
     # Updated Building Pool
@@ -116,7 +123,7 @@ def TC_CS_BP_SG_003():
     output += "\n"
 
     # Display Grid to check if remaining building is using updated building pool
-    for i in file[290:303]:
+    for i in file[358:372]:
         output += i
 
     sh = gc.open('SimpCity Test Cases')
@@ -124,7 +131,7 @@ def TC_CS_BP_SG_003():
     wks.update_value(funtionalIntegrationCol + '4', output)
 
     # Time Taken
-    wks.update_value(funtionalIntegrationTime + '4', file[311])
+    wks.update_value(funtionalIntegrationTime + '4', file[380])
 
 
 # Description: Verifying the interaction between selecting city size, selecting building pool and starting game
@@ -133,27 +140,26 @@ def TC_CS_BP_SG_003():
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit?pli=1#gid=768609166&range=3:3
 
 def TC_CS_BP_SG_004():
-    # Add City Size Output
-
     output = ""
     # Test ID
-    output += file[312]
+    output += file[381]
     output += "\n"
 
+    # Update City Size
+    for i in file[395:404]:
+        output += i
+
     # Current Building Pool
-    for i in file[333:346]:
+    for i in file[416:430]:
         output += i
 
     # Output after user input
-    output += file[346]
     output += "\n"
-
-    # Updated Building Pool
-    output += file[360]
+    output += file[443]
     output += "\n"
 
     # Display Grid to check if remaining building is using updated building pool
-    for i in file[383:396]:
+    for i in file[470:482]:
         output += i
 
     sh = gc.open('SimpCity Test Cases')
@@ -161,7 +167,7 @@ def TC_CS_BP_SG_004():
     wks.update_value(funtionalIntegrationCol + '5', output)
 
     # Time Taken
-    wks.update_value(funtionalIntegrationTime + '5', file[404])
+    wks.update_value(funtionalIntegrationTime + '5', file[490])
 
 
 # Type: Functional
@@ -172,18 +178,21 @@ def TC_CS_BP_SG_004():
 def TC_Grid_Fill_001():
     output = ""
     # Test ID
-    output += file[405]
+    output += file[491]
     output += "\n"
 
     # Display Turn and Grid
-    for i in file[723:736]:
+    for i in file[1116:1130]:
         output += i
 
     # Add user input when implemented
     output += "\n"
+    for i in file[1137:1139]:
+        output += i
+    output += "\n"
 
     # Display Turn and Grid
-    for i in file[744:757]:
+    for i in file[1140:1154]:
         output += i
 
     sh = gc.open('SimpCity Test Cases')
@@ -191,7 +200,7 @@ def TC_Grid_Fill_001():
     wks.update_value(funtionalIntegrationCol + '6', output)
 
     # Time Taken
-    wks.update_value(funtionalIntegrationTime + '6', file[765])
+    wks.update_value(funtionalIntegrationTime + '6', file[1165])
 
 
 # Type: Functional
@@ -202,23 +211,19 @@ def TC_Grid_Fill_001():
 def TC_Grid_Fill_002():
     output = ""
     # Test ID
-    output += file[766]
+    output += file[1166]
     output += "\n"
 
     # Display Turn and Grid
-    for i in file[835:847]:
+    for i in file[1305:1321]:
         output += i
-
-    # Output after user input
-    output += "\n"
-    output += file[855]
 
     sh = gc.open('SimpCity Test Cases')
     wks = sh[2]
     wks.update_value(funtionalIntegrationCol + '7', output)
 
     # Time Taken
-    wks.update_value(funtionalIntegrationTime + '7', file[878])
+    wks.update_value(funtionalIntegrationTime + '7', file[1329])
 
 
 # Description: Verifying the interaction between placing buildings and remaining building count
@@ -228,18 +233,11 @@ def TC_Grid_Fill_002():
 def TC_PB_BC_001():
     output = ""
     # Test ID
-    output += file[879]
+    output += file[1330]
     output += "\n"
 
     # Display Turn and Grid
-    for i in file[882:895]:
-        output += i
-
-    # Add user input when implemented
-    output += "\n"
-
-    # Display Turn and Grid
-    for i in file[903:916]:
+    for i in file[1482:1497]:
         output += i
 
     sh = gc.open('SimpCity Test Cases')
@@ -247,7 +245,7 @@ def TC_PB_BC_001():
     wks.update_value(funtionalIntegrationCol + '8', output)
 
     # Time Taken
-    wks.update_value(funtionalIntegrationTime + '8', file[924])
+    wks.update_value(funtionalIntegrationTime + '8', file[1388])
 
 
 # Description: Verifying the interaction between placing buildings and remaining building count
@@ -257,20 +255,11 @@ def TC_PB_BC_001():
 def TC_PB_BC_002():
     output = ""
     # Test ID
-    output += file[925]
+    output += file[1389]
     output += "\n"
 
     # Display Turn and Grid
-    for i in file[928:941]:
-        output += i
-
-    # Output after user input
-    output += "\n"
-    output += file[948]
-    output += "\n"
-
-    # Display Turn and Grid
-    for i in file[950:963]:
+    for i in file[1424:1437]:
         output += i
 
     sh = gc.open('SimpCity Test Cases')
@@ -278,7 +267,69 @@ def TC_PB_BC_002():
     wks.update_value(funtionalIntegrationCol + '9', output)
 
     # Time Taken
-    wks.update_value(funtionalIntegrationTime + '9', file[971])
+    wks.update_value(funtionalIntegrationTime + '9', file[1446])
+
+
+# Description: Verifying the interaction between placing buildings and saving the game.
+# Test Scenario ID: TS_PB_SG_001
+# Test Data: Valid coordinates
+
+def TC_PB_SG_001():
+    output = ""
+    # Test ID
+    output += file[1447]
+    output += "\n"
+
+    # Display Turn and Grid
+    for i in file[1482:1496]:
+        output += i
+
+    # Output after user input
+    output += "\n"
+    output += file[1507]
+    output += "\n"
+
+    # Display Game File
+    for i in file[1530:1536]:
+        output += i
+
+    sh = gc.open('SimpCity Test Cases')
+    wks = sh[2]
+    wks.update_value(funtionalIntegrationCol + '10', output)
+
+    # Time Taken
+    wks.update_value(funtionalIntegrationTime + '10', file[1539])
+
+
+# Description: Verifying the interaction between placing buildings and saving the game.
+# Test Scenario ID: TS_PB_SG_001
+# Test Data: Invalid coordinates
+
+def TC_PB_SG_002():
+    output = ""
+    # Test ID
+    output += file[1540]
+    output += "\n"
+
+    # Display Turn and Grid
+    for i in file[1575:1588]:
+        output += i
+
+    # Output after user input
+    output += "\n"
+    output += file[1599]
+    output += "\n"
+
+    # Display Game File
+    for i in file[1622:1628]:
+        output += i
+
+    sh = gc.open('SimpCity Test Cases')
+    wks = sh[2]
+    wks.update_value(funtionalIntegrationCol + '10', output)
+
+    # Time Taken
+    wks.update_value(funtionalIntegrationTime + '10', file[1631])
 
 
 # Description: Verifying the interaction between placing buildings and the viewing of game score
@@ -288,20 +339,20 @@ def TC_PB_BC_002():
 def TC_PB_DS_001():
     output = ""
     # Test ID
-    output += file[972]
+    output += file[1632]
     output += "\n"
 
     # Display Turn and Grid
-    for i in file[1143:1156]:
+    for i in file[1810:1824]:
         output += i
 
     # Output after user input
     output += "\n"
-    output += file[1163]
+    output += file[1832]
     output += "\n"
 
     # Display Score
-    for i in file[1164:1171]:
+    for i in file[1835:1841]:
         output += i
 
     sh = gc.open('SimpCity Test Cases')
@@ -309,7 +360,7 @@ def TC_PB_DS_001():
     wks.update_value(funtionalIntegrationCol + '16', output)
 
     # Time Taken
-    wks.update_value(funtionalIntegrationTime + '16', file[1193])
+    wks.update_value(funtionalIntegrationTime + '16', file[1863])
 
 
 # Description: Verifying the interaction between placing buildings and the viewing of game score
@@ -319,24 +370,20 @@ def TC_PB_DS_001():
 def TC_PB_DS_002():
     output = ""
     # Test ID
-    output += file[1194]
+    output += file[1864]
     output += "\n"
 
     # Display Turn and Grid
-    for i in file[1263:1276]:
+    for i in file[1951:1964]:
         output += i
 
     # Output after user input
     output += "\n"
-    output += file[1283]
-
-    # Output after user input
-    output += "\n"
-    output += file[1305]
+    output += file[1972]
     output += "\n"
 
     # Display Score
-    for i in file[1306:1313]:
+    for i in file[1975:1981]:
         output += i
 
     sh = gc.open('SimpCity Test Cases')
@@ -344,488 +391,488 @@ def TC_PB_DS_002():
     wks.update_value(funtionalIntegrationCol + '17', output)
 
     # Time Taken
-    wks.update_value(funtionalIntegrationTime + '17', file[1335])
+    wks.update_value(funtionalIntegrationTime + '17', file[2003])
 
 
-# Description: Verifying the interaction between exiting from both Game and Main menu
-# Test Scenario ID: TS_Exit_001
-# Test Data: Valid Game Menu Option / Valid Main Menu Option
+# # Description: Verifying the interaction between exiting from both Game and Main menu
+# # Test Scenario ID: TS_Exit_001
+# # Test Data: Valid Game Menu Option / Valid Main Menu Option
 
-def TC_Exit_001():
-    output = ""
-    # Test ID
-    output += file[1336]
-    output += "\n"
+# def TC_Exit_001():
+#     output = ""
+#     # Test ID
+#     output += file[1336]
+#     output += "\n"
 
-    # Display Turn and Game Menu
-    for i in file[1349:1369]:
-        output += i
+#     # Display Turn and Game Menu
+#     for i in file[1349:1369]:
+#         output += i
 
-    # Output after user input
-    output += "\n"
-    output += file[1369]
-    output += "\n"
+#     # Output after user input
+#     output += "\n"
+#     output += file[1369]
+#     output += "\n"
 
-    # Display Main Menu + Exit
-    for i in file[1370:1381]:
-        output += i
+#     # Display Main Menu + Exit
+#     for i in file[1370:1381]:
+#         output += i
 
-    sh = gc.open('SimpCity Test Cases')
-    wks = sh[2]
-    wks.update_value(funtionalIntegrationCol + '22', output)
+#     sh = gc.open('SimpCity Test Cases')
+#     wks = sh[2]
+#     wks.update_value(funtionalIntegrationCol + '22', output)
 
-    # Time Taken
-    wks.update_value(funtionalIntegrationTime + '22', file[1382])
+#     # Time Taken
+#     wks.update_value(funtionalIntegrationTime + '22', file[1382])
 
 
-# Description: Verifying the interaction between exiting from both Game and Main menu
-# Test Scenario ID: TS_Exit_001
-# Test Data: Valid Game Menu Option / Invalid Main Menu Option
+# # Description: Verifying the interaction between exiting from both Game and Main menu
+# # Test Scenario ID: TS_Exit_001
+# # Test Data: Valid Game Menu Option / Invalid Main Menu Option
 
-def TC_Exit_002():
-    output = ""
-    # Test ID
-    output += file[1383]
-    output += "\n"
+# def TC_Exit_002():
+#     output = ""
+#     # Test ID
+#     output += file[1383]
+#     output += "\n"
 
-    # Display Turn and Game Menu
-    for i in file[1396:1416]:
-        output += i
+#     # Display Turn and Game Menu
+#     for i in file[1396:1416]:
+#         output += i
 
-    # Output after user input
-    output += "\n"
-    output += file[1416]
-    output += "\n"
+#     # Output after user input
+#     output += "\n"
+#     output += file[1416]
+#     output += "\n"
 
-    # Display Main Menu + Exit
-    for i in file[1418:1426]:
-        output += i
+#     # Display Main Menu + Exit
+#     for i in file[1418:1426]:
+#         output += i
 
-    # Output after user input
-    output += "\n"
-    output += file[1427]
+#     # Output after user input
+#     output += "\n"
+#     output += file[1427]
 
-    sh = gc.open('SimpCity Test Cases')
-    wks = sh[2]
-    wks.update_value(funtionalIntegrationCol + '23', output)
+#     sh = gc.open('SimpCity Test Cases')
+#     wks = sh[2]
+#     wks.update_value(funtionalIntegrationCol + '23', output)
 
-    # Time Taken
-    wks.update_value(funtionalIntegrationTime + '23', file[1438])
+#     # Time Taken
+#     wks.update_value(funtionalIntegrationTime + '23', file[1438])
 
 
-# Description: Verifying the interaction between exiting from both Game and Main menu
-# Test Scenario ID: TS_Exit_001
-# Test Data: Invalid Game Menu Option
+# # Description: Verifying the interaction between exiting from both Game and Main menu
+# # Test Scenario ID: TS_Exit_001
+# # Test Data: Invalid Game Menu Option
 
-def TC_Exit_003():
-    output = ""
-    # Test ID
-    output += file[1439]
-    output += "\n"
+# def TC_Exit_003():
+#     output = ""
+#     # Test ID
+#     output += file[1439]
+#     output += "\n"
 
-    # Display Turn and Game Menu
-    for i in file[1452:1472]:
-        output += i
+#     # Display Turn and Game Menu
+#     for i in file[1452:1472]:
+#         output += i
 
-    # Output after user input
-    output += "\n"
-    output += file[1472]
+#     # Output after user input
+#     output += "\n"
+#     output += file[1472]
 
-    sh = gc.open('SimpCity Test Cases')
-    wks = sh[2]
-    wks.update_value(funtionalIntegrationCol + '24', output)
+#     sh = gc.open('SimpCity Test Cases')
+#     wks = sh[2]
+#     wks.update_value(funtionalIntegrationCol + '24', output)
 
-    # Time Taken
-    wks.update_value(funtionalIntegrationTime + '24', file[1495])
+#     # Time Taken
+#     wks.update_value(funtionalIntegrationTime + '24', file[1495])
 
 
-# Description: Verifying the interaction between starting a new game and exit immediately
-# Test Scenario ID: TS_SG_Exit_001
-# Test Data: Valid option for Main Menu, Valid option for Game Menu and Valid option for Main Menu.
-def TC_SG_Exit_001():
-    output = ""
-    # Test ID
-    output += file[1496]
-    output += "\n"
+# # Description: Verifying the interaction between starting a new game and exit immediately
+# # Test Scenario ID: TS_SG_Exit_001
+# # Test Data: Valid option for Main Menu, Valid option for Game Menu and Valid option for Main Menu.
+# def TC_SG_Exit_001():
+#     output = ""
+#     # Test ID
+#     output += file[1496]
+#     output += "\n"
 
-    # Display Turn and Game Menu
-    for i in file[1509:1529]:
-        output += i
+#     # Display Turn and Game Menu
+#     for i in file[1509:1529]:
+#         output += i
 
-    # Output after user input
-    output += "\n"
-    output += file[1529]
-    output += "\n"
+#     # Output after user input
+#     output += "\n"
+#     output += file[1529]
+#     output += "\n"
 
-    # Display Main Menu + Game Ended
-    for i in file[1530:1541]:
-        output += i
+#     # Display Main Menu + Game Ended
+#     for i in file[1530:1541]:
+#         output += i
 
-    sh = gc.open('SimpCity Test Cases')
-    wks = sh[2]
-    wks.update_value(funtionalIntegrationCol + '25', output)
+#     sh = gc.open('SimpCity Test Cases')
+#     wks = sh[2]
+#     wks.update_value(funtionalIntegrationCol + '25', output)
 
-    # Time Taken
-    wks.update_value(funtionalIntegrationTime + '25', file[1542])
+#     # Time Taken
+#     wks.update_value(funtionalIntegrationTime + '25', file[1542])
 
 
-# Description: Verifying the interaction between starting a new game and exit immediately
-# Test Scenario ID: TS_SG_Exit_001
-# Test Data: Valid option for Main Menu, Valid option for Game Menu and Invalid option for Main Menu.
+# # Description: Verifying the interaction between starting a new game and exit immediately
+# # Test Scenario ID: TS_SG_Exit_001
+# # Test Data: Valid option for Main Menu, Valid option for Game Menu and Invalid option for Main Menu.
 
-def TC_SG_Exit_002():
-    output = ""
-    # Test ID
-    output += file[1543]
-    output += "\n"
+# def TC_SG_Exit_002():
+#     output = ""
+#     # Test ID
+#     output += file[1543]
+#     output += "\n"
 
-    # Display Turn and Game Menu
-    for i in file[1556:1576]:
-        output += i
+#     # Display Turn and Game Menu
+#     for i in file[1556:1576]:
+#         output += i
 
-    # Output after user input
-    output += "\n"
-    output += file[1576]
-    output += "\n"
+#     # Output after user input
+#     output += "\n"
+#     output += file[1576]
+#     output += "\n"
 
-    # Display Main Menu + Output after user input
-    for i in file[1577:1588]:
-        output += i
+#     # Display Main Menu + Output after user input
+#     for i in file[1577:1588]:
+#         output += i
 
-    sh = gc.open('SimpCity Test Cases')
-    wks = sh[2]
-    wks.update_value(funtionalIntegrationCol + '26', output)
+#     sh = gc.open('SimpCity Test Cases')
+#     wks = sh[2]
+#     wks.update_value(funtionalIntegrationCol + '26', output)
 
-    # Time Taken
-    wks.update_value(funtionalIntegrationTime + '26', file[1598])
+#     # Time Taken
+#     wks.update_value(funtionalIntegrationTime + '26', file[1598])
 
 
-# Description: Verifying the interaction between starting a new game and exit immediately
-# Test Scenario ID: TS_SG_Exit_001
-# Test Data: Valid option for Main Menu, Invalid option for Game Menu.
+# # Description: Verifying the interaction between starting a new game and exit immediately
+# # Test Scenario ID: TS_SG_Exit_001
+# # Test Data: Valid option for Main Menu, Invalid option for Game Menu.
 
-def TC_SG_Exit_003():
-    output = ""
-    # Test ID
-    output += file[1599]
-    output += "\n"
+# def TC_SG_Exit_003():
+#     output = ""
+#     # Test ID
+#     output += file[1599]
+#     output += "\n"
 
-    # Display Turn and Game Menu
-    for i in file[1612:1632]:
-        output += i
+#     # Display Turn and Game Menu
+#     for i in file[1612:1632]:
+#         output += i
 
-    # Output after user input
-    output += "\n"
-    output += file[1632]
-    output += "\n"
+#     # Output after user input
+#     output += "\n"
+#     output += file[1632]
+#     output += "\n"
 
-    sh = gc.open('SimpCity Test Cases')
-    wks = sh[2]
-    wks.update_value(funtionalIntegrationCol + '27', output)
+#     sh = gc.open('SimpCity Test Cases')
+#     wks = sh[2]
+#     wks.update_value(funtionalIntegrationCol + '27', output)
 
-    # Time Taken
-    wks.update_value(funtionalIntegrationTime + '27', file[1655])
+#     # Time Taken
+#     wks.update_value(funtionalIntegrationTime + '27', file[1655])
 
 
-def UAT_TC_MainMenu_001():
-    output = ""
-    # Test ID
-    output += file[1656]
-    output += "\n"
+# def UAT_TC_MainMenu_001():
+#     output = ""
+#     # Test ID
+#     output += file[1656]
+#     output += "\n"
 
-    # Display Main Menu
-    for i in file[1659:1668]:
-        output += i
+#     # Display Main Menu
+#     for i in file[1659:1668]:
+#         output += i
 
-    sh = gc.open('SimpCity Test Cases')
-    wks = sh[1]
-    wks.update_value(uatFunctionalCol + '2', output)
+#     sh = gc.open('SimpCity Test Cases')
+#     wks = sh[1]
+#     wks.update_value(uatFunctionalCol + '2', output)
 
-    # Time Taken
-    wks.update_value(uatFunctionalTime + '2', file[1668])
+#     # Time Taken
+#     wks.update_value(uatFunctionalTime + '2', file[1668])
 
 
-def UAT_TC_BuildingPool_001():
-    output = ""
-    # Test ID
-    output += file[1669]
-    output += "\n"
+# def UAT_TC_BuildingPool_001():
+#     output = ""
+#     # Test ID
+#     output += file[1669]
+#     output += "\n"
 
-    # Display Current Building Pool
-    for i in file[1690:1703]:
-        output += i
+#     # Display Current Building Pool
+#     for i in file[1690:1703]:
+#         output += i
 
-    # Update Building Pool
-    output += "\n"
-    output += file[1703]
-    output += "\n"
+#     # Update Building Pool
+#     output += "\n"
+#     output += file[1703]
+#     output += "\n"
 
-    # Display Updated Building Pool
-    output += file[1717]
-    output += "\n"
+#     # Display Updated Building Pool
+#     output += file[1717]
+#     output += "\n"
 
-    sh = gc.open('SimpCity Test Cases')
-    wks = sh[1]
-    wks.update_value(uatFunctionalCol + '4', output)
+#     sh = gc.open('SimpCity Test Cases')
+#     wks = sh[1]
+#     wks.update_value(uatFunctionalCol + '4', output)
 
-    # Time Taken
-    wks.update_value(uatFunctionalTime + '4', file[1719])
+#     # Time Taken
+#     wks.update_value(uatFunctionalTime + '4', file[1719])
 
 
-def UAT_TC_BuildingPool_002():
-    output = ""
-    # Test ID
-    output += file[1720]
-    output += "\n"
+# def UAT_TC_BuildingPool_002():
+#     output = ""
+#     # Test ID
+#     output += file[1720]
+#     output += "\n"
 
-    # Display Current Building Pool
-    for i in file[1741:1754]:
-        output += i
+#     # Display Current Building Pool
+#     for i in file[1741:1754]:
+#         output += i
 
-    # Update Building Pool
-    output += "\n"
-    output += file[1754]
-    output += "\n"
+#     # Update Building Pool
+#     output += "\n"
+#     output += file[1754]
+#     output += "\n"
 
-    # Display Updated Building Pool
-    output += file[1768]
-    output += "\n"
+#     # Display Updated Building Pool
+#     output += file[1768]
+#     output += "\n"
 
-    sh = gc.open('SimpCity Test Cases')
-    wks = sh[1]
-    wks.update_value(uatFunctionalCol + '5', output)
+#     sh = gc.open('SimpCity Test Cases')
+#     wks = sh[1]
+#     wks.update_value(uatFunctionalCol + '5', output)
 
-    # Time Taken
-    wks.update_value(uatFunctionalTime + '5', file[1770])
+#     # Time Taken
+#     wks.update_value(uatFunctionalTime + '5', file[1770])
 
 
-def UAT_TC_StartGame_001():
-    output = ""
-    # Test ID
-    output += file[1771]
-    output += "\n"
+# def UAT_TC_StartGame_001():
+#     output = ""
+#     # Test ID
+#     output += file[1771]
+#     output += "\n"
 
-    # Display Main Menu and Selection Output (Including Grid and Game Menu)
-    for i in file[1774:1804]:
-        output += i
+#     # Display Main Menu and Selection Output (Including Grid and Game Menu)
+#     for i in file[1774:1804]:
+#         output += i
 
-    sh = gc.open('SimpCity Test Cases')
-    wks = sh[1]
-    wks.update_value(uatFunctionalCol + '6', output)
+#     sh = gc.open('SimpCity Test Cases')
+#     wks = sh[1]
+#     wks.update_value(uatFunctionalCol + '6', output)
 
-    # Time Taken
-    wks.update_value(uatFunctionalTime + '6', file[1805])
+#     # Time Taken
+#     wks.update_value(uatFunctionalTime + '6', file[1805])
 
 
-def UAT_TC_StartGame_002():
-    output = ""
-    # Test ID
-    output += file[1806]
-    output += "\n"
+# def UAT_TC_StartGame_002():
+#     output = ""
+#     # Test ID
+#     output += file[1806]
+#     output += "\n"
 
-    # Display Main Menu and Selection Output (Including Grid and Game Menu)
-    for i in file[1809:1818]:
-        output += i
+#     # Display Main Menu and Selection Output (Including Grid and Game Menu)
+#     for i in file[1809:1818]:
+#         output += i
 
-    sh = gc.open('SimpCity Test Cases')
-    wks = sh[1]
-    wks.update_value(uatFunctionalCol + '7', output)
+#     sh = gc.open('SimpCity Test Cases')
+#     wks = sh[1]
+#     wks.update_value(uatFunctionalCol + '7', output)
 
-    # Time Taken
-    wks.update_value(uatFunctionalTime + '7', file[1828])
+#     # Time Taken
+#     wks.update_value(uatFunctionalTime + '7', file[1828])
 
 
-def UAT_TC_PlaceBuilding_001():
-    output = ""
-    # Test ID
-    output += file[1829]
-    output += "\n"
+# def UAT_TC_PlaceBuilding_001():
+#     output = ""
+#     # Test ID
+#     output += file[1829]
+#     output += "\n"
 
-    # Display Turn and Grid
-    for i in file[1842:1855]:
-        output += i
+#     # Display Turn and Grid
+#     for i in file[1842:1855]:
+#         output += i
 
-    # Add output of user input
+#     # Add output of user input
 
-    # Display Turn and Grid
-    output += "\n"
-    for i in file[1863:1876]:
-        output += i
+#     # Display Turn and Grid
+#     output += "\n"
+#     for i in file[1863:1876]:
+#         output += i
 
-    sh = gc.open('SimpCity Test Cases')
-    wks = sh[1]
-    wks.update_value(uatFunctionalCol + '8', output)
+#     sh = gc.open('SimpCity Test Cases')
+#     wks = sh[1]
+#     wks.update_value(uatFunctionalCol + '8', output)
 
-    # Time Taken
-    wks.update_value(uatFunctionalTime + '8', file[1884])
+#     # Time Taken
+#     wks.update_value(uatFunctionalTime + '8', file[1884])
 
 
-def UAT_TC_PlaceBuilding_002():
-    output = ""
-    # Test ID
-    output += file[1885]
-    output += "\n"
+# def UAT_TC_PlaceBuilding_002():
+#     output = ""
+#     # Test ID
+#     output += file[1885]
+#     output += "\n"
 
-    # Display Turn and Grid
-    for i in file[1898:1910]:
-        output += i
+#     # Display Turn and Grid
+#     for i in file[1898:1910]:
+#         output += i
 
-    # Output after user input
-    output += "\n"
-    output += file[1918]
+#     # Output after user input
+#     output += "\n"
+#     output += file[1918]
 
-    # Display Turn and Grid
-    output += "\n"
-    for i in file[1920:1932]:
-        output += i
+#     # Display Turn and Grid
+#     output += "\n"
+#     for i in file[1920:1932]:
+#         output += i
 
-    sh = gc.open('SimpCity Test Cases')
-    wks = sh[1]
-    wks.update_value(uatFunctionalCol + '9', output)
+#     sh = gc.open('SimpCity Test Cases')
+#     wks = sh[1]
+#     wks.update_value(uatFunctionalCol + '9', output)
 
-    # Time Taken
-    wks.update_value(uatFunctionalTime + '9', file[1941])
+#     # Time Taken
+#     wks.update_value(uatFunctionalTime + '9', file[1941])
 
 
-def UAT_TC_BuildingCount_001():
-    output = ""
-    # Test ID
-    output += file[1942]
-    output += "\n"
+# def UAT_TC_BuildingCount_001():
+#     output = ""
+#     # Test ID
+#     output += file[1942]
+#     output += "\n"
 
-    # Display Turn and Grid
-    output += "\n"
-    for i in file[1955:1968]:
-        output += i
+#     # Display Turn and Grid
+#     output += "\n"
+#     for i in file[1955:1968]:
+#         output += i
 
-    # Display Turn and Grid
-    output += "\n"
-    for i in file[1976:1989]:
-        output += i
+#     # Display Turn and Grid
+#     output += "\n"
+#     for i in file[1976:1989]:
+#         output += i
 
-    sh = gc.open('SimpCity Test Cases')
-    wks = sh[1]
-    wks.update_value(uatFunctionalCol + '10', output)
+#     sh = gc.open('SimpCity Test Cases')
+#     wks = sh[1]
+#     wks.update_value(uatFunctionalCol + '10', output)
 
-    # Time Taken
-    wks.update_value(uatFunctionalTime + '10', file[1997])
+#     # Time Taken
+#     wks.update_value(uatFunctionalTime + '10', file[1997])
 
 
-def UAT_TC_BuildingCount_002():
-    output = ""
-    # Test ID
-    output += file[1998]
-    output += "\n"
+# def UAT_TC_BuildingCount_002():
+#     output = ""
+#     # Test ID
+#     output += file[1998]
+#     output += "\n"
 
-    # Display Turn and Grid
-    output += "\n"
-    for i in file[2011:2023]:
-        output += i
+#     # Display Turn and Grid
+#     output += "\n"
+#     for i in file[2011:2023]:
+#         output += i
 
-    # Output after user input
-    output += "\n"
-    output += file[2031]
+#     # Output after user input
+#     output += "\n"
+#     output += file[2031]
 
-    # Display Turn and Grid
-    output += "\n"
-    for i in file[2033:2046]:
-        output += i
+#     # Display Turn and Grid
+#     output += "\n"
+#     for i in file[2033:2046]:
+#         output += i
 
-    sh = gc.open('SimpCity Test Cases')
-    wks = sh[1]
-    wks.update_value(uatFunctionalCol + '11', output)
+#     sh = gc.open('SimpCity Test Cases')
+#     wks = sh[1]
+#     wks.update_value(uatFunctionalCol + '11', output)
 
-    # Time Taken
-    wks.update_value(uatFunctionalTime + '11', file[2054])
+#     # Time Taken
+#     wks.update_value(uatFunctionalTime + '11', file[2054])
 
 
-def UAT_TC_SaveGame_001():
-    output = ""
-    # Test ID
-    output += file[2055]
-    output += "\n"
+# def UAT_TC_SaveGame_001():
+#     output = ""
+#     # Test ID
+#     output += file[2055]
+#     output += "\n"
 
-    # Display Turn and Grid
-    output += "\n"
-    for i in file[2111:2124]:
-        output += i
+#     # Display Turn and Grid
+#     output += "\n"
+#     for i in file[2111:2124]:
+#         output += i
 
-    # Display Saved File
-    output += "\n"
-    for i in file[2131:2138]:
-        output += i
+#     # Display Saved File
+#     output += "\n"
+#     for i in file[2131:2138]:
+#         output += i
 
-    sh = gc.open('SimpCity Test Cases')
-    wks = sh[1]
-    wks.update_value(uatFunctionalCol + '12', output)
+#     sh = gc.open('SimpCity Test Cases')
+#     wks = sh[1]
+#     wks.update_value(uatFunctionalCol + '12', output)
 
-    # Time Taken
-    wks.update_value(uatFunctionalTime + '12', file[2140])
+#     # Time Taken
+#     wks.update_value(uatFunctionalTime + '12', file[2140])
 
 
-def UAT_TC_GameScore_001():
-    output = ""
-    # Test ID
-    output += file[2141]
-    output += "\n"
+# def UAT_TC_GameScore_001():
+#     output = ""
+#     # Test ID
+#     output += file[2141]
+#     output += "\n"
 
-    # Display Turn and Grid
-    output += "\n"
-    for i in file[2176:2188]:
-        output += i
+#     # Display Turn and Grid
+#     output += "\n"
+#     for i in file[2176:2188]:
+#         output += i
 
-    # Output after user input
-    output += "\n"
-    output += file[2195]
+#     # Output after user input
+#     output += "\n"
+#     output += file[2195]
 
-    # Display Score
-    output += "\n"
-    for i in file[2196:2203]:
-        output += i
+#     # Display Score
+#     output += "\n"
+#     for i in file[2196:2203]:
+#         output += i
 
-    sh = gc.open('SimpCity Test Cases')
-    wks = sh[1]
-    wks.update_value(uatFunctionalCol + '15', output)
+#     sh = gc.open('SimpCity Test Cases')
+#     wks = sh[1]
+#     wks.update_value(uatFunctionalCol + '15', output)
 
-    # Time Taken
-    wks.update_value(uatFunctionalTime + '15', file[2225])
+#     # Time Taken
+#     wks.update_value(uatFunctionalTime + '15', file[2225])
 
 
-def UAT_TC_GameScore_002():
-    output = ""
-    # Test ID
-    output += file[2226]
-    output += "\n"
+# def UAT_TC_GameScore_002():
+#     output = ""
+#     # Test ID
+#     output += file[2226]
+#     output += "\n"
 
-    # Display Turn and Grid
-    output += "\n"
-    for i in file[2239:2252]:
-        output += i
+#     # Display Turn and Grid
+#     output += "\n"
+#     for i in file[2239:2252]:
+#         output += i
 
-    # Output after user input
-    output += "\n"
-    output += file[2259]
+#     # Output after user input
+#     output += "\n"
+#     output += file[2259]
 
-    # Display Turn and Grid
-    output += "\n"
-    for i in file[2261:2274]:
-        output += i
+#     # Display Turn and Grid
+#     output += "\n"
+#     for i in file[2261:2274]:
+#         output += i
 
-    # Output after user input
-    output += "\n"
-    output += file[2281]
+#     # Output after user input
+#     output += "\n"
+#     output += file[2281]
 
-    # Display Score
-    output += "\n"
-    for i in file[2282:2289]:
-        output += i
+#     # Display Score
+#     output += "\n"
+#     for i in file[2282:2289]:
+#         output += i
 
-    sh = gc.open('SimpCity Test Cases')
-    wks = sh[1]
-    wks.update_value(uatFunctionalCol + '16', output)
+#     sh = gc.open('SimpCity Test Cases')
+#     wks = sh[1]
+#     wks.update_value(uatFunctionalCol + '16', output)
 
-    # Time Taken
-    wks.update_value(uatFunctionalTime + '16', file[2311])
+#     # Time Taken
+#     wks.update_value(uatFunctionalTime + '16', file[2311])
 
 
 TC_CS_BP_SG_001()
@@ -838,22 +885,22 @@ TC_PB_BC_001()
 TC_PB_BC_002()
 TC_PB_DS_001()
 TC_PB_DS_002()
-TC_Exit_001()
-TC_Exit_002()
-TC_Exit_003()
-TC_SG_Exit_001()
-TC_SG_Exit_002()
-TC_SG_Exit_003()
+# TC_Exit_001()
+# TC_Exit_002()
+# TC_Exit_003()
+# TC_SG_Exit_001()
+# TC_SG_Exit_002()
+# TC_SG_Exit_003()
 
-UAT_TC_MainMenu_001()
-UAT_TC_BuildingPool_001()
-UAT_TC_BuildingPool_002()
-UAT_TC_StartGame_001()
-UAT_TC_StartGame_002()
-UAT_TC_PlaceBuilding_001()
-UAT_TC_PlaceBuilding_002()
-UAT_TC_BuildingCount_001()
-UAT_TC_BuildingCount_002()
-UAT_TC_SaveGame_001()
-UAT_TC_GameScore_001()
-UAT_TC_GameScore_002()
+# UAT_TC_MainMenu_001()
+# UAT_TC_BuildingPool_001()
+# UAT_TC_BuildingPool_002()
+# UAT_TC_StartGame_001()
+# UAT_TC_StartGame_002()
+# UAT_TC_PlaceBuilding_001()
+# UAT_TC_PlaceBuilding_002()
+# UAT_TC_BuildingCount_001()
+# UAT_TC_BuildingCount_002()
+# UAT_TC_SaveGame_001()
+# UAT_TC_GameScore_001()
+# UAT_TC_GameScore_002()
