@@ -140,7 +140,8 @@ def invalidGridSize():
 # Test Data: Valid Coordinates
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit?pli=1#gid=768609166&range=6:6
 
-def test_TC_Grid_Fill_001(monkeypatch, capfd):
+@pytest.mark.parametrize('execution_number', range(100))
+def test_TC_Grid_Fill_001(monkeypatch, capfd, execution_number):
     start_time = time.time()
     game = Game()
 
@@ -160,8 +161,7 @@ def test_TC_Grid_Fill_001(monkeypatch, capfd):
     except StopIteration as e:
         pass
 
-    print("\n %s seconds" % (time.time() - start_time))
-
+    return ("\n %s seconds" % (time.time() - start_time))
 
 # Type: Integration
 # Description: Verifying the interaction between placing buildings and saving the game.
@@ -169,8 +169,8 @@ def test_TC_Grid_Fill_001(monkeypatch, capfd):
 # Test Data: Valid coordinates.
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit?pli=1#gid=768609166&range=10:10
 
-
-def test_TC_PB_SG_001(monkeypatch, capfd):
+@pytest.mark.parametrize('execution_number', range(100))
+def test_TC_PB_SG_001(monkeypatch, capfd, execution_number):
     game = Game()
 
     # Choose random valid city size
@@ -206,7 +206,8 @@ def test_TC_PB_SG_001(monkeypatch, capfd):
 # Test Data: Valid City Size - Random
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit#gid=1826582149&range=3:3
 
-def test_UAT_TC_CitySize_001(monkeypatch, capfd):
+@pytest.mark.parametrize('execution_number', range(100))
+def test_UAT_TC_CitySize_001(monkeypatch, capfd, execution_number):
     start_time = time.time()
 
     # Choose random valid city size
