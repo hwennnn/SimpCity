@@ -481,3 +481,9 @@ def test_displayGridSizeMenu(capfd):
     assert "\n     A     B     C     D   \t Remaining Buildings\n" in out
 
 
+def test_initializeGrid(capfd):
+    player = Player()
+    player.initializeGrid()
+    player.displayGrid()
+    out, _ = capfd.readouterr()
+    assert "1 |     |     |     |     |\t BCH: 8" in out
