@@ -179,7 +179,7 @@ f"""1. Build a {firstBuilding}
     def startNewGame(self):
         self.turns = 1
         self.savedGame = False
-        self.grid.initializeGrid()
+        self.initializeGrid()
         print('\n---- Entering Game Menu ----')
 
     # Prompt player for input in InGame main menu
@@ -212,10 +212,10 @@ f"""1. Build a {firstBuilding}
                 print(f"{building} has been successfully placed at {positions}.")
             else:
                 print(f"Placing {building} at {positions} was unsuccessful.")
-                print("You must build next to an existing building.")
+                print(f"{positions} is an invalid position! You must build next to an existing building.")
 
         else:
-            print("Please enter a valid building position!")
+            print(f"{positions} is an invalid position! Please enter a valid building position!")
 
     def displayBuildingsScore(self):
         print()
@@ -265,6 +265,10 @@ f"""1. Build a {firstBuilding}
             print("\nFinal layout of Simp City:")
 
         self.grid.displayGrid()
+
+    #Re-initialize the grid
+    def initializeGrid(self):
+        self.grid.initializeGrid()
 
     # Access grid attribute to
     def loadGame(self):
