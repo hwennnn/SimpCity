@@ -1,6 +1,5 @@
 """
 This module deals with all game related functions (driver code of SimpCity).
-
 """
 
 from models.player import Player
