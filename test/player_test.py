@@ -138,17 +138,17 @@ validBuildingPoolOptionMenuTestData = [
 ]
 
 invalidBuildingPoolOptionMenuTestData = [
-    ("1,2,1,3,4", "Invalid option!"),
-    ("1,2,3,5,8", "Invalid option!"),
-    ("1,2,3,8,2", "Invalid option!"),
-    ("1,2,1,3,4", "Invalid option!"),
-    ("1,2,10,5,6", "Invalid option!"),
-    ("1,2,2,3,4", "Invalid option!"),
-    ("1,5,5,6,6", "Invalid option!"),
-    ("2", "Invalid option!"),
-    ("3", "Invalid option!"),
-    ("5", "Invalid option!"),
-    ("10", "Invalid option!"),
+    ("1,2,1,3,4", "Invalid option! 1,2,1,3,4 is not a valid building pool!"),
+    ("1,2,3,5,8", "Invalid option! 1,2,3,5,8 is not a valid building pool!"),
+    ("1,2,3,8,2", "Invalid option! 1,2,3,8,2 is not a valid building pool!"),
+    ("1,2,1,3,4", "Invalid option! 1,2,1,3,4 is not a valid building pool!"),
+    ("1,2,10,5,6", "Invalid option! 1,2,10,5,6 is not a valid building pool!"),
+    ("1,2,2,3,4", "Invalid option! 1,2,2,3,4 is not a valid building pool!"),
+    ("1,5,5,6,6", "Invalid option! 1,5,5,6,6 is not a valid building pool!"),
+    ("2", "Invalid option! 2 is not a valid building pool!"),
+    ("3", "Invalid option! 3 is not a valid building pool!"),
+    ("5", "Invalid option! 5 is not a valid building pool!"),
+    ("10", "Invalid option! 10 is not a valid building pool!"),
 ]
 
 
@@ -361,18 +361,18 @@ def test_displayGrid(capfd, gridSize, gridOutput):
 
 
 failingGridSizes = [
-    ("0,0", "Invalid Grid Size!"),
-    ("6,7", "Invalid Grid Size!"),
-    ("8,5", "Invalid Grid Size!"),
-    ("2,0", "Invalid Grid Size!"),
-    ("10,1", "Invalid Grid Size!"),
-    ("3,7", "Invalid Grid Size!"),
-    ("26,5", "Invalid Grid Size!"),
-    ("aaa,5", "Invalid Grid Size!"),
-    ("64,game", "Invalid Grid Size!"),
-    ("$,0", "Invalid Grid Size!"),
-    ("a,b", "Invalid Grid Size!"),
-    ("100,100", "Invalid Grid Size!")
+    ("0,0", "Invalid Grid Size! 0,0 is not a valid grid size!"),
+    ("6,7", "Invalid Grid Size! 6,7 is not a valid grid size!"),
+    ("8,5", "Invalid Grid Size! 8,5 is not a valid grid size!"),
+    ("2,0", "Invalid Grid Size! 2,0 is not a valid grid size!"),
+    ("10,1", "Invalid Grid Size! 10,1 is not a valid grid size!"),
+    ("3,7", "Invalid Grid Size! 3,7 is not a valid grid size!"),
+    ("26,5", "Invalid Grid Size! 26,5 is not a valid grid size!"),
+    ("aaa,5", "Invalid Grid Size! aaa,5 is not a valid grid size!"),
+    ("64,game", "Invalid Grid Size! 64,game is not a valid grid size!"),
+    ("$,0", "Invalid Grid Size! $,0 is not a valid grid size!"),
+    ("a,b", "Invalid Grid Size! a,b is not a valid grid size!"),
+    ("100,100", "Invalid Grid Size! 100,100 is not a valid grid size!")
 ]
 
 
@@ -472,5 +472,12 @@ def test_savedGameSuccessful(capfd):
     player_test.savedGameSuccessful()
     out, _ = capfd.readouterr()
     assert "\nGame has been saved successfully.\n\n---- Back to Game Menu----" in out
+
+
+def test_displayGridSizeMenu(capfd):
+    player = Player()
+    player.displayGrid()
+    out, _ = capfd.readouterr()
+    assert "\n     A     B     C     D   \t Remaining Buildings\n" in out
 
 

@@ -49,8 +49,7 @@ Welcome, mayor of Simp City!
                 self.displayBuildingPoolOptionMenu()
 
             elif option == "2":
-                gridSize = self.promptGridSize()
-                self.validateGridSize(gridSize)
+                self.displayGridSizeMenu()
 
     def displayOptionMenuHelper(self):
         print("""
@@ -76,7 +75,7 @@ SimpCity Game Options
 
     def displayBuildingPoolOptionMenu(self):
         option = None
-        while option != "9" and option != "0":
+        while option != "0":
             self.displayBuildingPoolOptionMenuHelper()
             self.displayCurrentBuildingPool()
             option = self.promptBuildingPoolOptionMenu()
@@ -107,9 +106,8 @@ Choose Building Pool
         elif self.isBuildingPoolOptionsValid(option):
             self.updateBuildingPoolFromOption(option)
             print("Sucessfully updated building pool!")
-            print("\n---- Back to Option Menu ----")
         else:
-            print('Invalid option!')
+            print(f'Invalid option! {option} is not a valid building pool!')
 
     def isBuildingPoolOptionsValid(self, option):
         # (e.g. 1,2,4,6,7)
@@ -126,20 +124,26 @@ Choose Building Pool
 
     def displayCurrentBuildingPool(self):
         self.grid.availableBuildings.displayCurrentBuildingPool()
+    
+    def displayGridSizeMenu(self):
+        gridSize = None
+        while gridSize != "0":
+            self.displayGrid()
+            gridSize = self.promptGridSize()
+            self.validateGridSize(gridSize)
 
     def promptGridSize(self):
         return input("\nEnter a valid Grid Size (x,y) between 1-6 with a comma separator (e.g. 3,4) or '0' to exit: ")
 
     def validateGridSize(self, option):
         if option == '0':
-            pass
+            print('\n---- Back to Option Menu ----')
         elif self.isGridSizeValid(option):
             self.updateGridSize(option)
             gridSize = option.split(',')
             print(f"Sucessfully updated grid size to [{gridSize[0]} x {gridSize[1]}]!")
         else:
-            print('Invalid Grid Size!')
-        print('\n---- Back to Option Menu ----')
+            print(f'Invalid Grid Size! {option} is not a valid grid size!')
 
     def isGridSizeValid(self, gridSize):
         # (e.g. 4,4  6,6  3,3)
