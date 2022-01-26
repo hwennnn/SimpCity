@@ -471,7 +471,7 @@ def test_validateSaveGame(capfd, validateOption, expectedResult):
 def test_savedGameSuccessful(capfd):
     player_test.savedGameSuccessful()
     out, _ = capfd.readouterr()
-    assert "\nGame has been saved successfully.\n\n---- Back to Game Menu----" in out
+    assert "Game has been saved successfully.\n\n---- Back to Game Menu----" in out
 
 
 def test_displayGridSizeMenu(capfd):
