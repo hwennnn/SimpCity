@@ -308,7 +308,7 @@ validGridSizes = [
 
 
 @pytest.mark.parametrize("gridSize, expectedResult", validGridSizes)
-def test_validateGridSizePassing(capfd, gridSize, expectedResult):
+def test_validateGridSize_Passing(capfd, gridSize, expectedResult):
     player = Player()
     player.validateGridSize(gridSize)
     out, _ = capfd.readouterr()
