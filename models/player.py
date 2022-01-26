@@ -204,15 +204,17 @@ f"""1. Build a {firstBuilding}
             if ord("1") <= ord(option) <= ord("2"):
                 buildingValue = self.firstBuilding if \
                     ord(option) == ord("1") else self.secondBuilding
-                self.promptEnterBuildingPosition(buildingValue)
+                positions = self.promptEnterBuildingPosition(buildingValue)
+                self.validatePlaceBuildingOnPosition(buildingValue, positions)
             else:
                 print(f"You selected option {option}\n")
         else:
             print("Invalid option!")
 
     def promptEnterBuildingPosition(self, building):
-        positions = input(f"\nWhere would you like to place {building} at? ")
+        return input(f"\nWhere would you like to place {building} at? ")
 
+    def validatePlaceBuildingOnPosition(self, building, positions):
         if self.grid.isPositionValid(positions):
             x, y = self.grid.retrieveParsedPosition(positions)
             if self.turns == 1 or (self.turns > 1 and self.grid.hasAdjacentBuildingsForPosition(x, y)):

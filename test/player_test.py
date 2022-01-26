@@ -308,7 +308,7 @@ validGridSizes = [
 
 
 @pytest.mark.parametrize("gridSize, expectedResult", validGridSizes)
-def test_validateGridSize(capfd, gridSize, expectedResult):
+def test_validateGridSizePassing(capfd, gridSize, expectedResult):
     player = Player()
     player.validateGridSize(gridSize)
     out, _ = capfd.readouterr()
@@ -377,7 +377,7 @@ failingGridSizes = [
 
 
 @pytest.mark.parametrize("gridSize, expectedResult", validGridSizes)
-def test_validateGridSize(capfd, gridSize, expectedResult):
+def test_validateGridSize_Failing(capfd, gridSize, expectedResult):
     player = Player()
     player.validateGridSize(gridSize)
     out, _ = capfd.readouterr()
@@ -487,3 +487,58 @@ def test_initializeGrid(capfd):
     player.displayGrid()
     out, _ = capfd.readouterr()
     assert "1 |     |     |     |     |\t BCH: 8" in out
+
+
+invalidGridPosition = [
+    ("A3", "A3 is an invalid position! You must build next to an existing building."),
+    ("B2", "B2 is an invalid position! You must build next to an existing building."),
+    ("D4", "D4 is an invalid position! You must build next to an existing building."),
+    ("C2", "C2 is an invalid position! You must build next to an existing building."),
+    ("B4", "B4 is an invalid position! You must build next to an existing building.")
+]
+
+validGridPosition = [
+    ("B2", "HSE has been successfully placed at B2."),
+    ("A3", "HSE has been successfully placed at A3."),
+    ("C3", "HSE has been successfully placed at C3."),
+    ("B4", "HSE has been successfully placed at B4.")
+]
+
+nonExistantGridPosition = [
+    ("A", "A is an invalid position! Please enter a valid building position!"),
+    ("55", "55 is an invalid position! Please enter a valid building position!"),
+    ("46", "46 is an invalid position! Please enter a valid building position!"),
+    ("G7", "G7 is an invalid position! Please enter a valid building position!"),
+    ("$$", "$$ is an invalid position! Please enter a valid building position!"),
+    ("100", "100 is an invalid position! Please enter a valid building position!"),
+    ("Bible", "Bible is an invalid position! Please enter a valid building position!")
+]
+
+
+@pytest.mark.parametrize("gridPosition, expectedResult", invalidGridPosition)
+def test_placeInvalidGridPosition(capfd, gridPosition, expectedResult):
+    player = Player()
+    player.validatePlaceBuildingOnPosition('HSE', "A1")
+    player.validatePlaceBuildingOnPosition('HSE', gridPosition)
+
+    out, _ = capfd.readouterr()
+    assert expectedResult in out
+
+
+@pytest.mark.parametrize("gridPosition, expectedResult", validGridPosition)
+def test_placeValidGridPosition(capfd, gridPosition, expectedResult):
+    player = Player()
+    player.validatePlaceBuildingOnPosition('HSE', "B3")
+    player.validatePlaceBuildingOnPosition('HSE', gridPosition)
+
+    out, _ = capfd.readouterr()
+    assert expectedResult in out
+
+
+@pytest.mark.parametrize("gridPosition, expectedResult", nonExistantGridPosition)
+def test_placeNonExistantGridPosition(capfd, gridPosition, expectedResult):
+    player = Player()
+    player.validatePlaceBuildingOnPosition('HSE', gridPosition)
+
+    out, _ = capfd.readouterr()
+    assert expectedResult in out
