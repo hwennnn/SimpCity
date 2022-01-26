@@ -46,6 +46,27 @@ def get_key(val):
             return key
 
 
+def parse_fileToList(f):
+    temp = ''
+    row = []
+    grid = []
+    for i in f:
+        if i == ',':
+            row.append(temp)    # Add a coordinate to a row
+            temp = ''
+            continue    # Ignore ',' and not append (it will be 'None,' if not included)
+
+        if i == '\n':
+            row.append(temp)    # Add the last coordinate for the row as it has '\n' instead of ','
+            grid.append(row)    # Add the row into a list to form a grid
+            row = []
+            temp = ''
+
+        else:
+            temp += i
+    return grid
+
+
 def buildingPlacements(x, y):
     player = Player()
 
@@ -172,12 +193,15 @@ def test_TC_Grid_Fill_001(monkeypatch, capfd, execution_number):
 @pytest.mark.parametrize('execution_number', range(100))
 def test_TC_PB_SG_001(monkeypatch, capfd, execution_number):
     game = Game()
+    player = Player()
 
     # Choose random valid city size
     randomCitySize = random.choice(validGridSize())
-    
+    x, y = randomCitySize[0].split(',')
+    randomCoordinate = random.choice([i for i in buildingPlacements(int(x), int(y)) if len(i) == 2])
+
     # Select Options -> Choose City Size -> Valid City Size -> Exit to Main Menu -> Start Game -> Place Buidling -> Save Game
-    tempList =["4", "2", randomCitySize[0], "0", "1", str(random.randint(1,2)), "A4", "4"]
+    tempList =["4", "2", randomCitySize[0], "0", "1", str(random.randint(1,2)), randomCoordinate, "4"]
 
     # Iterates through the list of options that mimics user input
     try:
@@ -194,6 +218,12 @@ def test_TC_PB_SG_001(monkeypatch, capfd, execution_number):
     file = f.readlines()
     for i in file:
         print(i)
+
+    f = open("saved_game.txt", "r")
+    gridList = parse_fileToList(f.read())
+
+    # Check if the game file's building placed is the same as the current grid stored in program
+    assert game.player.grid.grid[int([i for i in randomCoordinate][1]) - 1][int(get_key([i for i in randomCoordinate][0]))].__dict__["name"] == gridList[int([i for i in randomCoordinate][1]) - 1][int(get_key([i for i in randomCoordinate][0]))]
 
 
 ##########################################
