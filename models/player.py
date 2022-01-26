@@ -35,7 +35,7 @@ class Player:
     def displayMainMenu(self):
         """
         This method will display the main menu options for the player to
-        interact with the main menu
+        interact with the main menu.
 
         """
         mainMenuContent = [
@@ -65,7 +65,7 @@ class Player:
         Args:
             option (str): The main menu option input by the player
 
-        The method will display valid strings based on the user's main menu input
+        This method will display valid strings based on the user's main menu input.
 
         """
         if option == '0':
@@ -79,7 +79,7 @@ class Player:
 
     def displayOptionMenu(self):
         """
-        This method facilitates the process of the player's actions when they enter the Game Options Menu
+        This method facilitates the process of the player's actions when they enter the Game Options Menu.
 
         """
         option = None
@@ -98,6 +98,10 @@ class Player:
                 self.validateGridSize(gridSize)
 
     def displayOptionMenuHelper(self):
+        """
+        This method will display the game options menu for the player to interact with the game option menu.
+
+        """
         optionMenuContent = [
             "\nSimpCity Game Options",
             "---------------------",
@@ -109,26 +113,51 @@ class Player:
         print("\n".join(optionMenuContent))
 
     def promptOptionMenu(self):
+        """
+        Returns:
+            str: The game option menu choice input by the player
+
+        This method will return the player's menu choice input as a string object.
+
+        """
         return input("Please enter an option: ")
 
     # Validate options made in main menu
     def validateOptionMenu(self, option):
+        """
+        Args:
+            option (str): The game menu option input by the player
+
+        This method will display valid strings based on the user's option menu input.
+
+        """
         if option == '0':
             print('\n---- Back to Main Menu ----')
+        # Check for validity of option
         elif len(option) == 1 and ord("1") <= ord(option) <= ord("2"):
             print(f"You selected option {option}")
         else:
             print('Invalid option!')
 
     def displayBuildingPoolOptionMenu(self):
+        """
+        This method facilitates the process of the player's actions when they enter the Building Pool Options Menu.
+
+        """
         option = None
         while option != "9" and option != "0":
+            # Always display building pool change menu if player does not exit by entering "0"
             self.displayBuildingPoolOptionMenuHelper()
             self.displayCurrentBuildingPool()
             option = self.promptBuildingPoolOptionMenu()
             self.validateBuildingPoolOptionMenu(option)
 
     def displayBuildingPoolOptionMenuHelper(self):
+        """
+        This method will display the building pool options for the player to
+        interact with the change building pool menu.
+
+        """
         buildingPoolOptionMenuContent = [
             "\nChoose Building Pool",
             "--------------------",
@@ -145,10 +174,26 @@ class Player:
         print("\n".join(buildingPoolOptionMenuContent))
 
     def promptBuildingPoolOptionMenu(self):
+        """
+        Returns:
+            str: The building pool choice input by the player
+
+        This method will return the player's building pool choices input as a string object.
+
+        """
         return input("\nEnter 5 building options with a comma separator (e.g. 1,2,4,6,7) or '0' to exit: ")
 
     # Validate options made in main menu
     def validateBuildingPoolOptionMenu(self, option):
+        """
+        Args:
+            option (str): The building pool choice input by the player
+
+        The method will display valid strings based on the user's building pool menu input.
+        If the player enters a valid building pool option, the method will update the current building pool
+        based on the user's input.
+
+        """
         if option == '0':
             print('\n---- Back to Option Menu ----')
         elif self.isBuildingPoolOptionsValid(option):
@@ -159,8 +204,18 @@ class Player:
             print('Invalid option!')
 
     def isBuildingPoolOptionsValid(self, option):
-        # (e.g. 1,2,4,6,7)
+        """
+        Args:
+            option (str): The building pool choice input by the player. \n
+            Example -> 1,2,3,5,7
 
+        Returns:
+            bool: The result whether the building pool is valid.
+
+        This method will return whether the userInput is a valid building pool selection for gameplay
+        by checking whether the input lengths are of the correct size and the options are within the number of building types available.
+
+        """
         if len(option) != 9:
             return False
 
@@ -169,15 +224,49 @@ class Player:
         return len(set(choices)) == 5 and all(ord("1") <= ord(x) <= ord("7") for x in choices)
 
     def updateBuildingPoolFromOption(self, option):
+        """
+        Args:
+            option (str): The building pool choice input by the player. \n
+            Example -> 1,2,3,5,7
+
+        This method will call the function in the available buildings object that changes the
+        current building pool for the current player.
+
+        """
         self.grid.availableBuildings.updateBuildingPool(option)
 
     def displayCurrentBuildingPool(self):
+        """
+        Args:
+            option (str): The building pool choice input by the player. \n
+            Example -> 1,2,3,5,7
+
+        This method will call the function in the available buildings object that changes the
+        current building pool for the current player.
+
+        """
         self.grid.availableBuildings.displayCurrentBuildingPool()
 
     def promptGridSize(self):
+        """
+        Returns:
+            str: The grid size menu input by the player
+
+        This method will return the player's grid size menu input as a string object.
+
+        """
         return input("\nEnter a valid Grid Size (x,y) between 1-6 with a comma separator (e.g. 3,4) or '0' to exit: ")
 
     def validateGridSize(self, option):
+        """
+        Args:
+            option (str): The grid size menu input by the player.
+
+        The method will display valid strings based on the user's grid size menu input.
+        If the player enters a valid grid size, the method will update the current grid size
+        based on the user's input.
+
+        """
         if option == '0':
             pass
         elif self.isGridSizeValid(option):
@@ -190,8 +279,18 @@ class Player:
         print('\n---- Back to Option Menu ----')
 
     def isGridSizeValid(self, gridSize):
-        # (e.g. 4,4  6,6  3,3)
+        """
+        Args:
+            gridSize (str): The grid size menu input by the player. \n
+            Example -> 2,2
 
+        Returns:
+            bool: The result whether the grid size is valid.
+
+        This method will return whether the userInput is a valid grid size for gameplay
+        by checking whether the input lengths are of the correct size and the options are within the eligible row and column sizes.
+
+        """
         if len(gridSize) != 3:
             return False
 
@@ -200,10 +299,30 @@ class Player:
         return size[0].isnumeric() and size[1].isnumeric() and 1 < int(size[0]) <= 6 and 1 < int(size[1]) <= 6
 
     def updateGridSize(self, gridSize):
+        """
+        Args:
+            gridSize (str): The grid size menu input by the player. \n
+            Example -> 2,2
+
+        This method will call the function in the grid object that changes the grid size to the grid input from the player
+
+        """
         size = gridSize.split(',')
         self.grid.updateGridSize(size[0], size[1])
 
     def retrieveGameMenuContent(self, firstBuilding, secondBuilding):
+        """
+        Args:
+            firstBuilding (Buildings): The first building obtained from the retrieve random buildings method. \n
+            secondBuilding (Buildings): The second building obtained from the retrieve random buildings method. \n
+            Example -> HSE or MON or HWY
+
+        Returns:
+            str: The game menu content in a new line to avoid cluttering of game information
+
+        This method will return the game menu options as a string for displaying in the displayGameMenu() method
+
+        """
         gameMenuContent = [
             f"1. Build a {firstBuilding}",
             f"2. Build a {secondBuilding}",
@@ -215,6 +334,15 @@ class Player:
         return ("\n".join(gameMenuContent))
 
     def displayGameMenu(self, firstBuilding=None, secondBuilding=None):
+        """
+        Args:
+            firstBuilding (Buildings): The first building attribute to be set as a random building. \n
+            secondBuilding (Buildings): The second building attribute to be set as a random building. \n
+            Example -> HSE or MON or HWY
+
+        This method displays the In-Game menu for the player during the game session.
+
+        """
         if firstBuilding is not None and secondBuilding is not None:
             self.firstBuilding, self.secondBuilding = firstBuilding, secondBuilding
         else:
@@ -224,6 +352,10 @@ class Player:
             self.firstBuilding, self.secondBuilding))
 
     def startNewGame(self):
+        """
+        This method resets the player's attributes when they start a new game in the main menu
+
+        """
         self.turns = 1
         self.savedGame = False
         self.grid.initializeGrid()
@@ -231,10 +363,25 @@ class Player:
 
     # Prompt player for input in InGame main menu
     def promptGameMenu(self):
+        """
+        Returns:
+            str: The game menu option input by the player
+
+        This method will return the player's game menu option input as a string object.
+
+        """
         return input('Please enter an input: ')
 
     # Validate options made in game menu
     def validateGame(self, option):
+        """
+        Args:
+            option (str): The game menu option input by the player.
+
+        The method will display valid strings based on the user's game option menu input.
+        If the player chooses to place either the first or second building, they will be prompted with a building position input.
+
+        """
         if len(option) == 1 and ord("0") <= ord(option) <= ord("4"):
             if ord("1") <= ord(option) <= ord("2"):
                 buildingValue = self.firstBuilding if \
@@ -246,6 +393,14 @@ class Player:
             print("Invalid option!")
 
     def promptEnterBuildingPosition(self, building):
+        """
+        Args:
+            building (Buildings): The building object the player chooses to place.
+
+        The method will prompt the user for a valid position and update the grid
+        with the player's building of choice on the position input if the position input is valid.
+
+        """
         positions = input(f"\nWhere would you like to place {building} at? ")
 
         if self.grid.isPositionValid(positions):
@@ -265,6 +420,11 @@ class Player:
             print("Please enter a valid building position!")
 
     def displayBuildingsScore(self):
+        """
+        This method displays the score accumulation for the current state of the grid object.
+        It calls the method for displaying the score breakdown while retrieving the total score and printing it.
+
+        """
         print()
 
         scores = self.retrieveBuildingsScore()
@@ -273,6 +433,17 @@ class Player:
 
     # Calculate total score for current game iteration
     def retrieveBuildingsScore(self, printBreakdown=True):
+        """
+        Args:
+            printBreakdown (bool): The Boolean value for determining if the score breakdown should be displayed.
+
+        Returns:
+            int: The total score of the current grid object
+
+        This method will retrieve the total score and score breakdown from the grid method retrieveBuildingsScore().
+        The method will print each line of the score breakdown and return the total score.
+
+        """
         scores, scoresBreakdown = self.grid.retrieveBuildingsScore()
 
         for buildingName, scoreBreakdown in scoresBreakdown.items():
@@ -289,10 +460,25 @@ class Player:
 
     # Prompt player to check if they saved their game beforehand
     def promptSaveGame(self):
+        """
+        Returns:
+            str: The input that determines if the player has saved their game or not
+
+        This method will prompt the user for whether they have saved their game yet and return the input as a string
+
+        """
         return input('Game has not been saved yet. Would you like to save your progress? [Y/N]: ').upper()
 
     # Validate options for prompting save game.
     def validateSaveGame(self, option):
+        """
+        Args:
+            option (str): The [Y/N] option input by the player.
+
+        This method will display valid strings based on the user's saved game menu input.
+        The method is called when the player chooses to exit the game without saving the game.
+
+        """
         if option.upper() == "Y":
             print('\nGame has been saved successfully.\n\n---- Back to Main Menu ---')
 
@@ -304,10 +490,22 @@ class Player:
 
     # Validation message for successfully saving game in the game menu
     def savedGameSuccessful(self):
+        """
+        This method displays a saved game successfully message if the player chooses the Save Game option in the game menu.
+
+        """
         print('\nGame has been saved successfully.\n\n---- Back to Game Menu----')
 
     # Access grid attribute to display grid
     def displayGrid(self, isFinal=False):
+        """
+        Args:
+            isFinal (bool): The boolean to check if it is the Final Turn for the active player.
+
+        This method will call the Grid function for displaying the grid object.
+        If it is the final turn for the player, the additioanl tag "Final layout of SimpCity:" will be added with the grid display
+
+        """
         if isFinal:
             print("\nFinal layout of Simp City:")
 
@@ -315,9 +513,18 @@ class Player:
 
     # Access grid attribute to
     def loadGame(self):
+        """
+        This method will call the Grid function for loading a grid object from a text file.
+
+        """
         self.grid.readGridFromFile()
 
     def saveGame(self):
+        """
+        This method will call the Grid function for parsing the grid as a string and writing it into a text file.
+        The method will set the player attribute savedGame to True for validation In-Game.
+
+        """
         with open(savedGameFilename, 'w+') as f:
             gridValue = self.grid.parseGridAsString()
             for row in gridValue:
@@ -325,6 +532,15 @@ class Player:
         self.savedGame = True
 
     def retrieveTwoRandomBuildings(self):
+        """
+        Returns:
+            firstBuilding (Buildings): The first building attribute to be set as a random building. \n
+            secondBuilding (Buildings): The second building attribute to be set as a random building. \n
+            Example -> HSE or MON or HWY
+
+        This method will call the Grid object function for retrieving two random building values from the current buildings pool
+        and returning it as 2 separate variables.
+        """
         return self.grid.retrieveTwoRandomBuildings()
 
     def exitToMainMenu(self):
