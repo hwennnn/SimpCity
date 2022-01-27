@@ -81,12 +81,15 @@ class Game:
                     self.player.validateSaveGame(subOption)
                     if subOption == "Y":
                         self.player.saveGame()
+                        self.player.initializeGrid()
                         break
 
                     elif subOption == "N":
+                        self.player.initializeGrid()
                         break
                 else:
                     self.player.validateSaveGame("N")
+                    self.player.initializeGrid()
                     break
 
             elif option == '3':

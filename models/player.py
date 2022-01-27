@@ -4,7 +4,6 @@ from models.configurations import *
 
 class Player:  # Player Class
     def __init__(self):
-        self.score = 0
         self.turns = 1
         self.grid = Grid()
         self.firstBuilding = self.secondBuilding = None
@@ -38,20 +37,21 @@ class Player:  # Player Class
         else:
             print('Invalid option!')
 
-    def displayOptionMenu(self):
+    # Function that facilitates the process of entering the game options menu
+    def displayOptionMenu(self):    
         option = None
         while option != "0":
             self.displayOptionMenuHelper()
-            option = self.promptOptionMenu()
+            option = self.promptOptionMenu()  
             self.validateOptionMenu(option)
 
             if option == "1":
                 self.displayBuildingPoolOptionMenu()
 
             elif option == "2":
-                gridSize = self.promptGridSize()
-                self.validateGridSize(gridSize)
+                self.displayGridSizeMenu()
 
+    # String display for game options menu
     def displayOptionMenuHelper(self):
         optionMenuContent = [
             "\nSimpCity Game Options",
@@ -66,8 +66,8 @@ class Player:  # Player Class
     def promptOptionMenu(self):
         return input("Please enter an option: ")
 
-    # Validate options made in main menu
-    def validateOptionMenu(self, option):
+    # Validate options made in game options menu
+    def validateOptionMenu(self, option):   
         if option == '0':
             print('\n---- Back to Main Menu ----')
         elif len(option) == 1 and ord("1") <= ord(option) <= ord("2"):
@@ -75,14 +75,16 @@ class Player:  # Player Class
         else:
             print('Invalid option!')
 
+    # Function that facilitates the process of changing the game building pool
     def displayBuildingPoolOptionMenu(self):
         option = None
-        while option != "9" and option != "0":
+        while option != "0":
             self.displayBuildingPoolOptionMenuHelper()
             self.displayCurrentBuildingPool()
             option = self.promptBuildingPoolOptionMenu()
             self.validateBuildingPoolOptionMenu(option)
 
+    # String display for building pool change menu
     def displayBuildingPoolOptionMenuHelper(self):
         buildingPoolOptionMenuContent = [
             "\nChoose Building Pool",
@@ -102,17 +104,17 @@ class Player:  # Player Class
     def promptBuildingPoolOptionMenu(self):
         return input("\nEnter 5 building options with a comma separator (e.g. 1,2,4,6,7) or '0' to exit: ")
 
-    # Validate options made in main menu
+    # Validate options made in building pool menu
     def validateBuildingPoolOptionMenu(self, option):
         if option == '0':
             print('\n---- Back to Option Menu ----')
         elif self.isBuildingPoolOptionsValid(option):
             self.updateBuildingPoolFromOption(option)
             print("Sucessfully updated building pool!")
-            print("\n---- Back to Option Menu ----")
         else:
-            print('Invalid option!')
+            print(f'Invalid option! {option} is not a valid building pool!')
 
+    # Check validity of building pool options by player in building pool change menu
     def isBuildingPoolOptionsValid(self, option):
         # (e.g. 1,2,4,6,7)
 
@@ -121,29 +123,41 @@ class Player:  # Player Class
 
         choices = option.split(',')
 
+        # Check Condition for valid input choices
         return len(set(choices)) == 5 and all(ord("1") <= ord(x) <= ord("7") for x in choices)
 
+    # Calls grid's availableBuildings function for updating current building pool to selected options
     def updateBuildingPoolFromOption(self, option):
         self.grid.availableBuildings.updateBuildingPool(option)
 
+    # Calls grid's availableBuildings function for displaying current building pool for active player
     def displayCurrentBuildingPool(self):
         self.grid.availableBuildings.displayCurrentBuildingPool()
+    
+    # Function that facilitates the process of changing the game grid size
+    def displayGridSizeMenu(self):
+        gridSize = None
+        while gridSize != "0":
+            self.displayGrid()
+            gridSize = self.promptGridSize()
+            self.validateGridSize(gridSize)
 
     def promptGridSize(self):
         return input("\nEnter a valid Grid Size (x,y) between 1-6 with a comma separator (e.g. 3,4) or '0' to exit: ")
 
+    # Validate options made in grid size adjustment menu
     def validateGridSize(self, option):
         if option == '0':
-            pass
+            print('\n---- Back to Option Menu ----')
         elif self.isGridSizeValid(option):
             self.updateGridSize(option)
             gridSize = option.split(',')
             print(
                 f"Sucessfully updated grid size to [{gridSize[0]} x {gridSize[1]}]!")
         else:
-            print('Invalid Grid Size!')
-        print('\n---- Back to Option Menu ----')
+            print(f'Invalid Grid Size! {option} is not a valid grid size!')
 
+    # Check validity of grid size input by player in grid size adjustment menu 
     def isGridSizeValid(self, gridSize):
         # (e.g. 4,4  6,6  3,3)
 
@@ -152,8 +166,10 @@ class Player:  # Player Class
 
         size = gridSize.split(',')
 
+        # Check condition for valid grid size choice
         return size[0].isnumeric() and size[1].isnumeric() and 1 < int(size[0]) <= 6 and 1 < int(size[1]) <= 6
 
+    # Splits grid size input into values to be passed into updateGridSize function in grid object
     def updateGridSize(self, gridSize):
         size = gridSize.split(',')
         self.grid.updateGridSize(size[0], size[1])
@@ -181,7 +197,7 @@ class Player:  # Player Class
     def startNewGame(self):
         self.turns = 1
         self.savedGame = False
-        self.grid.initializeGrid()
+        self.initializeGrid()
         print('\n---- Entering Game Menu ----')
 
     # Prompt player for input in InGame main menu
@@ -194,15 +210,17 @@ class Player:  # Player Class
             if ord("1") <= ord(option) <= ord("2"):
                 buildingValue = self.firstBuilding if \
                     ord(option) == ord("1") else self.secondBuilding
-                self.promptEnterBuildingPosition(buildingValue)
+                positions = self.promptEnterBuildingPosition(buildingValue)
+                self.validatePlaceBuildingOnPosition(buildingValue, positions)
             else:
                 print(f"You selected option {option}\n")
         else:
             print("Invalid option!")
 
     def promptEnterBuildingPosition(self, building):
-        positions = input(f"\nWhere would you like to place {building} at? ")
+        return input(f"\nWhere would you like to place {building} at? ")
 
+    def validatePlaceBuildingOnPosition(self, building, positions):
         if self.grid.isPositionValid(positions):
             x, y = self.grid.retrieveParsedPosition(positions)
             if self.turns == 1 or (self.turns > 1 and self.grid.hasAdjacentBuildingsForPosition(x, y)):
@@ -214,10 +232,10 @@ class Player:  # Player Class
                 print(f"{building} has been successfully placed at {positions}.")
             else:
                 print(f"Placing {building} at {positions} was unsuccessful.")
-                print("You must build next to an existing building.")
+                print(f"{positions} is an invalid position! You must build next to an existing building.")
 
         else:
-            print("Please enter a valid building position!")
+            print(f"{positions} is an invalid position! Please enter a valid building position!")
 
     def displayBuildingsScore(self):
         print()
@@ -259,7 +277,7 @@ class Player:  # Player Class
 
     # Validation message for successfully saving game in the game menu
     def savedGameSuccessful(self):
-        print('\nGame has been saved successfully.\n\n---- Back to Game Menu----')
+        print('Game has been saved successfully.\n\n---- Back to Game Menu----')
 
     # Access grid attribute to display grid
     def displayGrid(self, isFinal=False):
@@ -267,6 +285,10 @@ class Player:  # Player Class
             print("\nFinal layout of Simp City:")
 
         self.grid.displayGrid()
+
+    #Re-initialize the grid
+    def initializeGrid(self):
+        self.grid.initializeGrid()
 
     # Access grid attribute to
     def loadGame(self):
