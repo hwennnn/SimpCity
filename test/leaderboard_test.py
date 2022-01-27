@@ -9,6 +9,9 @@ import os
 path = str(Path(Path('leaderboard_test.py').parent.absolute()).parent.absolute())
 sys.path.insert(0, path)
 
+# configurations used in the unit tests
+rowCount = colCount = 4
+
 
 def test_checkIfLeaderboardFileExist():
     try:
@@ -46,6 +49,7 @@ def test_checkIsLeaderboardPlayerNameValid(option, expectedResult):
 validSavedLeaderboardFileTestData = \
     [
         ([
+            "# 4, 4",
             "zachary, 70, 1642677335555",
             "hwen, 40, 1642677336958",
             "yong teng, 39, 1642677336951",
@@ -56,12 +60,15 @@ validSavedLeaderboardFileTestData = \
 invalidSavedLeaderboardFileTestData = \
     [
         ([
+            "# 4, 4",
             "this is a very long sentence!!!!!, 70, 1642677335555",
             "hwen, 40, 1642677336958",
             "yong teng, 39, 1642677336951",
             "glenn, 20, 12381237872",
         ], False),
         ([
+            # failed because exceed 10 lines for leaderboard data
+            "# 4, 4",
             "zachary, 69, 1642677335555",
             "hwen, 40, 1642677336958",
             "yong teng, 39, 1642677336951",
@@ -73,6 +80,13 @@ invalidSavedLeaderboardFileTestData = \
             "zachary, 69, 1642677335555",
             "hwen, 40, 1642677336958",
             "yong teng, 39, 1642677336951",
+        ], False),
+        ([
+            # failed because without indicating grid size
+            "zachary, 70, 1642677335555",
+            "hwen, 40, 1642677336958",
+            "yong teng, 39, 1642677336951",
+            "glenn, 20, 12381237872",
         ], False),
     ]
 
@@ -89,15 +103,16 @@ def test_saveScoreIntoLeaderboard():
     leaderboard = Leaderboard()
 
     for i in range(10):
-        leaderboard.saveScoreIntoLeaderboard(i + 1, chr(ord('a') + i))
+        leaderboard.saveScoreIntoLeaderboard(
+            i + 1, rowCount, colCount, chr(ord('a') + i))
 
-    assert len(leaderboard.leaderboard) == 10
+    assert len(leaderboard.leaderboard[rowCount][colCount]) == 10
     assert leaderboard.isSavedLeaderboardExist() == True
 
-    newRanking = leaderboard.getRankingInLeaderBoard(30)
+    newRanking = leaderboard.getRankingInLeaderBoard(30, rowCount, colCount)
     assert newRanking == 0
 
-    leaderboard.saveScoreIntoLeaderboard(30, "hwen")
+    leaderboard.saveScoreIntoLeaderboard(30, rowCount, colCount, "hwen")
 
 
 def test_loadLeaderboardFromFile(capfd):
@@ -113,13 +128,14 @@ def test_loadLeaderboardFromFile(capfd):
 def test_readFiles():
     leaderboard = Leaderboard()
 
-    assert len(leaderboard.readFiles()) == 10
+    # 10 leaderboard data including one header
+    assert len(leaderboard.readFiles()) == 11
 
 
 def test_displayLeaderboard(capfd):
     leaderboard = Leaderboard()
 
-    leaderboard.displayLeaderboard()
+    leaderboard.displayLeaderboard(rowCount, colCount)
 
     out, _ = capfd.readouterr()
 
@@ -129,7 +145,7 @@ def test_displayLeaderboard(capfd):
 def test_failToSaveScoreIntoLeaderBoard(capfd):
     leaderboard = Leaderboard()
 
-    leaderboard.saveScoreIntoLeaderboard(0)
+    leaderboard.saveScoreIntoLeaderboard(0, rowCount, colCount)
 
     out, _ = capfd.readouterr()
 
