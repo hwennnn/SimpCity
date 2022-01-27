@@ -380,7 +380,9 @@ class Grid:
         """
         This method will display the grid and adapts to each building type.
 
-        There are multiple layers of string concatenations for displaying the grid orderly.
+        The method will loop through each grid cell and retrieve the object stored within it.
+        If there is a building in the cell and it matches a building name, the building name will be added to the row.
+        If there is no building in the cell, an empty cell will be displayed
         Depending on the grid size, the Remaining Buildings Tab on the Right will be displayed accordingly
         E.g.:If grid size only has a row count of 2, the last Remaining Building Line will be printed as a separate
              line on its own. Otherwise, it will be concatenated beside the next row line.
