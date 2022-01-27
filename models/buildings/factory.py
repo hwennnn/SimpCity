@@ -29,7 +29,7 @@ class Factory(Building):
 
         Override method to retrieve the building score. \n
 
-        The score calculation for park building only needs to be done once, hence it is implemented in Grid object.
+        The score calculation for factory building only needs to be done once, hence it is implemented in Grid object.
 
         """
         pass
