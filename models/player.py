@@ -12,17 +12,17 @@ class Player:  # Player Class
 
     # Display first main menu upon launching python code
     def displayMainMenu(self):
+        mainMenuContent = [
+            "\nWelcome, mayor of Simp City!",
+            "----------------------------",
+            "1. Start new game",
+            "2. Load saved game",
+            "3. Show high scores",
+            "4. Options\n",
+            "0. Exit"
+        ]
 
-        print("""
-Welcome, mayor of Simp City!
-----------------------------
-1. Start new game
-2. Load saved game
-3. Show high scores
-4. Options
-
-0. Exit
-""")
+        print("\n".join(mainMenuContent))
 
     # Prompt player for input in first main menu
     def promptMainMenu(self):
@@ -52,14 +52,15 @@ Welcome, mayor of Simp City!
                 self.displayGridSizeMenu()
 
     def displayOptionMenuHelper(self):
-        print("""
-SimpCity Game Options
----------------------
-1. Choose Building Pool
-2. Adjust Grid Size
+        optionMenuContent = [
+            "\nSimpCity Game Options",
+            "---------------------",
+            "1. Choose Building Pool",
+            "2. Adjust Grid Size\n",
+            "0. Return to Main Menu"
+        ]
 
-0. Return to Main Menu
-""")
+        print("\n".join(optionMenuContent))
 
     def promptOptionMenu(self):
         return input("Please enter an option: ")
@@ -82,19 +83,20 @@ SimpCity Game Options
             self.validateBuildingPoolOptionMenu(option)
 
     def displayBuildingPoolOptionMenuHelper(self):
-        print("""
-Choose Building Pool
---------------------
-1. Beach
-2. Factory
-3. Highway
-4. House
-5. Shop
-6. Monument
-7. Park 
+        buildingPoolOptionMenuContent = [
+            "\nChoose Building Pool",
+            "--------------------",
+            "1. Beach",
+            "2. Factory",
+            "3. Highway",
+            "4. House",
+            "5. Shop",
+            "6. Monument",
+            "7. Park\n",
+            "0. Return to Option Menu"
+        ]
 
-0. Return to Option Menu
-""")
+        print("\n".join(buildingPoolOptionMenuContent))
 
     def promptBuildingPoolOptionMenu(self):
         return input("\nEnter 5 building options with a comma separator (e.g. 1,2,4,6,7) or '0' to exit: ")
@@ -141,7 +143,8 @@ Choose Building Pool
         elif self.isGridSizeValid(option):
             self.updateGridSize(option)
             gridSize = option.split(',')
-            print(f"Sucessfully updated grid size to [{gridSize[0]} x {gridSize[1]}]!")
+            print(
+                f"Sucessfully updated grid size to [{gridSize[0]} x {gridSize[1]}]!")
         else:
             print(f'Invalid Grid Size! {option} is not a valid grid size!')
 
@@ -150,23 +153,25 @@ Choose Building Pool
 
         if len(gridSize) != 3:
             return False
-        
+
         size = gridSize.split(',')
 
         return size[0].isnumeric() and size[1].isnumeric() and 1 < int(size[0]) <= 6 and 1 < int(size[1]) <= 6
 
     def updateGridSize(self, gridSize):
         size = gridSize.split(',')
-        self.grid.updateGridSize(size[0] ,size[1])
+        self.grid.updateGridSize(size[0], size[1])
 
-    def gameMenuContent(self, firstBuilding, secondBuilding):
-        return (
-f"""1. Build a {firstBuilding}
-2. Build a {secondBuilding}
-3. See current score
+    def retrieveGameMenuContent(self, firstBuilding, secondBuilding):
+        gameMenuContent = [
+            f"1. Build a {firstBuilding}",
+            f"2. Build a {secondBuilding}",
+            "3. See current score\n",
+            "4. Save game",
+            "0. Exit to main menu"
+        ]
 
-4. Save game
-0. Exit to main menu""")
+        return ("\n".join(gameMenuContent))
 
     def displayGameMenu(self, firstBuilding=None, secondBuilding=None):
         if firstBuilding is not None and secondBuilding is not None:
@@ -174,7 +179,8 @@ f"""1. Build a {firstBuilding}
         else:
             self.firstBuilding, self.secondBuilding = self.retrieveTwoRandomBuildings()
 
-        print(self.gameMenuContent(self.firstBuilding, self.secondBuilding))
+        print(self.retrieveGameMenuContent(
+            self.firstBuilding, self.secondBuilding))
 
     def startNewGame(self):
         self.turns = 1

@@ -95,7 +95,7 @@ Choose Building Pool
 4. House
 5. Shop
 6. Monument
-7. Park 
+7. Park
 
 0. Return to Option Menu
 """ in out
@@ -254,7 +254,7 @@ def generateRandomBuildingsMenuContent():
     for _ in range(10):
         firstBuilding, secondBuilding = player_test.retrieveTwoRandomBuildings()
         gameMenuContentTestData.append(
-            ((firstBuilding, secondBuilding), player_test.gameMenuContent(firstBuilding, secondBuilding)))
+            ((firstBuilding, secondBuilding), player_test.retrieveGameMenuContent(firstBuilding, secondBuilding)))
 
     return gameMenuContentTestData
 
@@ -313,7 +313,7 @@ def test_validateGridSize(capfd, gridSize, expectedResult):
     player.validateGridSize(gridSize)
     out, _ = capfd.readouterr()
     assert expectedResult in out
-    
+
 
 validGridSizeDisplay = [
     (

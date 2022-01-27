@@ -1,3 +1,8 @@
+"""
+This module deals with the building enumeration object.
+"""
+__docformat__ = "google"
+
 from enum import Enum
 
 
