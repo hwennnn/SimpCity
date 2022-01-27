@@ -164,7 +164,7 @@ class Leaderboard:
         """
 
         leaderboardContent = [
-            "--------- HIGH SCORES ---------",
+            "\n--------- HIGH SCORES ---------",
             "Pos Player                Score",
             "--- ------                -----",
         ]
