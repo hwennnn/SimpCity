@@ -201,7 +201,7 @@ def test_TC_PB_SG_001(monkeypatch, capfd, execution_number):
     randomCoordinate = random.choice([i for i in buildingPlacements(int(x), int(y)) if len(i) == 2])
 
     # Select Options -> Choose City Size -> Valid City Size -> Exit to Main Menu -> Start Game -> Place Buidling -> Save Game
-    tempList =["4", "2", randomCitySize[0], "0", "1", str(random.randint(1,2)), randomCoordinate, "4"]
+    tempList =["4", "2", randomCitySize[0], "0", "0", "1", str(random.randint(1,2)), randomCoordinate, "4"]
 
     # Iterates through the list of options that mimics user input
     try:
@@ -223,7 +223,7 @@ def test_TC_PB_SG_001(monkeypatch, capfd, execution_number):
     gridList = parse_fileToList(f.read())
 
     # Check if the game file's building placed is the same as the current grid stored in program
-    assert game.player.grid.grid[int([i for i in randomCoordinate][1]) - 1][int(get_key([i for i in randomCoordinate][0]))].__dict__["name"] == gridList[int([i for i in randomCoordinate][1]) - 1][int(get_key([i for i in randomCoordinate][0]))]
+    assert game.player.grid.grid[int([i for i in randomCoordinate][1]) - 1][int(get_key([i for i in randomCoordinate][0]))].__dict__['name'] == gridList[int([i for i in randomCoordinate][1]) - 1][int(get_key([i for i in randomCoordinate][0]))]
 
 
 ##########################################
