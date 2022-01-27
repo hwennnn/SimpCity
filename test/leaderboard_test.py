@@ -123,7 +123,7 @@ def test_displayLeaderboard(capfd):
 
     out, _ = capfd.readouterr()
 
-    assert "--------- HIGH SCORES ---------" in out
+    assert "\n--------- HIGH SCORES ---------" in out
 
 
 def test_failToSaveScoreIntoLeaderBoard(capfd):

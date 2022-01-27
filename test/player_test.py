@@ -38,10 +38,10 @@ validMainOptionTestData = \
      ("4", "You selected option 4")]
 
 invalidMainOptionTestData = \
-    [("5", "Invalid option!"),
-     ("10", "Invalid option!"),
-     ("a", "Invalid option!"),
-     ("abc", "Invalid option!")]
+    [("5", "5 is an invalid option!"),
+     ("10", "10 is an invalid option!"),
+     ("a", "a is an invalid option!"),
+     ("abc", "abc is an invalid option!")]
 
 
 @pytest.mark.parametrize("option, expectedResult", validMainOptionTestData + invalidMainOptionTestData)
@@ -70,10 +70,10 @@ validOptionMenuTestData = \
      ("2", "You selected option 2")]
 
 invalidOptionMenuTestData = \
-    [("3", "Invalid option!"),
-     ("4", "Invalid option!"),
-     ("5", "Invalid option!"),
-     ("10", "Invalid option!")]
+    [("3", "3 is an invalid option!"),
+     ("4", "4 is an invalid option!"),
+     ("5", "5 is an invalid option!"),
+     ("10", "10 is an invalid option!")]
 
 
 @pytest.mark.parametrize("option, expectedResult", validOptionMenuTestData + invalidOptionMenuTestData)
@@ -213,13 +213,13 @@ def test_validGameOption(capfd, option, expectedResult):
 
 
 invalidGameOptionTestData = \
-    [("5", "Invalid option!"),
-     ("6", "Invalid option!"),
-     ("7", "Invalid option!"),
-     ("8", "Invalid option!"),
-     ("9", "Invalid option!"),
-     ("10", "Invalid option!"),
-     ("abc", "Invalid option!")]
+    [("5", "5 is an invalid option!"),
+     ("6", "6 is an invalid option!"),
+     ("7", "7 is an invalid option!"),
+     ("8", "8 is an invalid option!"),
+     ("9", "9 is an invalid option!"),
+     ("10", "10 is an invalid option!"),
+     ("abc", "abc is an invalid option!")]
 
 
 @pytest.mark.parametrize("option, expectedResult", invalidGameOptionTestData)

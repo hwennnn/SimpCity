@@ -74,7 +74,7 @@ class Player:
         elif len(option) == 1 and ord("1") <= ord(option) <= ord("4"):
             print(f"You selected option {option}")
         else:
-            print('Invalid option!')
+            print(f'{option} is an invalid option!')
 
     def displayOptionMenu(self):
         """
@@ -136,7 +136,7 @@ class Player:
         elif len(option) == 1 and ord("1") <= ord(option) <= ord("2"):
             print(f"You selected option {option}")
         else:
-            print('Invalid option!')
+            print(f'{option} is an invalid option!')
 
     # Function that facilitates the process of changing the game building pool
     def displayBuildingPoolOptionMenu(self):
@@ -406,7 +406,7 @@ class Player:
             else:
                 print(f"You selected option {option}\n")
         else:
-            print("Invalid option!")
+            print(f"{option} is an invalid option!")
 
     def promptEnterBuildingPosition(self, building):
         """
