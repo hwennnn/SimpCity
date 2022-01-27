@@ -1,30 +1,95 @@
+"""
+This module deals with all grid related functions.
+"""
+__docformat__ = "google"
+
 from models.available_buildings import AvailableBuildings
 from models.buildings import *
 from models.enums import Buildings
 from models.configurations import *
 
 
-class Grid:  # Grid Class
+class Grid:
+    rowCount: int
+    """The row count of the grid"""
+    colCount: int
+    """The column count of the grid"""
+    grid: list[list[str]]
+    """The 2D array (row * grid) represents the grid. Initially each position in the grid is initialised as None"""
+    factoryList: list[Factory]
+    """The array keeps track of placed Factory building in the grid"""
+    availableBuildings: AvailableBuildings
+    """The available buildings object associated with the grid"""
+
     def __init__(self):
+        """
+        Initialise the grid object with default values for rowCount, columnCount, grid, factoryList and availableBuildings object.
+        """
         self.rowCount = self.colCount = 4
-        # First initialise the object in each position as None
         self.grid = [[None] * self.colCount for _ in range(self.rowCount)]
         self.factoryList = []
         self.availableBuildings = AvailableBuildings()
 
     def isPositionXValid(self, x):
+        """
+        Args:
+            x (str): The building position on x-axis of the grid entered by the user.
+
+        The method will validate whether the input is valid as the length is 1 and its within the boundary.
+
+        """
         return len(x) == 1 and ord('A') <= ord(x.upper()) <= ord('A') + (self.colCount - 1)
 
     def isPositionYValid(self, y):
+        """
+        Args:
+            y (str): The building position on y-axis of the grid entered by the user.
+
+        The method will validate whether the input is valid as the length is 1 and its within the boundary.
+
+        """
         return len(y) == 1 and y.isnumeric() and 1 <= int(y) <= self.rowCount
 
     def parseXPositionInput(self, x):
+        """
+        Args:
+            x (str): The building position on x-axis of the grid entered by the user.
+
+        Returns:
+            int: The 0-indexed position integer represents the position on x-axis in the grid.
+
+        The method will return the 0-indexed x position integer.
+
+        """
         return ord(x.upper()) - ord('A')
 
     def parseYPositionInput(self, y):
+        """
+        Args:
+            y (str): The building position on y-axis of the grid entered by the user.
+
+        Returns:
+            int: The 0-indexed position integer represents the position on y-axis in the grid.
+
+        The method will return the 0-indexed y position integer.
+
+        """
         return int(y) - 1
 
     def isPositionValid(self, userInput):
+        """
+        Args:
+            userInput (str): The building position on the grid entered by the user. \n
+            Example -> a1
+
+        Returns:
+            bool: The result whether the position is valid.
+
+        The method will return whether the userInput is valid to be placed on the grid
+        by checking whether the x and y axis are within boundary and that particular position is not occupied yet.
+
+        """
+
         if len(userInput) != 2:
             return False
 
@@ -34,11 +99,35 @@ class Grid:  # Grid Class
             and self.grid[self.parseYPositionInput(y)][self.parseXPositionInput(x)] is None
 
     def retrieveParsedPosition(self, userInput):
+        """
+        Args:
+            userInput (str): The building position on the grid entered by the user. \n
+            Example -> a1
+
+        Returns:
+            tuple(int): Return a tuple of integer values.
+
+        The method will return the parsed positions from raw user inputs.
+        For example, "a1" will become (0, 0).
+
+        """
         x, y = userInput
 
         return (self.parseYPositionInput(y), self.parseXPositionInput(x))
 
     def hasAdjacentBuildingsForPosition(self, x, y):
+        """
+        Args:
+            x (int): The building position on x-axis of the grid
+            y (int): The building position on y-axis of the grid
+
+        Returns:
+            bool: The result whether the position has adjacent buildings.
+
+        The method will return whether there is any adjacent buildings on its left, right, upper and down position.
+
+        """
+
         adjacentPositions = [(x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)]
 
         for dx, dy in adjacentPositions:
@@ -48,18 +137,62 @@ class Grid:  # Grid Class
         return False
 
     def hasBuildingOnPosition(self, x, y):
+        """
+        Args:
+            x (int): The building position on x-axis of the grid
+            y (int): The building position on y-axis of the grid
+
+        Returns:
+            bool: The result whether the position has any building
+
+        The method will return whether there is any building on the position.
+
+        """
         return self.grid[x][y] is not None
 
     def updateGrid(self, x, y, buildingName):
+        """
+        Args:
+            x (int): The building position on x-axis of the grid
+            y (int): The building position on y-axis of the grid
+            buildingName (str): The name of the building going to be placed on the given position
+
+        The method will place the building object associated with the buildingName in the given position.
+
+        """
+
         # convert the user input to 0-indexed for array processing
         self.grid[x][y] = self.createBuilding(buildingName, x, y)
 
     def updateGridSize(self, x, y):
+        """
+        Args:
+            x (int): The building position on x-axis of the grid entered by the user
+            y (int): The building position on y-axis of the grid entered by the user
+
+        The method will update rowCount and colCount accordingly based on the given user options.
+        It will also call another method re-initialise the grid.
+
+        """
+
         self.rowCount = int(x)
         self.colCount = int(y)
         self.initializeGrid()
 
     def createBuilding(self, buildingName, x, y):
+        """
+        Args:
+            buildingName (str): The name of the building going to be placed on the given position
+            x (int): The building position on x-axis of the grid
+            y (int): The building position on y-axis of the grid
+
+        Returns:
+            Object: The created building object
+
+        The method will return the created building object associated with the buildingName.
+
+        """
+
         match buildingName:
             case Buildings.BEACH.value:
                 return Beach(buildingName, x, y)
@@ -84,14 +217,26 @@ class Grid:  # Grid Class
             case Buildings.PARK.value:
                 return Park(buildingName, x, y)
 
-            # raise exception if the building input cannot be found in the cases
-            case _:
-                raise Exception()
-
     def decreaseBuildingCount(self, buildingName):
+        """
+        Args:
+            buildingName (str): The name of the building
+
+        The method will call the AvailableBuildings object method to decrease the available building count.
+
+        """
         self.availableBuildings.decreaseAvailableBuilding(buildingName)
 
     def retrieveBuildingsScore(self):
+        """
+        Returns:
+            tuple(int, map[int]): (The total buildings score of the player, The score breakdown for each type of building)
+
+        The method will return the calculated total buildings score of the player in each position of the grid. \n
+        There are two exceptions during the loop calculation, which are Factory and Park buildings, because they would only be calculated once at the start of the algorithm. \n
+
+        """
+
         scoresBreakdown = {}
 
         for buildingName in self.availableBuildings.buildings:
@@ -125,6 +270,22 @@ class Grid:  # Grid Class
         return (scores, scoresBreakdown)
 
     def calculateFactoryBuildingsScore(self):
+        """
+        Returns:
+            tuple(int, map[int]): (The total Factory buildings score of the player, The score breakdown for the Factory Building)
+
+        The method will return the calculated total Factory buildings score of the player in each position of the grid. \n
+
+        A Factory (FAC) scores 1 point per factory (FAC) in the city, up to a maximum of 4
+        points for the first 4 factories; all subsequent factories only score 1 point each. \n
+        For example,
+        - If there are 3 factories in the city, each factory will score 3 points, for a total
+        of 3+3+3 = 9 points. \n
+        - If there are 5 factories in the city, the first 4 factories will score 4 points each
+        while the 5 th factory will score 1 point, for a total of 4+4+4+4+1 = 17 points.
+
+        """
+
         scoreBreakdown = []
         result = 0
 
@@ -152,6 +313,21 @@ class Grid:  # Grid Class
         return (result, scoreBreakdown)
 
     def calculateParkBuildingsScore(self):
+        """
+        Returns:
+            tuple(int, map[int]): (The total Park buildings score of the player, The score breakdown for the Park Building)
+
+        The method will return the calculated total Park buildings score of the player in each position of the grid. \n
+
+        A Park is a new type of building depending on how many
+        parks are connected to each other (both horizontally and vertically). The
+        score for a Park is given by the following table: \n
+
+        scoresMap = {1: 1, 2: 3, 3: 8, 4: 16, 5: 22, 6: 23, 7: 24, 8: 25} \n
+        Note that the score given above is for the entire Park, not for each Park
+        building, so a 4-square Park scores 16 in total, not 16 per building.
+        """
+
         scoreBreakdown = []
         result = 0
 
@@ -165,7 +341,7 @@ class Grid:  # Grid Class
             if visited[x][y]:
                 return 0
 
-            # mark the current position as visited
+            # mark the current position as visited so it will ensure each position wil only be visited once
             visited[x][y] = True
             # initialise the park building count as 1
             count = 1
@@ -180,7 +356,6 @@ class Grid:  # Grid Class
         # search through all Park buildings and conduct a depth-first-search to retrieve the Park Building Size
         for x in range(self.rowCount):
             for y in range(self.colCount):
-                # update the dp value as 1 if a park building is found
                 if self.grid[x][y] is not None and self.grid[x][y].getName() == Buildings.PARK.value and not visited[x][y]:
                     parkSize = dfs(x, y)
                     score = scoresMap[parkSize]
@@ -190,18 +365,34 @@ class Grid:  # Grid Class
         return (result, scoreBreakdown)
 
     def retrieveTwoRandomBuildings(self):
+        """
+        Returns:
+            list[str]: The first two element of the shuffled buildings
+
+        This method will return the first two element of the shuffled buildings.
+        Logically the length of the shuffled buildings should be always greater than two.
+
+        """
+
         return self.availableBuildings.retriveTwoRandomBuildings()
 
-    # displays the grid and adapts to each building type
     def displayGrid(self):
+        """
+        TODO: @glenn please help to add on more comments on this method :))
+        This method will display the grid and adapts to each building type.
+        """
+
         columnIndication = "\n   "
         upperGridline = " +"
+
         for y in range(self.colCount):
             columnIndication += "  "+chr(65 + y)+"   "
             upperGridline += "-----+"
+
         columnIndication += "\t Remaining Buildings\n"
         upperGridline += "\t -------------------"
         print(columnIndication, upperGridline)
+
         for x in range(self.rowCount):
             lastRemainingBuilding = ""
             row = str(x + 1) + " |"
@@ -225,25 +416,26 @@ class Grid:  # Grid Class
                             row += " " + Buildings.MONUMENT.value + " |"
                         case Buildings.PARK.value:
                             row += " " + Buildings.PARK.value + " |"
-                        # raise exception if the building input cannot be found in the cases
-                        case _:
-                            raise Exception()
+
                 lowerGridline += "-----+"
+
             if self.rowCount <= 2:
                 row += f"\t {self.availableBuildings.buildings[x * 2]}: {self.availableBuildings.availability[x * 2]}"
                 lowerGridline += f"\t {self.availableBuildings.buildings[x * 2 + 1]}: {self.availableBuildings.availability[x * 2 + 1]}"
+
                 if self.colCount == 6:
                     lastRemainingBuilding = f"\t\t\t\t\t {self.availableBuildings.buildings[4]}: {self.availableBuildings.availability[4]}\n"
                 else:
                     for y in range(self.colCount):
                         lastRemainingBuilding += "\t"
-                    lastRemainingBuilding += f" {self.availableBuildings.buildings[4]}: {self.availableBuildings.availability[4]}\n" 
+                    lastRemainingBuilding += f" {self.availableBuildings.buildings[4]}: {self.availableBuildings.availability[4]}\n"
 
                 print(row)
                 print(lowerGridline)
+
                 if x == 1:
                     print(lastRemainingBuilding)
-                
+
             else:
                 row += f"\t {self.availableBuildings.buildings[x * 2]}: {self.availableBuildings.availability[x * 2]}" \
                     if x < 2 else ""
@@ -255,8 +447,14 @@ class Grid:  # Grid Class
                 print(row)
                 print(lowerGridline)
 
-    # parses the grid as an array of string, allowing it to be written into txt file
     def parseGridAsString(self):
+        """
+        Returns:
+            list[str]: The list of parsed string.
+
+        This method will parse the grid as an array of string, allowing it to be written into txt file
+        """
+
         returnStrArr = []
         for row in self.grid:
             rowStr = []
@@ -265,8 +463,11 @@ class Grid:  # Grid Class
             returnStrArr.append(",".join(rowStr))
         return returnStrArr
 
-    # re-initializes grid to be empty
     def initializeGrid(self):
+        """
+        This method will reset the grid, the available building count and the factory list.
+        """
+
         self.grid = [[None] * self.colCount for _ in range(self.rowCount)]
         self.availableBuildings.availability = [8] * 5
         self.factoryList.clear()
