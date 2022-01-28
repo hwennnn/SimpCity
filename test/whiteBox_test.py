@@ -93,7 +93,7 @@ def test_checkLoadFileContentsWithChangePool():
     # Check if the file contents are the same as the grid
     newGame.player.loadGame()
     assert newGame.player.grid.grid[0][0].name == Buildings.BEACH.value
-    assert availablebuildingsName == newGame.player.grid.availableBuildings.buildings
+    assert availablebuildingsName.split(",") == newGame.player.grid.availableBuildings.buildings
 
 
 # Features Under Test
