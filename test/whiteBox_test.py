@@ -139,7 +139,7 @@ def test_checkLoadFileContents(monkeypatch, capfd):
     # Parse the file into formatted grid
     lines = newGame.player.grid.readFiles()
     isFileValid, gridStr = newGame.player.grid.isSavedGameFileValid(lines)
-    formattedGrid = newGame.player.grid.formatGrid(gridString)
+    formattedGrid = newGame.player.grid.formatGrid(gridStr)
 
     # Check if the file contents are the same as the grid
     newGame.player.loadGame()
