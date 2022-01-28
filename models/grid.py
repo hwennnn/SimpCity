@@ -292,11 +292,12 @@ class Grid:  # Grid Class
     def readGridFromFile(self):
         if not self.isSavedGameExist():
             return
+
         lines = self.readFiles()
 
         # check if saved game file has (row,col) and building pool
         if len(lines) < 3:
-            return
+            return False
         
         row,col = map(int,lines.pop(0).lstrip("(").rstrip(")\n").split(","))
         if row > 0 and col > 0: 

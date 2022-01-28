@@ -65,12 +65,14 @@ def test_checkLoadFileContents():
     
     # Parse the file into formatted grid
     lines = newGame.player.grid.readFiles()
-    isFileValid, gridStr = newGame.player.grid.isSavedGameFileValid(lines[2:])
-    formattedGrid = newGame.player.grid.formatGrid(gridString)
+    lines.pop(0) # Remove the first 2 lines which contains row,col and buildings
+    lines.pop(0)
+    isFileValid, gridStr = newGame.player.grid.isSavedGameFileValid(lines)
+    formattedGrid = newGame.player.grid.formatGrid(gridStr)
 
     # Check if the file contents are the same as the grid
     newGame.player.loadGame()
-    assert newGame.player.grid.grid[0][0] == Buildings.BEACH.value
+    assert newGame.player.grid.grid[0][0].value == Buildings.BEACH.value
     assert newGame.player.grid.grid == formattedGrid
 
 # Features Under Test
@@ -98,12 +100,14 @@ def test_checkLoadFileContentsWithChangePool():
     
     # Parse the file into formatted grid
     lines = newGame.player.grid.readFiles()
+    lines.pop(0) # Remove the first 2 lines which contains row,col and buildings
+    lines.pop(0)
     isFileValid, gridStr = newGame.player.grid.isSavedGameFileValid(lines[2:])
     formattedGrid = newGame.player.grid.formatGrid(gridStr)
 
     # Check if the file contents are the same as the grid
     newGame.player.loadGame()
-    assert newGame.player.grid.grid[0][0] == Buildings.BEACH.value
+    assert newGame.player.grid.grid[0][0].value == Buildings.BEACH.value
     assert newGame.player.grid.grid == formattedGrid
     assert availablebuildingsName == newGame.player.grid.availableBuildings.buildings
 
@@ -138,12 +142,14 @@ def test_checkLoadFileContentsWithChangeSize():
     
     # Parse the file into formatted grid
     lines = newGame.player.grid.readFiles()
+    lines.pop(0) # Remove the first 2 lines which contains row,col and buildings
+    lines.pop(0)
     isFileValid, gridStr = newGame.player.grid.isSavedGameFileValid(lines[2:])
     formattedGrid = newGame.player.grid.formatGrid(gridStr)
 
     # Check if the file contents are the same as the grid
     newGame.player.loadGame()
-    assert newGame.player.grid.grid[0][0] == Buildings.BEACH.value
+    assert newGame.player.grid.grid[0][0].value == Buildings.BEACH.value
     assert newGame.player.grid.grid == formattedGrid
     assert oldRow == newGame.player.grid.rowCount
     assert oldColumn == newGame.player.grid.colCount
