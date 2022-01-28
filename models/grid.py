@@ -378,8 +378,15 @@ class Grid:
 
     def displayGrid(self):
         """
-        TODO: @glenn please help to add on more comments on this method :))
         This method will display the grid and adapts to each building type.
+
+        The method will loop through each grid cell and retrieve the object stored within it.
+        If there is a building in the cell and it matches a building name, the building name will be added to the row.
+        If there is no building in the cell, an empty cell will be displayed
+        Depending on the grid size, the Remaining Buildings Tab on the Right will be displayed accordingly
+        E.g.:If grid size only has a row count of 2, the last Remaining Building Line will be printed as a separate
+             line on its own. Otherwise, it will be concatenated beside the next row line.
+        Displaying the Remaining Buildings Tab stops when row count has reached more than 2
         """
 
         columnIndication = "\n   "
@@ -419,12 +426,17 @@ class Grid:
 
                 lowerGridline += "-----+"
 
+            # Checking Grid Size for displaying Remaining Buildings Tab
             if self.rowCount <= 2:
+                # Add Remaining Buildings from Building Pool Availability to the Right Side of the grid row and grid line
                 row += f"\t {self.availableBuildings.buildings[x * 2]}: {self.availableBuildings.availability[x * 2]}"
                 lowerGridline += f"\t {self.availableBuildings.buildings[x * 2 + 1]}: {self.availableBuildings.availability[x * 2 + 1]}"
 
+                # Fixed remaining building display for last building type
                 if self.colCount == 6:
                     lastRemainingBuilding = f"\t\t\t\t\t {self.availableBuildings.buildings[4]}: {self.availableBuildings.availability[4]}\n"
+
+                # Adds a \t based on how wide grid is to allow for proper string display.
                 else:
                     for y in range(self.colCount):
                         lastRemainingBuilding += "\t"
@@ -437,8 +449,10 @@ class Grid:
                     print(lastRemainingBuilding)
 
             else:
+                # If Grid Row Count > 2, all Remaining Buildings Strings can be added to the end of the Grid Rows and Grid Lines
                 row += f"\t {self.availableBuildings.buildings[x * 2]}: {self.availableBuildings.availability[x * 2]}" \
                     if x < 2 else ""
+                # Adds last Remaining Building line.
                 row += f"\t {self.availableBuildings.buildings[4]}: {self.availableBuildings.availability[4]}" \
                     if x == 2 else ""
                 lowerGridline += f"\t {self.availableBuildings.buildings[x * 2 + 1]}: {self.availableBuildings.availability[x * 2 + 1]}" \

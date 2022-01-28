@@ -6,9 +6,12 @@ sys.path.insert(0, path)
 
 gameObject = Game()
 
+# configurations used in the unit tests
+rowCount = colCount = 4
+
 
 def test_displayLeaderboard(capfd):
-    gameObject.displayLeaderboard()
+    gameObject.displayLeaderboard(rowCount, colCount)
 
     out, _ = capfd.readouterr()
 

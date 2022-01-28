@@ -11,15 +11,17 @@ import os
 
 
 class Leaderboard:
-    leaderboard: list[LeaderboardPlayer]
-    """A list of leaderboard player in descending order"""
+    leaderboard: list[list[LeaderboardPlayer]]
+    """A 2D list represent the ranking leaderboard player by rowSize and colSize in descending order"""
 
     def __init__(self):
         """
         Initialise the leaderboard object with empty leaderboard array, 
         then call another method to load leaderboard from the file.
         """
-        self.leaderboard = []
+
+        # 7 because the maxGridSize is 6 x 6 (0-indexed)
+        self.leaderboard = [[[] for _ in range(7)] for _ in range(7)]
         self.loadLeaderboardFromFile()
 
     def loadLeaderboardFromFile(self):
@@ -52,10 +54,12 @@ class Leaderboard:
 
         return lines
 
-    def saveScoreIntoLeaderboard(self, playerScore, defaultPlayerName=""):
+    def saveScoreIntoLeaderboard(self, playerScore, rowCount, colCount, defaultPlayerName=""):
         """
         Args:
             playerScore (int): The score of the player
+            rowCount (int): The current row count of the grid
+            colCount (int): The current column count of the grid
             defaultPlayerName (str): An optional value for the name of the player
 
 
@@ -65,7 +69,8 @@ class Leaderboard:
         """
 
         # 1-indexed ranking
-        ranking = 1 + self.getRankingInLeaderBoard(playerScore)
+        ranking = 1 + \
+            self.getRankingInLeaderBoard(playerScore, rowCount, colCount)
 
         if ranking > 10:
             print("Sorry! You didn't make it to top 10 in the leaderboard!")
@@ -79,14 +84,17 @@ class Leaderboard:
             while len(playerName) == 0 or len(playerName) > 20:
                 playerName = input("Please enter your name (max 20 chars): ")
 
-            self.appendScoreIntoLeaderboard(playerName, playerScore)
+            self.appendScoreIntoLeaderboard(
+                playerName, playerScore, rowCount, colCount)
             self.saveLatestLeaderboardIntoFile()
 
-    def appendScoreIntoLeaderboard(self, playerName, playerScore):
+    def appendScoreIntoLeaderboard(self, playerName, playerScore, rowCount, colCount):
         """
         Args:
             playerName (str): The name of the player
             playerScore (int): The score of the player
+            rowCount (int): The current row count of the grid
+            colCount (int): The current column count of the grid
 
         The method will append the leaderboard player object to the current leaderboard array, and sort them in descending order (of score), \n
         If it satisfies any of the condition below:
@@ -95,28 +103,30 @@ class Leaderboard:
 
         """
 
-        if (0 <= len(self.leaderboard) <= 9):
+        if (0 <= len(self.leaderboard[rowCount][colCount]) <= 9):
             # There are less than 10 players in the current leaderboard
             currentMs = current_ms()
-            self.leaderboard.append(LeaderboardPlayer(
+            self.leaderboard[rowCount][colCount].append(LeaderboardPlayer(
                 playerName, playerScore, currentMs))
-            self.leaderboard.sort(
+            self.leaderboard[rowCount][colCount].sort(
                 key=lambda player: (-player.score, player.recordedTime, player.name))
 
-        elif (playerScore > self.leaderboard[-1].score):
+        elif (playerScore > self.leaderboard[rowCount][colCount][-1].score):
             # pop the player from the leaderboard as the new playerScore is higher than his
-            self.leaderboard.pop()
+            self.leaderboard[rowCount][colCount].pop()
 
             currentMs = current_ms()
-            self.leaderboard.append(LeaderboardPlayer(
+            self.leaderboard[rowCount][colCount].append(LeaderboardPlayer(
                 playerName, playerScore, currentMs))
-            self.leaderboard.sort(
+            self.leaderboard[rowCount][colCount].sort(
                 key=lambda player: (-player.score, player.recordedTime, player.name))
 
-    def getRankingInLeaderBoard(self, playerScore):
+    def getRankingInLeaderBoard(self, playerScore, rowCount, colCount):
         """
         Args:
             playerScore (int): The score of the player
+            rowCount (int): The current row count of the grid
+            colCount (int): The current column count of the grid
 
         The method will retrieve the ranking of the player in the current leaderboard using binary search. \n
         For examples, the scores array is [-10, -9, -7]. \n
@@ -124,7 +134,7 @@ class Leaderboard:
         we can find the insertion point, hence knowing the player will be 3rd place in the leaderboard if his score is 8 (-8).
         """
 
-        scores = [-player.score for player in self.leaderboard]
+        scores = [-player.score for player in self.leaderboard[rowCount][colCount]]
 
         ranking = bisect_right(scores, -playerScore)
 
@@ -141,9 +151,18 @@ class Leaderboard:
 
         lines = []
 
-        for player in self.leaderboard:
-            playerName, playerScore, recordedTime = player.name, player.score, player.recordedTime
-            lines.append(f"{playerName}, {playerScore}, {recordedTime}")
+        for row in range(1, 7):
+            for col in range(1, 7):
+                leaderboard = self.leaderboard[row][col]
+                if len(leaderboard) == 0:
+                    continue
+
+                # add a "# row, col" header to indicate the below leaderboard is with this grid size
+                lines.append(f"# {row}, {col}")
+                for player in leaderboard:
+                    playerName, playerScore, recordedTime = player.name, player.score, player.recordedTime
+                    lines.append(
+                        f"{playerName}, {playerScore}, {recordedTime}")
 
         return lines
 
@@ -158,22 +177,26 @@ class Leaderboard:
             for line in leaderboardLines:
                 f.writelines(line + "\n")
 
-    def displayLeaderboard(self):
+    def displayLeaderboard(self, rowCount, colCount):
         """
+        Args:
+            rowCount (int): The current row count of the grid
+            colCount (int): The current column count of the grid
+
         The method will display the leaderboard.
         """
 
         leaderboardContent = [
-            "--------- HIGH SCORES ---------",
+            "\n--------- HIGH SCORES ---------",
             "Pos Player                Score",
             "--- ------                -----",
         ]
         maxLineWidth = len(leaderboardContent[0])
 
-        for ranking, player in enumerate(self.leaderboard, 1):
+        for ranking, player in enumerate(self.leaderboard[rowCount][colCount], 1):
             header = " " * int(ranking != 10) + f"{ranking}. {player.name}"
             trailing = f"{player.score}"
-            spacesCount = maxLineWidth - len(header) - len(trailing)
+            spacesCount = maxLineWidth - len(header) - len(trailing) - 1
             middleSpaces = " " * spacesCount
 
             leaderboardContent.append(header + middleSpaces + trailing)
@@ -194,6 +217,9 @@ class Leaderboard:
 
     def isLeaderboardPlayerNameValid(self, playerName):
         """
+        Args:
+            playerName (str): The name of the player
+
         Returns:
             bool: The result whether is the player name valid
 
@@ -204,6 +230,9 @@ class Leaderboard:
 
     def isSavedLeaderboardFileValid(self, lines):
         """
+        Args:
+            lines (str): The lines read from the file
+
         Returns:
             tuple(bool, list[str]): (The result whether is the leaderboard file valid, the loaded leaderboard content)
 
@@ -211,18 +240,24 @@ class Leaderboard:
         and it will return the loaded leaderboard result if the file is valid.
         """
 
-        # leaderboard file will have at most 10 lines
-        if len(lines) > 10:
-            return (False, None)
+        results = [[[] for _ in range(7)] for _ in range(7)]
 
-        results = []
+        currRowSize = currColSize = -1
 
         for line in lines:
+            # update current row and column size if found
+            if line[0] == "#":
+                currRowSize, currColSize = map(int, line[1:].split(','))
+                continue
+
             playerName, playerScore, recordedTime = line.strip("\n").split(',')
 
-            if self.isLeaderboardPlayerNameValid(playerName):
-                results.append(LeaderboardPlayer(
+            if currRowSize != -1 and currColSize != -1 and self.isLeaderboardPlayerNameValid(playerName):
+                results[currRowSize][currColSize].append(LeaderboardPlayer(
                     playerName, int(playerScore), int(recordedTime)))
+
+                if len(results[currRowSize][currColSize]) > 10:
+                    return (False, None)
             else:
                 return (False, None)
 

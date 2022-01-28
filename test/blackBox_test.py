@@ -145,7 +145,7 @@ def test_TC_CS_BP_SG_001(monkeypatch, capfd):
     game = Game()
 
     # Select Options -> Choose City Size -> Valid City Size -> Choose Building Pool, Valid Building Pool, Exit to Options Menu, Exit to Main Menu -> Start New Game
-    tempList = ["4", "2", "5,5", "1", "1,2,3,6,7", "0", "0", "1", "0", "Y", "0"]
+    tempList = ["4", "2", "5,5", "0", "1", "1,2,3,6,7", "0", "0", "1", "0", "Y", "0"]
 
     # Iterates through the list of options that mimics user input
     try:
@@ -170,7 +170,7 @@ def test_TC_CS_BP_SG_002(monkeypatch, capfd):
     game = Game()
 
     # Select Options -> Choose City Size -> Invalid City Size -> Choose Building Pool, Valid Building Pool, Exit to Options Menu, Exit to Main Menu -> Start New Game
-    tempList = ["4", "2", "5,0", "1", "1,2,3,6,7", "0", "0", "1", "0", "Y", "0"]
+    tempList = ["4", "2", "5,0", "0", "1", "1,2,3,6,7", "0", "0", "1", "0", "Y", "0"]
 
     # Iterates through the list of options that mimics user input
     try:
@@ -195,7 +195,7 @@ def test_TC_CS_BP_SG_003(monkeypatch, capfd):
     start_time = time.time()
 
     # Select Options -> Choose City Size -> Valid City Size -> Choose Building Pool, Invalid Building Pool, Exit to Options Menu, Exit to Main Menu -> Start New Game
-    tempList = ["4", "2", "5,5", "1", "1,2,3,8,10", "0", "0", "1"]
+    tempList = ["4", "2", "5,5", "0", "1", "1,2,3,8,10", "0", "0", "1"]
 
     # Iterates through the list of options that mimics user input
     try:
@@ -220,7 +220,7 @@ def test_TC_CS_BP_SG_004(monkeypatch, capfd):
     start_time = time.time()
     
     # Select Options -> Choose City Size -> Invalid City Size -> Choose Building Pool, Invalid Building Pool, Exit to Options Menu, Exit to Main Menu -> Start New Game
-    tempList = ["4", "2", "5,0", "1", "1,2,3,8,10", "0", "0", "1"]
+    tempList = ["4", "2", "5,0", "0", "1", "1,2,3,8,10", "0", "0", "1"]
 
     # Iterates through the list of options that mimics user input
     try:
@@ -252,7 +252,7 @@ def test_TC_Grid_Fill_001(monkeypatch, capfd):
     # Iterates through the list of options that mimics user input
     try:
         # Select Options -> Choose City Size -> Valid City Size -> Exit to Main Menu -> Start Game -> Place Buildlings
-        responses = iter(["4", "2", "5,5", "0", "1"] + tempList)
+        responses = iter(["4", "2", "5,5", "0", "0", "1"] + tempList)
         monkeypatch.setattr('builtins.input', lambda _: next(responses))
         game.launch()
 
@@ -276,7 +276,7 @@ def test_TC_Grid_Fill_002(monkeypatch, capfd):
     tempList = buildingPlacements(5,5)
 
     # Choose City Size and randomly pick between the two building options together with an invalid coordinate
-    tempList = ["4", "2", "5,5", "0", "1", str(random.randint(1, 2)), "11", str(random.randint(1, 2)), "!a", str(
+    tempList = ["4", "2", "5,5", "0", "0", "1", str(random.randint(1, 2)), "11", str(random.randint(1, 2)), "!a", str(
         random.randint(1, 2)), "1a", str(random.randint(1, 2)), "!/"]
 
     # Iterates through the list of options that mimics user input
@@ -1115,7 +1115,7 @@ def test_UAT_TC_GameScore_003(monkeypatch, capfd):
     # Iterates through the list of options that mimics user input
     try:
         # Select Options -> Choose City Size -> Valid City Size -> Exit to Main Menu -> Start Game -> Place Buidlings -> Enter Name for High Score -> Show High Score
-        responses = iter(["4", "2", "5,5", "0", "1"] + tempList + ["Tester01", "3"])
+        responses = iter(["4", "2", "5,5", "0", "0", "1"] + tempList + ["Tester01", "3"])
         monkeypatch.setattr('builtins.input', lambda _: next(responses))
         game.launch()
 

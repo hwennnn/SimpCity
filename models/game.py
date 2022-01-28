@@ -44,7 +44,8 @@ class Game:
                 self.player.loadGame()
 
             elif option == '3':
-                self.displayLeaderboard()
+                rowCount, colCount = self.player.grid.rowCount, self.player.grid.colCount
+                self.displayLeaderboard(rowCount, colCount)
 
             elif option == '4':
                 self.player.displayOptionMenu()
@@ -99,17 +100,25 @@ class Game:
                 self.player.saveGame()
                 self.player.savedGameSuccessful()
 
-            maxPlayerTurns = min(self.player.grid.rowCount *
-                                 self.player.grid.colCount, 40)
+            rowCount, colCount = self.player.grid.rowCount, self.player.grid.colCount
+
+            maxPlayerTurns = min(rowCount*colCount, 40)
 
             if self.player.turns > maxPlayerTurns:
                 self.player.displayGrid(True)  # print final layout of SimpCity
                 self.player.displayBuildingsScore()
                 playerScore = self.player.retrieveBuildingsScore(False)
-                self.leaderboard.saveScoreIntoLeaderboard(playerScore)
-                self.displayLeaderboard()
+                self.leaderboard.saveScoreIntoLeaderboard(
+                    playerScore, rowCount, colCount)
+                self.displayLeaderboard(rowCount, colCount)
                 break
 
-    def displayLeaderboard(self):
-        """The driver function to call the leaderboard object to display the score leaderboard."""
-        self.leaderboard.displayLeaderboard()
+    def displayLeaderboard(self, rowCount, colCount):
+        """
+        Args:
+            rowCount (int): The current row count of the grid
+            colCount (int): The current column count of the grid
+
+        The driver function to call the leaderboard object to display the score leaderboard.
+        """
+        self.leaderboard.displayLeaderboard(rowCount, colCount)
