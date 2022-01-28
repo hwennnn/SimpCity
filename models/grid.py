@@ -426,7 +426,6 @@ class Grid:
 
                 lowerGridline += "-----+"
 
-
             # Checking Grid Size for displaying Remaining Buildings Tab
             if self.rowCount <= 2:
                 # Add Remaining Buildings from Building Pool Availability to the Right Side of the grid row and grid line
@@ -436,7 +435,7 @@ class Grid:
                 # Fixed remaining building display for last building type
                 if self.colCount == 6:
                     lastRemainingBuilding = f"\t\t\t\t\t {self.availableBuildings.buildings[4]}: {self.availableBuildings.availability[4]}\n"
-                
+
                 # Adds a \t based on how wide grid is to allow for proper string display.
                 else:
                     for y in range(self.colCount):
