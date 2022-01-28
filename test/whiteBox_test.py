@@ -398,3 +398,139 @@ def test_whiteBox_flow1(monkeypatch, capfd):
     assert "Congratulations! You made the high score board at position 1!" in out
     assert len(game.leaderboard.leaderboard[4][4]) == 1
     assert game.leaderboard.leaderboard[4][4][0].name == "hwen" and game.leaderboard.leaderboard[4][4][0].score == 30
+
+
+def test_whiteBox_flow2(monkeypatch, capfd):
+    game = Game()
+
+    # Current grid size is 3x3
+    # Current Building Pool: BCH,FAC,HSE,SHP,HWY
+
+    # 1. Place HWY on A1
+    game.player.validatePlaceBuildingOnPosition(Buildings.HIGHWAY.value, "A1")
+
+    out, _ = capfd.readouterr()
+
+    assert "Placing HWY at A1..." in out
+
+    # Check if the grid position at (0, 0) has a Highway building now
+    assert game.player.grid.grid[0][0].getName() == Buildings.HIGHWAY.value
+    assert game.player.turns == 2
+    assert game.player.retrieveBuildingsScore() == 1
+
+    # 2. Place HIGHWAY on B1
+    game.player.validatePlaceBuildingOnPosition(Buildings.HIGHWAY.value, "B1")
+
+    out, _ = capfd.readouterr()
+
+    assert "Placing HWY at B1..." in out
+
+    # Check if the grid position at (0, 1) has a Highway building now
+    assert game.player.grid.grid[0][1].getName() == Buildings.HIGHWAY.value
+    assert game.player.turns == 3
+    assert game.player.retrieveBuildingsScore() == 4
+
+    # 3. Place HIGHWAY on A1
+    game.player.validatePlaceBuildingOnPosition(Buildings.HIGHWAY.value, "C1")
+
+    out, _ = capfd.readouterr()
+
+    assert "Placing HWY at C1..." in out
+
+    # Check if the grid position at (0, 2) has a Highway building now
+    assert game.player.grid.grid[0][2].getName() == Buildings.HIGHWAY.value
+    assert game.player.turns == 4
+    assert game.player.retrieveBuildingsScore() == 9
+
+    # 4. Place HOUSE on D1 (Invalid Position)
+    game.player.validatePlaceBuildingOnPosition(Buildings.HOUSE.value, "D1")
+
+    out, _ = capfd.readouterr()
+
+    assert "Placing HSE at D1 was unsuccessful." in out
+    assert "D1 is an invalid position! You must build next to an existing building." in out
+    assert game.player.turns == 4
+    assert game.player.retrieveBuildingsScore() == 9
+
+    # 5. Place SHOP on A2
+    game.player.validatePlaceBuildingOnPosition(Buildings.SHOP.value, "A2")
+
+    out, _ = capfd.readouterr()
+
+    assert "Placing SHP at A2..." in out
+
+    # Check if the grid position at (1, 0) has a Shop building now
+    assert game.player.grid.grid[1][0].getName() == Buildings.SHOP.value
+    assert game.player.turns == 5
+    assert game.player.retrieveBuildingsScore() == 11
+
+    # 6. Place FACTORY on B2
+    game.player.validatePlaceBuildingOnPosition(Buildings.FACTORY.value, "B2")
+
+    out, _ = capfd.readouterr()
+
+    assert "Placing FAC at B2..." in out
+
+    # Check if the grid position at (1, 1) has a Factory building now
+    assert game.player.grid.grid[1][1].getName() == Buildings.FACTORY.value
+    assert game.player.turns == 6
+    assert game.player.retrieveBuildingsScore() == 13
+
+    # 7. Place HOUSE on C2
+    game.player.validatePlaceBuildingOnPosition(Buildings.HOUSE.value, "C2")
+
+    out, _ = capfd.readouterr()
+
+    assert "Placing HSE at C2..." in out
+
+    # Check if the grid position at (1, 2) has a House Building now
+    assert game.player.grid.grid[1][2].getName() == Buildings.HOUSE.value
+    assert game.player.turns == 7
+    assert game.player.retrieveBuildingsScore() == 14
+
+    # 8. Place BEACH on A3
+    game.player.validatePlaceBuildingOnPosition(Buildings.BEACH.value, "A3")
+
+    out, _ = capfd.readouterr()
+
+    assert "Placing BCH at A3..." in out
+
+    # Check if the grid position at (2, 0) has a Beach building now
+    assert game.player.grid.grid[2][0].getName() == Buildings.BEACH.value
+    assert game.player.turns == 8
+    assert game.player.retrieveBuildingsScore() == 18
+    
+    # 9. Place FACTORY on B3
+    game.player.validatePlaceBuildingOnPosition(Buildings.FACTORY.value, "B3")
+
+    out, _ = capfd.readouterr()
+
+    assert "Placing FAC at B3..." in out
+
+    # Check if the grid position at (2, 1) has a Factory building now
+    assert game.player.grid.grid[2][1].getName() == Buildings.FACTORY.value
+    assert game.player.turns == 9
+    assert game.player.retrieveBuildingsScore() == 21
+    
+    # 10. Place SHOP on C3
+    game.player.validatePlaceBuildingOnPosition(Buildings.SHOP.value, "C3")
+
+    out, _ = capfd.readouterr()
+
+    assert "Placing SHP at C3..." in out
+
+    # Check if the grid position at (2, 2) has a Shop building now
+    assert game.player.grid.grid[2][2].getName() == Buildings.SHOP.value
+    assert game.player.retrieveBuildingsScore() == 24
+
+    assert game.player.grid.availableBuildings.buildings.index(Buildings.FACTORY.value) == 6
+    assert game.player.grid.availableBuildings.buildings.index(Buildings.BEACH.value) == 7
+    assert game.player.grid.availableBuildings.buildings.index(Buildings.HOUSE.value) == 7
+    assert game.player.grid.availableBuildings.buildings.index(Buildings.HIGHWAY.value) == 5
+    assert game.player.grid.availableBuildings.buildings.index(Buildings.SHOP.value) == 6
+
+    game.leaderboard.saveScoreIntoLeaderboard(game.player.retrieveBuildingsScore(False), game.player.grid.rowCount, game.player.grid.colCount, "newh")
+    out, _ = capfd.readouterr()
+    assert "Congratulations! You made the high score board at position 1!" in out
+    assert len(game.leaderboard.leaderboard[4][4]) == 1
+    assert game.leaderboard.leaderboard[4][4][0].name == "newh" and game.leaderboard.leaderboard[4][4][0].score == 24
