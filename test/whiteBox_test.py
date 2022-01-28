@@ -51,7 +51,7 @@ def saveGridToTextUnderTest(grid):
 # 2) Save Game
 # 3) Load Game
 # Test if contents of save game file is the same as the grid that is loaded
-def test_checkLoadFileContents(monkeypatch, capfd):
+def test_checkLoadFileContents():
     newGame = Game()
  
     # add BCH into A1 of grid 
@@ -65,7 +65,7 @@ def test_checkLoadFileContents(monkeypatch, capfd):
     
     # Parse the file into formatted grid
     lines = newGame.player.grid.readFiles()
-    isFileValid, gridStr = newGame.player.grid.isSavedGameFileValid(lines)
+    isFileValid, gridStr = newGame.player.grid.isSavedGameFileValid(lines[2:])
     formattedGrid = newGame.player.grid.formatGrid(gridString)
 
     # Check if the file contents are the same as the grid
@@ -79,7 +79,7 @@ def test_checkLoadFileContents(monkeypatch, capfd):
 # 3) Change Building Pool
 # 4) Load Game
 # Test if contents of save game file is the same as the grid that is loaded and available buildings are the same
-def test_checkLoadFileContents(monkeypatch, capfd):
+def test_checkLoadFileContentsWithChangePool():
     newGame = Game()
  
     # add BCH into A1 of grid 
@@ -98,7 +98,7 @@ def test_checkLoadFileContents(monkeypatch, capfd):
     
     # Parse the file into formatted grid
     lines = newGame.player.grid.readFiles()
-    isFileValid, gridStr = newGame.player.grid.isSavedGameFileValid(lines)
+    isFileValid, gridStr = newGame.player.grid.isSavedGameFileValid(lines[2:])
     formattedGrid = newGame.player.grid.formatGrid(gridStr)
 
     # Check if the file contents are the same as the grid
@@ -114,7 +114,7 @@ def test_checkLoadFileContents(monkeypatch, capfd):
 # 3) Change Grid Size
 # 4) Load Game
 # Test if contents of save game file is the same as the grid that is loaded and gridsize is the same
-def test_checkLoadFileContents(monkeypatch, capfd):
+def test_checkLoadFileContentsWithChangeSize():
     newGame = Game()
  
     # add BCH into A1 of grid 
@@ -138,7 +138,7 @@ def test_checkLoadFileContents(monkeypatch, capfd):
     
     # Parse the file into formatted grid
     lines = newGame.player.grid.readFiles()
-    isFileValid, gridStr = newGame.player.grid.isSavedGameFileValid(lines)
+    isFileValid, gridStr = newGame.player.grid.isSavedGameFileValid(lines[2:])
     formattedGrid = newGame.player.grid.formatGrid(gridStr)
 
     # Check if the file contents are the same as the grid
