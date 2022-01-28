@@ -70,4 +70,4 @@ class AvailableBuildings:
 
     # Return list of buildings as string of building names
     def exportBuildingsNames(self):
-        return ",".join(self.buildingsPool[int(building)-1] for building in self.exportBuildings())
+        return ",".join(self.buildingsPool[int(building)-1] for building in self.exportBuildings().split(","))
