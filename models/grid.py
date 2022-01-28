@@ -271,7 +271,7 @@ class Grid:  # Grid Class
         self.grid = [[None] * self.colCount for _ in range(self.rowCount)]
         self.availableBuildings.availability = [8] * 5
         self.factoryList.clear()
-
+        
     # checks if save game file exists
     def isSavedGameExist(self):
         return os.path.exists(savedGameFilename)
@@ -295,9 +295,10 @@ class Grid:  # Grid Class
         validBuildings = set(['None', 'BCH', 'FAC', 'HSE', 'SHP', 'HWY', 'MON', 'PRK'])
         results = []
 
+        len(lines[0])
+
         for line in lines:
             line = line.strip("\n").split(',')
-
             if len(line) != self.colCount:
                 return (False, None)
 

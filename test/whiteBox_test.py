@@ -53,7 +53,7 @@ def saveGridToTextUnderTest(grid):
 # Test if contents of save game file is the same as the grid that is loaded
 def test_checkLoadFileContents(monkeypatch, capfd):
     newGame = Game()
-
+ 
     # add BCH into A1 of grid 
     x, y = newGame.player.grid.retrieveParsedPosition("A1")
     newGame.player.grid.updateGrid(x, y, "BCH")

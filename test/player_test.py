@@ -234,11 +234,8 @@ def test_checkFileSaved():
     rootDirWithFile = currentDirectory.joinpath(savedGameFilename)
     assert rootDirWithFile.exists()
 
-# def test_checkLoadFileContents():
-#     player_test.loadGame()
-#     rootDirWithFile = currentDirectory.joinpath(savedGameFilename)
-#     assert rootDirWithFile.exists()
-
+def test_checkIfSaveGameExist():
+    assert player_test.grid.isSavedGameExist() == True
 
 def test_shuffleCurrentAvailableBuildings():
     available_buildings = player_test.grid.availableBuildings
