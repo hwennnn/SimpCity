@@ -1,6 +1,8 @@
 # Unit Test Only
 import pytest
+from models.configurations import savedGameFilename
 from models.player import Player
+import os
 
 player_test = Player()
 player_test.grid.updateGridSize(6, 6)
@@ -339,8 +341,17 @@ validGrids = [
     ,"None,None,None,None\n","None,None,None,None\n","None,None,None,None\n"], True)
 ]
 
-@pytest.mark.parametrize("gridlines, expectedResult", validGrids)
+invalidGrids = [
+    (["B,None,None,None\n"
+    ,"None,None,None,None\n","None,None,None,None\n","None,None,None,None\n"], False),
+    (["BCH,KKK,None,None\n"
+    ,"None,None,None,None\n","None,None,None,None\n","None,None,None,None\n"], False)
+]
+
+
+@pytest.mark.parametrize("gridlines, expectedResult", validGrids+invalidGrids)
 def test_validateSaveFile(gridlines, expectedResult):
     player = Player()
     isFileValid, _  = player.grid.isSavedGameFileValid(gridlines)
     assert expectedResult == isFileValid
+
