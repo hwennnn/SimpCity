@@ -331,3 +331,16 @@ def test_gridHouseDisplay(capfd):
     player.displayGrid()
     out, _ = capfd.readouterr()
     assert "1 |     |     | PRK |     |\t BCH: 8" in out
+
+validGrids = [
+    (["None,None,None,None\n"
+    ,"None,None,None,None\n","None,None,None,None\n","None,None,None,None\n"], True),
+    (["BCH,None,None,None\n"
+    ,"None,None,None,None\n","None,None,None,None\n","None,None,None,None\n"], True)
+]
+
+@pytest.mark.parametrize("gridlines, expectedResult", validGrids)
+def test_validateSaveFile(gridlines, expectedResult):
+    player = Player()
+    isFileValid, _  = player.grid.isSavedGameFileValid(gridlines)
+    assert expectedResult == isFileValid

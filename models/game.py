@@ -23,6 +23,7 @@ class Game:  # Game Class
 
             elif option == '2':
                 self.player.loadGame()
+                self.launchGame(True)
 
             elif option == '3':
                 self.displayLeaderboard()
@@ -30,8 +31,9 @@ class Game:  # Game Class
             elif option == '4':
                 self.player.displayOptionMenu()
 
-    def launchGame(self):  # pragma: no cover
-        self.player.startNewGame()
+    def launchGame(self, loadgame=False):  # pragma: no cover
+        if not loadgame:
+            self.player.startNewGame()
         while True:
             print("\nTurn: {0}".format(self.player.turns))
             self.player.displayGrid()

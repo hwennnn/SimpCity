@@ -1,7 +1,6 @@
 from models.grid import Grid
 from models.configurations import *
 
-
 class Player:  # Player Class
     def __init__(self):
         self.score = 0
@@ -266,8 +265,11 @@ f"""1. Build a {firstBuilding}
     def loadGame(self):
         self.grid.readGridFromFile()
 
+    # writing row,col of grid , saved building pool and grid state to file
     def saveGame(self):
         with open(savedGameFilename, 'w+') as f:
+            f.write("(" + str(self.grid.rowCount) + "," + str(self.grid.colCount) + ")"+ "\n")
+            f.write("#" + self.grid.availableBuildings.exportBuildings() + "\n")
             gridValue = self.grid.parseGridAsString()
             for row in gridValue:
                 f.writelines(row + "\n")

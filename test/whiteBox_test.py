@@ -65,14 +65,88 @@ def test_checkLoadFileContents(monkeypatch, capfd):
     
     # Parse the file into formatted grid
     lines = newGame.player.grid.readFiles()
-    isFileValid, formattedGrid = newGame.player.grid.isSavedGameFileValid(lines)
+    isFileValid, gridStr = newGame.player.grid.isSavedGameFileValid(lines)
+    formattedGrid = newGame.player.grid.formatGrid(gridString)
 
     # Check if the file contents are the same as the grid
     newGame.player.loadGame()
     assert newGame.player.grid.grid[0][0] == Buildings.BEACH.value
     assert newGame.player.grid.grid == formattedGrid
 
+# Features Under Test
+# 1) Placing Building
+# 2) Save Game
+# 3) Change Building Pool
+# 4) Load Game
+# Test if contents of save game file is the same as the grid that is loaded and available buildings are the same
+def test_checkLoadFileContents(monkeypatch, capfd):
+    newGame = Game()
+ 
+    # add BCH into A1 of grid 
+    x, y = newGame.player.grid.retrieveParsedPosition("A1")
+    newGame.player.grid.updateGrid(x, y, "BCH")
 
+    newGame.player.saveGame()
+    availablebuildingsName = newGame.player.grid.availableBuildings.exportBuildingsNames()
+
+    # Check if the file exists
+    rootDirWithFile = currentDirectory.joinpath(savedGameFilename)
+    assert rootDirWithFile.exists()
+
+    # Change Buildings to exclude BCH
+    newGame.player.grid.availableBuildings.updateBuildingPool("2,3,4,5,6")
+    
+    # Parse the file into formatted grid
+    lines = newGame.player.grid.readFiles()
+    isFileValid, gridStr = newGame.player.grid.isSavedGameFileValid(lines)
+    formattedGrid = newGame.player.grid.formatGrid(gridString)
+
+    # Check if the file contents are the same as the grid
+    newGame.player.loadGame()
+    assert newGame.player.grid.grid[0][0] == Buildings.BEACH.value
+    assert newGame.player.grid.grid == formattedGrid
+    assert availablebuildingsName == newGame.player.grid.availableBuildings.buildings
+
+
+# Features Under Test
+# 1) Placing Building
+# 2) Save Game
+# 3) Change Grid Size
+# 4) Load Game
+# Test if contents of save game file is the same as the grid that is loaded and gridsize is the same
+def test_checkLoadFileContents(monkeypatch, capfd):
+    newGame = Game()
+ 
+    # add BCH into A1 of grid 
+    x, y = newGame.player.grid.retrieveParsedPosition("A1")
+    newGame.player.grid.updateGrid(x, y, "BCH")
+    
+    # Save old grid size
+    oldRow = newGame.player.grid.rowCount
+    oldColumn = newGame.player.grid.colCount
+
+    newGame.player.saveGame()
+    availablebuildingsName = newGame.player.grid.availableBuildings.exportBuildingsNames()
+
+    # Check if the file exists
+    rootDirWithFile = currentDirectory.joinpath(savedGameFilename)
+    assert rootDirWithFile.exists()
+
+    # Change grid size to 3,3
+    newGame.player.grid.rowCount = 3
+    newGame.player.grid.colCount = 3
+    
+    # Parse the file into formatted grid
+    lines = newGame.player.grid.readFiles()
+    isFileValid, gridStr = newGame.player.grid.isSavedGameFileValid(lines)
+    formattedGrid = newGame.player.grid.formatGrid(gridString)
+
+    # Check if the file contents are the same as the grid
+    newGame.player.loadGame()
+    assert newGame.player.grid.grid[0][0] == Buildings.BEACH.value
+    assert newGame.player.grid.grid == formattedGrid
+    assert oldRow == newGame.player.grid.rowCount
+    assert oldColumn == newGame.player.grid.colCount
 
 
 # Features Under Test

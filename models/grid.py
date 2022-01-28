@@ -271,10 +271,22 @@ class Grid:  # Grid Class
         self.grid = [[None] * self.colCount for _ in range(self.rowCount)]
         self.availableBuildings.availability = [8] * 5
         self.factoryList.clear()
-        
+
     # checks if save game file exists
     def isSavedGameExist(self):
         return os.path.exists(savedGameFilename)
+
+    def formatGrid(self, gridstr):
+        grid = []
+        for row in range(len(gridstr)):
+            rowArr = gridstr[row]
+            for i in range(len(rowArr)):
+                if rowArr[i] == "None":
+                    rowArr[i] = None
+                else:
+                    rowArr[i] = self.createBuilding(rowArr[i], row, i)
+            grid.append(rowArr)
+        return grid
 
     # serialising from file to grid object
     def readGridFromFile(self):
@@ -282,21 +294,35 @@ class Grid:  # Grid Class
             return
         lines = self.readFiles()
 
-        isFileValid, formattedGrid = self.isSavedGameFileValid(lines)
+        # check if saved game file has (row,col) and building pool
+        if len(lines) < 3:
+            return
+        
+        row,col = map(int,lines.pop(0).lstrip("(").rstrip(")\n").split(","))
+        if row > 0 and col > 0: 
+            self.rowCount = row
+            self.colCount = col
+        
+        # load buildings into builings
+        buildings = lines.pop(0).lstrip("#").rstrip("\n")
+        if len(buildings.split(",")) == 5:
+            self.availableBuildings.updateBuildingPool(buildings)
+
+        isFileValid, gridString = self.isSavedGameFileValid(lines)
+        formattedGrid = self.formatGrid(gridString)
         if isFileValid:
             self.grid = formattedGrid
             print('Successfully loaded the game!')
-
+        
 
     def isSavedGameFileValid(self, lines):
         if len(lines) != self.rowCount:
             return (False, None)
-
+        
         validBuildings = set(['None', 'BCH', 'FAC', 'HSE', 'SHP', 'HWY', 'MON', 'PRK'])
         results = []
-
-        len(lines[0])
-
+        buildingList = []
+        
         for line in lines:
             line = line.strip("\n").split(',')
             if len(line) != self.colCount:
@@ -305,8 +331,13 @@ class Grid:  # Grid Class
             for building in line:
                 if building not in validBuildings:
                     return (False, None)
+                if building != "None": 
+                    buildingList.append(building)
             results.append(line)
-
+        
+        # update buildings if grid contains buildings
+        if len(buildingList) > 0:
+            self.availableBuildings.updateAvailableBuildings(buildingList)
         return (True, results)
 
     def readFiles(self):

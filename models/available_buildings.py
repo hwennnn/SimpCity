@@ -1,4 +1,5 @@
 from models.enums import Buildings
+from collections import Counter
 import random
 
 
@@ -28,7 +29,6 @@ class AvailableBuildings:
         print(f"Current Building Pool: {','.join(self.buildings)}")
 
     # decrease the available building
-
     def decreaseAvailableBuilding(self, buildingName):
         building_index = self.buildings.index(buildingName)
         self.availability[building_index] -= 1
@@ -53,3 +53,21 @@ class AvailableBuildings:
         shuffled_buildings = self.shuffleCurrentAvailableBuildings()
 
         return shuffled_buildings[:2]
+
+
+    # Update the available buildings 
+    def updateAvailableBuildings(self, buildings):
+        self.availability = [8] * 5 # init availabilities for each building
+        buildingCounter = Counter(buildings)
+        for building in buildingCounter.keys():
+            if building != "None":
+                building_index = self.buildingsPool.index(building)
+                self.availability[building_index] -= buildingCounter[building]
+
+    # Return list of buildings as string of indexes
+    def exportBuildings(self): 
+        return ",".join(str(self.buildingsPool.index(building) + 1 ) for building in self.buildings)
+
+    # Return list of buildings as string of building names
+    def exportBuildingsNames(self):
+        return ",".join(self.buildingsPool[int(building)-1] for building in self.exportBuildings())
