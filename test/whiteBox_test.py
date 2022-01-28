@@ -62,18 +62,10 @@ def test_checkLoadFileContents():
     # Check if the file exists
     rootDirWithFile = currentDirectory.joinpath(savedGameFilename)
     assert rootDirWithFile.exists()
-    
-    # Parse the file into formatted grid
-    lines = newGame.player.grid.readFiles()
-    lines.pop(0) # Remove the first 2 lines which contains row,col and buildings
-    lines.pop(0)
-    isFileValid, gridStr = newGame.player.grid.isSavedGameFileValid(lines)
-    formattedGrid = newGame.player.grid.formatGrid(gridStr)
 
     # Check if the file contents are the same as the grid
     newGame.player.loadGame()
     assert newGame.player.grid.grid[0][0].name == Buildings.BEACH.value
-    assert newGame.player.grid.grid == formattedGrid
 
 # Features Under Test
 # 1) Placing Building
@@ -97,18 +89,10 @@ def test_checkLoadFileContentsWithChangePool():
 
     # Change Buildings to exclude BCH
     newGame.player.grid.availableBuildings.updateBuildingPool("2,3,4,5,6")
-    
-    # Parse the file into formatted grid
-    lines = newGame.player.grid.readFiles()
-    lines.pop(0) # Remove the first 2 lines which contains row,col and buildings
-    lines.pop(0)
-    isFileValid, gridStr = newGame.player.grid.isSavedGameFileValid(lines)
-    formattedGrid = newGame.player.grid.formatGrid(gridStr)
 
     # Check if the file contents are the same as the grid
     newGame.player.loadGame()
     assert newGame.player.grid.grid[0][0].name == Buildings.BEACH.value
-    assert newGame.player.grid.grid == formattedGrid
     assert availablebuildingsName == newGame.player.grid.availableBuildings.buildings
 
 
@@ -140,17 +124,9 @@ def test_checkLoadFileContentsWithChangeSize():
     newGame.player.grid.rowCount = 3
     newGame.player.grid.colCount = 3
     
-    # Parse the file into formatted grid
-    lines = newGame.player.grid.readFiles()
-    lines.pop(0) # Remove the first 2 lines which contains row,col and buildings
-    lines.pop(0)
-    isFileValid, gridStr = newGame.player.grid.isSavedGameFileValid(lines)
-    formattedGrid = newGame.player.grid.formatGrid(gridStr)
-
     # Check if the file contents are the same as the grid
     newGame.player.loadGame()
     assert newGame.player.grid.grid[0][0].name == Buildings.BEACH.value
-    assert newGame.player.grid.grid == formattedGrid
     assert oldRow == newGame.player.grid.rowCount
     assert oldColumn == newGame.player.grid.colCount
 
