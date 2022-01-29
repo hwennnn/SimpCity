@@ -1,6 +1,8 @@
 # Unit Test Only
 import pytest
+from models.configurations import savedGameFilename
 from models.player import Player
+import os
 
 player_test = Player()
 player_test.grid.updateGridSize(6, 6)
@@ -331,3 +333,25 @@ def test_gridHouseDisplay(capfd):
     player.displayGrid()
     out, _ = capfd.readouterr()
     assert "1 |     |     | PRK |     |\t BCH: 8" in out
+
+validGrids = [
+    (["None,None,None,None\n"
+    ,"None,None,None,None\n","None,None,None,None\n","None,None,None,None\n"], True),
+    (["BCH,None,None,None\n"
+    ,"None,None,None,None\n","None,None,None,None\n","None,None,None,None\n"], True)
+]
+
+invalidGrids = [
+    (["B,None,None,None\n"
+    ,"None,None,None,None\n","None,None,None,None\n","None,None,None,None\n"], False),
+    (["BCH,KKK,None,None\n"
+    ,"None,None,None,None\n","None,None,None,None\n","None,None,None,None\n"], False)
+]
+
+
+@pytest.mark.parametrize("gridlines, expectedResult", validGrids+invalidGrids)
+def test_validateSaveFile(gridlines, expectedResult):
+    player = Player()
+    isFileValid, _  = player.grid.isSavedGameFileValid(gridlines)
+    assert expectedResult == isFileValid
+

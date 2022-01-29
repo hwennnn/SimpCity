@@ -48,6 +48,91 @@ def saveGridToTextUnderTest(grid):
 
 
 # Features Under Test
+# 1) Placing Building
+# 2) Save Game
+# 3) Load Game
+# Test if contents of save game file is the same as the grid that is loaded
+def test_checkLoadFileContents():
+    newGame = Game()
+ 
+    # add BCH into A1 of grid 
+    x, y = newGame.player.grid.retrieveParsedPosition("A1")
+    newGame.player.grid.updateGrid(x, y, "BCH")
+
+    newGame.player.saveGame()
+    # Check if the file exists
+    rootDirWithFile = currentDirectory.joinpath(savedGameFilename)
+    assert rootDirWithFile.exists()
+
+    # Check if the file contents are the same as the grid
+    newGame.player.loadGame()
+    assert newGame.player.grid.grid[0][0].name == Buildings.BEACH.value
+
+# Features Under Test
+# 1) Placing Building
+# 2) Save Game
+# 3) Change Building Pool
+# 4) Load Game
+# Test if contents of save game file is the same as the grid that is loaded and available buildings are the same
+def test_checkLoadFileContentsWithChangePool():
+    newGame = Game()
+ 
+    # add BCH into A1 of grid 
+    x, y = newGame.player.grid.retrieveParsedPosition("A1")
+    newGame.player.grid.updateGrid(x, y, "BCH")
+
+    newGame.player.saveGame()
+    availablebuildingsName = newGame.player.grid.availableBuildings.exportBuildingsNames()
+
+    # Check if the file exists
+    rootDirWithFile = currentDirectory.joinpath(savedGameFilename)
+    assert rootDirWithFile.exists()
+
+    # Change Buildings to exclude BCH
+    newGame.player.grid.availableBuildings.updateBuildingPool("2,3,4,5,6")
+
+    # Check if the file contents are the same as the grid
+    newGame.player.loadGame()
+    assert newGame.player.grid.grid[0][0].name == Buildings.BEACH.value
+    assert availablebuildingsName.split(",") == newGame.player.grid.availableBuildings.buildings
+
+
+# Features Under Test
+# 1) Placing Building
+# 2) Save Game
+# 3) Change Grid Size
+# 4) Load Game
+# Test if contents of save game file is the same as the grid that is loaded and gridsize is the same
+def test_checkLoadFileContentsWithChangeSize():
+    newGame = Game()
+ 
+    # add BCH into A1 of grid 
+    x, y = newGame.player.grid.retrieveParsedPosition("A1")
+    newGame.player.grid.updateGrid(x, y, "BCH")
+    
+    # Save old grid size
+    oldRow = newGame.player.grid.rowCount
+    oldColumn = newGame.player.grid.colCount
+
+    newGame.player.saveGame()
+    availablebuildingsName = newGame.player.grid.availableBuildings.exportBuildingsNames()
+
+    # Check if the file exists
+    rootDirWithFile = currentDirectory.joinpath(savedGameFilename)
+    assert rootDirWithFile.exists()
+
+    # Change grid size to 3,3
+    newGame.player.grid.rowCount = 3
+    newGame.player.grid.colCount = 3
+    
+    # Check if the file contents are the same as the grid
+    newGame.player.loadGame()
+    assert newGame.player.grid.grid[0][0].name == Buildings.BEACH.value
+    assert oldRow == newGame.player.grid.rowCount
+    assert oldColumn == newGame.player.grid.colCount
+
+
+# Features Under Test
 # 1) Building Placement
 # Test if all the coordinates in the grid is fillable with buildings. Scaleable to grid size.
 def test_fillGridWithBuildings(monkeypatch, capfd):

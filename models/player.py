@@ -532,7 +532,6 @@ class Player:
     def initializeGrid(self):
         self.grid.initializeGrid()
 
-    # Access grid attribute to
     def loadGame(self):
         """
         This method will call the Grid function for loading a grid object from a text file.
@@ -540,6 +539,7 @@ class Player:
         """
         self.grid.readGridFromFile()
 
+    # writing row,col of grid , saved building pool and grid state to file
     def saveGame(self):
         """
         This method will call the Grid function for parsing the grid as a string and writing it into a text file.
@@ -547,6 +547,8 @@ class Player:
 
         """
         with open(savedGameFilename, 'w+') as f:
+            f.write("(" + str(self.grid.rowCount) + "," + str(self.grid.colCount) + ")"+ "\n")
+            f.write("#" + self.grid.availableBuildings.exportBuildings() + "\n")
             gridValue = self.grid.parseGridAsString()
             for row in gridValue:
                 f.writelines(row + "\n")

@@ -42,6 +42,7 @@ class Game:
 
             elif option == '2':
                 self.player.loadGame()
+                self.launchGame(True)
 
             elif option == '3':
                 rowCount, colCount = self.player.grid.rowCount, self.player.grid.colCount
@@ -50,7 +51,7 @@ class Game:
             elif option == '4':
                 self.player.displayOptionMenu()
 
-    def launchGame(self):  # pragma: no cover
+    def launchGame(self, loadgame=False):  # pragma: no cover
         '''
         The driver function to start new game for the player, and it will react accordingly based on user option. \n
         First, it will initialise the player by clearing the game turns and re-initialising the whole new grid.
@@ -67,8 +68,9 @@ class Game:
         Option 3 -> Display buildings score \n
         Option 4 -> Save Game \n
         '''
+        if not loadgame:
+            self.player.startNewGame()
 
-        self.player.startNewGame()
         while True:
             print("\nTurn: {0}".format(self.player.turns))
             self.player.displayGrid()

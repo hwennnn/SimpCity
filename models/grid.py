@@ -7,6 +7,7 @@ from models.available_buildings import AvailableBuildings
 from models.buildings import *
 from models.enums import Buildings
 from models.configurations import *
+import os 
 
 
 class Grid:
@@ -486,15 +487,78 @@ class Grid:
         self.availableBuildings.availability = [8] * 5
         self.factoryList.clear()
 
+    # checks if save game file exists
     def isSavedGameExist(self):
-        pass
+        return os.path.exists(savedGameFilename)
+
+    def formatGrid(self, gridstr):
+        grid = []
+        for row in range(len(gridstr)):
+            rowArr = gridstr[row]
+            for i in range(len(rowArr)):
+                if rowArr[i] == "None":
+                    rowArr[i] = None
+                else:
+                    rowArr[i] = self.createBuilding(rowArr[i], row, i)
+            grid.append(rowArr)
+        return grid
 
     # serialising from file to grid object
     def readGridFromFile(self):
-        pass
+        if not self.isSavedGameExist():
+            return
+
+        lines = self.readFiles()
+
+        # check if saved game file has (row,col) and building pool
+        if len(lines) < 3:
+            return False
+        
+        row,col = map(int,lines.pop(0).lstrip("(").rstrip(")\n").split(","))
+        if row > 0 and col > 0: 
+            self.rowCount = row
+            self.colCount = col
+        
+        # load buildings into builings
+        buildings = lines.pop(0).lstrip("#").rstrip("\n")
+        if len(buildings.split(",")) == 5:
+            self.availableBuildings.updateBuildingPool(buildings)
+
+        isFileValid, gridString = self.isSavedGameFileValid(lines)
+        formattedGrid = self.formatGrid(gridString)
+        if isFileValid:
+            self.grid = formattedGrid
+            print('Successfully loaded the game!')
+        
 
     def isSavedGameFileValid(self, lines):
-        pass
+        if len(lines) != self.rowCount:
+            return (False, None)
+        
+        validBuildings = set(['None', 'BCH', 'FAC', 'HSE', 'SHP', 'HWY', 'MON', 'PRK'])
+        results = []
+        buildingList = []
+        
+        for line in lines:
+            line = line.strip("\n").split(',')
+            if len(line) != self.colCount:
+                return (False, None)
+
+            for building in line:
+                if building not in validBuildings:
+                    return (False, None)
+                if building != "None": 
+                    buildingList.append(building)
+            results.append(line)
+        
+        # update buildings if grid contains buildings
+        if len(buildingList) > 0:
+            self.availableBuildings.updateAvailableBuildings(buildingList)
+        return (True, results)
 
     def readFiles(self):
-        pass
+        lines = None
+        with open(savedGameFilename, "r+") as file:
+            lines = file.readlines()
+
+        return lines
