@@ -355,7 +355,7 @@ def test_TC_PB_SG_001(monkeypatch, capfd):
     game = Game()
     
     # Select Options -> Choose City Size -> Valid City Size -> Exit to Main Menu -> Start Game -> Place Buidling -> Save Game
-    tempList =["1", str(random.randint(1,2)), "A4", "4"]
+    tempList =["1", str(random.randint(1,2)), "A1", "4"]
 
     # Iterates through the list of options that mimics user input
     try:
@@ -415,6 +415,38 @@ def test_TC_PB_SG_002(monkeypatch, capfd):
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit?pli=1#gid=768609166&range=12:12
 
 def test_TC_LG_CG_001(monkeypatch, capfd):
+    start_time = time.time()
+    game = Game()
+
+    open("saved_leaderboard.txt", "w").close()
+
+    tempList = buildingPlacements(5, 5)
+
+    # Remove the building placement for A1
+    tempList.pop(0)
+    tempList.pop(0)
+
+    # Iterates through the list of options that mimics user input
+    try:
+        # Select Options -> Choose City Size -> Valid City Size -> Exit to Main Menu -> Start Game -> Place Buildlings
+        responses = iter(["4", "2", "5,5", "0", "0", "2"] + tempList)
+        monkeypatch.setattr('builtins.input', lambda _: next(responses))
+        game.launch()
+
+    # When list runs out of options, StopIteration error will happen unless game is exited with user inputs
+    except StopIteration as e:
+        pass
+
+    print("\n %s seconds" % (time.time() - start_time))
+
+
+# Type: Integration
+# Description: Verifying the interaction between loading the game file and continuing the game.
+# Test Scenario ID: TS_LG_CG_001
+# Test Data: Invalid Game File
+# Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit?pli=1#gid=768609166&range=12:12
+
+def test_TC_LG_CG_002(monkeypatch, capfd):
     pass
 
 
@@ -434,7 +466,7 @@ def test_TC_LG_DS_001(monkeypatch, capfd):
 # Test Data: Invalid Game File
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit?pli=1#gid=768609166&range=15:15
 
-def test_TC_LG_DS_001(monkeypatch, capfd):
+def test_TC_LG_DS_002(monkeypatch, capfd):
     pass
 
 
