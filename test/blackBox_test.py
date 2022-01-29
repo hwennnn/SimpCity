@@ -144,7 +144,7 @@ def test_TC_CS_BP_SG_001(monkeypatch, capfd):
     start_time = time.time()
     game = Game()
 
-    # Select Options -> Choose City Size -> Valid City Size -> Choose Building Pool, Valid Building Pool, Exit to Options Menu, Exit to Main Menu -> Start New Game
+    # Select Options -> Choose City Size -> Valid City Size -> Choose Building Pool -> Valid Building Pool -> Exit to Options Menu -> Exit to Main Menu -> Start New Game
     tempList = ["4", "2", "5,5", "0", "1", "1,2,3,6,7", "0", "0", "1", "0", "Y", "0"]
 
     # Iterates through the list of options that mimics user input
@@ -169,7 +169,7 @@ def test_TC_CS_BP_SG_002(monkeypatch, capfd):
     start_time = time.time()
     game = Game()
 
-    # Select Options -> Choose City Size -> Invalid City Size -> Choose Building Pool, Valid Building Pool, Exit to Options Menu, Exit to Main Menu -> Start New Game
+    # Select Options -> Choose City Size -> Invalid City Size -> Choose Building Pool -> Valid Building Pool -> Exit to Options Menu -> Exit to Main Menu -> Start New Game
     tempList = ["4", "2", "5,0", "0", "1", "1,2,3,6,7", "0", "0", "1", "0", "Y", "0"]
 
     # Iterates through the list of options that mimics user input
@@ -275,7 +275,7 @@ def test_TC_Grid_Fill_002(monkeypatch, capfd):
 
     tempList = buildingPlacements(5,5)
 
-    # Choose City Size and randomly pick between the two building options together with an invalid coordinate
+    # Select Options -> Choose City Size -> Valid City Size -> Exit to Main Menu -> Start Game -> Place Buildlings
     tempList = ["4", "2", "5,5", "0", "0", "1", str(random.randint(1, 2)), "11", str(random.randint(1, 2)), "!a", str(
         random.randint(1, 2)), "1a", str(random.randint(1, 2)), "!/"]
 
@@ -302,7 +302,7 @@ def test_TC_PB_BC_001(monkeypatch, capfd):
     start_time = time.time()
     game = Game()
 
-    # Choose City Size and randomly pick between the two building options together with an valid coordinate
+    # Start Game -> Place Building
     tempList = ["1", str(random.randint(1, 2)), "A1"]
 
     # Iterates through the list of options that mimics user input
@@ -328,7 +328,7 @@ def test_TC_PB_BC_002(monkeypatch, capfd):
     start_time = time.time()
     game = Game()
 
-    # Choose City Size and randomly pick between the two building options together with an invalid coordinate
+    # Start Game -> Place Building
     tempList = ["1", str(random.randint(1, 2)), "!1"]
 
     # Iterates through the list of options that mimics user input
@@ -347,14 +347,14 @@ def test_TC_PB_BC_002(monkeypatch, capfd):
 # Type: Integration
 # Description: Verifying the interaction between placing buildings and saving the game.
 # Test Scenario ID: TS_PB_SG_001
-# Test Data: Valid coordinates - A4
+# Test Data: Valid coordinates - A1
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit?pli=1#gid=768609166&range=10:10
 
 def test_TC_PB_SG_001(monkeypatch, capfd):
     start_time = time.time()
     game = Game()
     
-    # Select Options -> Choose City Size -> Valid City Size -> Exit to Main Menu -> Start Game -> Place Buidling -> Save Game
+    # Start Game -> Place Building -> Save Game
     tempList =["1", str(random.randint(1,2)), "A1", "4"]
 
     # Iterates through the list of options that mimics user input
@@ -386,7 +386,7 @@ def test_TC_PB_SG_002(monkeypatch, capfd):
     start_time = time.time()
     game = Game()
 
-    # Select Options -> Choose City Size -> Valid City Size -> Exit to Main Menu -> Start Game -> Place Buidling-> Save Game
+    # Select Options -> Choose City Size -> Valid City Size -> Exit to Main Menu -> Start Game -> Place Building -> Save Game
     tempList = ["1", str(random.randint(1,2)), "A20", "4"]
 
     # Iterates through the list of options that mimics user input
@@ -398,12 +398,6 @@ def test_TC_PB_SG_002(monkeypatch, capfd):
     # When list runs out of options, StopIteration error will happen unless game is exited with user inputs
     except StopIteration as e:
         pass
-
-    # Prints out the saved game file for verification
-    f = open("saved_game.txt", "r")
-    file = f.readlines()
-    for i in file:
-        print(i)
     
     print("\n %s seconds" % (time.time() - start_time))
 
@@ -426,13 +420,14 @@ def test_TC_LG_CG_001(monkeypatch, capfd):
     tempList.pop(0)
     tempList.pop(0)
 
+    # Generating a valid game file
     f = open("saved_game.txt", "w")
     f.write("(5,5)\n#1,2,4,5,3\nHWY,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None")
     f.close()
 
     # Iterates through the list of options that mimics user input
     try:
-        # Open game file
+        # Open Game File -> Place Building
         responses = iter(["2"] + tempList)
         monkeypatch.setattr('builtins.input', lambda _: next(responses))
         game.launch()
@@ -456,12 +451,10 @@ def test_TC_LG_CG_002(monkeypatch, capfd):
 
     open("saved_leaderboard.txt", "w").close()
 
-    tempList = buildingPlacements(5, 5)
+    # Open game file
+    tempList = ["2"]
 
-    # Remove the building placement for A1
-    tempList.pop(0)
-    tempList.pop(0)
-
+    # Generating invalid game file
     f = open("saved_game.txt", "w")
     f.write("(5,5)\n#1,2,4,5,3\nHWYY,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None")
     f.close()
@@ -469,7 +462,7 @@ def test_TC_LG_CG_002(monkeypatch, capfd):
     # Iterates through the list of options that mimics user input
     try:
         # Open game file
-        responses = iter(["2"])
+        responses = iter(tempList)
         monkeypatch.setattr('builtins.input', lambda _: next(responses))
         game.launch()
 
@@ -490,14 +483,17 @@ def test_TC_LG_DS_001(monkeypatch, capfd):
     start_time = time.time()
     game = Game()
 
+    # Load Game, Display Score
+    tempList = ["2", "3"]
+
+    # Generating valid game file
     f = open("saved_game.txt", "w")
     f.write("(5,5)\n#1,2,4,5,3\nHWY,HWY,FAC,BCH,BCH\nHSE,SHP,HWY,HSE,SHP\nNone,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None")
     f.close()
 
     # Iterates through the list of options that mimics user input
     try:
-        # Load Game, Display Score
-        responses = iter(["2", "3"])
+        responses = iter(tempList)
         monkeypatch.setattr('builtins.input', lambda _: next(responses))
         game.launch()
 
@@ -518,14 +514,17 @@ def test_TC_LG_DS_002(monkeypatch, capfd):
     start_time = time.time()
     game = Game()
 
+    # Load Game, Display Score
+    tempList = ["2", "3"]
+
+    # Generating invalid game file
     f = open("saved_game.txt", "w")
     f.write("(5,5)\n#1,2,4,5,3\nHWYY,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None")
     f.close()
 
     # Iterates through the list of options that mimics user input
     try:
-        # Load Game, Display Score
-        responses = iter(["2", "3"])
+        responses = iter(tempList)
         monkeypatch.setattr('builtins.input', lambda _: next(responses))
         game.launch()
 
@@ -551,6 +550,7 @@ def test_TC_PB_DS_001(monkeypatch, capfd):
 
     # Iterates through the list of options that mimics user input
     try:
+        # Place Buildings -> Display Score
         responses = iter(tempList + ["3"])
         monkeypatch.setattr('builtins.input', lambda _: next(responses))
         game.launchGame()
@@ -578,6 +578,7 @@ def test_TC_PB_DS_002(monkeypatch, capfd):
 
     # Iterates through the list of options that mimics user input
     try:
+        # Place Buildings
         responses = iter(tempList)
         monkeypatch.setattr('builtins.input', lambda _: next(responses))
         game.launchGame()
@@ -599,11 +600,11 @@ def test_TC_EOGA_001(monkeypatch, capfd):
     start_time = time.time()
     game = Game()
 
-    tempList = buildingPlacements(None, None)
+    tempList = buildingPlacements(5,5)
 
     # Iterates through the list of options that mimics user input
     try:
-        # Select Options -> Choose City Size -> Valid City Size -> Exit to Main Menu -> Start Game -> Place Buidlings -> Enter Name for High Score -> Show High Score
+        # Place Buidlings -> Enter Name for High Score -> Show High Score
         responses = iter(tempList + ["Tester01", "3"])
         monkeypatch.setattr('builtins.input', lambda _: next(responses))
         game.launchGame()
@@ -633,6 +634,7 @@ def test_TC_EOGA_002(monkeypatch, capfd):
 
     # Iterates through the list of options that mimics user input
     try:
+        # Place Buildings
         responses = iter(tempList)
         monkeypatch.setattr('builtins.input', lambda _: next(responses))
         game.launchGame()
@@ -653,9 +655,13 @@ def test_TC_EOGA_002(monkeypatch, capfd):
 def test_TC_HS_001(monkeypatch, capfd):
     start_time = time.time()
 
+    # High Score
+    tempList = ["3"]
+
     # Iterates through the list of options that mimics user input
     try:
-        responses = iter(["3"])
+        # Display High Score
+        responses = iter(tempList)
         monkeypatch.setattr('builtins.input', lambda _: next(responses))
         import main
 
