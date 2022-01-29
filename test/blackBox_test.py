@@ -377,7 +377,7 @@ def test_TC_PB_SG_001(monkeypatch, capfd):
 
 
 # Type: Integration
-# Description: Verifying the interaction between placing buildings and remaining building count
+# Description: Verifying the interaction between placing buildings and saving the game.
 # Test Scenario ID: TS_PB_SG_001
 # Test Data: Invalid coordinates - A20
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit?pli=1#gid=768609166&range=11:11
@@ -426,10 +426,14 @@ def test_TC_LG_CG_001(monkeypatch, capfd):
     tempList.pop(0)
     tempList.pop(0)
 
+    f = open("saved_game.txt", "w")
+    f.write("(5,5)\n#1,2,4,5,3\nHWY,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None")
+    f.close()
+
     # Iterates through the list of options that mimics user input
     try:
-        # Select Options -> Choose City Size -> Valid City Size -> Exit to Main Menu -> Start Game -> Place Buildlings
-        responses = iter(["4", "2", "5,5", "0", "0", "2"] + tempList)
+        # Open game file
+        responses = iter(["2"] + tempList)
         monkeypatch.setattr('builtins.input', lambda _: next(responses))
         game.launch()
 
@@ -447,27 +451,89 @@ def test_TC_LG_CG_001(monkeypatch, capfd):
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit?pli=1#gid=768609166&range=12:12
 
 def test_TC_LG_CG_002(monkeypatch, capfd):
-    pass
+    start_time = time.time()
+    game = Game()
+
+    open("saved_leaderboard.txt", "w").close()
+
+    tempList = buildingPlacements(5, 5)
+
+    # Remove the building placement for A1
+    tempList.pop(0)
+    tempList.pop(0)
+
+    f = open("saved_game.txt", "w")
+    f.write("(5,5)\n#1,2,4,5,3\nHWYY,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None")
+    f.close()
+
+    # Iterates through the list of options that mimics user input
+    try:
+        # Open game file
+        responses = iter(["2"])
+        monkeypatch.setattr('builtins.input', lambda _: next(responses))
+        game.launch()
+
+    # When list runs out of options, StopIteration error will happen unless game is exited with user inputs
+    except StopIteration as e:
+        pass
+
+    print("\n %s seconds" % (time.time() - start_time))
 
 
 # Type: Integration
-# Description: Verifying the interaction between loading the game file and continuing the game.
+# Description: Verifying the interaction between loading the game file and displaying score.
 # Test Scenario ID: TS_LG_DS_001
 # Test Data: Invalid Game File
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit?pli=1#gid=768609166&range=14:14
 
 def test_TC_LG_DS_001(monkeypatch, capfd):
-    pass
+    start_time = time.time()
+    game = Game()
+
+    f = open("saved_game.txt", "w")
+    f.write("(5,5)\n#1,2,4,5,3\nHWY,HWY,FAC,BCH,BCH\nHSE,SHP,HWY,HSE,SHP\nNone,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None")
+    f.close()
+
+    # Iterates through the list of options that mimics user input
+    try:
+        # Load Game, Display Score
+        responses = iter(["2", "3"])
+        monkeypatch.setattr('builtins.input', lambda _: next(responses))
+        game.launch()
+
+    # When list runs out of options, StopIteration error will happen unless game is exited with user inputs
+    except StopIteration as e:
+        pass
+
+    print("\n %s seconds" % (time.time() - start_time))
 
 
 # Type: Integration
-# Description: Verifying the interaction between loading the game file and continuing the game.
+# Description: Verifying the interaction between loading the game file and displaying score.
 # Test Scenario ID: TS_LG_DS_001
 # Test Data: Invalid Game File
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit?pli=1#gid=768609166&range=15:15
 
 def test_TC_LG_DS_002(monkeypatch, capfd):
-    pass
+    start_time = time.time()
+    game = Game()
+
+    f = open("saved_game.txt", "w")
+    f.write("(5,5)\n#1,2,4,5,3\nHWYY,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None")
+    f.close()
+
+    # Iterates through the list of options that mimics user input
+    try:
+        # Load Game, Display Score
+        responses = iter(["2", "3"])
+        monkeypatch.setattr('builtins.input', lambda _: next(responses))
+        game.launch()
+
+    # When list runs out of options, StopIteration error will happen unless game is exited with user inputs
+    except StopIteration as e:
+        pass
+
+    print("\n %s seconds" % (time.time() - start_time))
 
 
 # Type: Integration
