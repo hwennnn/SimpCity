@@ -309,11 +309,13 @@ class Grid:  # Grid Class
         if len(buildings.split(",")) == 5:
             self.availableBuildings.updateBuildingPool(buildings)
 
-        isFileValid, gridString = self.isSavedGameFileValid(lines)
-        formattedGrid = self.formatGrid(gridString)
+        isFileValid, gridString = self.isSavedGameFileValid(lines)        
         if isFileValid:
+            formattedGrid = self.formatGrid(gridString)
             self.grid = formattedGrid
             print('Successfully loaded the game!')
+        else: 
+            print('Saved game file not found')
         
 
     def isSavedGameFileValid(self, lines):
@@ -331,6 +333,7 @@ class Grid:  # Grid Class
 
             for building in line:
                 if building not in validBuildings:
+                    raise Exception("Invalid building found in saved game file")
                     return (False, None)
                 if building != "None": 
                     buildingList.append(building)
