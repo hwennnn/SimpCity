@@ -22,6 +22,16 @@ jobs:
       run: |
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+        echo "FLAKE8COMMENTS=$(flake8 . --quiet --quiet --count)" >> $GITHUB_ENV
+
+    - name: Comment Flake8 Check Count on PR
+      uses: thollander/actions-comment-pull-request@v1
+      with:
+          message: |
+            **${{ env.FLAKE8COMMENTS }} Suspicious and Non-Structural Code Identified with Flake8.**
+            ---------------------------------------------------------------
+            Please refer to GitHub Actions Pull Request Log for full Flake8 Linter Check
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Label the PR Size
       uses: coverwallet/pr-labeler@v1.2.1
