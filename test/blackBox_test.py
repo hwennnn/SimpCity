@@ -515,7 +515,7 @@ def test_TC_LG_DS_002(monkeypatch, capfd):
     game = Game()
 
     # Load Game, Display Score
-    tempList = ["2", "3"]
+    tempList = ["2", "1", "3"]
 
     # Generating invalid game file
     f = open("saved_game.txt", "w")
