@@ -1155,6 +1155,66 @@ def test_UAT_TC_SaveGame_001(monkeypatch, capfd):
 
 
 # Type: Functional
+# Description: Verify that game file can be loaded
+# Test Scenario ID: UAT_TS_LoadGame_001
+# Test Data: Valid Game File
+# Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit#gid=1826582149&range=14:14
+
+def test_UAT_TC_SaveGame_001(monkeypatch, capfd):
+    start_time = time.time()
+
+    # Load Game File
+    tempList = ["2"]
+
+    # Generating valid game file
+    f = open("saved_game.txt", "w")
+    f.write("(5,5)\n#1,2,4,5,3\nHWYY,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None")
+    f.close()
+
+    # Iterates through the list of options that mimics user input
+    try:
+        responses = iter(tempList)
+        monkeypatch.setattr('builtins.input', lambda _: next(responses))
+        import main
+
+    # When list runs out of options, StopIteration error will happen unless game is exited with user inputs
+    except StopIteration as e:
+        pass
+
+    print("\n%s seconds" % (time.time() - start_time))
+
+
+# Type: Functional
+# Description: Verify that game file can be loaded
+# Test Scenario ID: UAT_TS_LoadGame_001
+# Test Data: Invalid Game File
+# Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit#gid=1826582149&range=15:15
+
+def test_UAT_TC_SaveGame_001(monkeypatch, capfd):
+    start_time = time.time()
+
+    # Load Game File
+    tempList = ["2"]
+
+    # Generating invalid game file
+    f = open("saved_game.txt", "w")
+    f.write("(5,5)\n#1,2,4,5,3\nHWYY,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None")
+    f.close()
+
+    # Iterates through the list of options that mimics user input
+    try:
+        responses = iter(tempList)
+        monkeypatch.setattr('builtins.input', lambda _: next(responses))
+        import main
+
+    # When list runs out of options, StopIteration error will happen unless game is exited with user inputs
+    except StopIteration as e:
+        pass
+
+    print("\n%s seconds" % (time.time() - start_time))
+
+
+# Type: Functional
 # Description: Verify that game score can be shown
 # Test Scenario ID: UAT_TS_GameScore_001
 # Test Data: Valid Coordinate - A1, Valid Game Menu Option - 3
