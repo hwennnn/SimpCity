@@ -3,6 +3,7 @@ This module deals with all grid related functions.
 """
 __docformat__ = "google"
 
+from logging import exception
 from models.available_buildings import AvailableBuildings
 from models.buildings import *
 from models.enums import Buildings
@@ -503,6 +504,7 @@ class Grid:
             grid.append(rowArr)
         return grid
 
+
     # serialising from file to grid object
     def readGridFromFile(self):
         if not self.isSavedGameExist():
@@ -525,10 +527,13 @@ class Grid:
             self.availableBuildings.updateBuildingPool(buildings)
 
         isFileValid, gridString = self.isSavedGameFileValid(lines)
-        formattedGrid = self.formatGrid(gridString)
         if isFileValid:
+            formattedGrid = self.formatGrid(gridString)
             self.grid = formattedGrid
             print('Successfully loaded the game!')
+            return True
+        else:
+            return False
         
 
     def isSavedGameFileValid(self, lines):

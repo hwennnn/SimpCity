@@ -537,7 +537,10 @@ class Player:
         This method will call the Grid function for loading a grid object from a text file.
 
         """
-        self.grid.readGridFromFile()
+        if self.grid.readGridFromFile():
+            return True
+        else:
+            return False
 
     # writing row,col of grid , saved building pool and grid state to file
     def saveGame(self):
