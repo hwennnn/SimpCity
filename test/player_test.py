@@ -38,10 +38,10 @@ validMainOptionTestData = \
      ("4", "You selected option 4")]
 
 invalidMainOptionTestData = \
-    [("5", "Invalid option!"),
-     ("10", "Invalid option!"),
-     ("a", "Invalid option!"),
-     ("abc", "Invalid option!")]
+    [("5", "5 is an invalid option!"),
+     ("10", "10 is an invalid option!"),
+     ("a", "a is an invalid option!"),
+     ("abc", "abc is an invalid option!")]
 
 
 @pytest.mark.parametrize("option, expectedResult", validMainOptionTestData + invalidMainOptionTestData)
@@ -70,10 +70,10 @@ validOptionMenuTestData = \
      ("2", "You selected option 2")]
 
 invalidOptionMenuTestData = \
-    [("3", "Invalid option!"),
-     ("4", "Invalid option!"),
-     ("5", "Invalid option!"),
-     ("10", "Invalid option!")]
+    [("3", "3 is an invalid option!"),
+     ("4", "4 is an invalid option!"),
+     ("5", "5 is an invalid option!"),
+     ("10", "10 is an invalid option!")]
 
 
 @pytest.mark.parametrize("option, expectedResult", validOptionMenuTestData + invalidOptionMenuTestData)
@@ -95,7 +95,7 @@ Choose Building Pool
 4. House
 5. Shop
 6. Monument
-7. Park 
+7. Park
 
 0. Return to Option Menu
 """ in out
@@ -138,17 +138,17 @@ validBuildingPoolOptionMenuTestData = [
 ]
 
 invalidBuildingPoolOptionMenuTestData = [
-    ("1,2,1,3,4", "Invalid option!"),
-    ("1,2,3,5,8", "Invalid option!"),
-    ("1,2,3,8,2", "Invalid option!"),
-    ("1,2,1,3,4", "Invalid option!"),
-    ("1,2,10,5,6", "Invalid option!"),
-    ("1,2,2,3,4", "Invalid option!"),
-    ("1,5,5,6,6", "Invalid option!"),
-    ("2", "Invalid option!"),
-    ("3", "Invalid option!"),
-    ("5", "Invalid option!"),
-    ("10", "Invalid option!"),
+    ("1,2,1,3,4", "Invalid option! 1,2,1,3,4 is not a valid building pool!"),
+    ("1,2,3,5,8", "Invalid option! 1,2,3,5,8 is not a valid building pool!"),
+    ("1,2,3,8,2", "Invalid option! 1,2,3,8,2 is not a valid building pool!"),
+    ("1,2,1,3,4", "Invalid option! 1,2,1,3,4 is not a valid building pool!"),
+    ("1,2,10,5,6", "Invalid option! 1,2,10,5,6 is not a valid building pool!"),
+    ("1,2,2,3,4", "Invalid option! 1,2,2,3,4 is not a valid building pool!"),
+    ("1,5,5,6,6", "Invalid option! 1,5,5,6,6 is not a valid building pool!"),
+    ("2", "Invalid option! 2 is not a valid building pool!"),
+    ("3", "Invalid option! 3 is not a valid building pool!"),
+    ("5", "Invalid option! 5 is not a valid building pool!"),
+    ("10", "Invalid option! 10 is not a valid building pool!"),
 ]
 
 
@@ -213,13 +213,13 @@ def test_validGameOption(capfd, option, expectedResult):
 
 
 invalidGameOptionTestData = \
-    [("5", "Invalid option!"),
-     ("6", "Invalid option!"),
-     ("7", "Invalid option!"),
-     ("8", "Invalid option!"),
-     ("9", "Invalid option!"),
-     ("10", "Invalid option!"),
-     ("abc", "Invalid option!")]
+    [("5", "5 is an invalid option!"),
+     ("6", "6 is an invalid option!"),
+     ("7", "7 is an invalid option!"),
+     ("8", "8 is an invalid option!"),
+     ("9", "9 is an invalid option!"),
+     ("10", "10 is an invalid option!"),
+     ("abc", "abc is an invalid option!")]
 
 
 @pytest.mark.parametrize("option, expectedResult", invalidGameOptionTestData)
@@ -256,7 +256,7 @@ def generateRandomBuildingsMenuContent():
     for _ in range(10):
         firstBuilding, secondBuilding = player_test.retrieveTwoRandomBuildings()
         gameMenuContentTestData.append(
-            ((firstBuilding, secondBuilding), player_test.gameMenuContent(firstBuilding, secondBuilding)))
+            ((firstBuilding, secondBuilding), player_test.retrieveGameMenuContent(firstBuilding, secondBuilding)))
 
     return gameMenuContentTestData
 
@@ -310,12 +310,12 @@ validGridSizes = [
 
 
 @pytest.mark.parametrize("gridSize, expectedResult", validGridSizes)
-def test_validateGridSize(capfd, gridSize, expectedResult):
+def test_validateGridSize_Passing(capfd, gridSize, expectedResult):
     player = Player()
     player.validateGridSize(gridSize)
     out, _ = capfd.readouterr()
     assert expectedResult in out
-    
+
 
 validGridSizeDisplay = [
     (
@@ -363,23 +363,23 @@ def test_displayGrid(capfd, gridSize, gridOutput):
 
 
 failingGridSizes = [
-    ("0,0", "Invalid Grid Size!"),
-    ("6,7", "Invalid Grid Size!"),
-    ("8,5", "Invalid Grid Size!"),
-    ("2,0", "Invalid Grid Size!"),
-    ("10,1", "Invalid Grid Size!"),
-    ("3,7", "Invalid Grid Size!"),
-    ("26,5", "Invalid Grid Size!"),
-    ("aaa,5", "Invalid Grid Size!"),
-    ("64,game", "Invalid Grid Size!"),
-    ("$,0", "Invalid Grid Size!"),
-    ("a,b", "Invalid Grid Size!"),
-    ("100,100", "Invalid Grid Size!")
+    ("0,0", "Invalid Grid Size! 0,0 is not a valid grid size!"),
+    ("6,7", "Invalid Grid Size! 6,7 is not a valid grid size!"),
+    ("8,5", "Invalid Grid Size! 8,5 is not a valid grid size!"),
+    ("2,0", "Invalid Grid Size! 2,0 is not a valid grid size!"),
+    ("10,1", "Invalid Grid Size! 10,1 is not a valid grid size!"),
+    ("3,7", "Invalid Grid Size! 3,7 is not a valid grid size!"),
+    ("26,5", "Invalid Grid Size! 26,5 is not a valid grid size!"),
+    ("aaa,5", "Invalid Grid Size! aaa,5 is not a valid grid size!"),
+    ("64,game", "Invalid Grid Size! 64,game is not a valid grid size!"),
+    ("$,0", "Invalid Grid Size! $,0 is not a valid grid size!"),
+    ("a,b", "Invalid Grid Size! a,b is not a valid grid size!"),
+    ("100,100", "Invalid Grid Size! 100,100 is not a valid grid size!")
 ]
 
 
 @pytest.mark.parametrize("gridSize, expectedResult", validGridSizes)
-def test_validateGridSize(capfd, gridSize, expectedResult):
+def test_validateGridSize_Failing(capfd, gridSize, expectedResult):
     player = Player()
     player.validateGridSize(gridSize)
     out, _ = capfd.readouterr()
@@ -473,6 +473,74 @@ def test_validateSaveGame(capfd, validateOption, expectedResult):
 def test_savedGameSuccessful(capfd):
     player_test.savedGameSuccessful()
     out, _ = capfd.readouterr()
-    assert "\nGame has been saved successfully.\n\n---- Back to Game Menu----" in out
+    assert "Game has been saved successfully.\n\n---- Back to Game Menu----" in out
 
 
+def test_displayGridSizeMenu(capfd):
+    player = Player()
+    player.displayGrid()
+    out, _ = capfd.readouterr()
+    assert "\n     A     B     C     D   \t Remaining Buildings\n" in out
+
+
+def test_initializeGrid(capfd):
+    player = Player()
+    player.initializeGrid()
+    player.displayGrid()
+    out, _ = capfd.readouterr()
+    assert "1 |     |     |     |     |\t BCH: 8" in out
+
+
+invalidGridPosition = [
+    ("A3", "A3 is an invalid position! You must build next to an existing building."),
+    ("B2", "B2 is an invalid position! You must build next to an existing building."),
+    ("D4", "D4 is an invalid position! You must build next to an existing building."),
+    ("C2", "C2 is an invalid position! You must build next to an existing building."),
+    ("B4", "B4 is an invalid position! You must build next to an existing building.")
+]
+
+validGridPosition = [
+    ("B2", "HSE has been successfully placed at B2."),
+    ("A3", "HSE has been successfully placed at A3."),
+    ("C3", "HSE has been successfully placed at C3."),
+    ("B4", "HSE has been successfully placed at B4.")
+]
+
+nonExistantGridPosition = [
+    ("A", "A is an invalid position! Please enter a valid building position!"),
+    ("55", "55 is an invalid position! Please enter a valid building position!"),
+    ("46", "46 is an invalid position! Please enter a valid building position!"),
+    ("G7", "G7 is an invalid position! Please enter a valid building position!"),
+    ("$$", "$$ is an invalid position! Please enter a valid building position!"),
+    ("100", "100 is an invalid position! Please enter a valid building position!"),
+    ("Bible", "Bible is an invalid position! Please enter a valid building position!")
+]
+
+
+@pytest.mark.parametrize("gridPosition, expectedResult", invalidGridPosition)
+def test_placeInvalidGridPosition(capfd, gridPosition, expectedResult):
+    player = Player()
+    player.validatePlaceBuildingOnPosition('HSE', "A1")
+    player.validatePlaceBuildingOnPosition('HSE', gridPosition)
+
+    out, _ = capfd.readouterr()
+    assert expectedResult in out
+
+
+@pytest.mark.parametrize("gridPosition, expectedResult", validGridPosition)
+def test_placeValidGridPosition(capfd, gridPosition, expectedResult):
+    player = Player()
+    player.validatePlaceBuildingOnPosition('HSE', "B3")
+    player.validatePlaceBuildingOnPosition('HSE', gridPosition)
+
+    out, _ = capfd.readouterr()
+    assert expectedResult in out
+
+
+@pytest.mark.parametrize("gridPosition, expectedResult", nonExistantGridPosition)
+def test_placeNonExistantGridPosition(capfd, gridPosition, expectedResult):
+    player = Player()
+    player.validatePlaceBuildingOnPosition('HSE', gridPosition)
+
+    out, _ = capfd.readouterr()
+    assert expectedResult in out
