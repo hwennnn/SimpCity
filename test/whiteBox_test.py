@@ -241,7 +241,8 @@ def test_buildingPoolAndRemainingBuildingCount(monkeypatch, capfd):
 
     monkeypatch.setattr('builtins.input', lambda _: "A1")
     # Place Park on A1.
-    player.promptEnterBuildingPosition("PRK")
+    positions = player.promptEnterBuildingPosition("PRK")
+    player.validatePlaceBuildingOnPosition("PRK", positions)
     print(player.grid.availableBuildings.availability)
     out, _ = capfd.readouterr()
     # Checks if Park's building count is deducted by 1.

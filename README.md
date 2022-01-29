@@ -59,6 +59,13 @@ docker build -t simpcity .
 docker run -ti simpcity
 ```
 
+### Run docker with production image
+
+```bash
+docker pull devops02team4/simpcity:latest
+docker run -ti devops02team4/simpcity:latest
+```
+
 ### Run pytest unit testing in docker
 
 ```bash
