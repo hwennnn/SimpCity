@@ -111,7 +111,7 @@ class AvailableBuildings:
         return shuffled_buildings[:2]
 
     def updateAvailableBuildings(self, buildings):
-         """
+        """
         Parameters:
             list[str] : list of valid building names
 
