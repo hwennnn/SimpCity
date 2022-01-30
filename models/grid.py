@@ -549,7 +549,7 @@ class Grid:
             return (False, None)
         
         turns = int(lines.pop(0))
-        if !(ord("1") <= ord(option) <= ord("16")):
+        if not (ord("1") <= ord(option) <= ord("16")):
             return (False, None)
 
         results["turns"] = turns
