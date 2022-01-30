@@ -45,6 +45,7 @@ class Game:
                     self.launchGame(True)
                 else:
                     print('Invalid Game File!')
+                    self.launchGame()
 
             elif option == '3':
                 rowCount, colCount = self.player.grid.rowCount, self.player.grid.colCount

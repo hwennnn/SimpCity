@@ -399,6 +399,12 @@ def test_TC_PB_SG_002(monkeypatch, capfd):
     except StopIteration as e:
         pass
     
+    # Prints out the saved game file for verification
+    f = open("saved_game.txt", "r")
+    file = f.readlines()
+    for i in file:
+        print(i)
+
     print("\n %s seconds" % (time.time() - start_time))
 
 
@@ -1160,7 +1166,7 @@ def test_UAT_TC_SaveGame_001(monkeypatch, capfd):
 # Test Data: Valid Game File
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit#gid=1826582149&range=14:14
 
-def test_UAT_TC_SaveGame_001(monkeypatch, capfd):
+def test_UAT_TC_LoadGame_001(monkeypatch, capfd):
     start_time = time.time()
 
     # Load Game File
@@ -1168,7 +1174,7 @@ def test_UAT_TC_SaveGame_001(monkeypatch, capfd):
 
     # Generating valid game file
     f = open("saved_game.txt", "w")
-    f.write("(5,5)\n#1,2,4,5,3\nHWYY,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None")
+    f.write("(5,5)\n#1,2,4,5,3\nHWY,HWY,FAC,BCH,BCH\nHSE,SHP,HWY,HSE,SHP\nNone,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None")
     f.close()
 
     # Iterates through the list of options that mimics user input
@@ -1190,7 +1196,7 @@ def test_UAT_TC_SaveGame_001(monkeypatch, capfd):
 # Test Data: Invalid Game File
 # Link to Test: https://docs.google.com/spreadsheets/d/1j9zOtrntEV0F12utHqEf2nbwmaoZZrfxYVwqXxvVVEs/edit#gid=1826582149&range=15:15
 
-def test_UAT_TC_SaveGame_001(monkeypatch, capfd):
+def test_UAT_TC_LoadGame_002(monkeypatch, capfd):
     start_time = time.time()
 
     # Load Game File
