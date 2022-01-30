@@ -22,6 +22,37 @@ jobs:
       run: |
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+        echo "FLAKE8COMMENTS=$(flake8 . --quiet --quiet --count --exit-zero --max-complexity=10 --max-line-length=127)" >> $GITHUB_ENV
+
+    - name: Find Flake8 Comment
+      uses: peter-evans/find-comment@v1
+      id: fc
+      with:
+        issue-number: ${{ github.event.pull_request.number }}
+        comment-author: 'github-actions[bot]'
+        body-includes: Please refer to GitHub Actions Pull Request Log for full linter check
+
+    - name: Create Flake8 comment
+      if: steps.fc.outputs.comment-id == ''
+      uses: peter-evans/create-or-update-comment@v1
+      with:
+        issue-number: ${{ github.event.pull_request.number }}
+        body: |
+          **${{ env.FLAKE8COMMENTS }} Suspicious and Non-Structural Code Identified with Flake8.**
+          ---------------------------------------------------------------
+          Please refer to GitHub Actions Pull Request Log for full linter check
+
+    - name: Update Flake8 comment
+      if: steps.fc.outputs.comment-id != ''
+      uses: jungwinter/comment@v1
+      with:
+        type: edit
+        body: |
+          **${{ env.FLAKE8COMMENTS }} Suspicious and Non-Structural Code Identified with Flake8.**
+          ---------------------------------------------------------------
+          Please refer to GitHub Actions Pull Request Log for full linter check
+        comment_id: ${{ steps.fc.outputs.comment-id }}
+        token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Label the PR Size
       uses: coverwallet/pr-labeler@v1.2.1
