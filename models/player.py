@@ -545,12 +545,13 @@ class Player:
     # writing row,col of grid , saved building pool and grid state to file
     def saveGame(self):
         """
+        This method will write the current game state to a text file such as player turns , row and col of grid and saved building pool.
         This method will call the Grid function for parsing the grid as a string and writing it into a text file.
         The method will set the player attribute savedGame to True for validation In-Game.
 
         """
         with open(savedGameFilename, 'w+') as f:
-            f.write("*" + str(self.turns))
+            f.write("*" + str(self.turns) + "\n")
             f.write("(" + str(self.grid.rowCount) + "," + str(self.grid.colCount) + ")"+ "\n")
             f.write("#" + self.grid.availableBuildings.exportBuildings() + "\n")
             gridValue = self.grid.parseGridAsString()
