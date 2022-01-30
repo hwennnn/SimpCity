@@ -223,7 +223,7 @@ def test_TC_PB_SG_001(monkeypatch, capfd, execution_number):
     gridList = parse_fileToList(f.read())
 
     # Check if the game file's building placed is the same as the current grid stored in program
-    assert game.player.grid.grid[int([i for i in randomCoordinate][1]) - 1][int(get_key([i for i in randomCoordinate][0]))].__dict__['name'] == gridList[(int([i for i in randomCoordinate][1]) - 1)+2][int(get_key([i for i in randomCoordinate][0]))]
+    assert game.player.grid.grid[int([i for i in randomCoordinate][1]) - 1][int(get_key([i for i in randomCoordinate][0]))].__dict__['name'] == gridList[(int([i for i in randomCoordinate][1]) - 1)+3][int(get_key([i for i in randomCoordinate][0]))]
 
 
 ##########################################
