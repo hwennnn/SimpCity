@@ -41,8 +41,8 @@ class Game:
                 self.launchGame()
 
             elif option == '2':
-                isLoadGameValid = self.player.loadGame()
-                self.launchGame(isLoadGameValid)
+                didLoadGameRun = self.player.loadGame()
+                self.launchGame(didLoadGameRun)
 
             elif option == '3':
                 rowCount, colCount = self.player.grid.rowCount, self.player.grid.colCount

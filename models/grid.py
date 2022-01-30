@@ -521,7 +521,7 @@ class Grid:
     # serialising from file to grid object
     def readGridFromFile(self):
         if not self.isSavedGameExist():
-            return False 
+            return (False, None) 
 
         lines = self.readFiles()
 
@@ -536,29 +536,39 @@ class Grid:
             if len(results["buildingList"]) > 0:
                 self.availableBuildings.updateAvailableBuildings(results["buildingList"])
             print('Successfully loaded the game!')
-            return True
+            return (True, result["turns"])
         else: 
             print('Saved game file not found')
-            return False
+            return (False, None)
 
     def isSavedGameFileValid(self, lines):
         results = {} # set dict to store results
 
-        # check if saved game file has (row,col) and building pool
-        if len(lines) < 3:
+        # check if saved game file has (row,col), building pool, turns and grid 
+        if len(lines) < 4:
             return (False, None)
         
+        turns = int(lines.pop(0))
+        if !(ord("1") <= ord(option) <= ord("16")):
+            return (False, None)
+
+        results["turns"] = turns
+
         row,col = map(int,lines.pop(0).lstrip("(").rstrip(")\n").split(","))
-        if row > 0 and col > 0: 
-            results["row"] = row
-            results["col"] = col
+        if row < 0 and col < 0: 
+            return (False, None)
+
+        results["row"] = row
+        results["col"] = col
         
         # load buildings into builings
         buildings = lines.pop(0).lstrip("#").rstrip("\n")
-        if len(buildings.split(",")) == 5:
-            results["buildings"] = buildings
+        if len(buildings.split(",")) != 5:
+            return (False, None)
 
-        if len(lines) != self.rowCount:
+        results["buildings"] = buildings
+
+        if len(lines) != row:
             return (False, None)
         
         validBuildings = set(['None', 'BCH', 'FAC', 'HSE', 'SHP', 'HWY', 'MON', 'PRK'])
@@ -567,7 +577,7 @@ class Grid:
         
         for line in lines:
             line = line.strip("\n").split(',')
-            if len(line) != self.colCount:
+            if len(line) != col:
                 return (False, None)
 
             for building in line:
@@ -581,7 +591,7 @@ class Grid:
         results["grid"] = gridStr
         results["buildingList"] = buildingList
 
-        return (True, results )
+        return (True, results)
 
     def readFiles(self):
         lines = None
