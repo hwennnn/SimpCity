@@ -571,7 +571,7 @@ class Grid:
             return (False, None)
         
         turns = int(lines.pop(0).lstrip("*").rstrip("\n"))
-        if turns < 1 or turns > 18:
+        if turns < 0 or turns > 18:
             return (False, None)
 
         results["turns"] = int(turns)
