@@ -428,7 +428,7 @@ def test_TC_LG_CG_001(monkeypatch, capfd):
 
     # Generating a valid game file
     f = open("saved_game.txt", "w")
-    f.write("(5,5)\n#1,2,4,5,3\nHWY,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None")
+    f.write("*2\n(5,5)\n#1,2,4,5,3\nHWY,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None")
     f.close()
 
     # Iterates through the list of options that mimics user input
@@ -462,7 +462,7 @@ def test_TC_LG_CG_002(monkeypatch, capfd):
 
     # Generating invalid game file
     f = open("saved_game.txt", "w")
-    f.write("(5,5)\n#1,2,4,5,3\nHWYY,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None")
+    f.write("*2\n(5,5)\n#1,2,4,5,3\nHWYY,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None")
     f.close()
 
     # Iterates through the list of options that mimics user input
@@ -494,7 +494,7 @@ def test_TC_LG_DS_001(monkeypatch, capfd):
 
     # Generating valid game file
     f = open("saved_game.txt", "w")
-    f.write("(5,5)\n#1,2,4,5,3\nHWY,HWY,FAC,BCH,BCH\nHSE,SHP,HWY,HSE,SHP\nNone,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None")
+    f.write("*11\n(5,5)\n#1,2,4,5,3\nHWY,HWY,FAC,BCH,BCH\nHSE,SHP,HWY,HSE,SHP\nNone,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None")
     f.close()
 
     # Iterates through the list of options that mimics user input
@@ -521,11 +521,11 @@ def test_TC_LG_DS_002(monkeypatch, capfd):
     game = Game()
 
     # Load Game, Display Score
-    tempList = ["2", "1", "3"]
+    tempList = ["2", "3"]
 
     # Generating invalid game file
     f = open("saved_game.txt", "w")
-    f.write("(5,5)\n#1,2,4,5,3\nHWYY,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None")
+    f.write("*2\n(5,5)\n#1,2,4,5,3\nHWYY,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None")
     f.close()
 
     # Iterates through the list of options that mimics user input
@@ -1174,7 +1174,7 @@ def test_UAT_TC_LoadGame_001(monkeypatch, capfd):
 
     # Generating valid game file
     f = open("saved_game.txt", "w")
-    f.write("(5,5)\n#1,2,4,5,3\nHWY,HWY,FAC,BCH,BCH\nHSE,SHP,HWY,HSE,SHP\nNone,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None")
+    f.write("*11\n(5,5)\n#1,2,4,5,3\nHWY,HWY,FAC,BCH,BCH\nHSE,SHP,HWY,HSE,SHP\nNone,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None")
     f.close()
 
     # Iterates through the list of options that mimics user input
@@ -1204,7 +1204,7 @@ def test_UAT_TC_LoadGame_002(monkeypatch, capfd):
 
     # Generating invalid game file
     f = open("saved_game.txt", "w")
-    f.write("(5,5)\n#1,2,4,5,3\nHWYY,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None")
+    f.write("*2\n(5,5)\n#1,2,4,5,3\nHWYY,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None\nNone,None,None,None,None")
     f.close()
 
     # Iterates through the list of options that mimics user input
