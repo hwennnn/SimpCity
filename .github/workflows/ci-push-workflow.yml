@@ -26,7 +26,14 @@ jobs:
         
     - name: Begin Test with Pytest
       run: |
-        cd test; pytest --cov -v --junitxml=report.xml
+        cd test; pytest --cov -v --cov-report=xml --junitxml=report.xml
+
+    - name: Upload coverage report to codecov
+      uses: codecov/codecov-action@v2
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        files: ./test/coverage.xml 
+
     - if: ${{failure()}}       
       name: Create Issues
       uses: nashmaniac/create-issue-action@v1.1
