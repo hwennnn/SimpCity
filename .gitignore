@@ -35,6 +35,7 @@ nosetests.xml
 coverage.xml
 testing.txt
 saved_game.txt
+saved_leaderboard.txt
 
 # Translations
 *.mo
@@ -48,3 +49,5 @@ output.txt
 testing.txt
 
 CHANGELOG.md
+
+codecov

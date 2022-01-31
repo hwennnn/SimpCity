@@ -1,3 +1,7 @@
+"""
+This module deals with all building object. It eases the import usage.
+"""
+
 from models.buildings.beach import Beach
 from models.buildings.factory import Factory
 from models.buildings.highway import Highway
