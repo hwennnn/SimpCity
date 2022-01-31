@@ -3,6 +3,7 @@ This module deals with all grid related functions.
 """
 __docformat__ = "google"
 
+from logging import exception
 from models.available_buildings import AvailableBuildings
 from models.buildings import *
 from models.enums import Buildings
@@ -517,6 +518,7 @@ class Grid:
                     rowArr[i] = self.createBuilding(rowArr[i], row, i)
             grid.append(rowArr)
         return grid
+
 
     # serialising from file to grid object
     def readGridFromFile(self):

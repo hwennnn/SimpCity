@@ -174,13 +174,18 @@ def test_TC_Grid_Fill_001(monkeypatch, capfd, execution_number):
     # Iterates through the list of options that mimics user input
     try:
         # Select Options -> Choose City Size -> Valid City Size -> Exit to Main Menu -> Start Game -> Place Buidlings
-        responses = iter(["4", "2", randomCitySize[0], "0", "1"] + tempList)
+        responses = iter(["4", "2", randomCitySize[0], "0", "0", "1"] + tempList)
         monkeypatch.setattr('builtins.input', lambda _: next(responses))
         game.launch()
 
     # When list runs out of options, StopIteration error will happen unless game is exited with user inputs
     except StopIteration as e:
         pass
+    
+    # Check if each coordinate is filled
+    for row in range(0, game.player.grid.rowCount):
+        for col in range(0, game.player.grid.colCount):
+            assert game.player.grid.grid[row][col] is not None
 
     return ("\n %s seconds" % (time.time() - start_time))
 
@@ -193,7 +198,6 @@ def test_TC_Grid_Fill_001(monkeypatch, capfd, execution_number):
 @pytest.mark.parametrize('execution_number', range(100))
 def test_TC_PB_SG_001(monkeypatch, capfd, execution_number):
     game = Game()
-    player = Player()
 
     # Choose random valid city size
     randomCitySize = random.choice(validGridSize())
@@ -239,9 +243,11 @@ def test_TC_PB_SG_001(monkeypatch, capfd, execution_number):
 @pytest.mark.parametrize('execution_number', range(100))
 def test_UAT_TC_CitySize_001(monkeypatch, capfd, execution_number):
     start_time = time.time()
+    game = Game()
 
     # Choose random valid city size
     randomCitySize = random.choice(validGridSize())
+    x, y = randomCitySize[0].split(',')
 
     # Select Options -> Choose Building Pool, Valid Building Pool
     tempList = ["4", "2", randomCitySize[0]]
@@ -250,10 +256,14 @@ def test_UAT_TC_CitySize_001(monkeypatch, capfd, execution_number):
     try:
         responses = iter(tempList)
         monkeypatch.setattr('builtins.input', lambda _: next(responses))
-        import main
+        game.launch()
 
     # When list runs out of options, OS error will happen if a input is not given with prompted
     except StopIteration as e:
         pass
-
+    
+    # Check if City Size matches the Grid Size
+    assert game.player.grid.rowCount == int(x)
+    assert game.player.grid.colCount == int(y)
+    
     print("\n%s seconds" % (time.time() - start_time))
