@@ -22,6 +22,14 @@ validXPositions = [
     ("F", True)
 ]
 
+
+@pytest.mark.parametrize("userInput, expectedResult", validXPositions)
+def test_isPositionXValid_Pass(userInput, expectedResult):
+    result = player_test.grid.isPositionXValid(userInput)
+
+    assert result == expectedResult
+
+
 invalidXPositions = [
     ("g", False),
     ("h", False),
@@ -33,8 +41,8 @@ invalidXPositions = [
 ]
 
 
-@pytest.mark.parametrize("userInput, expectedResult", validXPositions + invalidXPositions)
-def test_isPositionXValid(userInput, expectedResult):
+@pytest.mark.parametrize("userInput, expectedResult", invalidXPositions)
+def test_isPositionXValid_Failing(userInput, expectedResult):
     result = player_test.grid.isPositionXValid(userInput)
 
     assert result == expectedResult
@@ -49,6 +57,14 @@ validYPositions = [
     ("6", True)
 ]
 
+
+@pytest.mark.parametrize("userInput, expectedResult", validYPositions)
+def test_isPositionYValid_Pass(userInput, expectedResult):
+    result = player_test.grid.isPositionYValid(userInput)
+
+    assert result == expectedResult
+
+
 invalidYPositions = [
     ("7", False),
     ("8", False),
@@ -62,8 +78,8 @@ invalidYPositions = [
 ]
 
 
-@pytest.mark.parametrize("userInput, expectedResult", validYPositions + invalidYPositions)
-def test_isPositionYValid(userInput, expectedResult):
+@pytest.mark.parametrize("userInput, expectedResult", invalidYPositions)
+def test_isPositionYValid_Failing(userInput, expectedResult):
     result = player_test.grid.isPositionYValid(userInput)
 
     assert result == expectedResult
@@ -144,6 +160,14 @@ passingBuildingPositionsFromUserInput = [
     ("F6", True)
 ]
 
+
+@pytest.mark.parametrize("userInput, expectedResult", passingBuildingPositionsFromUserInput)
+def test_validBuildingPositionFromUserInputs_Pass(userInput, expectedResult):
+    result = player_test.grid.isPositionValid(userInput)
+
+    assert result == expectedResult
+
+
 failingBuildingPositionsFromUserInput = [
     ("a10", False),
     ("a11", False),
@@ -170,8 +194,8 @@ failingBuildingPositionsFromUserInput = [
 ]
 
 
-@pytest.mark.parametrize("userInput, expectedResult", passingBuildingPositionsFromUserInput + failingBuildingPositionsFromUserInput)
-def test_validBuildingPositionFromUserInputs(userInput, expectedResult):
+@pytest.mark.parametrize("userInput, expectedResult", failingBuildingPositionsFromUserInput)
+def test_validBuildingPositionFromUserInputs_Failing(userInput, expectedResult):
     result = player_test.grid.isPositionValid(userInput)
 
     assert result == expectedResult
@@ -218,7 +242,7 @@ positionFromUserInput = [
 
 
 @pytest.mark.parametrize("userInput, expectedResult", positionFromUserInput)
-def test_retrieveParsedPosition(userInput, expectedResult):
+def test_retrieveParsedPosition_Pass(userInput, expectedResult):
     result = player_test.grid.retrieveParsedPosition(userInput)
 
     assert result == expectedResult
@@ -235,7 +259,7 @@ parsedXPosition = [
 
 
 @pytest.mark.parametrize("userInput, expectedResult", parsedXPosition)
-def test_parseXPositionInput(userInput, expectedResult):
+def test_parseXPositionInput_Pass(userInput, expectedResult):
     result = player_test.grid.parseXPositionInput(userInput)
 
     assert result == expectedResult
@@ -252,7 +276,7 @@ parsedYPosition = [
 
 
 @pytest.mark.parametrize("userInput, expectedResult", parsedYPosition)
-def test_parseYPositionInput(userInput, expectedResult):
+def test_parseYPositionInput_Pass(userInput, expectedResult):
     result = player_test.grid.parseYPositionInput(userInput)
 
     assert result == expectedResult
@@ -288,7 +312,7 @@ validGridSizes = [
 
 
 @pytest.mark.parametrize("gridSize", validGridSizes)
-def test_updateGridSize(gridSize):
+def test_updateGridSize_Pass(gridSize):
     player = Player()
     x, y = gridSize
     player.grid.updateGridSize(x, y)
@@ -334,12 +358,21 @@ def test_gridHouseDisplay(capfd):
     out, _ = capfd.readouterr()
     assert "1 |     |     | PRK |     |\t BCH: 8" in out
 
+
 validGrids = [
     (["*2\n","(4,4)\n","1,2,3,4,5\n" ,"None,None,None,None\n"
     ,"None,None,None,None\n","None,None,None,None\n","None,None,None,None\n"], True),
     (["*2\n","(4,4)\n","1,2,3,4,5\n","BCH,None,None,None\n"
     ,"None,None,None,None\n","None,None,None,None\n","None,None,None,None\n"], True)
 ]
+
+
+@pytest.mark.parametrize("gridlines, expectedResult", validGrids)
+def test_validateSaveFile_Pass(gridlines, expectedResult):
+    player = Player()
+    isFileValid, _ = player.grid.isSavedGameFileValid(gridlines)
+    assert expectedResult == isFileValid
+
 
 invalidGrids = [
     (["*2\n","(4,4)\n","1,2,3,4,5\n","B,None,None,None\n"
@@ -353,9 +386,8 @@ invalidGrids = [
 ]
 
 
-@pytest.mark.parametrize("gridlines, expectedResult", validGrids+invalidGrids)
-def test_validateSaveFile(gridlines, expectedResult):
+@pytest.mark.parametrize("gridlines, expectedResult",  invalidGrids)
+def test_validateSaveFile_Failing(gridlines, expectedResult):
     player = Player()
-    isFileValid, _  = player.grid.isSavedGameFileValid(gridlines)
+    isFileValid, _ = player.grid.isSavedGameFileValid(gridlines)
     assert expectedResult == isFileValid
-

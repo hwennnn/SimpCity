@@ -32,6 +32,14 @@ validLeaderboardPlayerNameTestData = \
      ("12345678901234567890", True),
      ]
 
+
+@pytest.mark.parametrize("option, expectedResult", validLeaderboardPlayerNameTestData)
+def test_checkIsLeaderboardPlayerNameValid_Pass(option, expectedResult):
+    leaderboard = Leaderboard()
+
+    assert leaderboard.isLeaderboardPlayerNameValid(option) == expectedResult
+
+
 invalidLeaderboardPlayerNameTestData = \
     [("", False),
      ("this is a very long sentence", False),
@@ -39,8 +47,8 @@ invalidLeaderboardPlayerNameTestData = \
      ]
 
 
-@pytest.mark.parametrize("option, expectedResult", validLeaderboardPlayerNameTestData + invalidLeaderboardPlayerNameTestData)
-def test_checkIsLeaderboardPlayerNameValid(option, expectedResult):
+@pytest.mark.parametrize("option, expectedResult", invalidLeaderboardPlayerNameTestData)
+def test_checkIsLeaderboardPlayerNameValid_Failing(option, expectedResult):
     leaderboard = Leaderboard()
 
     assert leaderboard.isLeaderboardPlayerNameValid(option) == expectedResult
@@ -56,6 +64,15 @@ validSavedLeaderboardFileTestData = \
             "glenn, 20, 12381237872",
         ], True),
     ]
+
+
+@pytest.mark.parametrize("option, expectedResult", validSavedLeaderboardFileTestData)
+def test_checkIsSavedLeaderboardFileValid_Pass(option, expectedResult):
+    leaderboard = Leaderboard()
+    isValid, _ = leaderboard.isSavedLeaderboardFileValid(option)
+
+    assert isValid == expectedResult
+
 
 invalidSavedLeaderboardFileTestData = \
     [
@@ -91,8 +108,8 @@ invalidSavedLeaderboardFileTestData = \
     ]
 
 
-@pytest.mark.parametrize("option, expectedResult", validSavedLeaderboardFileTestData + invalidSavedLeaderboardFileTestData)
-def test_checkIsSavedLeaderboardFileValid(option, expectedResult):
+@pytest.mark.parametrize("option, expectedResult", invalidSavedLeaderboardFileTestData)
+def test_checkIsSavedLeaderboardFileValid_Failing(option, expectedResult):
     leaderboard = Leaderboard()
     isValid, _ = leaderboard.isSavedLeaderboardFileValid(option)
 
