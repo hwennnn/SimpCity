@@ -360,10 +360,10 @@ def test_gridHouseDisplay(capfd):
 
 
 validGrids = [
-    (["*2\n", "(4,4)\n", "1,2,3,4,5\n", "None,None,None,None\n",
-     "None,None,None,None\n", "None,None,None,None\n", "None,None,None,None\n"], True),
-    (["*2\n", "(4,4)\n", "1,2,3,4,5\n", "BCH,None,None,None\n",
-     "None,None,None,None\n", "None,None,None,None\n", "None,None,None,None\n"], True)
+    (["*2\n","(4,4)\n","1,2,3,4,5\n" ,"None,None,None,None\n"
+    ,"None,None,None,None\n","None,None,None,None\n","None,None,None,None\n"], True),
+    (["*2\n","(4,4)\n","1,2,3,4,5\n","BCH,None,None,None\n"
+    ,"None,None,None,None\n","None,None,None,None\n","None,None,None,None\n"], True)
 ]
 
 
@@ -375,14 +375,14 @@ def test_validateSaveFile_Pass(gridlines, expectedResult):
 
 
 invalidGrids = [
-    (["*2\n", "(4,4)\n", "1,2,3,4,5\n", "B,None,None,None\n", "None,None,None,None\n",
-     "None,None,None,None\n", "None,None,None,None\n"], False),
-    (["*2\n", "(4,4)\n", "1,2,3,4,5\n", "BCH,KKK,None,None\n", "None,None,None,None\n",
-     "None,None,None,None\n", "None,None,None,None\n"], False),
-    (["*2\n", "(0,4)\n", "1,2,3,4,5\n", "BCH,None,None,None\n",
-     "None,None,None,None\n", "None,None,None,None\n", "None,None,None,None\n"], False),
-    (["*2\n", "(4,0)\n", "1,2,3,4,5\n", "BCH,None,None,None\n",
-     "None,None,None,None\n", "None,None,None,None\n", "None,None,None,None\n"], False)
+    (["*2\n","(4,4)\n","1,2,3,4,5\n","B,None,None,None\n"
+    ,"None,None,None,None\n","None,None,None,None\n","None,None,None,None\n"], False),
+    (["*2\n","(4,4)\n","1,2,3,4,5\n","BCH,KKK,None,None\n"
+    ,"None,None,None,None\n","None,None,None,None\n","None,None,None,None\n"], False),
+    (["*2\n","(0,4)\n","1,2,3,4,5\n","BCH,None,None,None\n"
+    ,"None,None,None,None\n","None,None,None,None\n","None,None,None,None\n"], False),
+    (["*2\n","(4,0)\n","1,2,3,4,5\n","BCH,None,None,None\n"
+    ,"None,None,None,None\n","None,None,None,None\n","None,None,None,None\n"], False)
 ]
 
 
