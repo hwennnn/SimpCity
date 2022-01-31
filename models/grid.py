@@ -3,6 +3,7 @@ This module deals with all grid related functions.
 """
 __docformat__ = "google"
 
+from logging import exception
 from models.available_buildings import AvailableBuildings
 from models.buildings import *
 from models.enums import Buildings
@@ -489,9 +490,24 @@ class Grid:
 
     # checks if save game file exists
     def isSavedGameExist(self):
+        """
+        This method will check if there is a saved game file in the current directory.
+        """
+
         return os.path.exists(savedGameFilename)
 
     def formatGrid(self, gridstr):
+        """
+        Parameters:
+            list[str] : The grid as a string read in from a file.
+
+        Returns:
+            list[list[building obj]]: The grid as a list of list of building objects.
+
+        This method will format the grid string into a grid object. 
+        It takes in the building names as strings and parse it as an object.
+        """ 
+
         grid = []
         for row in range(len(gridstr)):
             rowArr = gridstr[row]
@@ -503,60 +519,115 @@ class Grid:
             grid.append(rowArr)
         return grid
 
+
     # serialising from file to grid object
     def readGridFromFile(self):
+        """
+        Returns:
+            isSavedFilevalid (Bool): True if the file is valid, False otherwise.
+            player turns (int): The number of turns the player has played otherwise it will be none if the file is invalid.
+            
+
+        This method will read the saved game file and set the grid , row and col, building pool after checking the validity of the saved game file.
+        """
+
         if not self.isSavedGameExist():
-            return
+            return (False, None) 
 
         lines = self.readFiles()
 
-        # check if saved game file has (row,col) and building pool
-        if len(lines) < 3:
-            return False
+        isFileValid, results = self.isSavedGameFileValid(lines)        
+        if isFileValid:
+            self.rowCount = results["row"]
+            self.colCount = results["col"]
+            self.availableBuildings.updateBuildingPool(results["buildings"])
+            formattedGrid = self.formatGrid(results["grid"])
+            self.grid = formattedGrid
+            # update buildings if grid contains buildings
+            if len(results["buildingList"]) > 0:
+                self.availableBuildings.updateAvailableBuildings(results["buildingList"])
+            print('Successfully loaded the game!')
+            return (True, results["turns"])
+        else: 
+            print('Saved game file not found')
+            return (False, None)
+
+    def isSavedGameFileValid(self, lines):
+        """
+        Parameters:
+            list[str] : The lines of the saved game file. 
+
+        Returns:
+            isSavedFilevalid (Bool): True if the file is valid, False otherwise.
+            results (dict): A dictionary to store the needed information extracted from the saved game file
+
+        This method will check each line of file, and extract the needed information to be stored in the results dictionary.
+        It will check if the file is valid , check if the turns are within the range of the game, check if the len of buildings is 5 and check if the grid is valid.
+
+        """
+
+        results = {} # set dict to store results
+
+        # check if saved game file has (row,col), building pool, turns and grid 
+        if len(lines) < 4:
+            return (False, None)
         
+        turns = int(lines.pop(0).lstrip("*").rstrip("\n"))
+        if turns > 18:
+            return (False, None)
+
+        results["turns"] = int(turns)
+
         row,col = map(int,lines.pop(0).lstrip("(").rstrip(")\n").split(","))
-        if row > 0 and col > 0: 
-            self.rowCount = row
-            self.colCount = col
+        if row < 1 and col < 1: 
+            return (False, None)
+
+        results["row"] = row
+        results["col"] = col
         
         # load buildings into builings
         buildings = lines.pop(0).lstrip("#").rstrip("\n")
-        if len(buildings.split(",")) == 5:
-            self.availableBuildings.updateBuildingPool(buildings)
+        if len(buildings.split(",")) != 5:
+            return (False, None)
 
-        isFileValid, gridString = self.isSavedGameFileValid(lines)
-        formattedGrid = self.formatGrid(gridString)
-        if isFileValid:
-            self.grid = formattedGrid
-            print('Successfully loaded the game!')
-        
+        results["buildings"] = buildings
 
-    def isSavedGameFileValid(self, lines):
-        if len(lines) != self.rowCount:
+        if len(lines) != row:
             return (False, None)
         
         validBuildings = set(['None', 'BCH', 'FAC', 'HSE', 'SHP', 'HWY', 'MON', 'PRK'])
-        results = []
+        gridStr = []
         buildingList = []
         
         for line in lines:
             line = line.strip("\n").split(',')
-            if len(line) != self.colCount:
+            if len(line) != col:
                 return (False, None)
 
             for building in line:
                 if building not in validBuildings:
+                    # raise Exception("Invalid building found in saved game file")
                     return (False, None)
                 if building != "None": 
                     buildingList.append(building)
-            results.append(line)
+            gridStr.append(line)
         
-        # update buildings if grid contains buildings
-        if len(buildingList) > 0:
-            self.availableBuildings.updateAvailableBuildings(buildingList)
+        results["grid"] = gridStr
+        results["buildingList"] = buildingList
+
         return (True, results)
 
     def readFiles(self):
+        """
+         Returns:
+            isSavedFilevalid (Bool): True if the file is valid, False otherwise.
+            results (dict): A dictionary to store the needed information extracted from the saved game file
+
+        This method will check each line of file, and extract the needed information to be stored in the results dictionary.
+        It will check if the file is valid , check if the turns are within the range of the game, check if the len of buildings is 5 and check if the grid is valid.
+
+        """
+        
         lines = None
         with open(savedGameFilename, "r+") as file:
             lines = file.readlines()

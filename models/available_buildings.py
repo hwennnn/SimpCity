@@ -110,8 +110,16 @@ class AvailableBuildings:
 
         return shuffled_buildings[:2]
 
-    # Update the available buildings 
     def updateAvailableBuildings(self, buildings):
+        """
+        Parameters:
+            list[str] : list of valid building names
+
+        This method will update the available buildings based on the saved game state
+        It will deduct buildings count from the available buildings.
+
+        """
+        
         self.availability = [8] * 5 # init availabilities for each building
         buildingCounter = Counter(buildings)
         for building in buildingCounter.keys():
@@ -121,9 +129,26 @@ class AvailableBuildings:
 
     # Return list of buildings as string of indexes
     def exportBuildings(self): 
+        """
+        Returns:
+            list[str]: list of buildings as indexes
+
+        This method will return the a list of indexes of the available buildings for the current game.
+
+
+        """
         return ",".join(str(self.buildingsPool.index(building) + 1 ) for building in self.buildings)
 
     # Return list of buildings as string of building names
     def exportBuildingsNames(self):
+
+        """
+        Returns:
+            list[str]: list of building's names
+
+        This method will return the a list of the available buildings names for the current game.
+
+
+        """
         return ",".join(self.buildingsPool[int(building)-1] for building in self.exportBuildings().split(","))
       
